@@ -13,10 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.onehippo.forge.page.statemachine.core;
+package org.onehippo.forge.page.statemachine.core.rt;
 
-public interface PageState {
+import java.util.List;
+import java.util.Map;
 
-    public String getPath();
+public interface PageStateMachine {
+
+    public void start();
+
+    public void stop();
+
+    public PageState getCurrentPageState();
+
+    public void sendEvent(String event);
+
+    public List<PageState> getPageStates();
+
+    public Object getModel(String name);
+
+    public void setModel(String name, Object model);
+
+    public Map<String, Object> getModelMap();
 
 }

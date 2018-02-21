@@ -13,16 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.onehippo.forge.page.statemachine.core;
+package org.onehippo.forge.page.statemachine.core.def;
 
-import java.util.List;
+import java.io.Serializable;
 
-public interface PageStateMachine {
+public interface PageStateTransitionDefinition extends Serializable {
 
-    public PageState getCurrentPageState();
+    public String getEvent();
 
-    public void sendEvent(String event);
-
-    public List<PageState> getPageStates();
+    public PageStateDefinition getTargetPageStateDefinition();
 
 }

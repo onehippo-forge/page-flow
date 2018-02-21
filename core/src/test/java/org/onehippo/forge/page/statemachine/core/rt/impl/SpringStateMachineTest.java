@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.onehippo.forge.page.statemachine.core.impl;
+package org.onehippo.forge.page.statemachine.core.rt.impl;
 
 import org.junit.Test;
 import org.springframework.beans.factory.support.StaticListableBeanFactory;
@@ -27,7 +27,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class DefaultPageStateMachineTest {
+public class SpringStateMachineTest {
 
     @Test
     public void testStateMachine() throws Exception {

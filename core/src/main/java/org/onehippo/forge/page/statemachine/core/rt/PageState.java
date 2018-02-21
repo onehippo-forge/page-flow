@@ -13,14 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.onehippo.forge.page.statemachine.core;
+package org.onehippo.forge.page.statemachine.core.rt;
 
-public interface PageStateMachineStore {
+public interface PageState {
 
-    public PageStateMachine getPageStateMachine(String id);
+    public String getId();
 
-    public PageStateMachine savePageStateMachine(String id, PageStateMachine pageStateMachine);
-
-    public PageStateMachine removePageStateMachine(String id);
+    public String getPath();
 
 }

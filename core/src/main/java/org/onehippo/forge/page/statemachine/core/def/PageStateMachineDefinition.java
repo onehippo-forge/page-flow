@@ -13,10 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.onehippo.forge.page.statemachine.core;
+package org.onehippo.forge.page.statemachine.core.def;
 
-public interface PageStateMachineFactory {
+import java.io.Serializable;
+import java.util.List;
 
-    public PageStateMachine createPageStateMachine(String definitionId);
+public interface PageStateMachineDefinition extends Serializable {
+
+    public String getId();
+
+    public List<PageStateDefinition> getPageStateDefinitions();
 
 }

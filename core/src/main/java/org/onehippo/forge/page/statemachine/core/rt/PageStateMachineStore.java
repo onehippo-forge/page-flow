@@ -13,15 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.onehippo.forge.page.statemachine.core.impl;
+package org.onehippo.forge.page.statemachine.core.rt;
 
-import org.onehippo.forge.page.statemachine.core.PageState;
+public interface PageStateMachineStore {
 
-public class DefaultPageState implements PageState {
+    public PageStateMachine getPageStateMachine(String id);
 
-    @Override
-    public String getPath() {
-        return null;
-    }
+    public PageStateMachine savePageStateMachine(String id, PageStateMachine pageStateMachine);
+
+    public PageStateMachine removePageStateMachine(String id);
 
 }

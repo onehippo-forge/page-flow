@@ -13,31 +13,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.onehippo.forge.page.statemachine.core.impl;
+package org.onehippo.forge.page.statemachine.core.rt.impl;
 
-import java.util.List;
+import org.onehippo.forge.page.statemachine.core.rt.PageState;
 
-import org.onehippo.forge.page.statemachine.core.PageState;
-import org.onehippo.forge.page.statemachine.core.PageStateMachine;
+public class DefaultPageState implements PageState {
 
-public class DefaultPageStateMachine implements PageStateMachine {
+    private final String id;
 
-    @Override
-    public PageState getCurrentPageState() {
-        // TODO Auto-generated method stub
-        return null;
+    private String path;
+
+    public DefaultPageState(final String id) {
+        this.id = id;
     }
 
     @Override
-    public void sendEvent(String event) {
-        // TODO Auto-generated method stub
-        
+    public String getId() {
+        return id;
     }
 
     @Override
-    public List<PageState> getPageStates() {
-        // TODO Auto-generated method stub
+    public String getPath() {
         return null;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
     }
 
 }
