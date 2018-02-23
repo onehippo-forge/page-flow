@@ -15,7 +15,6 @@
  */
 package org.onehippo.forge.page.statemachine.core.def.impl;
 
-import org.onehippo.forge.page.statemachine.core.def.PageStateDefinition;
 import org.onehippo.forge.page.statemachine.core.def.PageStateTransitionDefinition;
 
 public class DefaultPageStateTransitionDefinition implements PageStateTransitionDefinition {
@@ -24,7 +23,7 @@ public class DefaultPageStateTransitionDefinition implements PageStateTransition
 
     private String event;
 
-    private PageStateDefinition targetPageStateDefinition;
+    private String targetPageStateDefinitionId;
 
     public String getEvent() {
         return event;
@@ -34,12 +33,12 @@ public class DefaultPageStateTransitionDefinition implements PageStateTransition
         this.event = event;
     }
 
-    public PageStateDefinition getTargetPageStateDefinition() {
-        return targetPageStateDefinition;
+    public String getTargetPageStateDefinitionId() {
+        return targetPageStateDefinitionId;
     }
 
-    public void setTargetPageStateDefinition(PageStateDefinition targetPageStateDefinition) {
-        this.targetPageStateDefinition = targetPageStateDefinition;
+    public void setTargetPageStateDefinitionId(String targetPageStateDefinitionId) {
+        this.targetPageStateDefinitionId = targetPageStateDefinitionId;
     }
 
 }

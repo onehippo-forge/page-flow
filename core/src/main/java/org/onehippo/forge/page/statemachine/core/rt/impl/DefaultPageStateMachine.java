@@ -48,6 +48,11 @@ public class DefaultPageStateMachine implements PageStateMachine {
     }
 
     @Override
+    public boolean isComplete() {
+        return stateMachine.isComplete();
+    }
+
+    @Override
     public PageState getCurrentPageState() {
         return stateMachine.getState().getId();
     }

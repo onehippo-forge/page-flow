@@ -21,6 +21,6 @@ public interface PageStateTransitionDefinition extends Serializable {
 
     public String getEvent();
 
-    public PageStateDefinition getTargetPageStateDefinition();
+    public String getTargetPageStateDefinitionId();
 
 }

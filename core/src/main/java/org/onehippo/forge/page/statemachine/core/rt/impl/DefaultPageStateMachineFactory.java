@@ -16,6 +16,8 @@
 package org.onehippo.forge.page.statemachine.core.rt.impl;
 
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
@@ -46,50 +48,51 @@ public class DefaultPageStateMachineFactory implements PageStateMachineFactory {
 
             StateConfigurer<PageState, String> stateConfigurer = builder.configureStates().withStates();
 
-            DefaultPageState initialState = new DefaultPageState("_initial_");
-            DefaultPageState finalState = new DefaultPageState("_final_");
+            DefaultPageState initialState = new DefaultPageState(PageStateMachine.INITIAL_PAGE_STATE_ID);
+            DefaultPageState finalState = new DefaultPageState(PageStateMachine.FINAL_PAGE_STATE_ID);
             stateConfigurer.initial(initialState).end(finalState);
 
             ExternalTransitionConfigurer<PageState, String> transConfigurer = builder.configureTransitions()
                     .withExternal();
 
-            Map<PageStateDefinition, PageState> pageStatesMap = new LinkedHashMap<>();
-            Map<PageStateDefinition, PageStateTransitionDefinition> pageStateTransDefMap = new LinkedHashMap<>();
+            Map<String, PageState> pageStatesMap = new LinkedHashMap<>();
+            Map<String, PageStateTransitionDefinition> pageStateTransDefMap = new LinkedHashMap<>();
 
             for (PageStateDefinition pageStateDef : pageStateMachineDefinition.getPageStateDefinitions()) {
-                DefaultPageState pageState = new DefaultPageState(pageStateDef.getId());
-                pageStatesMap.put(pageStateDef, pageState);
+                final String pageStateId = pageStateDef.getId();
+                DefaultPageState pageState = new DefaultPageState(pageStateId);
+                pageStatesMap.put(pageStateId, pageState);
 
                 stateConfigurer.state(pageState);
 
                 for (PageStateTransitionDefinition pageStateTransDef : pageStateDef
                         .getPageStateTransitionDefinitions()) {
-                    pageStateTransDefMap.put(pageStateDef, pageStateTransDef);
+                    pageStateTransDefMap.put(pageStateId, pageStateTransDef);
                 }
             }
 
-            for (Map.Entry<PageStateDefinition, PageStateTransitionDefinition> entry : pageStateTransDefMap
-                    .entrySet()) {
-                PageStateDefinition pageStateDef = entry.getKey();
+            List<PageState> pageStateList = new LinkedList<>(pageStatesMap.values());
+
+            for (Map.Entry<String, PageStateTransitionDefinition> entry : pageStateTransDefMap.entrySet()) {
+                String pageStateId = entry.getKey();
+                PageState pageState = pageStatesMap.get(pageStateId);
                 PageStateTransitionDefinition pageStateTransDef = entry.getValue();
 
                 if (StringUtils.isBlank(pageStateTransDef.getEvent())) {
                     continue;
                 }
 
-                PageStateDefinition targetPageStateDef = pageStateTransDef.getTargetPageStateDefinition();
+                String targetPageStateDefId = pageStateTransDef.getTargetPageStateDefinitionId();
 
-                if (targetPageStateDef == null) {
+                if (StringUtils.isBlank(targetPageStateDefId)) {
                     continue;
                 }
-
-                PageState pageState = pageStatesMap.get(pageStateDef);
 
                 if (pageState == null) {
                     continue;
                 }
 
-                PageState targetPageState = pageStatesMap.get(targetPageStateDef);
+                PageState targetPageState = pageStatesMap.get(targetPageStateDefId);
 
                 if (targetPageState == null) {
                     continue;
@@ -98,7 +101,13 @@ public class DefaultPageStateMachineFactory implements PageStateMachineFactory {
                 transConfigurer.event(pageStateTransDef.getEvent()).source(pageState).target(targetPageState);
             }
 
+            System.out.println("$$$$$ " + pageStateList);
+            transConfigurer.event(PageStateMachine.EVENT_INITIALIZED).source(initialState).target(pageStateList.get(0));
+            transConfigurer.event(PageStateMachine.EVENT_FINALIZING).source(pageStateList.get(pageStateList.size() - 1))
+                    .target(finalState);
+
             StateMachine<PageState, String> stateMachine = builder.build();
+
             pageStateMachine = new DefaultPageStateMachine(stateMachine);
         } catch (Exception e) {
             throw new RuntimeException("Failed to create page state machine.", e);

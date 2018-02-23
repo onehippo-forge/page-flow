@@ -15,12 +15,19 @@
  */
 package org.onehippo.forge.page.statemachine.core.rt.impl;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.onehippo.forge.page.statemachine.core.def.impl.DefaultPageStateDefinition;
 import org.onehippo.forge.page.statemachine.core.def.impl.DefaultPageStateMachineDefinition;
 import org.onehippo.forge.page.statemachine.core.def.impl.DefaultPageStateTransitionDefinition;
+import org.onehippo.forge.page.statemachine.core.rt.PageState;
 import org.onehippo.forge.page.statemachine.core.rt.PageStateMachine;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+@Ignore
 public class DefaultPageStateMachineTest {
 
     @Test
@@ -33,21 +40,45 @@ public class DefaultPageStateMachineTest {
 
         DefaultPageStateTransitionDefinition pstd1 = new DefaultPageStateTransitionDefinition();
         pstd1.setEvent("P1-to-P2");
-        pstd1.setTargetPageStateDefinition(psd2);
+        pstd1.setTargetPageStateDefinitionId("P2");
         psd1.addPageStateTransitionDefinition(pstd1);
 
         DefaultPageStateTransitionDefinition pstd2 = new DefaultPageStateTransitionDefinition();
         pstd1.setEvent("P2-to-P3");
-        pstd1.setTargetPageStateDefinition(psd3);
+        pstd1.setTargetPageStateDefinitionId("P3");
         psd2.addPageStateTransitionDefinition(pstd2);
 
         psmDef.addPageStateDefinition(psd1);
         psmDef.addPageStateDefinition(psd2);
+        psmDef.addPageStateDefinition(psd3);
 
         DefaultPageStateMachineFactory factory = new DefaultPageStateMachineFactory();
         PageStateMachine psm = factory.createPageStateMachine(psmDef);
 
         psm.start();
-        psm.stop();
+        assertFalse(psm.isComplete());
+
+        PageState currentPageState = psm.getCurrentPageState();
+        assertEquals(PageStateMachine.INITIAL_PAGE_STATE_ID, currentPageState.getId());
+        assertFalse(psm.isComplete());
+
+        psm.sendEvent(PageStateMachine.EVENT_INITIALIZED);
+        assertEquals("P1", currentPageState.getId());
+        assertFalse(psm.isComplete());
+
+        psm.sendEvent("P1-to-P2");
+        assertEquals("P2", currentPageState.getId());
+        assertFalse(psm.isComplete());
+
+        psm.sendEvent("P2-to-P3");
+        assertEquals("P3", currentPageState.getId());
+        assertFalse(psm.isComplete());
+
+        psm.sendEvent(PageStateMachine.EVENT_FINALIZING);
+        assertEquals(PageStateMachine.FINAL_PAGE_STATE_ID, currentPageState.getId());
+        assertTrue(psm.isComplete());
+
+//        psm.stop();
+//        assertTrue(psm.isComplete());
     }
 }

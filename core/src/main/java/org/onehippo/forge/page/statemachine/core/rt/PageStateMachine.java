@@ -20,9 +20,19 @@ import java.util.Map;
 
 public interface PageStateMachine {
 
+    public static final String INITIAL_PAGE_STATE_ID = "__state.initial__";
+
+    public static final String FINAL_PAGE_STATE_ID = "__state.final__";
+
+    public static final String EVENT_INITIALIZED = "__event.initialized__";
+
+    public static final String EVENT_FINALIZING = "__event.finalizing__";
+
     public void start();
 
     public void stop();
+
+    public boolean isComplete();
 
     public PageState getCurrentPageState();
 
