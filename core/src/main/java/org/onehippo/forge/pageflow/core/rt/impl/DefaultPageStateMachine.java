@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.onehippo.forge.page.statemachine.core.rt.impl;
+package org.onehippo.forge.pageflow.core.rt.impl;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -22,8 +22,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import org.onehippo.forge.page.statemachine.core.rt.PageState;
-import org.onehippo.forge.page.statemachine.core.rt.PageStateMachine;
+import org.onehippo.forge.pageflow.core.rt.PageState;
+import org.onehippo.forge.pageflow.core.rt.PageStateMachine;
 import org.springframework.statemachine.StateMachine;
 import org.springframework.statemachine.state.State;
 

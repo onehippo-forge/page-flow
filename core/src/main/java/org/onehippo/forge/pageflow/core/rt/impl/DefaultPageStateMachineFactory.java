@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.onehippo.forge.page.statemachine.core.rt.impl;
+package org.onehippo.forge.pageflow.core.rt.impl;
 
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -21,12 +21,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.onehippo.forge.page.statemachine.core.def.PageStateDefinition;
-import org.onehippo.forge.page.statemachine.core.def.PageStateMachineDefinition;
-import org.onehippo.forge.page.statemachine.core.def.PageStateTransitionDefinition;
-import org.onehippo.forge.page.statemachine.core.rt.PageState;
-import org.onehippo.forge.page.statemachine.core.rt.PageStateMachine;
-import org.onehippo.forge.page.statemachine.core.rt.PageStateMachineFactory;
+import org.onehippo.forge.pageflow.core.def.PageStateDefinition;
+import org.onehippo.forge.pageflow.core.def.PageStateMachineDefinition;
+import org.onehippo.forge.pageflow.core.def.PageStateTransitionDefinition;
+import org.onehippo.forge.pageflow.core.rt.PageState;
+import org.onehippo.forge.pageflow.core.rt.PageStateMachine;
+import org.onehippo.forge.pageflow.core.rt.PageStateMachineFactory;
 import org.springframework.beans.factory.support.StaticListableBeanFactory;
 import org.springframework.statemachine.StateMachine;
 import org.springframework.statemachine.config.StateMachineBuilder;

@@ -13,15 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.onehippo.forge.page.statemachine.core.rt.impl;
+package org.onehippo.forge.pageflow.core.rt.impl;
 
 import org.junit.Ignore;
 import org.junit.Test;
-import org.onehippo.forge.page.statemachine.core.def.impl.DefaultPageStateDefinition;
-import org.onehippo.forge.page.statemachine.core.def.impl.DefaultPageStateMachineDefinition;
-import org.onehippo.forge.page.statemachine.core.def.impl.DefaultPageStateTransitionDefinition;
-import org.onehippo.forge.page.statemachine.core.rt.PageState;
-import org.onehippo.forge.page.statemachine.core.rt.PageStateMachine;
+import org.onehippo.forge.pageflow.core.def.impl.DefaultPageStateDefinition;
+import org.onehippo.forge.pageflow.core.def.impl.DefaultPageStateMachineDefinition;
+import org.onehippo.forge.pageflow.core.def.impl.DefaultPageStateTransitionDefinition;
+import org.onehippo.forge.pageflow.core.rt.PageState;
+import org.onehippo.forge.pageflow.core.rt.PageStateMachine;
+import org.onehippo.forge.pageflow.core.rt.impl.DefaultPageStateMachineFactory;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;

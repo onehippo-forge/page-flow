@@ -13,12 +13,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.onehippo.forge.page.statemachine.core.rt;
+package org.onehippo.forge.pageflow.core.rt.impl;
 
-import org.onehippo.forge.page.statemachine.core.def.PageStateMachineDefinition;
+import org.onehippo.forge.pageflow.core.rt.PageState;
 
-public interface PageStateMachineFactory {
+public class DefaultPageState implements PageState {
 
-    public PageStateMachine createPageStateMachine(PageStateMachineDefinition pageStateMachineDefinition);
+    private final String id;
+
+    private String path;
+
+    public DefaultPageState(final String id) {
+        this.id = id;
+    }
+
+    @Override
+    public String getId() {
+        return id;
+    }
+
+    @Override
+    public String getPath() {
+        return null;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
 
 }

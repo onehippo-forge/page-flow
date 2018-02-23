@@ -13,15 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.onehippo.forge.page.statemachine.core.def;
+package org.onehippo.forge.pageflow.core.rt;
 
-import java.io.Serializable;
-import java.util.List;
+public interface PageStateMachineStore {
 
-public interface PageStateMachineDefinition extends Serializable {
+    public PageStateMachine getPageStateMachine(String id);
 
-    public String getId();
+    public PageStateMachine savePageStateMachine(String id, PageStateMachine pageStateMachine);
 
-    public List<PageStateDefinition> getPageStateDefinitions();
+    public PageStateMachine removePageStateMachine(String id);
 
 }

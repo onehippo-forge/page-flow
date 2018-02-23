@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.onehippo.forge.page.statemachine.core.def.impl;
+package org.onehippo.forge.pageflow.core.def.impl;
 
-import org.onehippo.forge.page.statemachine.core.def.PageStateTransitionDefinition;
+import org.onehippo.forge.pageflow.core.def.PageStateTransitionDefinition;
 
 public class DefaultPageStateTransitionDefinition implements PageStateTransitionDefinition {
 
