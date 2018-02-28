@@ -34,10 +34,12 @@ public class DefaultPageStateMachineDefinition implements PageStateMachineDefini
         this.id = id;
     }
 
+    @Override
     public String getId() {
         return id;
     }
 
+    @Override
     public List<PageStateDefinition> getPageStateDefinitions() {
         if (pageStateDefinitions == null) {
             return Collections.emptyList();

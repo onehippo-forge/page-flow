@@ -15,16 +15,20 @@
  */
 package org.onehippo.forge.pageflow.core.rt.impl;
 
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang.builder.ToStringBuilder;
 import org.onehippo.forge.pageflow.core.rt.PageState;
 
 public class DefaultPageState implements PageState {
 
     private final String id;
 
-    private String path;
+    private final String path;
 
-    public DefaultPageState(final String id) {
+    public DefaultPageState(final String id, final String path) {
         this.id = id;
+        this.path = path;
     }
 
     @Override
@@ -34,11 +38,27 @@ public class DefaultPageState implements PageState {
 
     @Override
     public String getPath() {
-        return null;
+        return path;
     }
 
-    public void setPath(String path) {
-        this.path = path;
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof DefaultPageState)) {
+            return false;
+        }
+
+        DefaultPageState that = (DefaultPageState) o;
+
+        return StringUtils.equals(id, that.id) && StringUtils.equals(path, that.path);
     }
 
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder().append(id).append(path).toHashCode();
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this).append("id", id).append("path", path).toString();
+    }
 }

@@ -16,6 +16,8 @@
 package org.onehippo.forge.pageflow.core.rt.impl;
 
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.support.StaticListableBeanFactory;
 import org.springframework.statemachine.StateContext;
 import org.springframework.statemachine.StateMachine;
@@ -28,6 +30,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class SpringStateMachineTest {
+
+    private static Logger log = LoggerFactory.getLogger(SpringStateMachineTest.class);
 
     @Test
     public void testStateMachine() throws Exception {
@@ -83,7 +87,7 @@ public class SpringStateMachineTest {
         return new Action<String, String>() {
             @Override
             public void execute(StateContext<String, String> context) {
-                System.out.println("$$$ ACTION: " + actionName);
+                log.debug("ACTION: {}", actionName);
             }
         };
     }

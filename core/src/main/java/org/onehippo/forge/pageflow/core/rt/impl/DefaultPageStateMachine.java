@@ -22,6 +22,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
 import org.onehippo.forge.pageflow.core.rt.PageState;
 import org.onehippo.forge.pageflow.core.rt.PageStateMachine;
 import org.springframework.statemachine.StateMachine;
@@ -110,4 +111,8 @@ public class DefaultPageStateMachine implements PageStateMachine {
         return Collections.unmodifiableMap(modelMap);
     }
 
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this).append("stateMachine", stateMachine).toString();
+    }
 }

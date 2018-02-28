@@ -28,14 +28,23 @@ public class DefaultPageStateDefinition implements PageStateDefinition {
 
     private final String id;
 
+    private final String path;
+
     private List<PageStateTransitionDefinition> pageStateTransitionDefinitions;
 
-    public DefaultPageStateDefinition(final String id) {
+    public DefaultPageStateDefinition(final String id, final String path) {
         this.id = id;
+        this.path = path;
     }
 
+    @Override
     public String getId() {
         return id;
+    }
+
+    @Override
+    public String getPath() {
+        return path;
     }
 
     @Override

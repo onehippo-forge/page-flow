@@ -15,8 +15,9 @@
  */
 package org.onehippo.forge.pageflow.core.rt.impl;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -27,14 +28,17 @@ import org.onehippo.forge.pageflow.core.def.PageStateTransitionDefinition;
 import org.onehippo.forge.pageflow.core.rt.PageState;
 import org.onehippo.forge.pageflow.core.rt.PageStateMachine;
 import org.onehippo.forge.pageflow.core.rt.PageStateMachineFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.support.StaticListableBeanFactory;
 import org.springframework.statemachine.StateMachine;
 import org.springframework.statemachine.config.StateMachineBuilder;
 import org.springframework.statemachine.config.StateMachineBuilder.Builder;
-import org.springframework.statemachine.config.configurers.ExternalTransitionConfigurer;
 import org.springframework.statemachine.config.configurers.StateConfigurer;
 
 public class DefaultPageStateMachineFactory implements PageStateMachineFactory {
+
+    private static Logger log = LoggerFactory.getLogger(DefaultPageStateMachineFactory.class);
 
     @Override
     public PageStateMachine createPageStateMachine(PageStateMachineDefinition pageStateMachineDefinition) {
@@ -46,65 +50,67 @@ public class DefaultPageStateMachineFactory implements PageStateMachineFactory {
             builder.configureConfiguration().withConfiguration().autoStartup(false)
                     .beanFactory(new StaticListableBeanFactory());
 
-            StateConfigurer<PageState, String> stateConfigurer = builder.configureStates().withStates();
-
-            DefaultPageState initialState = new DefaultPageState(PageStateMachine.INITIAL_PAGE_STATE_ID);
-            DefaultPageState finalState = new DefaultPageState(PageStateMachine.FINAL_PAGE_STATE_ID);
-            stateConfigurer.initial(initialState).end(finalState);
-
-            ExternalTransitionConfigurer<PageState, String> transConfigurer = builder.configureTransitions()
-                    .withExternal();
-
-            Map<String, PageState> pageStatesMap = new LinkedHashMap<>();
-            Map<String, PageStateTransitionDefinition> pageStateTransDefMap = new LinkedHashMap<>();
+            Map<PageState, List<PageStateTransitionDefinition>> pageStateTransDefMap = new LinkedHashMap<>();
 
             for (PageStateDefinition pageStateDef : pageStateMachineDefinition.getPageStateDefinitions()) {
-                final String pageStateId = pageStateDef.getId();
-                DefaultPageState pageState = new DefaultPageState(pageStateId);
-                pageStatesMap.put(pageStateId, pageState);
+                DefaultPageState pageState = new DefaultPageState(pageStateDef.getId(), pageStateDef.getPath());
 
-                stateConfigurer.state(pageState);
+                List<PageStateTransitionDefinition> pageStateTransList = new ArrayList<>();
 
                 for (PageStateTransitionDefinition pageStateTransDef : pageStateDef
                         .getPageStateTransitionDefinitions()) {
-                    pageStateTransDefMap.put(pageStateId, pageStateTransDef);
+                    pageStateTransList.add(pageStateTransDef);
+                }
+
+                pageStateTransDefMap.put(pageState, pageStateTransList);
+            }
+
+            StateConfigurer<PageState, String> stateConfigurer = builder.configureStates().withStates();
+            boolean initialSet = false;
+
+            for (Map.Entry<PageState, List<PageStateTransitionDefinition>> entry : pageStateTransDefMap.entrySet()) {
+                PageState pageState = entry.getKey();
+
+                if (!initialSet) {
+                    stateConfigurer.initial(pageState);
+                    initialSet = true;
+                } else {
+                    stateConfigurer.state(pageState);
                 }
             }
 
-            List<PageState> pageStateList = new LinkedList<>(pageStatesMap.values());
+            for (Map.Entry<PageState, List<PageStateTransitionDefinition>> entry : pageStateTransDefMap.entrySet()) {
+                PageState pageState = entry.getKey();
 
-            for (Map.Entry<String, PageStateTransitionDefinition> entry : pageStateTransDefMap.entrySet()) {
-                String pageStateId = entry.getKey();
-                PageState pageState = pageStatesMap.get(pageStateId);
-                PageStateTransitionDefinition pageStateTransDef = entry.getValue();
+                List<PageStateTransitionDefinition> pageStateTransDefList = entry.getValue();
 
-                if (StringUtils.isBlank(pageStateTransDef.getEvent())) {
-                    continue;
+                for (PageStateTransitionDefinition pageStateTransDef : pageStateTransDefList) {
+                    if (StringUtils.isBlank(pageStateTransDef.getEvent())) {
+                        continue;
+                    }
+
+                    String targetPageStateDefId = pageStateTransDef.getTargetPageStateDefinitionId();
+
+                    if (StringUtils.isBlank(targetPageStateDefId)) {
+                        continue;
+                    }
+
+                    if (pageState == null) {
+                        continue;
+                    }
+
+                    PageState targetPageState = findPageStateById(pageStateTransDefMap.keySet(), targetPageStateDefId);
+
+                    if (targetPageState == null) {
+                        continue;
+                    }
+
+                    log.debug("Registering page transtion on '{}' from '{}' to '{}'.", pageStateTransDef.getEvent(),
+                            pageState, targetPageState);
+                    builder.configureTransitions().withExternal().event(pageStateTransDef.getEvent()).source(pageState)
+                            .target(targetPageState);
                 }
-
-                String targetPageStateDefId = pageStateTransDef.getTargetPageStateDefinitionId();
-
-                if (StringUtils.isBlank(targetPageStateDefId)) {
-                    continue;
-                }
-
-                if (pageState == null) {
-                    continue;
-                }
-
-                PageState targetPageState = pageStatesMap.get(targetPageStateDefId);
-
-                if (targetPageState == null) {
-                    continue;
-                }
-
-                transConfigurer.event(pageStateTransDef.getEvent()).source(pageState).target(targetPageState);
             }
-
-            System.out.println("$$$$$ " + pageStateList);
-            transConfigurer.event(PageStateMachine.EVENT_INITIALIZED).source(initialState).target(pageStateList.get(0));
-            transConfigurer.event(PageStateMachine.EVENT_FINALIZING).source(pageStateList.get(pageStateList.size() - 1))
-                    .target(finalState);
 
             StateMachine<PageState, String> stateMachine = builder.build();
 
@@ -116,4 +122,13 @@ public class DefaultPageStateMachineFactory implements PageStateMachineFactory {
         return pageStateMachine;
     }
 
+    private PageState findPageStateById(final Collection<PageState> pageStates, final String id) {
+        for (PageState pageState : pageStates) {
+            if (StringUtils.equals(id, pageState.getId())) {
+                return pageState;
+            }
+        }
+
+        return null;
+    }
 }
