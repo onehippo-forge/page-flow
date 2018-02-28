@@ -16,11 +16,12 @@
 package org.onehippo.forge.pageflow.core.def;
 
 import java.io.Serializable;
+import java.util.List;
 
-public interface PageStateTransitionDefinition extends Serializable {
+public interface PageFlowDefinition extends Serializable {
 
-    public String getEvent();
+    public String getId();
 
-    public String getTargetPageStateDefinitionId();
+    public List<PageStateDefinition> getPageStateDefinitions();
 
 }

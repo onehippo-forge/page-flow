@@ -20,7 +20,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.onehippo.forge.pageflow.core.def.PageStateDefinition;
-import org.onehippo.forge.pageflow.core.def.PageStateTransitionDefinition;
+import org.onehippo.forge.pageflow.core.def.PageTransitionDefinition;
 
 public class DefaultPageStateDefinition implements PageStateDefinition {
 
@@ -30,7 +30,7 @@ public class DefaultPageStateDefinition implements PageStateDefinition {
 
     private final String path;
 
-    private List<PageStateTransitionDefinition> pageStateTransitionDefinitions;
+    private List<PageTransitionDefinition> pageTransitionDefs;
 
     public DefaultPageStateDefinition(final String id, final String path) {
         this.id = id;
@@ -48,33 +48,33 @@ public class DefaultPageStateDefinition implements PageStateDefinition {
     }
 
     @Override
-    public List<PageStateTransitionDefinition> getPageStateTransitionDefinitions() {
-        if (pageStateTransitionDefinitions == null) {
+    public List<PageTransitionDefinition> getPageTransitionDefinitions() {
+        if (pageTransitionDefs == null) {
             return Collections.emptyList();
         }
 
-        return Collections.unmodifiableList(pageStateTransitionDefinitions);
+        return Collections.unmodifiableList(pageTransitionDefs);
     }
 
-    public void addPageStateTransitionDefinition(PageStateTransitionDefinition pageStateTransitionDefinition) {
-        if (pageStateTransitionDefinitions == null) {
-            pageStateTransitionDefinitions = new LinkedList<>();
+    public void addPageStateTransitionDefinition(PageTransitionDefinition pageTransitionDef) {
+        if (pageTransitionDefs == null) {
+            pageTransitionDefs = new LinkedList<>();
         }
 
-        pageStateTransitionDefinitions.add(pageStateTransitionDefinition);
+        pageTransitionDefs.add(pageTransitionDef);
     }
 
-    public boolean removePageStateTransitionDefinition(PageStateTransitionDefinition pageStateTransitionDefinition) {
-        if (pageStateTransitionDefinitions == null) {
+    public boolean removePageStateTransitionDefinition(PageTransitionDefinition pageTransitionDef) {
+        if (pageTransitionDefs == null) {
             return false;
         }
 
-        return pageStateTransitionDefinitions.remove(pageStateTransitionDefinition);
+        return pageTransitionDefs.remove(pageTransitionDef);
     }
 
     public void removeAllPageStateTransitionDefinitions() {
-        if (pageStateTransitionDefinitions != null) {
-            pageStateTransitionDefinitions.clear();
+        if (pageTransitionDefs != null) {
+            pageTransitionDefs.clear();
         }
     }
 }

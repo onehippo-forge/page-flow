@@ -22,12 +22,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.onehippo.forge.pageflow.core.def.PageFlowDefinition;
 import org.onehippo.forge.pageflow.core.def.PageStateDefinition;
-import org.onehippo.forge.pageflow.core.def.PageStateMachineDefinition;
-import org.onehippo.forge.pageflow.core.def.PageStateTransitionDefinition;
+import org.onehippo.forge.pageflow.core.def.PageTransitionDefinition;
+import org.onehippo.forge.pageflow.core.rt.PageFlow;
+import org.onehippo.forge.pageflow.core.rt.PageFlowFactory;
 import org.onehippo.forge.pageflow.core.rt.PageState;
-import org.onehippo.forge.pageflow.core.rt.PageStateMachine;
-import org.onehippo.forge.pageflow.core.rt.PageStateMachineFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.support.StaticListableBeanFactory;
@@ -36,13 +36,13 @@ import org.springframework.statemachine.config.StateMachineBuilder;
 import org.springframework.statemachine.config.StateMachineBuilder.Builder;
 import org.springframework.statemachine.config.configurers.StateConfigurer;
 
-public class DefaultPageStateMachineFactory implements PageStateMachineFactory {
+public class DefaultPageFlowFactory implements PageFlowFactory {
 
-    private static Logger log = LoggerFactory.getLogger(DefaultPageStateMachineFactory.class);
+    private static Logger log = LoggerFactory.getLogger(DefaultPageFlowFactory.class);
 
     @Override
-    public PageStateMachine createPageStateMachine(PageStateMachineDefinition pageStateMachineDefinition) {
-        PageStateMachine pageStateMachine = null;
+    public PageFlow createPageFlow(PageFlowDefinition pageFlowDef) {
+        PageFlow pageFlow = null;
 
         try {
             Builder<PageState, String> builder = StateMachineBuilder.builder();
@@ -50,25 +50,25 @@ public class DefaultPageStateMachineFactory implements PageStateMachineFactory {
             builder.configureConfiguration().withConfiguration().autoStartup(false)
                     .beanFactory(new StaticListableBeanFactory());
 
-            Map<PageState, List<PageStateTransitionDefinition>> pageStateTransDefMap = new LinkedHashMap<>();
+            Map<PageState, List<PageTransitionDefinition>> pageStateTranDefsMap = new LinkedHashMap<>();
 
-            for (PageStateDefinition pageStateDef : pageStateMachineDefinition.getPageStateDefinitions()) {
+            for (PageStateDefinition pageStateDef : pageFlowDef.getPageStateDefinitions()) {
                 DefaultPageState pageState = new DefaultPageState(pageStateDef.getId(), pageStateDef.getPath());
 
-                List<PageStateTransitionDefinition> pageStateTransList = new ArrayList<>();
+                List<PageTransitionDefinition> pageTransList = new ArrayList<>();
 
-                for (PageStateTransitionDefinition pageStateTransDef : pageStateDef
-                        .getPageStateTransitionDefinitions()) {
-                    pageStateTransList.add(pageStateTransDef);
+                for (PageTransitionDefinition pageTransDef : pageStateDef
+                        .getPageTransitionDefinitions()) {
+                    pageTransList.add(pageTransDef);
                 }
 
-                pageStateTransDefMap.put(pageState, pageStateTransList);
+                pageStateTranDefsMap.put(pageState, pageTransList);
             }
 
             StateConfigurer<PageState, String> stateConfigurer = builder.configureStates().withStates();
             boolean initialSet = false;
 
-            for (Map.Entry<PageState, List<PageStateTransitionDefinition>> entry : pageStateTransDefMap.entrySet()) {
+            for (Map.Entry<PageState, List<PageTransitionDefinition>> entry : pageStateTranDefsMap.entrySet()) {
                 PageState pageState = entry.getKey();
 
                 if (!initialSet) {
@@ -79,19 +79,19 @@ public class DefaultPageStateMachineFactory implements PageStateMachineFactory {
                 }
             }
 
-            for (Map.Entry<PageState, List<PageStateTransitionDefinition>> entry : pageStateTransDefMap.entrySet()) {
+            for (Map.Entry<PageState, List<PageTransitionDefinition>> entry : pageStateTranDefsMap.entrySet()) {
                 PageState pageState = entry.getKey();
 
-                List<PageStateTransitionDefinition> pageStateTransDefList = entry.getValue();
+                List<PageTransitionDefinition> pageTransDefList = entry.getValue();
 
-                for (PageStateTransitionDefinition pageStateTransDef : pageStateTransDefList) {
-                    if (StringUtils.isBlank(pageStateTransDef.getEvent())) {
+                for (PageTransitionDefinition pageTransDef : pageTransDefList) {
+                    if (StringUtils.isBlank(pageTransDef.getEvent())) {
                         continue;
                     }
 
-                    String targetPageStateDefId = pageStateTransDef.getTargetPageStateDefinitionId();
+                    String targetStateDefId = pageTransDef.getTargetPageStateDefinitionId();
 
-                    if (StringUtils.isBlank(targetPageStateDefId)) {
+                    if (StringUtils.isBlank(targetStateDefId)) {
                         continue;
                     }
 
@@ -99,27 +99,27 @@ public class DefaultPageStateMachineFactory implements PageStateMachineFactory {
                         continue;
                     }
 
-                    PageState targetPageState = findPageStateById(pageStateTransDefMap.keySet(), targetPageStateDefId);
+                    PageState targetPageState = findPageStateById(pageStateTranDefsMap.keySet(), targetStateDefId);
 
                     if (targetPageState == null) {
                         continue;
                     }
 
-                    log.debug("Registering page transtion on '{}' from '{}' to '{}'.", pageStateTransDef.getEvent(),
+                    log.debug("Registering page transtion on '{}' from '{}' to '{}'.", pageTransDef.getEvent(),
                             pageState, targetPageState);
-                    builder.configureTransitions().withExternal().event(pageStateTransDef.getEvent()).source(pageState)
+                    builder.configureTransitions().withExternal().event(pageTransDef.getEvent()).source(pageState)
                             .target(targetPageState);
                 }
             }
 
             StateMachine<PageState, String> stateMachine = builder.build();
 
-            pageStateMachine = new DefaultPageStateMachine(stateMachine);
+            pageFlow = new DefaultPageFlow(stateMachine);
         } catch (Exception e) {
             throw new RuntimeException("Failed to create page state machine.", e);
         }
 
-        return pageStateMachine;
+        return pageFlow;
     }
 
     private PageState findPageStateById(final Collection<PageState> pageStates, final String id) {

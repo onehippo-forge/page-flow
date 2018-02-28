@@ -15,10 +15,12 @@
  */
 package org.onehippo.forge.pageflow.core.rt;
 
-import org.onehippo.forge.pageflow.core.def.PageStateMachineDefinition;
+public interface PageFlowStore {
 
-public interface PageStateMachineFactory {
+    public PageFlow readPageFlow(String flowId);
 
-    public PageStateMachine createPageStateMachine(PageStateMachineDefinition pageStateMachineDefinition);
+    public PageFlow storePageFlow(String flowId, PageFlow pageFlow);
+
+    public PageFlow removePageFlow(String flowId);
 
 }

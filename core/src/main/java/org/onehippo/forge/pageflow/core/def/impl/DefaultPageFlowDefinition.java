@@ -20,17 +20,17 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.onehippo.forge.pageflow.core.def.PageStateDefinition;
-import org.onehippo.forge.pageflow.core.def.PageStateMachineDefinition;
+import org.onehippo.forge.pageflow.core.def.PageFlowDefinition;
 
-public class DefaultPageStateMachineDefinition implements PageStateMachineDefinition {
+public class DefaultPageFlowDefinition implements PageFlowDefinition {
 
     private static final long serialVersionUID = 1L;
 
     private final String id;
 
-    private List<PageStateDefinition> pageStateDefinitions;
+    private List<PageStateDefinition> pageStateDefs;
 
-    public DefaultPageStateMachineDefinition(final String id) {
+    public DefaultPageFlowDefinition(final String id) {
         this.id = id;
     }
 
@@ -41,32 +41,32 @@ public class DefaultPageStateMachineDefinition implements PageStateMachineDefini
 
     @Override
     public List<PageStateDefinition> getPageStateDefinitions() {
-        if (pageStateDefinitions == null) {
+        if (pageStateDefs == null) {
             return Collections.emptyList();
         }
 
-        return Collections.unmodifiableList(pageStateDefinitions);
+        return Collections.unmodifiableList(pageStateDefs);
     }
 
-    public void addPageStateDefinition(PageStateDefinition pageStateDefinition) {
-        if (pageStateDefinitions == null) {
-            pageStateDefinitions = new LinkedList<>();
+    public void addPageStateDefinition(PageStateDefinition pageStateDef) {
+        if (pageStateDefs == null) {
+            pageStateDefs = new LinkedList<>();
         }
 
-        pageStateDefinitions.add(pageStateDefinition);
+        pageStateDefs.add(pageStateDef);
     }
 
-    public boolean removePageStateDefinition(PageStateDefinition pageStateDefinition) {
-        if (pageStateDefinitions == null) {
+    public boolean removePageStateDefinition(PageStateDefinition pageStateDef) {
+        if (pageStateDefs == null) {
             return false;
         }
 
-        return pageStateDefinitions.remove(pageStateDefinition);
+        return pageStateDefs.remove(pageStateDef);
     }
 
     public void removeAllPageStateDefinitions() {
-        if (pageStateDefinitions != null) {
-            pageStateDefinitions.clear();
+        if (pageStateDefs != null) {
+            pageStateDefs.clear();
         }
     }
 }

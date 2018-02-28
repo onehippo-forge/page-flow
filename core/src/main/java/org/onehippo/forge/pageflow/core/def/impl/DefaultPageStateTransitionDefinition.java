@@ -15,9 +15,9 @@
  */
 package org.onehippo.forge.pageflow.core.def.impl;
 
-import org.onehippo.forge.pageflow.core.def.PageStateTransitionDefinition;
+import org.onehippo.forge.pageflow.core.def.PageTransitionDefinition;
 
-public class DefaultPageStateTransitionDefinition implements PageStateTransitionDefinition {
+public class DefaultPageStateTransitionDefinition implements PageTransitionDefinition {
 
     private static final long serialVersionUID = 1L;
 

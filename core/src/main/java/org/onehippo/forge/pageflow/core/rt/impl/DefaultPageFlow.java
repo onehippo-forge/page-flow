@@ -24,17 +24,17 @@ import java.util.Map;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.onehippo.forge.pageflow.core.rt.PageState;
-import org.onehippo.forge.pageflow.core.rt.PageStateMachine;
+import org.onehippo.forge.pageflow.core.rt.PageFlow;
 import org.springframework.statemachine.StateMachine;
 import org.springframework.statemachine.state.State;
 
-public class DefaultPageStateMachine implements PageStateMachine {
+public class DefaultPageFlow implements PageFlow {
 
-    private static final String MODEL_MAP_VAR_NAME = DefaultPageStateMachine.class.getName() + ".modelMap";
+    private static final String MODEL_MAP_VAR_NAME = DefaultPageFlow.class.getName() + ".modelMap";
 
     private final StateMachine<PageState, String> stateMachine;
 
-    public DefaultPageStateMachine(final StateMachine<PageState, String> stateMachine) {
+    public DefaultPageFlow(final StateMachine<PageState, String> stateMachine) {
         this.stateMachine = stateMachine;
     }
 
@@ -54,7 +54,7 @@ public class DefaultPageStateMachine implements PageStateMachine {
     }
 
     @Override
-    public PageState getCurrentPageState() {
+    public PageState getPageState() {
         return stateMachine.getState().getId();
     }
 

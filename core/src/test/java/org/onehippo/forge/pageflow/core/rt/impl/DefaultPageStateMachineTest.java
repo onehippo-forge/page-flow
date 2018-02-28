@@ -17,10 +17,10 @@ package org.onehippo.forge.pageflow.core.rt.impl;
 
 import org.junit.Test;
 import org.onehippo.forge.pageflow.core.def.impl.DefaultPageStateDefinition;
-import org.onehippo.forge.pageflow.core.def.impl.DefaultPageStateMachineDefinition;
+import org.onehippo.forge.pageflow.core.def.impl.DefaultPageFlowDefinition;
 import org.onehippo.forge.pageflow.core.def.impl.DefaultPageStateTransitionDefinition;
 import org.onehippo.forge.pageflow.core.rt.PageState;
-import org.onehippo.forge.pageflow.core.rt.PageStateMachine;
+import org.onehippo.forge.pageflow.core.rt.PageFlow;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,7 +34,7 @@ public class DefaultPageStateMachineTest {
 
     @Test
     public void testPageStateMachine() throws Exception {
-        DefaultPageStateMachineDefinition psmDef = new DefaultPageStateMachineDefinition("flow1");
+        DefaultPageFlowDefinition psmDef = new DefaultPageFlowDefinition("flow1");
 
         DefaultPageStateDefinition state1 = new DefaultPageStateDefinition("P1", "/page1");
         DefaultPageStateDefinition state2 = new DefaultPageStateDefinition("P2", "/page2");
@@ -54,26 +54,26 @@ public class DefaultPageStateMachineTest {
         psmDef.addPageStateDefinition(state2);
         psmDef.addPageStateDefinition(state3);
 
-        DefaultPageStateMachineFactory factory = new DefaultPageStateMachineFactory();
-        PageStateMachine psm = factory.createPageStateMachine(psmDef);
+        DefaultPageFlowFactory factory = new DefaultPageFlowFactory();
+        PageFlow psm = factory.createPageFlow(psmDef);
         log.debug("PageStateMachine instance: {}", psm);
 
         psm.start();
         assertFalse(psm.isComplete());
 
-        PageState currentPageState = psm.getCurrentPageState();
+        PageState currentPageState = psm.getPageState();
         log.debug("currentPageState: {}", currentPageState);
         assertEquals("P1", currentPageState.getId());
         assertFalse(psm.isComplete());
 
         psm.sendEvent("P1-to-P2");
-        currentPageState = psm.getCurrentPageState();
+        currentPageState = psm.getPageState();
         log.debug("currentPageState: {}", currentPageState);
         assertEquals("P2", currentPageState.getId());
         assertFalse(psm.isComplete());
 
         psm.sendEvent("P2-to-P3");
-        currentPageState = psm.getCurrentPageState();
+        currentPageState = psm.getPageState();
         log.debug("currentPageState: {}", currentPageState);
         assertEquals("P3", currentPageState.getId());
         assertFalse(psm.isComplete());

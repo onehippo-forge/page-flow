@@ -15,12 +15,27 @@
  */
 package org.onehippo.forge.pageflow.core.rt;
 
-public interface PageStateMachineStore {
+import java.util.List;
+import java.util.Map;
 
-    public PageStateMachine getPageStateMachine(String id);
+public interface PageFlow {
 
-    public PageStateMachine savePageStateMachine(String id, PageStateMachine pageStateMachine);
+    public void start();
 
-    public PageStateMachine removePageStateMachine(String id);
+    public void stop();
+
+    public boolean isComplete();
+
+    public PageState getPageState();
+
+    public void sendEvent(String event);
+
+    public List<PageState> getPageStates();
+
+    public Object getModel(String name);
+
+    public void setModel(String name, Object model);
+
+    public Map<String, Object> getModelMap();
 
 }

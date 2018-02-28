@@ -13,29 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.onehippo.forge.pageflow.core.rt;
+package org.onehippo.forge.pageflow.core.def;
 
-import java.util.List;
-import java.util.Map;
+import java.io.Serializable;
 
-public interface PageStateMachine {
+public interface PageTransitionDefinition extends Serializable {
 
-    public void start();
+    public String getEvent();
 
-    public void stop();
-
-    public boolean isComplete();
-
-    public PageState getCurrentPageState();
-
-    public void sendEvent(String event);
-
-    public List<PageState> getPageStates();
-
-    public Object getModel(String name);
-
-    public void setModel(String name, Object model);
-
-    public Map<String, Object> getModelMap();
+    public String getTargetPageStateDefinitionId();
 
 }

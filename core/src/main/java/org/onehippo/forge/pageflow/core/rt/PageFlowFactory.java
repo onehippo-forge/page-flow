@@ -13,15 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.onehippo.forge.pageflow.core.def;
+package org.onehippo.forge.pageflow.core.rt;
 
-import java.io.Serializable;
-import java.util.List;
+import org.onehippo.forge.pageflow.core.def.PageFlowDefinition;
 
-public interface PageStateMachineDefinition extends Serializable {
+public interface PageFlowFactory {
 
-    public String getId();
-
-    public List<PageStateDefinition> getPageStateDefinitions();
+    public PageFlow createPageFlow(PageFlowDefinition pageFlowDef);
 
 }
