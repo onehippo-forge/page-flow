@@ -15,10 +15,16 @@
  */
 package org.onehippo.forge.pageflow.core.rt;
 
-public interface PageState {
+import java.io.Serializable;
+
+public interface PageState extends Serializable {
 
     public String getId();
 
     public String getPath();
+
+    boolean equals(Object o);
+
+    int hashCode();
 
 }

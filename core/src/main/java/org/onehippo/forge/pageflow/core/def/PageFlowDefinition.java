@@ -24,4 +24,8 @@ public interface PageFlowDefinition extends Serializable {
 
     public List<PageStateDefinition> getPageStateDefinitions();
 
+    boolean equals(Object o);
+
+    int hashCode();
+
 }

@@ -21,14 +21,19 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
+import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
-import org.onehippo.forge.pageflow.core.rt.PageState;
+import org.onehippo.forge.pageflow.core.PageFlowException;
 import org.onehippo.forge.pageflow.core.rt.PageFlow;
+import org.onehippo.forge.pageflow.core.rt.PageState;
 import org.springframework.statemachine.StateMachine;
 import org.springframework.statemachine.state.State;
 
 public class DefaultPageFlow implements PageFlow {
+
+    private static final long serialVersionUID = 1L;
 
     private static final String MODEL_MAP_VAR_NAME = DefaultPageFlow.class.getName() + ".modelMap";
 
@@ -39,32 +44,32 @@ public class DefaultPageFlow implements PageFlow {
     }
 
     @Override
-    public void start() {
+    public void start() throws PageFlowException {
         stateMachine.start();
     }
 
     @Override
-    public void stop() {
+    public void stop() throws PageFlowException {
         stateMachine.stop();
     }
 
     @Override
-    public boolean isComplete() {
+    public boolean isComplete() throws PageFlowException {
         return stateMachine.isComplete();
     }
 
     @Override
-    public PageState getPageState() {
+    public PageState getPageState() throws PageFlowException {
         return stateMachine.getState().getId();
     }
 
     @Override
-    public void sendEvent(String event) {
+    public void sendEvent(String event) throws PageFlowException {
         stateMachine.sendEvent(event);
     }
 
     @Override
-    public List<PageState> getPageStates() {
+    public List<PageState> getPageStates() throws PageFlowException {
         Collection<State<PageState, String>> states = stateMachine.getStates();
         List<PageState> pageStates = new LinkedList<>();
         states.forEach(s -> pageStates.add(s.getId()));
@@ -73,7 +78,7 @@ public class DefaultPageFlow implements PageFlow {
 
     @SuppressWarnings("unchecked")
     @Override
-    public Object getModel(String name) {
+    public Object getModel(String name) throws PageFlowException {
         Map<String, Object> modelMap = (Map<String, Object>) stateMachine.getExtendedState().getVariables()
                 .get(MODEL_MAP_VAR_NAME);
 
@@ -86,7 +91,7 @@ public class DefaultPageFlow implements PageFlow {
 
     @SuppressWarnings("unchecked")
     @Override
-    public void setModel(String name, Object model) {
+    public void setModel(String name, Object model) throws PageFlowException {
         Map<String, Object> modelMap = (Map<String, Object>) stateMachine.getExtendedState().getVariables()
                 .get(MODEL_MAP_VAR_NAME);
 
@@ -100,7 +105,7 @@ public class DefaultPageFlow implements PageFlow {
 
     @SuppressWarnings("unchecked")
     @Override
-    public Map<String, Object> getModelMap() {
+    public Map<String, Object> getModelMap() throws PageFlowException {
         Map<String, Object> modelMap = (Map<String, Object>) stateMachine.getExtendedState().getVariables()
                 .get(MODEL_MAP_VAR_NAME);
 
@@ -109,6 +114,22 @@ public class DefaultPageFlow implements PageFlow {
         }
 
         return Collections.unmodifiableMap(modelMap);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof DefaultPageFlow)) {
+            return false;
+        }
+
+        DefaultPageFlow that = (DefaultPageFlow) o;
+
+        return (Objects.equals(stateMachine, that.stateMachine));
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder().append(stateMachine).toHashCode();
     }
 
     @Override

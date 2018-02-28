@@ -16,11 +16,11 @@
 package org.onehippo.forge.pageflow.core.rt.impl;
 
 import org.junit.Test;
-import org.onehippo.forge.pageflow.core.def.impl.DefaultPageStateDefinition;
 import org.onehippo.forge.pageflow.core.def.impl.DefaultPageFlowDefinition;
-import org.onehippo.forge.pageflow.core.def.impl.DefaultPageStateTransitionDefinition;
-import org.onehippo.forge.pageflow.core.rt.PageState;
+import org.onehippo.forge.pageflow.core.def.impl.DefaultPageStateDefinition;
+import org.onehippo.forge.pageflow.core.def.impl.DefaultPageTransitionDefinition;
 import org.onehippo.forge.pageflow.core.rt.PageFlow;
+import org.onehippo.forge.pageflow.core.rt.PageState;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,51 +34,47 @@ public class DefaultPageStateMachineTest {
 
     @Test
     public void testPageStateMachine() throws Exception {
-        DefaultPageFlowDefinition psmDef = new DefaultPageFlowDefinition("flow1");
+        DefaultPageFlowDefinition flowDef = new DefaultPageFlowDefinition("flow1");
 
-        DefaultPageStateDefinition state1 = new DefaultPageStateDefinition("P1", "/page1");
-        DefaultPageStateDefinition state2 = new DefaultPageStateDefinition("P2", "/page2");
-        DefaultPageStateDefinition state3 = new DefaultPageStateDefinition("P3", "/page3");
+        DefaultPageStateDefinition pageDef1 = new DefaultPageStateDefinition("P1", "/page1");
+        DefaultPageStateDefinition pageDef2 = new DefaultPageStateDefinition("P2", "/page2");
+        DefaultPageStateDefinition pageDef3 = new DefaultPageStateDefinition("P3", "/page3");
 
-        DefaultPageStateTransitionDefinition transition1 = new DefaultPageStateTransitionDefinition();
-        transition1.setEvent("P1-to-P2");
-        transition1.setTargetPageStateDefinitionId("P2");
-        state1.addPageStateTransitionDefinition(transition1);
+        DefaultPageTransitionDefinition transDef1 = new DefaultPageTransitionDefinition("P1-to-P2", "P2");
+        pageDef1.addPageTransitionDefinition(transDef1);
 
-        DefaultPageStateTransitionDefinition transition2 = new DefaultPageStateTransitionDefinition();
-        transition2.setEvent("P2-to-P3");
-        transition2.setTargetPageStateDefinitionId("P3");
-        state2.addPageStateTransitionDefinition(transition2);
+        DefaultPageTransitionDefinition transDef2 = new DefaultPageTransitionDefinition("P2-to-P3", "P3");
+        pageDef2.addPageTransitionDefinition(transDef2);
 
-        psmDef.addPageStateDefinition(state1);
-        psmDef.addPageStateDefinition(state2);
-        psmDef.addPageStateDefinition(state3);
+        flowDef.addPageStateDefinition(pageDef1);
+        flowDef.addPageStateDefinition(pageDef2);
+        flowDef.addPageStateDefinition(pageDef3);
 
-        DefaultPageFlowFactory factory = new DefaultPageFlowFactory();
-        PageFlow psm = factory.createPageFlow(psmDef);
-        log.debug("PageStateMachine instance: {}", psm);
+        DefaultPageFlowFactory pageFlowFactory = new DefaultPageFlowFactory();
+        PageFlow pageFlow = pageFlowFactory.createPageFlow(flowDef);
+        log.debug("PageStateMachine instance: {}", pageFlow);
 
-        psm.start();
-        assertFalse(psm.isComplete());
+        pageFlow.start();
+        assertFalse(pageFlow.isComplete());
 
-        PageState currentPageState = psm.getPageState();
-        log.debug("currentPageState: {}", currentPageState);
-        assertEquals("P1", currentPageState.getId());
-        assertFalse(psm.isComplete());
+        PageState pageState = pageFlow.getPageState();
+        log.debug("currentPageState: {}", pageState);
+        assertEquals("P1", pageState.getId());
+        assertFalse(pageFlow.isComplete());
 
-        psm.sendEvent("P1-to-P2");
-        currentPageState = psm.getPageState();
-        log.debug("currentPageState: {}", currentPageState);
-        assertEquals("P2", currentPageState.getId());
-        assertFalse(psm.isComplete());
+        pageFlow.sendEvent("P1-to-P2");
+        pageState = pageFlow.getPageState();
+        log.debug("currentPageState: {}", pageState);
+        assertEquals("P2", pageState.getId());
+        assertFalse(pageFlow.isComplete());
 
-        psm.sendEvent("P2-to-P3");
-        currentPageState = psm.getPageState();
-        log.debug("currentPageState: {}", currentPageState);
-        assertEquals("P3", currentPageState.getId());
-        assertFalse(psm.isComplete());
+        pageFlow.sendEvent("P2-to-P3");
+        pageState = pageFlow.getPageState();
+        log.debug("currentPageState: {}", pageState);
+        assertEquals("P3", pageState.getId());
+        assertFalse(pageFlow.isComplete());
 
-        psm.stop();
-        assertTrue(psm.isComplete());
+        pageFlow.stop();
+        assertTrue(pageFlow.isComplete());
     }
 }

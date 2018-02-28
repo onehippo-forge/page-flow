@@ -15,12 +15,14 @@
  */
 package org.onehippo.forge.pageflow.core.rt;
 
+import org.onehippo.forge.pageflow.core.PageFlowException;
+
 public interface PageFlowStore {
 
-    public PageFlow readPageFlow(String flowId);
+    public PageFlow readPageFlow(String flowId) throws PageFlowException;
 
-    public PageFlow storePageFlow(String flowId, PageFlow pageFlow);
+    public PageFlow storePageFlow(String flowId, PageFlow pageFlow) throws PageFlowException;
 
-    public PageFlow removePageFlow(String flowId);
+    public PageFlow removePageFlow(String flowId) throws PageFlowException;
 
 }

@@ -18,9 +18,12 @@ package org.onehippo.forge.pageflow.core.def.impl;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
-import org.onehippo.forge.pageflow.core.def.PageStateDefinition;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang.builder.ToStringBuilder;
 import org.onehippo.forge.pageflow.core.def.PageFlowDefinition;
+import org.onehippo.forge.pageflow.core.def.PageStateDefinition;
 
 public class DefaultPageFlowDefinition implements PageFlowDefinition {
 
@@ -68,5 +71,26 @@ public class DefaultPageFlowDefinition implements PageFlowDefinition {
         if (pageStateDefs != null) {
             pageStateDefs.clear();
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof DefaultPageFlowDefinition)) {
+            return false;
+        }
+
+        DefaultPageFlowDefinition that = (DefaultPageFlowDefinition) o;
+
+        return (Objects.equals(id, that.id) && Objects.equals(pageStateDefs, that.pageStateDefs));
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder().append(id).append(pageStateDefs).toHashCode();
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this).append("id", id).append("pageStateDefs", pageStateDefs).toString();
     }
 }

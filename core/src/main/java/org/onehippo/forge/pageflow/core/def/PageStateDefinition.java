@@ -26,4 +26,8 @@ public interface PageStateDefinition extends Serializable {
 
     public List<PageTransitionDefinition> getPageTransitionDefinitions();
 
+    boolean equals(Object o);
+
+    int hashCode();
+
 }

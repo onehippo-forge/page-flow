@@ -23,4 +23,8 @@ public interface PageTransitionDefinition extends Serializable {
 
     public String getTargetPageStateDefinitionId();
 
+    boolean equals(Object o);
+
+    int hashCode();
+
 }

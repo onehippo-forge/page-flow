@@ -18,7 +18,10 @@ package org.onehippo.forge.pageflow.core.def.impl;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
+import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang.builder.ToStringBuilder;
 import org.onehippo.forge.pageflow.core.def.PageStateDefinition;
 import org.onehippo.forge.pageflow.core.def.PageTransitionDefinition;
 
@@ -56,7 +59,7 @@ public class DefaultPageStateDefinition implements PageStateDefinition {
         return Collections.unmodifiableList(pageTransitionDefs);
     }
 
-    public void addPageStateTransitionDefinition(PageTransitionDefinition pageTransitionDef) {
+    public void addPageTransitionDefinition(PageTransitionDefinition pageTransitionDef) {
         if (pageTransitionDefs == null) {
             pageTransitionDefs = new LinkedList<>();
         }
@@ -64,7 +67,7 @@ public class DefaultPageStateDefinition implements PageStateDefinition {
         pageTransitionDefs.add(pageTransitionDef);
     }
 
-    public boolean removePageStateTransitionDefinition(PageTransitionDefinition pageTransitionDef) {
+    public boolean removePageTransitionDefinition(PageTransitionDefinition pageTransitionDef) {
         if (pageTransitionDefs == null) {
             return false;
         }
@@ -72,9 +75,32 @@ public class DefaultPageStateDefinition implements PageStateDefinition {
         return pageTransitionDefs.remove(pageTransitionDef);
     }
 
-    public void removeAllPageStateTransitionDefinitions() {
+    public void clearPageTransitionDefinitions() {
         if (pageTransitionDefs != null) {
             pageTransitionDefs.clear();
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof DefaultPageStateDefinition)) {
+            return false;
+        }
+
+        DefaultPageStateDefinition that = (DefaultPageStateDefinition) o;
+
+        return (Objects.equals(id, that.id) && Objects.equals(path, that.path)
+                && Objects.equals(pageTransitionDefs, that.pageTransitionDefs));
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder().append(id).append(path).append(pageTransitionDefs).toHashCode();
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this).append("id", id).append("path", path)
+                .append("pageTransitionDefs", pageTransitionDefs).toString();
     }
 }

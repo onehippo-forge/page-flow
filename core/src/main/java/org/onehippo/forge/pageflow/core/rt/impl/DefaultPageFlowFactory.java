@@ -16,12 +16,12 @@
 package org.onehippo.forge.pageflow.core.rt.impl;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.onehippo.forge.pageflow.core.PageFlowException;
 import org.onehippo.forge.pageflow.core.def.PageFlowDefinition;
 import org.onehippo.forge.pageflow.core.def.PageStateDefinition;
 import org.onehippo.forge.pageflow.core.def.PageTransitionDefinition;
@@ -41,36 +41,46 @@ public class DefaultPageFlowFactory implements PageFlowFactory {
     private static Logger log = LoggerFactory.getLogger(DefaultPageFlowFactory.class);
 
     @Override
-    public PageFlow createPageFlow(PageFlowDefinition pageFlowDef) {
-        PageFlow pageFlow = null;
-
+    public PageFlow createPageFlow(PageFlowDefinition pageFlowDef) throws PageFlowException {
         try {
-            Builder<PageState, String> builder = StateMachineBuilder.builder();
+            final List<PageStateDefinition> pageStateDefinitions = pageFlowDef.getPageStateDefinitions();
+
+            if (pageStateDefinitions.isEmpty()) {
+                throw new PageFlowException("Page flow definition has no page states: " + pageFlowDef);
+            }
+
+            final Map<String, PageState> pageStateMap = new LinkedHashMap<>();
+            final Map<String, List<PageTransitionDefinition>> pageTransitionsMap = new LinkedHashMap<>();
+
+            for (PageStateDefinition pageStateDef : pageStateDefinitions) {
+                final String pageStateDefId = pageStateDef.getId();
+
+                if (pageStateMap.containsKey(pageStateDefId)) {
+                    throw new PageFlowException(
+                            "Duplicate page state id, '" + pageStateDefId + "' in page flow: " + pageFlowDef);
+                }
+
+                final PageState pageState = new DefaultPageState(pageStateDefId, pageStateDef.getPath());
+                pageStateMap.put(pageState.getId(), pageState);
+
+                final List<PageTransitionDefinition> pageTransList = new ArrayList<>();
+
+                for (PageTransitionDefinition pageTransDef : pageStateDef.getPageTransitionDefinitions()) {
+                    pageTransList.add(pageTransDef);
+                }
+
+                pageTransitionsMap.put(pageState.getId(), pageTransList);
+            }
+
+            final Builder<PageState, String> builder = StateMachineBuilder.builder();
 
             builder.configureConfiguration().withConfiguration().autoStartup(false)
                     .beanFactory(new StaticListableBeanFactory());
 
-            Map<PageState, List<PageTransitionDefinition>> pageStateTranDefsMap = new LinkedHashMap<>();
-
-            for (PageStateDefinition pageStateDef : pageFlowDef.getPageStateDefinitions()) {
-                DefaultPageState pageState = new DefaultPageState(pageStateDef.getId(), pageStateDef.getPath());
-
-                List<PageTransitionDefinition> pageTransList = new ArrayList<>();
-
-                for (PageTransitionDefinition pageTransDef : pageStateDef
-                        .getPageTransitionDefinitions()) {
-                    pageTransList.add(pageTransDef);
-                }
-
-                pageStateTranDefsMap.put(pageState, pageTransList);
-            }
-
-            StateConfigurer<PageState, String> stateConfigurer = builder.configureStates().withStates();
+            final StateConfigurer<PageState, String> stateConfigurer = builder.configureStates().withStates();
             boolean initialSet = false;
 
-            for (Map.Entry<PageState, List<PageTransitionDefinition>> entry : pageStateTranDefsMap.entrySet()) {
-                PageState pageState = entry.getKey();
-
+            for (PageState pageState : pageStateMap.values()) {
                 if (!initialSet) {
                     stateConfigurer.initial(pageState);
                     initialSet = true;
@@ -79,56 +89,50 @@ public class DefaultPageFlowFactory implements PageFlowFactory {
                 }
             }
 
-            for (Map.Entry<PageState, List<PageTransitionDefinition>> entry : pageStateTranDefsMap.entrySet()) {
-                PageState pageState = entry.getKey();
+            for (Map.Entry<String, List<PageTransitionDefinition>> entry : pageTransitionsMap.entrySet()) {
+                final String pageStateId = entry.getKey();
+                final PageState pageState = pageStateMap.get(pageStateId);
 
-                List<PageTransitionDefinition> pageTransDefList = entry.getValue();
+                for (PageTransitionDefinition pageTransDef : entry.getValue()) {
+                    final String transEvent = StringUtils.trim(pageTransDef.getEvent());
 
-                for (PageTransitionDefinition pageTransDef : pageTransDefList) {
-                    if (StringUtils.isBlank(pageTransDef.getEvent())) {
+                    if (StringUtils.isEmpty(transEvent)) {
+                        log.warn(
+                                "Ignoring page transition definition as its event is blank on transition definition: {}, in flow definition: {}.",
+                                pageTransDef, pageFlowDef);
                         continue;
                     }
 
-                    String targetStateDefId = pageTransDef.getTargetPageStateDefinitionId();
+                    final String targetPageStateDefId = StringUtils.trim(pageTransDef.getTargetPageStateDefinitionId());
 
-                    if (StringUtils.isBlank(targetStateDefId)) {
+                    if (StringUtils.isEmpty(targetPageStateDefId)) {
+                        log.warn(
+                                "Ignoring page transition definition as its target ID is blank on transition definition: {}, in flow definition: {}.",
+                                pageTransDef, pageFlowDef);
                         continue;
                     }
 
-                    if (pageState == null) {
-                        continue;
-                    }
-
-                    PageState targetPageState = findPageStateById(pageStateTranDefsMap.keySet(), targetStateDefId);
+                    final PageState targetPageState = pageStateMap.get(targetPageStateDefId);
 
                     if (targetPageState == null) {
+                        log.warn(
+                                "Ignoring page transition definition as its target page state is not found for transition definition: {}, in flow definition: {}.",
+                                pageTransDef, pageFlowDef);
                         continue;
                     }
 
-                    log.debug("Registering page transtion on '{}' from '{}' to '{}'.", pageTransDef.getEvent(),
-                            pageState, targetPageState);
-                    builder.configureTransitions().withExternal().event(pageTransDef.getEvent()).source(pageState)
+                    log.debug("Registering page transtion on '{}' from '{}' to '{}'.", transEvent, pageState,
+                            targetPageState);
+
+                    builder.configureTransitions().withExternal().event(transEvent).source(pageState)
                             .target(targetPageState);
                 }
             }
 
-            StateMachine<PageState, String> stateMachine = builder.build();
-
-            pageFlow = new DefaultPageFlow(stateMachine);
+            final StateMachine<PageState, String> stateMachine = builder.build();
+            return new DefaultPageFlow(stateMachine);
         } catch (Exception e) {
-            throw new RuntimeException("Failed to create page state machine.", e);
+            throw new PageFlowException("Failed to create page flow.", e);
         }
-
-        return pageFlow;
-    }
-
-    private PageState findPageStateById(final Collection<PageState> pageStates, final String id) {
-        for (PageState pageState : pageStates) {
-            if (StringUtils.equals(id, pageState.getId())) {
-                return pageState;
-            }
-        }
-
-        return null;
     }
 }

@@ -15,10 +15,11 @@
  */
 package org.onehippo.forge.pageflow.core.rt;
 
+import org.onehippo.forge.pageflow.core.PageFlowException;
 import org.onehippo.forge.pageflow.core.def.PageFlowDefinition;
 
 public interface PageFlowFactory {
 
-    public PageFlow createPageFlow(PageFlowDefinition pageFlowDef);
+    public PageFlow createPageFlow(PageFlowDefinition pageFlowDef) throws PageFlowException;
 
 }

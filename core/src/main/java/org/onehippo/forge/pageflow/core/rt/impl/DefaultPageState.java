@@ -15,12 +15,15 @@
  */
 package org.onehippo.forge.pageflow.core.rt.impl;
 
-import org.apache.commons.lang.StringUtils;
+import java.util.Objects;
+
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.onehippo.forge.pageflow.core.rt.PageState;
 
 public class DefaultPageState implements PageState {
+
+    private static final long serialVersionUID = 1L;
 
     private final String id;
 
@@ -49,7 +52,7 @@ public class DefaultPageState implements PageState {
 
         DefaultPageState that = (DefaultPageState) o;
 
-        return StringUtils.equals(id, that.id) && StringUtils.equals(path, that.path);
+        return (Objects.equals(id, that.id) && Objects.equals(path, that.path));
     }
 
     @Override

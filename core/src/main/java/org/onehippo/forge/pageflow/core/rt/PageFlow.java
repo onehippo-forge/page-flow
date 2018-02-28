@@ -15,27 +15,34 @@
  */
 package org.onehippo.forge.pageflow.core.rt;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-public interface PageFlow {
+import org.onehippo.forge.pageflow.core.PageFlowException;
 
-    public void start();
+public interface PageFlow extends Serializable {
 
-    public void stop();
+    public void start() throws PageFlowException;
 
-    public boolean isComplete();
+    public void stop() throws PageFlowException;
 
-    public PageState getPageState();
+    public boolean isComplete() throws PageFlowException;
 
-    public void sendEvent(String event);
+    public PageState getPageState() throws PageFlowException;
 
-    public List<PageState> getPageStates();
+    public void sendEvent(String event) throws PageFlowException;
 
-    public Object getModel(String name);
+    public List<PageState> getPageStates() throws PageFlowException;
 
-    public void setModel(String name, Object model);
+    public Object getModel(String name) throws PageFlowException;
 
-    public Map<String, Object> getModelMap();
+    public void setModel(String name, Object model) throws PageFlowException;
+
+    public Map<String, Object> getModelMap() throws PageFlowException;
+
+    boolean equals(Object o);
+
+    int hashCode();
 
 }
