@@ -69,25 +69,34 @@ public class PageFlowControlHstSiteMapItemHandler extends AbstractFilterChainAwa
                 final HstRequestContext requestContext = RequestContextProvider.get();
 
                 if (requestContext != null) {
-                    final Mount mount = requestContext.getResolvedMount().getMount();
-                    final ChannelInfo channelInfo = mount.getChannelInfo();
+                    final ResolvedSiteMapItem resolvedSiteMapItem = requestContext.getResolvedSiteMapItem();
 
-                    if (channelInfo != null) {
-                        final Map<String, Object> channelProps = channelInfo.getProperties();
-
-                        if (channelProps != null) {
-                            flowId = StringUtils.trim(
-                                    (String) channelInfo.getProperties().get(PageFlowControl.PAGE_FLOW_ID_PROP_NAME));
-                        }
-                    }
-
-                    if (StringUtils.isEmpty(flowId)) {
+                    if (resolvedSiteMapItem != null) {
                         flowId = StringUtils
-                                .trim(mount.getMountProperties().get(PageFlowControl.PAGE_FLOW_ID_PROP_NAME));
+                                .trim(resolvedSiteMapItem.getParameter(PageFlowControl.PAGE_FLOW_ID_PROP_NAME));
                     }
 
                     if (StringUtils.isEmpty(flowId)) {
-                        flowId = StringUtils.trim(mount.getProperty(PageFlowControl.PAGE_FLOW_ID_PROP_NAME));
+                        final Mount mount = requestContext.getResolvedMount().getMount();
+                        final ChannelInfo channelInfo = mount.getChannelInfo();
+
+                        if (channelInfo != null) {
+                            final Map<String, Object> channelProps = channelInfo.getProperties();
+
+                            if (channelProps != null) {
+                                flowId = StringUtils.trim((String) channelInfo.getProperties()
+                                        .get(PageFlowControl.PAGE_FLOW_ID_PROP_NAME));
+                            }
+                        }
+
+                        if (StringUtils.isEmpty(flowId)) {
+                            flowId = StringUtils
+                                    .trim(mount.getMountProperties().get(PageFlowControl.PAGE_FLOW_ID_PROP_NAME));
+                        }
+
+                        if (StringUtils.isEmpty(flowId)) {
+                            flowId = StringUtils.trim(mount.getProperty(PageFlowControl.PAGE_FLOW_ID_PROP_NAME));
+                        }
                     }
                 }
             }

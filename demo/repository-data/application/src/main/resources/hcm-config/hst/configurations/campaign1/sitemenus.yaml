@@ -1,0 +1,4 @@
+definitions:
+  config:
+    /hst:hst/hst:configurations/campaign1/hst:sitemenus:
+      jcr:primaryType: hst:sitemenus

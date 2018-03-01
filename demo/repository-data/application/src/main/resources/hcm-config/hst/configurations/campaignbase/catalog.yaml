@@ -1,0 +1,6 @@
+definitions:
+  config:
+    /hst:hst/hst:configurations/campaignbase/hst:catalog:
+      jcr:primaryType: hst:catalog
+      /campaignbase-catalog:
+        jcr:primaryType: hst:containeritempackage
