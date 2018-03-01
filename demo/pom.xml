@@ -90,6 +90,12 @@
 
       <dependency>
         <groupId>org.onehippo.forge.pageflow</groupId>
+        <artifactId>pageflow-repository</artifactId>
+        <version>${forge.pageflow.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.onehippo.forge.pageflow</groupId>
         <artifactId>pageflow-hst</artifactId>
         <version>${forge.pageflow.version}</version>
       </dependency>

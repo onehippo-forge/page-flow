@@ -10,7 +10,14 @@
   <packaging>war</packaging>
   <name>Page Flow Demo CMS</name>
   <description>Page Flow Demo CMS</description>
+
   <dependencies>
+
+    <dependency>
+      <groupId>org.onehippo.forge.pageflow</groupId>
+      <artifactId>pageflow-repository</artifactId>
+    </dependency>
+
     <dependency>
       <groupId>org.onehippo.cms7.hst.dependencies</groupId>
       <artifactId>hst-repository-dependencies</artifactId>

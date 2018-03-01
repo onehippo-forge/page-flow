@@ -1,6 +1,6 @@
 group: 
   name: pageflow-demo
-  after: hippo-cms
+  after: [hippo-cms, hippo-forge]
 project: pageflow-demo
 module:
   name: pageflow-demo-repository-data-application

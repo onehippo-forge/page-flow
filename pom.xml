@@ -273,6 +273,7 @@
 
   <modules>
     <module>core</module>
+    <module>repository</module>
     <module>hst</module>
   </modules>
 
