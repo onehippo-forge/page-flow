@@ -73,7 +73,7 @@ public class DefaultPageStateMachineTest {
         session = new MockHttpSession();
         request = new MockHttpServletRequest();
         request.setSession(session);
-        request.setAttribute(PageFlowControl.PAGE_FLOW_ID_ATTRIBUTE, "flow1");
+        request.setAttribute(PageFlowControl.PAGE_FLOW_ID_ATTR_NAME, "flow1");
 
         PageFlowControl pfc = new PageFlowControl() {
             {
@@ -83,7 +83,7 @@ public class DefaultPageStateMachineTest {
             }
         };
 
-        request.setAttribute(PageFlowControl.PAGE_FLOW_CONTROL_ATTRIBUTE, pfc);
+        request.setAttribute(PageFlowControl.PAGE_FLOW_CONTROL_ATTR_NAME, pfc);
     }
 
     @Test

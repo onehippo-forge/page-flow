@@ -17,6 +17,7 @@ package org.onehippo.forge.pageflow.core.rt;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 import org.onehippo.forge.pageflow.core.PageFlowException;
@@ -30,14 +31,16 @@ public class PageFlowControl {
 
     private static Logger log = LoggerFactory.getLogger(PageFlowControl.class);
 
-    public static final String PAGE_FLOW_CONTROL_ATTRIBUTE = PageFlowControl.class.getName() + ".pageFlowControl";
+    public static final String PAGE_FLOW_CONTROL_ATTR_NAME = PageFlowControl.class.getName() + ".pageflowcontrol";
 
-    public static final String PAGE_FLOW_ID_ATTRIBUTE = PageFlowControl.class.getName() + ".pageFlowId";
+    public static final String PAGE_FLOW_ID_PROP_NAME = "pageflowid";
+
+    public static final String PAGE_FLOW_ID_ATTR_NAME = PageFlowControl.class.getName() + "." + PAGE_FLOW_ID_PROP_NAME;
 
     private static PageFlowControl DEFAULT_PAGE_FLOW_CONTROL = new PageFlowControl();
 
     public static PageFlowControl getDefault(ServletRequest request) {
-        PageFlowControl control = (PageFlowControl) request.getAttribute(PAGE_FLOW_CONTROL_ATTRIBUTE);
+        PageFlowControl control = (PageFlowControl) request.getAttribute(PAGE_FLOW_CONTROL_ATTR_NAME);
 
         if (control != null) {
             return control;
@@ -54,7 +57,7 @@ public class PageFlowControl {
     }
 
     public PageFlow getPageFlow(HttpServletRequest request) throws PageFlowNotFoundException, PageFlowException {
-        final String flowId = StringUtils.trim((String) request.getAttribute(PAGE_FLOW_ID_ATTRIBUTE));
+        String flowId = findPageFlowId(request);
 
         if (StringUtils.isEmpty(flowId)) {
             throw new PageFlowNotFoundException("Page flow ID not found from servlet request.");
@@ -63,28 +66,48 @@ public class PageFlowControl {
         return getPageFlow(request, flowId);
     }
 
-    protected PageFlow getPageFlow(HttpServletRequest request, String flowId) throws PageFlowNotFoundException, PageFlowException {
+    protected String findPageFlowId(HttpServletRequest request) {
+        String flowId = StringUtils.trim((String) request.getAttribute(PAGE_FLOW_ID_ATTR_NAME));
+
+        if (StringUtils.isEmpty(flowId)) {
+            final HttpSession session = request.getSession(false);
+
+            if (session != null) {
+                flowId = StringUtils.trim((String) session.getAttribute(PAGE_FLOW_ID_ATTR_NAME));
+            }
+        }
+
+        return flowId;
+    }
+
+    protected PageFlow getPageFlow(HttpServletRequest request, String flowId)
+            throws PageFlowNotFoundException, PageFlowException {
         if (StringUtils.isBlank(flowId)) {
             throw new IllegalArgumentException("Blank page flow ID.");
         }
 
         PageFlow pageFlow = null;
 
-        if (pageFlowStore != null) {
-            pageFlow = pageFlowStore.getPageFlow(request, flowId);
+        PageFlowStore store = getPageFlowStore();
+
+        if (store != null) {
+            pageFlow = store.getPageFlow(request, flowId);
 
             if (pageFlow != null) {
                 return pageFlow;
             }
         }
 
-        if (pageFlowDefinitionRegistry != null && pageFlowFactory != null) {
-            PageFlowDefinition pageFlowDef = pageFlowDefinitionRegistry.getPageFlowDefinition(flowId);
-            pageFlow = pageFlowFactory.createPageFlow(request, pageFlowDef);
+        PageFlowDefinitionRegistry registry = getPageFlowDefinitionRegistry();
+        PageFlowFactory factory = getPageFlowFactory();
+
+        if (registry != null && factory != null) {
+            PageFlowDefinition pageFlowDef = registry.getPageFlowDefinition(flowId);
+            pageFlow = factory.createPageFlow(request, pageFlowDef);
             pageFlow.start();
 
-            if (pageFlowStore != null) {
-                pageFlowStore.savePageFlow(request, flowId, pageFlow);
+            if (store != null) {
+                store.savePageFlow(request, flowId, pageFlow);
             }
 
             return pageFlow;

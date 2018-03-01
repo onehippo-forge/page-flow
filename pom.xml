@@ -35,6 +35,7 @@
 
     <hippo.repository.version>5.1.0</hippo.repository.version>
     <hippo.services.version>4.1.0</hippo.services.version>
+    <hippo.hst.version>5.1.0</hippo.hst.version>
 
     <spring.version>4.2.4.RELEASE</spring.version>
     <spring-statemachine.version>1.1.1.RELEASE</spring-statemachine.version>
@@ -167,6 +168,20 @@
       </dependency>
 
       <dependency>
+        <groupId>org.onehippo.cms7.hst</groupId>
+        <artifactId>hst-api</artifactId>
+        <version>${hippo.hst.version}</version>
+        <scope>provided</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.onehippo.cms7.hst</groupId>
+        <artifactId>hst-commons</artifactId>
+        <version>${hippo.hst.version}</version>
+        <scope>provided</scope>
+      </dependency>
+
+      <dependency>
         <groupId>org.springframework.statemachine</groupId>
         <artifactId>spring-statemachine-core</artifactId>
         <version>${spring-statemachine.version}</version>
@@ -258,6 +273,7 @@
 
   <modules>
     <module>core</module>
+    <module>hst</module>
   </modules>
 
   <reporting>
