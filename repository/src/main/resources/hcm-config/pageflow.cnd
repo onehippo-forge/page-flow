@@ -20,10 +20,13 @@
   orderable
   - pageflow:name (string) mandatory
   - pageflow:path (string)
+  - pageflow:description (string)
   + pageflow:pagetransition (pageflow:pagetransition) multiple
 
 [pageflow:pageflow] > pageflow:basedocument, hippostd:relaxed, hippotranslation:translated
   orderable
   - pageflow:flowid (string) mandatory
   - pageflow:name (string)
+  - pageflow:description (string)
+  + pageflow:eventdef (selection:listitem) multiple
   + pageflow:pagestate (pageflow:pagestate) multiple

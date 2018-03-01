@@ -19,6 +19,11 @@
     </dependency>
 
     <dependency>
+      <groupId>org.onehippo.forge.pageflow</groupId>
+      <artifactId>pageflow-cms</artifactId>
+    </dependency>
+
+    <dependency>
       <groupId>org.onehippo.cms7.hst.dependencies</groupId>
       <artifactId>hst-repository-dependencies</artifactId>
       <type>pom</type>

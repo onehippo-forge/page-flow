@@ -35,10 +35,12 @@
 
     <hippo.repository.version>5.1.0</hippo.repository.version>
     <hippo.services.version>4.1.0</hippo.services.version>
+    <hippo.cms.version>5.1.0</hippo.cms.version>
     <hippo.hst.version>5.1.0</hippo.hst.version>
 
     <spring.version>4.2.4.RELEASE</spring.version>
     <spring-statemachine.version>1.1.1.RELEASE</spring-statemachine.version>
+    <forge.exdocpickerbase.version>5.0.2</forge.exdocpickerbase.version>
 
     <commons-lang.version>2.6</commons-lang.version>
 
@@ -126,6 +128,11 @@
       <name>Hippo Maven 2 Repository</name>
       <url>http://maven.onehippo.com/maven2/</url>
     </repository>
+    <repository>
+      <id>hippo-maven2-forge</id>
+      <name>Hippo Maven 2 Forge Repository</name>
+      <url>http://maven.onehippo.com/maven2-forge/</url>
+    </repository>
   </repositories>
 
   <dependencyManagement>
@@ -168,6 +175,20 @@
       </dependency>
 
       <dependency>
+        <groupId>org.onehippo.cms7</groupId>
+        <artifactId>hippo-cms-api</artifactId>
+        <version>${hippo.cms.version}</version>
+        <scope>provided</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.onehippo.cms7</groupId>
+        <artifactId>hippo-cms-builtin</artifactId>
+        <version>${hippo.cms.version}</version>
+        <scope>provided</scope>
+      </dependency>
+
+      <dependency>
         <groupId>org.onehippo.cms7.hst</groupId>
         <artifactId>hst-api</artifactId>
         <version>${hippo.hst.version}</version>
@@ -185,6 +206,12 @@
         <groupId>org.springframework.statemachine</groupId>
         <artifactId>spring-statemachine-core</artifactId>
         <version>${spring-statemachine.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.onehippo.forge.exdocpickerbase</groupId>
+        <artifactId>exdocpickerbase-field</artifactId>
+        <version>${forge.exdocpickerbase.version}</version>
       </dependency>
 
       <dependency>
@@ -274,6 +301,7 @@
   <modules>
     <module>core</module>
     <module>repository</module>
+    <module>cms</module>
     <module>hst</module>
   </modules>
 

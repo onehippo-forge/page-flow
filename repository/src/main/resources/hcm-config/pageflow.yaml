@@ -49,6 +49,7 @@ definitions:
             jcr:primaryType: pageflow:pagetransition
             pageflow:event: ''
             pageflow:target: ''
+            pageflow:description: ''
         /editor:templates:
           jcr:primaryType: editor:templateset
           /_default_:
@@ -66,7 +67,12 @@ definitions:
               caption: Event
               field: event
               hint: Page Transition Event
-              plugin.class: org.hippoecm.frontend.editor.plugins.field.PropertyFieldPlugin
+              plugin.class: org.onehippo.forge.exdocpicker.impl.field.ExternalDocumentFieldSelectorPlugin
+              external.document.service.facade: org.onehippo.forge.pageflow.cms.editor.field.PageFlowPageStateServiceFacade
+              selection.mode: single
+              page.size: 20
+              initial.search.enabled: true
+              page.transition.target.field.name: pageflow:event
               wicket.id: ${cluster.id}.field
               /cluster.options:
                 jcr:primaryType: frontend:pluginconfig
@@ -75,7 +81,12 @@ definitions:
               caption: Target
               field: target
               hint: Page Transition Target
-              plugin.class: org.hippoecm.frontend.editor.plugins.field.PropertyFieldPlugin
+              plugin.class: org.onehippo.forge.exdocpicker.impl.field.ExternalDocumentFieldSelectorPlugin
+              external.document.service.facade: org.onehippo.forge.pageflow.cms.editor.field.PageFlowPageStateServiceFacade
+              selection.mode: single
+              page.size: 20
+              initial.search.enabled: true
+              page.transition.target.field.name: pageflow:target
               wicket.id: ${cluster.id}.field
               /cluster.options:
                 jcr:primaryType: frontend:pluginconfig
@@ -108,6 +119,14 @@ definitions:
               hipposysedit:path: pageflow:path
               hipposysedit:primary: false
               hipposysedit:type: String
+            /description:
+              jcr:primaryType: hipposysedit:field
+              hipposysedit:mandatory: false
+              hipposysedit:multiple: false
+              hipposysedit:ordered: false
+              hipposysedit:path: pageflow:description
+              hipposysedit:primary: false
+              hipposysedit:type: Text
             /pagetransition:
               jcr:primaryType: hipposysedit:field
               hipposysedit:mandatory: false
@@ -121,6 +140,7 @@ definitions:
           /hipposysedit:prototype:
             jcr:primaryType: pageflow:pagestate
             pageflow:name: ''
+            pageflow:description: ''
             pageflow:path: ''
         /editor:templates:
           jcr:primaryType: editor:templateset
@@ -162,6 +182,16 @@ definitions:
               wicket.id: ${cluster.id}.right.item
               /cluster.options:
                 jcr:primaryType: frontend:pluginconfig
+            /description:
+              jcr:primaryType: frontend:plugin
+              caption: Description
+              field: description
+              hint: Page State Description
+              plugin.class: org.hippoecm.frontend.editor.plugins.field.PropertyFieldPlugin
+              wicket.id: ${cluster.id}.right.item
+              /cluster.options:
+                jcr:primaryType: frontend:pluginconfig
+                rows: '2'
             /pagetransition:
               jcr:primaryType: frontend:plugin
               caption: Page Transitions
@@ -202,6 +232,14 @@ definitions:
               hipposysedit:primary: false
               hipposysedit:type: String
               hipposysedit:validators: [non-empty, required]
+            /description:
+              jcr:primaryType: hipposysedit:field
+              hipposysedit:mandatory: false
+              hipposysedit:multiple: false
+              hipposysedit:ordered: false
+              hipposysedit:path: pageflow:description
+              hipposysedit:primary: false
+              hipposysedit:type: Text
             /pagestate:
               jcr:primaryType: hipposysedit:field
               hipposysedit:mandatory: false
@@ -210,6 +248,14 @@ definitions:
               hipposysedit:path: pageflow:pagestate
               hipposysedit:primary: false
               hipposysedit:type: pageflow:pagestate
+            /eventdef:
+              jcr:primaryType: hipposysedit:field
+              hipposysedit:mandatory: false
+              hipposysedit:multiple: true
+              hipposysedit:ordered: true
+              hipposysedit:path: pageflow:eventdef
+              hipposysedit:primary: false
+              hipposysedit:type: selection:listitem
         /hipposysedit:prototypes:
           jcr:primaryType: hipposysedit:prototypeset
           /hipposysedit:prototype:
@@ -225,10 +271,16 @@ definitions:
             hippotranslation:locale: document-type-locale
             pageflow:flowid: ''
             pageflow:name: ''
+            pageflow:description: ''
+            /pageflow:eventdef:
+              jcr:primaryType: selection:listitem
+              selection:key: ''
+              selection:label: ''
             /pageflow:pagestate:
               jcr:primaryType: pageflow:pagestate
               pageflow:name: ''
               pageflow:path: ''
+              pageflow:description: ''
               /pageflow:pagetransition:
                 jcr:primaryType: pageflow:pagetransition
                 pageflow:event: ''
@@ -274,6 +326,16 @@ definitions:
               wicket.id: ${cluster.id}.right.item
               /cluster.options:
                 jcr:primaryType: frontend:pluginconfig
+            /description:
+              jcr:primaryType: frontend:plugin
+              caption: Description
+              field: description
+              hint: Page Flow Description
+              plugin.class: org.hippoecm.frontend.editor.plugins.field.PropertyFieldPlugin
+              wicket.id: ${cluster.id}.left.item
+              /cluster.options:
+                jcr:primaryType: frontend:pluginconfig
+                rows: '2'
             /pagestate:
               jcr:primaryType: frontend:plugin
               caption: Page States
@@ -281,5 +343,14 @@ definitions:
               hint: Page States
               plugin.class: org.hippoecm.frontend.editor.plugins.field.NodeFieldPlugin
               wicket.id: ${cluster.id}.left.item
+              /cluster.options:
+                jcr:primaryType: frontend:pluginconfig
+            /eventdef:
+              jcr:primaryType: frontend:plugin
+              caption: Event Definitions
+              field: eventdef
+              hint: Event Definitions
+              plugin.class: org.hippoecm.frontend.editor.plugins.field.NodeFieldPlugin
+              wicket.id: ${cluster.id}.right.item
               /cluster.options:
                 jcr:primaryType: frontend:pluginconfig
