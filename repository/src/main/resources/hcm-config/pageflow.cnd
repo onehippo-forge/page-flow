@@ -13,20 +13,17 @@
 
 [pageflow:pagetransition] > hippo:compound, hippostd:relaxed
   orderable
-  - pageflow:description (string)
   - pageflow:event (string) mandatory
   - pageflow:target (string)
 
 [pageflow:pagestate] > hippo:compound, hippostd:relaxed
   orderable
   - pageflow:name (string) mandatory
-  - pageflow:description (string)
   - pageflow:path (string)
   + pageflow:pagetransition (pageflow:pagetransition) multiple
 
 [pageflow:pageflow] > pageflow:basedocument, hippostd:relaxed, hippotranslation:translated
   orderable
-  - pageflow:id (string) mandatory
+  - pageflow:flowid (string) mandatory
   - pageflow:name (string)
-  - pageflow:description (string)
   + pageflow:pagestate (pageflow:pagestate) multiple

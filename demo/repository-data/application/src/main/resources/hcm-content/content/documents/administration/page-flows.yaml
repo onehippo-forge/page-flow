@@ -1,0 +1,6 @@
+/content/documents/administration/page-flows:
+  jcr:primaryType: hippostd:folder
+  jcr:mixinTypes: ['hippo:named', 'mix:versionable']
+  jcr:uuid: 9fa99494-6575-4b24-afbb-60adc3c374a9
+  hippo:name: Page Flows
+  hippostd:foldertype: [new-untranslated-folder, new-document]
