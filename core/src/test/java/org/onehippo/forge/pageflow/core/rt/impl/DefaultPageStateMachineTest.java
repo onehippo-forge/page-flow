@@ -15,25 +15,43 @@
  */
 package org.onehippo.forge.pageflow.core.rt.impl;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.onehippo.forge.pageflow.core.def.impl.DefaultPageFlowDefinition;
 import org.onehippo.forge.pageflow.core.def.impl.DefaultPageStateDefinition;
 import org.onehippo.forge.pageflow.core.def.impl.DefaultPageTransitionDefinition;
+import org.onehippo.forge.pageflow.core.def.impl.MapPageFlowDefinitionRegistry;
 import org.onehippo.forge.pageflow.core.rt.PageFlow;
+import org.onehippo.forge.pageflow.core.rt.PageFlowControl;
+import org.onehippo.forge.pageflow.core.rt.PageFlowFactory;
+import org.onehippo.forge.pageflow.core.rt.PageFlowStore;
 import org.onehippo.forge.pageflow.core.rt.PageState;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockHttpSession;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
 public class DefaultPageStateMachineTest {
 
     private static Logger log = LoggerFactory.getLogger(DefaultPageStateMachineTest.class);
 
-    @Test
-    public void testPageStateMachine() throws Exception {
+    private PageFlowStore pageFlowStore = new HttpSessionPageFlowStore();
+    private MapPageFlowDefinitionRegistry pageFlowDefinitionRegistry;
+    private PageFlowFactory pageFlowFactory = new DefaultPageFlowFactory();
+
+    private MockHttpServletRequest request;
+    private MockHttpSession session;
+
+    @Before
+    public void setUp() throws Exception {
+        pageFlowDefinitionRegistry = new MapPageFlowDefinitionRegistry();
+
         DefaultPageFlowDefinition flowDef = new DefaultPageFlowDefinition("flow1");
 
         DefaultPageStateDefinition pageDef1 = new DefaultPageStateDefinition("P1", "/page1");
@@ -50,9 +68,32 @@ public class DefaultPageStateMachineTest {
         flowDef.addPageStateDefinition(pageDef2);
         flowDef.addPageStateDefinition(pageDef3);
 
-        DefaultPageFlowFactory pageFlowFactory = new DefaultPageFlowFactory();
-        PageFlow pageFlow = pageFlowFactory.createPageFlow(flowDef);
+        pageFlowDefinitionRegistry.addPageFlowDefinition(flowDef.getId(), flowDef);
+
+        session = new MockHttpSession();
+        request = new MockHttpServletRequest();
+        request.setSession(session);
+        request.setAttribute(PageFlowControl.PAGE_FLOW_ID_ATTRIBUTE, "flow1");
+
+        PageFlowControl pfc = new PageFlowControl() {
+            {
+                setPageFlowStore(pageFlowStore);
+                setPageFlowDefinitionRegistry(pageFlowDefinitionRegistry);
+                setPageFlowFactory(pageFlowFactory);
+            }
+        };
+
+        request.setAttribute(PageFlowControl.PAGE_FLOW_CONTROL_ATTRIBUTE, pfc);
+    }
+
+    @Test
+    public void testPageStateMachine() throws Exception {
+        assertNull(pageFlowStore.getPageFlow(request, "flow1"));
+
+        PageFlowControl pageFlowControl = PageFlowControl.getDefault(request);
+        PageFlow pageFlow = pageFlowControl.getPageFlow(request);
         log.debug("PageStateMachine instance: {}", pageFlow);
+        assertSame(pageFlow, pageFlowStore.getPageFlow(request, "flow1"));
 
         pageFlow.start();
         assertFalse(pageFlow.isComplete());

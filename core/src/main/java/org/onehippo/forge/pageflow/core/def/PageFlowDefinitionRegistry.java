@@ -13,15 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.onehippo.forge.pageflow.core.rt;
-
-import javax.servlet.http.HttpServletRequest;
+package org.onehippo.forge.pageflow.core.def;
 
 import org.onehippo.forge.pageflow.core.PageFlowException;
-import org.onehippo.forge.pageflow.core.def.PageFlowDefinition;
+import org.onehippo.forge.pageflow.core.PageFlowNotFoundException;
 
-public interface PageFlowFactory {
+public interface PageFlowDefinitionRegistry {
 
-    public PageFlow createPageFlow(HttpServletRequest request, PageFlowDefinition pageFlowDef) throws PageFlowException;
+    public PageFlowDefinition getPageFlowDefinition(String flowId) throws PageFlowNotFoundException, PageFlowException;
 
 }

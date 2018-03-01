@@ -15,14 +15,16 @@
  */
 package org.onehippo.forge.pageflow.core.rt;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.onehippo.forge.pageflow.core.PageFlowException;
 
 public interface PageFlowStore {
 
-    public PageFlow readPageFlow(String flowId) throws PageFlowException;
+    public PageFlow getPageFlow(HttpServletRequest request, String flowId) throws PageFlowException;
 
-    public PageFlow storePageFlow(String flowId, PageFlow pageFlow) throws PageFlowException;
+    public PageFlow savePageFlow(HttpServletRequest request, String flowId, PageFlow pageFlow) throws PageFlowException;
 
-    public PageFlow removePageFlow(String flowId) throws PageFlowException;
+    public PageFlow removePageFlow(HttpServletRequest request, String flowId) throws PageFlowException;
 
 }

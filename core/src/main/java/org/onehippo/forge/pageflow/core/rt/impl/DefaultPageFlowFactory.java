@@ -20,6 +20,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.lang.StringUtils;
 import org.onehippo.forge.pageflow.core.PageFlowException;
 import org.onehippo.forge.pageflow.core.def.PageFlowDefinition;
@@ -41,7 +43,7 @@ public class DefaultPageFlowFactory implements PageFlowFactory {
     private static Logger log = LoggerFactory.getLogger(DefaultPageFlowFactory.class);
 
     @Override
-    public PageFlow createPageFlow(PageFlowDefinition pageFlowDef) throws PageFlowException {
+    public PageFlow createPageFlow(HttpServletRequest request, PageFlowDefinition pageFlowDef) throws PageFlowException {
         try {
             final List<PageStateDefinition> pageStateDefinitions = pageFlowDef.getPageStateDefinitions();
 
