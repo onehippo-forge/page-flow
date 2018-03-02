@@ -24,6 +24,7 @@ import org.hippoecm.hst.core.request.ResolvedSiteMapItem;
 import org.hippoecm.hst.core.sitemapitemhandler.AbstractFilterChainAwareHstSiteMapItemHandler;
 import org.hippoecm.hst.core.sitemapitemhandler.HstSiteMapItemHandlerException;
 import org.hippoecm.hst.util.PathUtils;
+import org.onehippo.forge.pageflow.core.PageFlowNotFoundException;
 import org.onehippo.forge.pageflow.core.rt.PageFlow;
 import org.onehippo.forge.pageflow.core.rt.PageFlowControl;
 import org.onehippo.forge.pageflow.core.rt.PageState;
@@ -49,7 +50,14 @@ public class PageFlowControlHstSiteMapItemHandler extends AbstractFilterChainAwa
         request.setAttribute(PageFlowControl.PAGE_FLOW_CONTROL_ATTR_NAME, pageFlowControl);
 
         final PageFlowControl flowControl = PageFlowControl.getDefault(request);
-        final PageFlow pageFlow = flowControl.getPageFlow(request);
+
+        PageFlow pageFlow = null;
+
+        try {
+            pageFlow = flowControl.getPageFlow(request);
+        } catch (PageFlowNotFoundException e) {
+            log.warn("Page Flow not found for the current request.");
+        }
 
         if (pageFlow != null) {
             if (!pageFlow.isStarted()) {
