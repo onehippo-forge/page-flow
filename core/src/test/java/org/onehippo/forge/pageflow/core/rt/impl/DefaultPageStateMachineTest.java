@@ -21,6 +21,7 @@ import org.onehippo.forge.pageflow.core.def.impl.DefaultPageFlowDefinition;
 import org.onehippo.forge.pageflow.core.def.impl.DefaultPageStateDefinition;
 import org.onehippo.forge.pageflow.core.def.impl.DefaultPageTransitionDefinition;
 import org.onehippo.forge.pageflow.core.def.impl.MapPageFlowDefinitionRegistry;
+import org.onehippo.forge.pageflow.core.rt.DefaultPageFlowControl;
 import org.onehippo.forge.pageflow.core.rt.PageFlow;
 import org.onehippo.forge.pageflow.core.rt.PageFlowControl;
 import org.onehippo.forge.pageflow.core.rt.PageFlowFactory;
@@ -75,7 +76,7 @@ public class DefaultPageStateMachineTest {
         request.setSession(session);
         request.setAttribute(PageFlowControl.PAGE_FLOW_ID_ATTR_NAME, "flow1");
 
-        PageFlowControl pfc = new PageFlowControl() {
+        PageFlowControl pfc = new DefaultPageFlowControl() {
             {
                 setPageFlowStore(pageFlowStore);
                 setPageFlowDefinitionRegistry(pageFlowDefinitionRegistry);
