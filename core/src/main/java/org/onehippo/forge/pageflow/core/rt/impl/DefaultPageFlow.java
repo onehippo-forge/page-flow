@@ -39,18 +39,34 @@ public class DefaultPageFlow implements PageFlow {
 
     private final StateMachine<PageState, String> stateMachine;
 
+    private boolean started;
+
+    private boolean stopped;
+
     public DefaultPageFlow(final StateMachine<PageState, String> stateMachine) {
         this.stateMachine = stateMachine;
     }
 
     @Override
+    public boolean isStarted() {
+        return started;
+    }
+
+    @Override
     public void start() throws PageFlowException {
         stateMachine.start();
+        started = true;
+    }
+
+    @Override
+    public boolean isStopped() {
+        return stopped;
     }
 
     @Override
     public void stop() throws PageFlowException {
         stateMachine.stop();
+        stopped = true;
     }
 
     @Override

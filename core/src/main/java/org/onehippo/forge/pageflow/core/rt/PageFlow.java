@@ -23,7 +23,11 @@ import org.onehippo.forge.pageflow.core.PageFlowException;
 
 public interface PageFlow extends Serializable {
 
+    public boolean isStarted();
+
     public void start() throws PageFlowException;
+
+    public boolean isStopped();
 
     public void stop() throws PageFlowException;
 

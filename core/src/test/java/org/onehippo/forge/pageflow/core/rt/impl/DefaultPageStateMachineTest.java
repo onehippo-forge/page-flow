@@ -93,6 +93,11 @@ public class DefaultPageStateMachineTest {
 
         PageFlowControl pageFlowControl = PageFlowControl.getDefault(request);
         PageFlow pageFlow = pageFlowControl.getPageFlow(request);
+
+        if (!pageFlow.isStarted()) {
+            pageFlow.start();
+        }
+
         log.debug("PageStateMachine instance: {}", pageFlow);
         assertSame(pageFlow, pageFlowStore.getPageFlow(request, "flow1"));
 

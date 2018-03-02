@@ -112,7 +112,6 @@ public class DefaultPageFlowControl implements PageFlowControl {
         if (registry != null && factory != null) {
             PageFlowDefinition pageFlowDef = registry.getPageFlowDefinition(flowId);
             pageFlow = factory.createPageFlow(request, pageFlowDef);
-            pageFlow.start();
 
             if (store != null) {
                 store.savePageFlow(request, flowId, pageFlow);

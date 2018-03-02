@@ -19,10 +19,14 @@ import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.hippoecm.hst.core.request.ResolvedSiteMapItem;
 import org.hippoecm.hst.core.sitemapitemhandler.AbstractFilterChainAwareHstSiteMapItemHandler;
 import org.hippoecm.hst.core.sitemapitemhandler.HstSiteMapItemHandlerException;
+import org.hippoecm.hst.util.PathUtils;
+import org.onehippo.forge.pageflow.core.rt.PageFlow;
 import org.onehippo.forge.pageflow.core.rt.PageFlowControl;
+import org.onehippo.forge.pageflow.core.rt.PageState;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,6 +47,27 @@ public class PageFlowControlHstSiteMapItemHandler extends AbstractFilterChainAwa
         }
 
         request.setAttribute(PageFlowControl.PAGE_FLOW_CONTROL_ATTR_NAME, pageFlowControl);
+
+        final PageFlowControl flowControl = PageFlowControl.getDefault(request);
+        final PageFlow pageFlow = flowControl.getPageFlow(request);
+
+        if (pageFlow != null) {
+            if (!pageFlow.isStarted()) {
+                pageFlow.start();
+            }
+
+            final PageState pageState = pageFlow.getPageState();
+
+            if (!StringUtils.equals(PathUtils.normalizePath(StringUtils.defaultString(pageState.getPath())),
+                    PathUtils.normalizePath(StringUtils.defaultString(request.getPathInfo())))) {
+                try {
+                    flowControl.sendRedirect(request, response, pageState);
+                    return null;
+                } catch (Exception e) {
+                    log.warn("Failed to redirect to the pageState: {}", pageState, e);
+                }
+            }
+        }
 
         if (resolvedSiteMapItem == null) {
             try {
