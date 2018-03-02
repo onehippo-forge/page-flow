@@ -4,3 +4,330 @@
   jcr:uuid: 9fa99494-6575-4b24-afbb-60adc3c374a9
   hippo:name: Page Flows
   hippostd:foldertype: [new-untranslated-folder, new-document]
+  /campaign-1-flow:
+    jcr:primaryType: hippo:handle
+    jcr:mixinTypes: ['hippo:named', 'mix:referenceable']
+    jcr:uuid: b7b73b11-5683-4130-b4a1-880d46ea7c1c
+    hippo:name: Campaign 1 Flow
+    /campaign-1-flow[1]:
+      jcr:primaryType: pageflow:pageflow
+      jcr:mixinTypes: ['mix:referenceable']
+      jcr:uuid: 1a2d8dfd-fee4-44bb-955a-a13475617905
+      hippo:availability: []
+      hippostd:state: draft
+      hippostdpubwf:createdBy: admin
+      hippostdpubwf:creationDate: 2018-03-02T12:35:00.844-05:00
+      hippostdpubwf:lastModificationDate: 2018-03-02T12:42:46.317-05:00
+      hippostdpubwf:lastModifiedBy: admin
+      hippotranslation:id: 786972dc-93c3-4119-a56f-97873ddd2096
+      hippotranslation:locale: document-type-locale
+      pageflow:description: Campaign 1 Page Flow
+      pageflow:flowid: pageflow.campaign1
+      pageflow:name: Campaign 1 Page Flow
+      /pageflow:eventdef[1]:
+        jcr:primaryType: selection:listitem
+        selection:key: start.quote
+        selection:label: Start Quote
+      /pageflow:pagestate[1]:
+        jcr:primaryType: pageflow:pagestate
+        pageflow:description: Landing Page
+        pageflow:name: Landing Page
+        pageflow:path: /
+        pageflow:stateid: landing
+        /pageflow:pagetransition:
+          jcr:primaryType: pageflow:pagetransition
+          pageflow:event: start.quote
+          pageflow:target: plan
+      /pageflow:pagestate[2]:
+        jcr:primaryType: pageflow:pagestate
+        pageflow:description: Select a Plan
+        pageflow:name: Select a Plan
+        pageflow:path: /plan
+        pageflow:stateid: plan
+        /pageflow:pagetransition[1]:
+          jcr:primaryType: pageflow:pagetransition
+          pageflow:event: plan.selected
+          pageflow:target: application
+        /pageflow:pagetransition[2]:
+          jcr:primaryType: pageflow:pagetransition
+          pageflow:event: cancel.requested
+          pageflow:target: cancel
+      /pageflow:pagestate[3]:
+        jcr:primaryType: pageflow:pagestate
+        pageflow:description: Application Form
+        pageflow:name: Application Form
+        pageflow:path: /application
+        pageflow:stateid: application
+        /pageflow:pagetransition[1]:
+          jcr:primaryType: pageflow:pagetransition
+          pageflow:event: application.submitted
+          pageflow:target: payment
+        /pageflow:pagetransition[2]:
+          jcr:primaryType: pageflow:pagetransition
+          pageflow:event: cancel.requested
+          pageflow:target: cancel
+      /pageflow:pagestate[4]:
+        jcr:primaryType: pageflow:pagestate
+        pageflow:description: Payment Form
+        pageflow:name: Payment Form
+        pageflow:path: /payment
+        pageflow:stateid: payment
+        /pageflow:pagetransition[1]:
+          jcr:primaryType: pageflow:pagetransition
+          pageflow:event: payment.accepted
+          pageflow:target: confirm
+        /pageflow:pagetransition[2]:
+          jcr:primaryType: pageflow:pagetransition
+          pageflow:event: payment.rejected
+          pageflow:target: payment
+        /pageflow:pagetransition[3]:
+          jcr:primaryType: pageflow:pagetransition
+          pageflow:event: cancel.requested
+          pageflow:target: cancel
+      /pageflow:pagestate[5]:
+        jcr:primaryType: pageflow:pagestate
+        pageflow:description: Confirmation
+        pageflow:name: Confirmation
+        pageflow:path: /confirm
+        pageflow:stateid: confirm
+      /pageflow:pagestate[6]:
+        jcr:primaryType: pageflow:pagestate
+        pageflow:description: Cancellation
+        pageflow:name: Cancellation
+        pageflow:path: /cancel
+        pageflow:stateid: cancel
+      /pageflow:eventdef[2]:
+        jcr:primaryType: selection:listitem
+        selection:key: plan.selected
+        selection:label: Plan Selected
+      /pageflow:eventdef[3]:
+        jcr:primaryType: selection:listitem
+        selection:key: application.submitted
+        selection:label: Application Submitted
+      /pageflow:eventdef[4]:
+        jcr:primaryType: selection:listitem
+        selection:key: payment.accepted
+        selection:label: Payment Accepted
+      /pageflow:eventdef[5]:
+        jcr:primaryType: selection:listitem
+        selection:key: payment.rejected
+        selection:label: Payment Rejected
+      /pageflow:eventdef[6]:
+        jcr:primaryType: selection:listitem
+        selection:key: cancel.requested
+        selection:label: Cancel Requested
+    /campaign-1-flow[2]:
+      jcr:primaryType: pageflow:pageflow
+      jcr:mixinTypes: ['mix:referenceable', 'mix:versionable']
+      jcr:uuid: fca1ae1b-689f-4789-8578-39104ca4c9b6
+      hippo:availability: [preview]
+      hippostd:state: unpublished
+      hippostdpubwf:createdBy: admin
+      hippostdpubwf:creationDate: 2018-03-02T12:35:00.844-05:00
+      hippostdpubwf:lastModificationDate: 2018-03-02T12:46:56.456-05:00
+      hippostdpubwf:lastModifiedBy: admin
+      hippotranslation:id: 786972dc-93c3-4119-a56f-97873ddd2096
+      hippotranslation:locale: document-type-locale
+      pageflow:description: Campaign 1 Page Flow
+      pageflow:flowid: pageflow.campaign1
+      pageflow:name: Campaign 1 Page Flow
+      /pageflow:eventdef[1]:
+        jcr:primaryType: selection:listitem
+        selection:key: start.quote
+        selection:label: Start Quote
+      /pageflow:pagestate[1]:
+        jcr:primaryType: pageflow:pagestate
+        pageflow:description: Landing Page
+        pageflow:name: Landing Page
+        pageflow:path: /
+        pageflow:stateid: landing
+        /pageflow:pagetransition:
+          jcr:primaryType: pageflow:pagetransition
+          pageflow:event: start.quote
+          pageflow:target: plan
+      /pageflow:pagestate[2]:
+        jcr:primaryType: pageflow:pagestate
+        pageflow:description: Select a Plan
+        pageflow:name: Select a Plan
+        pageflow:path: /plan
+        pageflow:stateid: plan
+        /pageflow:pagetransition[1]:
+          jcr:primaryType: pageflow:pagetransition
+          pageflow:event: plan.selected
+          pageflow:target: application
+        /pageflow:pagetransition[2]:
+          jcr:primaryType: pageflow:pagetransition
+          pageflow:event: cancel.requested
+          pageflow:target: cancel
+      /pageflow:pagestate[3]:
+        jcr:primaryType: pageflow:pagestate
+        pageflow:description: Application Form
+        pageflow:name: Application Form
+        pageflow:path: /application
+        pageflow:stateid: application
+        /pageflow:pagetransition[1]:
+          jcr:primaryType: pageflow:pagetransition
+          pageflow:event: application.submitted
+          pageflow:target: payment
+        /pageflow:pagetransition[2]:
+          jcr:primaryType: pageflow:pagetransition
+          pageflow:event: cancel.requested
+          pageflow:target: cancel
+      /pageflow:pagestate[4]:
+        jcr:primaryType: pageflow:pagestate
+        pageflow:description: Payment Form
+        pageflow:name: Payment Form
+        pageflow:path: /payment
+        pageflow:stateid: payment
+        /pageflow:pagetransition[1]:
+          jcr:primaryType: pageflow:pagetransition
+          pageflow:event: payment.accepted
+          pageflow:target: confirm
+        /pageflow:pagetransition[2]:
+          jcr:primaryType: pageflow:pagetransition
+          pageflow:event: payment.rejected
+          pageflow:target: payment
+        /pageflow:pagetransition[3]:
+          jcr:primaryType: pageflow:pagetransition
+          pageflow:event: cancel.requested
+          pageflow:target: cancel
+      /pageflow:pagestate[5]:
+        jcr:primaryType: pageflow:pagestate
+        pageflow:description: Confirmation
+        pageflow:name: Confirmation
+        pageflow:path: /confirm
+        pageflow:stateid: confirm
+      /pageflow:pagestate[6]:
+        jcr:primaryType: pageflow:pagestate
+        pageflow:description: Cancellation
+        pageflow:name: Cancellation
+        pageflow:path: /cancel
+        pageflow:stateid: cancel
+      /pageflow:eventdef[2]:
+        jcr:primaryType: selection:listitem
+        selection:key: plan.selected
+        selection:label: Plan Selected
+      /pageflow:eventdef[3]:
+        jcr:primaryType: selection:listitem
+        selection:key: application.submitted
+        selection:label: Application Submitted
+      /pageflow:eventdef[4]:
+        jcr:primaryType: selection:listitem
+        selection:key: payment.accepted
+        selection:label: Payment Accepted
+      /pageflow:eventdef[5]:
+        jcr:primaryType: selection:listitem
+        selection:key: payment.rejected
+        selection:label: Payment Rejected
+      /pageflow:eventdef[6]:
+        jcr:primaryType: selection:listitem
+        selection:key: cancel.requested
+        selection:label: Cancel Requested
+    /campaign-1-flow[3]:
+      jcr:primaryType: pageflow:pageflow
+      jcr:mixinTypes: ['mix:referenceable']
+      jcr:uuid: e5e354e0-6e78-4db4-8598-c906d40531e2
+      hippo:availability: [live]
+      hippostd:state: published
+      hippostdpubwf:createdBy: admin
+      hippostdpubwf:creationDate: 2018-03-02T12:35:00.844-05:00
+      hippostdpubwf:lastModificationDate: 2018-03-02T12:46:56.456-05:00
+      hippostdpubwf:lastModifiedBy: admin
+      hippostdpubwf:publicationDate: 2018-03-02T12:47:18.487-05:00
+      hippotranslation:id: 786972dc-93c3-4119-a56f-97873ddd2096
+      hippotranslation:locale: document-type-locale
+      pageflow:description: Campaign 1 Page Flow
+      pageflow:flowid: pageflow.campaign1
+      pageflow:name: Campaign 1 Page Flow
+      /pageflow:eventdef[1]:
+        jcr:primaryType: selection:listitem
+        selection:key: start.quote
+        selection:label: Start Quote
+      /pageflow:pagestate[1]:
+        jcr:primaryType: pageflow:pagestate
+        pageflow:description: Landing Page
+        pageflow:name: Landing Page
+        pageflow:path: /
+        pageflow:stateid: landing
+        /pageflow:pagetransition:
+          jcr:primaryType: pageflow:pagetransition
+          pageflow:event: start.quote
+          pageflow:target: plan
+      /pageflow:pagestate[2]:
+        jcr:primaryType: pageflow:pagestate
+        pageflow:description: Select a Plan
+        pageflow:name: Select a Plan
+        pageflow:path: /plan
+        pageflow:stateid: plan
+        /pageflow:pagetransition[1]:
+          jcr:primaryType: pageflow:pagetransition
+          pageflow:event: plan.selected
+          pageflow:target: application
+        /pageflow:pagetransition[2]:
+          jcr:primaryType: pageflow:pagetransition
+          pageflow:event: cancel.requested
+          pageflow:target: cancel
+      /pageflow:pagestate[3]:
+        jcr:primaryType: pageflow:pagestate
+        pageflow:description: Application Form
+        pageflow:name: Application Form
+        pageflow:path: /application
+        pageflow:stateid: application
+        /pageflow:pagetransition[1]:
+          jcr:primaryType: pageflow:pagetransition
+          pageflow:event: application.submitted
+          pageflow:target: payment
+        /pageflow:pagetransition[2]:
+          jcr:primaryType: pageflow:pagetransition
+          pageflow:event: cancel.requested
+          pageflow:target: cancel
+      /pageflow:pagestate[4]:
+        jcr:primaryType: pageflow:pagestate
+        pageflow:description: Payment Form
+        pageflow:name: Payment Form
+        pageflow:path: /payment
+        pageflow:stateid: payment
+        /pageflow:pagetransition[1]:
+          jcr:primaryType: pageflow:pagetransition
+          pageflow:event: payment.accepted
+          pageflow:target: confirm
+        /pageflow:pagetransition[2]:
+          jcr:primaryType: pageflow:pagetransition
+          pageflow:event: payment.rejected
+          pageflow:target: payment
+        /pageflow:pagetransition[3]:
+          jcr:primaryType: pageflow:pagetransition
+          pageflow:event: cancel.requested
+          pageflow:target: cancel
+      /pageflow:pagestate[5]:
+        jcr:primaryType: pageflow:pagestate
+        pageflow:description: Confirmation
+        pageflow:name: Confirmation
+        pageflow:path: /confirm
+        pageflow:stateid: confirm
+      /pageflow:pagestate[6]:
+        jcr:primaryType: pageflow:pagestate
+        pageflow:description: Cancellation
+        pageflow:name: Cancellation
+        pageflow:path: /cancel
+        pageflow:stateid: cancel
+      /pageflow:eventdef[2]:
+        jcr:primaryType: selection:listitem
+        selection:key: plan.selected
+        selection:label: Plan Selected
+      /pageflow:eventdef[3]:
+        jcr:primaryType: selection:listitem
+        selection:key: application.submitted
+        selection:label: Application Submitted
+      /pageflow:eventdef[4]:
+        jcr:primaryType: selection:listitem
+        selection:key: payment.accepted
+        selection:label: Payment Accepted
+      /pageflow:eventdef[5]:
+        jcr:primaryType: selection:listitem
+        selection:key: payment.rejected
+        selection:label: Payment Rejected
+      /pageflow:eventdef[6]:
+        jcr:primaryType: selection:listitem
+        selection:key: cancel.requested
+        selection:label: Cancel Requested
