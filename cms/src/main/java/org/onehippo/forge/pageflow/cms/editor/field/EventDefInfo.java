@@ -21,31 +21,20 @@ import java.util.Objects;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-public class PageStateInfo implements Serializable {
+public class EventDefInfo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private String stateId;
-
     private String name;
 
-    private String description;
+    private String label;
 
-    public PageStateInfo() {
+    public EventDefInfo() {
     }
 
-    public PageStateInfo(String stateId, String name, String description) {
-        this.stateId = stateId;
+    public EventDefInfo(String name, String label) {
         this.name = name;
-        this.description = description;
-    }
-
-    public String getStateId() {
-        return stateId;
-    }
-
-    public void setStateId(String stateId) {
-        this.stateId = stateId;
+        this.label = label;
     }
 
     public String getName() {
@@ -56,33 +45,31 @@ public class PageStateInfo implements Serializable {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public String getLabel() {
+        return label;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setLabel(String label) {
+        this.label = label;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof PageStateInfo)) {
+        if (!(o instanceof EventDefInfo)) {
             return false;
         }
 
-        PageStateInfo that = (PageStateInfo) o;
-        return Objects.equals(stateId, that.stateId) && Objects.equals(name, that.name)
-                && Objects.equals(description, that.description);
+        EventDefInfo that = (EventDefInfo) o;
+        return Objects.equals(name, that.name) && Objects.equals(label, that.label);
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(stateId).append(name).append(description).toHashCode();
+        return new HashCodeBuilder().append(name).append(label).toHashCode();
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("stateId", stateId).append("name", name)
-                .append("description", description).toString();
+        return new ToStringBuilder(this).append("name", name).append("label", label).toString();
     }
 }

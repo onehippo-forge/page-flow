@@ -68,11 +68,10 @@ definitions:
               field: event
               hint: Page Transition Event
               plugin.class: org.onehippo.forge.exdocpicker.impl.field.ExternalDocumentFieldSelectorPlugin
-              external.document.service.facade: org.onehippo.forge.pageflow.cms.editor.field.PageFlowPageStateServiceFacade
+              external.document.service.facade: org.onehippo.forge.pageflow.cms.editor.field.TransitionSourceEventDefServiceFacade
               selection.mode: single
               page.size: 20
               initial.search.enabled: true
-              page.transition.target.field.name: pageflow:event
               wicket.id: ${cluster.id}.field
               /cluster.options:
                 jcr:primaryType: frontend:pluginconfig
@@ -82,11 +81,10 @@ definitions:
               field: target
               hint: Page Transition Target
               plugin.class: org.onehippo.forge.exdocpicker.impl.field.ExternalDocumentFieldSelectorPlugin
-              external.document.service.facade: org.onehippo.forge.pageflow.cms.editor.field.PageFlowPageStateServiceFacade
+              external.document.service.facade: org.onehippo.forge.pageflow.cms.editor.field.TransitionTargetPageStateServiceFacade
               selection.mode: single
               page.size: 20
               initial.search.enabled: true
-              page.transition.target.field.name: pageflow:target
               wicket.id: ${cluster.id}.field
               /cluster.options:
                 jcr:primaryType: frontend:pluginconfig
