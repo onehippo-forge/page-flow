@@ -5,7 +5,7 @@ definitions:
       hst:referencecomponent: hst:abstractpages/base
       /main:
         jcr:primaryType: hst:component
-        hst:template: homepage-main
+        hst:template: campaign-homepage-main
         /container:
           jcr:primaryType: hst:containercomponentreference
           hst:referencecomponent: homepage/main

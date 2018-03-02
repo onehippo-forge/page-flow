@@ -6,7 +6,7 @@ definitions:
       /main:
         jcr:primaryType: hst:component
         hst:componentclassname: org.onehippo.cms7.essentials.components.EssentialsPageNotFoundComponent
-        hst:template: pagenotfound-main
+        hst:template: campaign-pagenotfound-main
         /container:
           jcr:primaryType: hst:containercomponentreference
           hst:referencecomponent: pagenotfound/main
