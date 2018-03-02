@@ -102,6 +102,15 @@ definitions:
             hipposysedit:node: true
             hipposysedit:supertype: ['hippo:compound', 'hippostd:relaxed']
             hipposysedit:uri: http://www.onehippo.org/pageflow/nt/1.0
+            /stateid:
+              jcr:primaryType: hipposysedit:field
+              hipposysedit:mandatory: false
+              hipposysedit:multiple: false
+              hipposysedit:ordered: false
+              hipposysedit:path: pageflow:stateid
+              hipposysedit:primary: false
+              hipposysedit:type: String
+              hipposysedit:validators: [non-empty, required]
             /name:
               jcr:primaryType: hipposysedit:field
               hipposysedit:mandatory: false
@@ -139,6 +148,7 @@ definitions:
           jcr:primaryType: hipposysedit:prototypeset
           /hipposysedit:prototype:
             jcr:primaryType: pageflow:pagestate
+            pageflow:stateid: ''
             pageflow:name: ''
             pageflow:description: ''
             pageflow:path: ''
@@ -165,6 +175,15 @@ definitions:
               item: ${cluster.id}.right.item
               plugin.class: org.hippoecm.frontend.service.render.ListViewPlugin
               wicket.id: ${cluster.id}.right
+            /stateid:
+              jcr:primaryType: frontend:plugin
+              caption: Page State ID
+              field: stateid
+              hint: Page State ID
+              plugin.class: org.hippoecm.frontend.editor.plugins.field.PropertyFieldPlugin
+              wicket.id: ${cluster.id}.right.item
+              /cluster.options:
+                jcr:primaryType: frontend:pluginconfig
             /name:
               jcr:primaryType: frontend:plugin
               caption: Name
@@ -278,6 +297,7 @@ definitions:
               selection:label: ''
             /pageflow:pagestate:
               jcr:primaryType: pageflow:pagestate
+              pageflow:stateid: ''
               pageflow:name: ''
               pageflow:path: ''
               pageflow:description: ''

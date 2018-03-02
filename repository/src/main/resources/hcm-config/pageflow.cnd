@@ -18,6 +18,7 @@
 
 [pageflow:pagestate] > hippo:compound, hippostd:relaxed
   orderable
+  - pageflow:stateid (string) mandatory
   - pageflow:name (string) mandatory
   - pageflow:path (string)
   - pageflow:description (string)
