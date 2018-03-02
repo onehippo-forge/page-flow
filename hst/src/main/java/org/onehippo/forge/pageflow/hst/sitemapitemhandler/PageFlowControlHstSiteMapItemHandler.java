@@ -35,21 +35,21 @@ public class PageFlowControlHstSiteMapItemHandler extends AbstractFilterChainAwa
 
     private static Logger log = LoggerFactory.getLogger(PageFlowControlHstSiteMapItemHandler.class);
 
-    private PageFlowControl pageFlowControl = new DefaultHstPageFlowControl();
-
     private boolean pageFlowControlSetInServletContext;
+
+    private volatile PageFlowControl pageFlowControl;
 
     @Override
     public ResolvedSiteMapItem process(ResolvedSiteMapItem resolvedSiteMapItem, HttpServletRequest request,
             HttpServletResponse response, FilterChain filterChain) throws HstSiteMapItemHandlerException {
+        final PageFlowControl flowControl = getPageFlowControl(request);
+
         if (!pageFlowControlSetInServletContext) {
-            request.getServletContext().setAttribute(PageFlowControl.PAGE_FLOW_CONTROL_ATTR_NAME, pageFlowControl);
+            request.getServletContext().setAttribute(PageFlowControl.PAGE_FLOW_CONTROL_ATTR_NAME, flowControl);
             pageFlowControlSetInServletContext = true;
         }
 
-        request.setAttribute(PageFlowControl.PAGE_FLOW_CONTROL_ATTR_NAME, pageFlowControl);
-
-        final PageFlowControl flowControl = PageFlowControl.getDefault(request);
+        request.setAttribute(PageFlowControl.PAGE_FLOW_CONTROL_ATTR_NAME, flowControl);
 
         PageFlow pageFlow = null;
 
@@ -88,4 +88,24 @@ public class PageFlowControlHstSiteMapItemHandler extends AbstractFilterChainAwa
         return resolvedSiteMapItem;
     }
 
+    protected PageFlowControl getPageFlowControl(HttpServletRequest request) {
+        PageFlowControl flowControl = pageFlowControl;
+
+        if (flowControl == null) {
+            synchronized (this) {
+                flowControl = pageFlowControl;
+
+                if (flowControl == null) {
+                    flowControl = createPageFlowControl(request);
+                    pageFlowControl = flowControl;
+                }
+            }
+        }
+
+        return flowControl;
+    }
+
+    protected PageFlowControl createPageFlowControl(HttpServletRequest request) {
+        return new DefaultHstPageFlowControl();
+    }
 }
