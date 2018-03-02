@@ -4,3 +4,52 @@ definitions:
       jcr:primaryType: hst:catalog
       /campaignbase-catalog:
         jcr:primaryType: hst:containeritempackage
+        /campaign-application-form:
+          jcr:primaryType: hst:containeritemcomponent
+          hst:componentclassname: org.onehippo.forge.pageflow.demo.components.campaign.CampaignApplicationFormComponent
+          hst:iconpath: images/campaignbase/catalog-component-icons/campaign-application-form.png
+          hst:label: Campaign Application Form
+          hst:template: campaign-application-form
+          hst:xtype: hst.item
+        /campaign-cancellation:
+          jcr:primaryType: hst:containeritemcomponent
+          hst:componentclassname: org.onehippo.forge.pageflow.demo.components.campaign.CampaignCancellationComponent
+          hst:iconpath: images/campaignbase/catalog-component-icons/campaign-cancellation.png
+          hst:label: Campaign Cancellation
+          hst:template: campaign-cancellation
+          hst:xtype: hst.item
+        /campaign-confirmation:
+          jcr:primaryType: hst:containeritemcomponent
+          hst:componentclassname: org.onehippo.forge.pageflow.demo.components.campaign.CampaignConfirmationComponent
+          hst:iconpath: images/campaignbase/catalog-component-icons/campaign-confirmation.png
+          hst:label: Campaign Confirmation
+          hst:template: campaign-confirmation
+          hst:xtype: hst.item
+        /campaign-flow-status:
+          jcr:primaryType: hst:containeritemcomponent
+          hst:componentclassname: org.onehippo.forge.pageflow.demo.components.campaign.CampaignFlowStatusComponent
+          hst:iconpath: images/campaignbase/catalog-component-icons/campaign-flow-status.png
+          hst:label: Campaign Flow Status
+          hst:template: campaign-flow-status
+          hst:xtype: hst.item
+        /campaign-payment-form:
+          jcr:primaryType: hst:containeritemcomponent
+          hst:componentclassname: org.onehippo.forge.pageflow.demo.components.campaign.CampaignPaymentFormComponent
+          hst:iconpath: images/campaignbase/catalog-component-icons/campaign-payment-form.png
+          hst:label: Campaign Payment Form
+          hst:template: campaign-payment-form
+          hst:xtype: hst.item
+        /campaign-plan:
+          jcr:primaryType: hst:containeritemcomponent
+          hst:componentclassname: org.onehippo.forge.pageflow.demo.components.campaign.CampaignPlanComponent
+          hst:iconpath: images/campaignbase/catalog-component-icons/campaign-plan.png
+          hst:label: Campaign Plan
+          hst:template: campaign-plan
+          hst:xtype: hst.item
+        /campaign-quote:
+          jcr:primaryType: hst:containeritemcomponent
+          hst:componentclassname: org.onehippo.forge.pageflow.demo.components.campaign.CampaignQuoteComponent
+          hst:iconpath: images/campaignbase/catalog-component-icons/campaign-quote.png
+          hst:label: Campaign Quote
+          hst:template: campaign-quote
+          hst:xtype: hst.item

@@ -17,3 +17,24 @@ definitions:
       /pagenotfound-main:
         jcr:primaryType: hst:template
         hst:renderpath: webfile:/freemarker/pageflowdemo/pagenotfound-main.ftl
+      /campaign-application-form:
+        jcr:primaryType: hst:template
+        hst:renderpath: webfile:/freemarker/campaignbase/campaign-application-form.ftl
+      /campaign-payment-form:
+        jcr:primaryType: hst:template
+        hst:renderpath: webfile:/freemarker/campaignbase/campaign-payment-form.ftl
+      /campaign-cancellation:
+        jcr:primaryType: hst:template
+        hst:renderpath: webfile:/freemarker/campaignbase/campaign-cancellation.ftl
+      /campaign-confirmation:
+        jcr:primaryType: hst:template
+        hst:renderpath: webfile:/freemarker/campaignbase/campaign-confirmation.ftl
+      /campaign-flow-status:
+        jcr:primaryType: hst:template
+        hst:renderpath: webfile:/freemarker/campaignbase/campaign-flow-status.ftl
+      /campaign-plan:
+        jcr:primaryType: hst:template
+        hst:renderpath: webfile:/freemarker/campaignbase/campaign-plan.ftl
+      /campaign-quote:
+        jcr:primaryType: hst:template
+        hst:renderpath: webfile:/freemarker/campaignbase/campaign-quote.ftl

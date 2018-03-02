@@ -60,7 +60,9 @@ public class PageFlowControlHstSiteMapItemHandler extends AbstractFilterChainAwa
         }
 
         if (pageFlow != null) {
-            if (!pageFlow.isStarted()) {
+            if (pageFlow.isComplete()) {
+                // TODO: go to completed page??
+            } else if (!pageFlow.isStarted()) {
                 pageFlow.start();
             }
 
