@@ -1,6 +1,6 @@
 <#include "../include/imports.ftl">
 
-<@hst.setBundle basename="essentials.global"/>
+<@hst.setBundle basename="campaign.general"/>
 <div>
   <@hst.include ref="container"/>
 </div>
