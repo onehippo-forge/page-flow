@@ -1,7 +1,0 @@
-/hst:hst/hst:configurations/campaign1/hst:workspace/hst:containers/homepage/main/campaign-quote:
-  jcr:primaryType: hst:containeritemcomponent
-  hst:componentclassname: org.onehippo.forge.pageflow.demo.components.campaign.CampaignQuoteComponent
-  hst:iconpath: images/campaignbase/catalog-component-icons/campaign-default.png
-  hst:label: Campaign Quote
-  hst:template: campaign-quote
-  hst:xtype: hst.item

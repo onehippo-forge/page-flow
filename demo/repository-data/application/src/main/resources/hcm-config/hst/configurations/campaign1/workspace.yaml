@@ -16,14 +16,6 @@ definitions:
             jcr:primaryType: hst:containercomponent
             hst:label: Footer
             hst:xtype: hst.vbox
-        /homepage:
-          jcr:primaryType: hst:containercomponentfolder
-          /main:
-            .meta:residual-child-node-category: content
-            jcr:primaryType: hst:containercomponent
-            hst:label: Home Page Main
-            hst:xtype: hst.vbox
-            hst:lastmodified: 2018-03-02T16:57:56.809-05:00
         /pagenotfound:
           jcr:primaryType: hst:containercomponentfolder
           /main:

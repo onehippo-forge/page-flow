@@ -1,0 +1,18 @@
+/hst:hst/hst:configurations/campaign1/hst:workspace/hst:pages/plan-campaign-mainpage:
+  jcr:primaryType: hst:component
+  hst:lastmodified: 2018-03-02T19:25:07.136-05:00
+  hst:referencecomponent: hst:abstractpages/base
+  /main:
+    jcr:primaryType: hst:component
+    hst:template: campaign-campaignpage-main
+    /main-container:
+      jcr:primaryType: hst:containercomponent
+      hst:lastmodified: 2018-03-02T19:25:26.422-05:00
+      hst:xtype: hst.vbox
+      /campaign-plan:
+        jcr:primaryType: hst:containeritemcomponent
+        hst:componentclassname: org.onehippo.forge.pageflow.demo.components.campaign.CampaignPlanComponent
+        hst:iconpath: images/campaignbase/catalog-component-icons/campaign-default.png
+        hst:label: Campaign Plan
+        hst:template: campaign-plan
+        hst:xtype: hst.item
