@@ -1,6 +1,5 @@
 <#include "../include/imports.ftl">
 
-<@hst.setBundle basename="campaign.general"/>
 <div>
   <h1><@fmt.message key="campaign.title" var="title"/>${title?html}</h1>
   <p><@fmt.message key="campaign.text" var="text"/>${text?html}</p>
