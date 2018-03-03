@@ -5,3 +5,4 @@ definitions:
       jcr:primaryType: hst:channel
       hst:name: Campaign 1
       hst:type: website
+      hst:channelinfoclass: org.onehippo.forge.pageflow.hst.channel.PageFlowSiteInfo
