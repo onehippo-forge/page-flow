@@ -18,7 +18,6 @@ package org.onehippo.forge.pageflow.demo.components.campaign;
 import org.hippoecm.hst.component.support.bean.BaseHstComponent;
 import org.hippoecm.hst.container.RequestContextProvider;
 import org.hippoecm.hst.core.request.HstRequestContext;
-import org.onehippo.forge.pageflow.core.PageFlowNotFoundException;
 import org.onehippo.forge.pageflow.core.rt.PageFlow;
 import org.onehippo.forge.pageflow.core.rt.PageFlowControl;
 import org.slf4j.Logger;
@@ -31,15 +30,6 @@ public abstract class AbstractCampaignComponent extends BaseHstComponent {
     protected PageFlow getPageFlow() {
         final HstRequestContext requestContext = RequestContextProvider.get();
         final PageFlowControl flowControl = PageFlowControl.getDefault(requestContext.getServletRequest());
-
-        PageFlow pageFlow = null;
-
-        try {
-            pageFlow = flowControl.getPageFlow(requestContext.getServletRequest());
-        } catch (PageFlowNotFoundException e) {
-            log.warn("Page flow not found.", e);
-        }
-
-        return pageFlow;
+        return flowControl.getPageFlow(requestContext.getServletRequest());
     }
 }

@@ -15,46 +15,77 @@
  */
 package org.onehippo.forge.pageflow.core.def.impl;
 
-import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
+import org.apache.commons.lang.StringUtils;
 import org.onehippo.forge.pageflow.core.PageFlowException;
-import org.onehippo.forge.pageflow.core.PageFlowNotFoundException;
 import org.onehippo.forge.pageflow.core.def.PageFlowDefinition;
 import org.onehippo.forge.pageflow.core.def.PageFlowDefinitionRegistry;
 
 public class MapPageFlowDefinitionRegistry implements PageFlowDefinitionRegistry {
 
-    private final Map<String, PageFlowDefinition> pageFlowDefMap;
+    private Map<String, String> uuidToFlowIdMap = new ConcurrentHashMap<>();
+    private Map<String, PageFlowDefinition> pageFlowDefMap;
 
     public MapPageFlowDefinitionRegistry() {
-        this(new LinkedHashMap<String, PageFlowDefinition>());
+        this(null);
     }
 
     public MapPageFlowDefinitionRegistry(final Map<String, PageFlowDefinition> pageFlowDefMap) {
-        this.pageFlowDefMap = pageFlowDefMap;
+        if (pageFlowDefMap != null) {
+            this.pageFlowDefMap = new ConcurrentHashMap<>(pageFlowDefMap);
+        }
     }
 
     @Override
-    public PageFlowDefinition getPageFlowDefinition(String flowId) throws PageFlowNotFoundException, PageFlowException {
-        PageFlowDefinition pageFlowDef = pageFlowDefMap.get(flowId);
+    public PageFlowDefinition getPageFlowDefinition(String flowId) throws PageFlowException {
+        if (StringUtils.isBlank(flowId)) {
+            throw new IllegalArgumentException("Blank page flow ID.");
+        }
 
-        if (pageFlowDef == null) {
-            throw new PageFlowNotFoundException("Page flow definition not found by ID: " + flowId);
+        PageFlowDefinition pageFlowDef = null;
+
+        if (pageFlowDefMap != null) {
+            pageFlowDef = pageFlowDefMap.get(flowId);
         }
 
         return pageFlowDef;
     }
 
-    public void addPageFlowDefinition(String flowId, PageFlowDefinition pageFlowDef) throws PageFlowException {
-        pageFlowDefMap.put(flowId, pageFlowDef);
+    public void addPageFlowDefinition(PageFlowDefinition pageFlowDef) throws PageFlowException {
+        if (pageFlowDefMap == null) {
+            pageFlowDefMap = new ConcurrentHashMap<>();
+        }
+
+        pageFlowDefMap.put(pageFlowDef.getId(), pageFlowDef);
+
+        if (StringUtils.isNotBlank(pageFlowDef.getUuid())) {
+            uuidToFlowIdMap.put(pageFlowDef.getUuid(), pageFlowDef.getId());
+        }
     }
 
+    @Override
+    public void removePageFlowDefinitionByUuid(String uuid) throws PageFlowException {
+        
+    }
+
+    @Override
     public void removePageFlowDefinition(String flowId) throws PageFlowException {
-        pageFlowDefMap.remove(flowId);
+        if (pageFlowDefMap != null) {
+            PageFlowDefinition flowDef = pageFlowDefMap.remove(flowId);
+
+            if (flowDef != null && flowDef.getUuid() != null) {
+                uuidToFlowIdMap.remove(flowDef.getUuid());
+            }
+        }
     }
 
+    @Override
     public void clearPageFlowDefinitions() throws PageFlowException {
-        pageFlowDefMap.clear();
+        if (pageFlowDefMap != null) {
+            pageFlowDefMap.clear();
+            uuidToFlowIdMap.clear();
+        }
     }
 }

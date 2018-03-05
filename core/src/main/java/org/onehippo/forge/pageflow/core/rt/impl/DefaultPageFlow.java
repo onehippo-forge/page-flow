@@ -76,7 +76,13 @@ public class DefaultPageFlow implements PageFlow {
 
     @Override
     public PageState getPageState() throws PageFlowException {
-        return stateMachine.getState().getId();
+        State<PageState, String> state = stateMachine.getState();
+
+        if (state != null) {
+            return state.getId();
+        }
+
+        return null;
     }
 
     @Override

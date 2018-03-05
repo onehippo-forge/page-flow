@@ -30,8 +30,12 @@ import org.onehippo.forge.pageflow.core.def.PageFlowDefinitionRegistry;
 import org.onehippo.forge.pageflow.core.rt.DefaultPageFlowControl;
 import org.onehippo.forge.pageflow.core.rt.PageFlowFactory;
 import org.onehippo.forge.pageflow.core.rt.PageFlowStore;
+import org.onehippo.forge.pageflow.hst.channel.PageFlowSiteInfo;
 
 public class DefaultHstPageFlowControl extends DefaultPageFlowControl {
+
+    private static final String MODULE_NAME = "org.onehippo.forge.pageflow";
+
     @Override
     protected String findPageFlowId(HttpServletRequest request) {
         String flowId = super.findPageFlowId(request);
@@ -52,11 +56,15 @@ public class DefaultHstPageFlowControl extends DefaultPageFlowControl {
                     final ChannelInfo channelInfo = mount.getChannelInfo();
 
                     if (channelInfo != null) {
-                        final Map<String, Object> channelProps = channelInfo.getProperties();
+                        if (channelInfo instanceof PageFlowSiteInfo) {
+                            flowId = ((PageFlowSiteInfo) channelInfo).getDefaultPageFlowId();
+                        } else {
+                            final Map<String, Object> channelProps = channelInfo.getProperties();
 
-                        if (channelProps != null) {
-                            flowId = StringUtils.trim((String) channelInfo.getProperties()
-                                    .get(DefaultPageFlowControl.PAGE_FLOW_ID_PROP_NAME));
+                            if (channelProps != null) {
+                                flowId = StringUtils.trim((String) channelInfo.getProperties()
+                                        .get(DefaultPageFlowControl.PAGE_FLOW_ID_PROP_NAME));
+                            }
                         }
                     }
 
@@ -77,16 +85,16 @@ public class DefaultHstPageFlowControl extends DefaultPageFlowControl {
 
     @Override
     protected PageFlowDefinitionRegistry getPageFlowDefinitionRegistry() {
-        return HstServices.getComponentManager().getComponent(PageFlowDefinitionRegistry.class.getName());
+        return HstServices.getComponentManager().getComponent(PageFlowDefinitionRegistry.class.getName(), MODULE_NAME);
     }
 
     @Override
     protected PageFlowFactory getPageFlowFactory() {
-        return HstServices.getComponentManager().getComponent(PageFlowFactory.class.getName());
+        return HstServices.getComponentManager().getComponent(PageFlowFactory.class.getName(), MODULE_NAME);
     }
 
     @Override
     protected PageFlowStore getPageFlowStore() {
-        return HstServices.getComponentManager().getComponent(PageFlowStore.class.getName());
+        return HstServices.getComponentManager().getComponent(PageFlowStore.class.getName(), MODULE_NAME);
     }
 }

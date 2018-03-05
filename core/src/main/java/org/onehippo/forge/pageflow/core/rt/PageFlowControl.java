@@ -22,7 +22,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.onehippo.forge.pageflow.core.PageFlowException;
-import org.onehippo.forge.pageflow.core.PageFlowNotFoundException;
 
 public interface PageFlowControl {
 
@@ -48,7 +47,7 @@ public interface PageFlowControl {
         return null;
     }
 
-    public PageFlow getPageFlow(HttpServletRequest request) throws PageFlowNotFoundException, PageFlowException;
+    public PageFlow getPageFlow(HttpServletRequest request) throws PageFlowException;
 
     public void sendRedirect(HttpServletRequest request, HttpServletResponse response, PageState pageState)
             throws PageFlowException, IOException, IllegalStateException;

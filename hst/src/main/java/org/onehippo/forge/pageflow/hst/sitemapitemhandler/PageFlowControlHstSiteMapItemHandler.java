@@ -24,7 +24,6 @@ import org.hippoecm.hst.core.request.ResolvedSiteMapItem;
 import org.hippoecm.hst.core.sitemapitemhandler.AbstractFilterChainAwareHstSiteMapItemHandler;
 import org.hippoecm.hst.core.sitemapitemhandler.HstSiteMapItemHandlerException;
 import org.hippoecm.hst.util.PathUtils;
-import org.onehippo.forge.pageflow.core.PageFlowNotFoundException;
 import org.onehippo.forge.pageflow.core.rt.PageFlow;
 import org.onehippo.forge.pageflow.core.rt.PageFlowControl;
 import org.onehippo.forge.pageflow.core.rt.PageState;
@@ -51,30 +50,30 @@ public class PageFlowControlHstSiteMapItemHandler extends AbstractFilterChainAwa
 
         request.setAttribute(PageFlowControl.PAGE_FLOW_CONTROL_ATTR_NAME, flowControl);
 
-        PageFlow pageFlow = null;
-
-        try {
-            pageFlow = flowControl.getPageFlow(request);
-        } catch (PageFlowNotFoundException e) {
-            log.warn("Page Flow not found for the current request.");
-        }
+        PageFlow pageFlow = flowControl.getPageFlow(request);
 
         if (pageFlow != null) {
-            if (pageFlow.isComplete()) {
-                // TODO: go to completed page??
-            } else if (!pageFlow.isStarted()) {
+            if (!pageFlow.isStarted()) {
                 pageFlow.start();
+            } else {
+                if (pageFlow.isComplete()) {
+                    // TODO: go to completed page??
+                }
             }
 
             final PageState pageState = pageFlow.getPageState();
 
-            if (!StringUtils.equals(PathUtils.normalizePath(StringUtils.defaultString(pageState.getPath())),
-                    PathUtils.normalizePath(StringUtils.defaultString(request.getPathInfo())))) {
-                try {
-                    flowControl.sendRedirect(request, response, pageState);
-                    return null;
-                } catch (Exception e) {
-                    log.warn("Failed to redirect to the pageState: {}", pageState, e);
+            if (pageState != null) {
+                final String normalizedPagePath = PathUtils.normalizePath(StringUtils.defaultString(pageState.getPath()));
+                final String normalizedPathInfo = PathUtils.normalizePath(StringUtils.defaultString(request.getPathInfo()));
+
+                if (!StringUtils.equals(normalizedPagePath, normalizedPathInfo)) {
+                    try {
+                        flowControl.sendRedirect(request, response, pageState);
+                        return null;
+                    } catch (Exception e) {
+                        log.warn("Failed to redirect to the pageState: {}", pageState, e);
+                    }
                 }
             }
         }

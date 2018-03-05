@@ -16,10 +16,15 @@
 package org.onehippo.forge.pageflow.core.def;
 
 import org.onehippo.forge.pageflow.core.PageFlowException;
-import org.onehippo.forge.pageflow.core.PageFlowNotFoundException;
 
 public interface PageFlowDefinitionRegistry {
 
-    public PageFlowDefinition getPageFlowDefinition(String flowId) throws PageFlowNotFoundException, PageFlowException;
+    public PageFlowDefinition getPageFlowDefinition(String flowId) throws PageFlowException;
+
+    public void removePageFlowDefinitionByUuid(String uuid) throws PageFlowException;
+
+    public void removePageFlowDefinition(String flowId) throws PageFlowException;
+
+    public void clearPageFlowDefinitions() throws PageFlowException;
 
 }

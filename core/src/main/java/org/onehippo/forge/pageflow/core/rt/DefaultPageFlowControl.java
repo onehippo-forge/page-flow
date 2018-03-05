@@ -23,7 +23,6 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 import org.onehippo.forge.pageflow.core.PageFlowException;
-import org.onehippo.forge.pageflow.core.PageFlowNotFoundException;
 import org.onehippo.forge.pageflow.core.def.PageFlowDefinition;
 import org.onehippo.forge.pageflow.core.def.PageFlowDefinitionRegistry;
 import org.slf4j.Logger;
@@ -41,11 +40,11 @@ public class DefaultPageFlowControl implements PageFlowControl {
     }
 
     @Override
-    public PageFlow getPageFlow(HttpServletRequest request) throws PageFlowNotFoundException, PageFlowException {
+    public PageFlow getPageFlow(HttpServletRequest request) throws PageFlowException {
         String flowId = findPageFlowId(request);
 
         if (StringUtils.isEmpty(flowId)) {
-            throw new PageFlowNotFoundException("Page flow ID not found from servlet request.");
+            return null;
         }
 
         return getPageFlow(request, flowId);
@@ -88,8 +87,7 @@ public class DefaultPageFlowControl implements PageFlowControl {
         return flowId;
     }
 
-    protected PageFlow getPageFlow(HttpServletRequest request, String flowId)
-            throws PageFlowNotFoundException, PageFlowException {
+    protected PageFlow getPageFlow(HttpServletRequest request, String flowId) throws PageFlowException {
         if (StringUtils.isBlank(flowId)) {
             throw new IllegalArgumentException("Blank page flow ID.");
         }
@@ -116,11 +114,9 @@ public class DefaultPageFlowControl implements PageFlowControl {
             if (store != null) {
                 store.savePageFlow(request, flowId, pageFlow);
             }
-
-            return pageFlow;
         }
 
-        throw new PageFlowNotFoundException("Page flow not found by ID: " + flowId);
+        return pageFlow;
     }
 
     protected PageFlowDefinitionRegistry getPageFlowDefinitionRegistry() {

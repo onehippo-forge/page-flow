@@ -15,6 +15,8 @@
  */
 package org.onehippo.forge.pageflow.core.rt.impl;
 
+import java.util.UUID;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.onehippo.forge.pageflow.core.def.impl.DefaultPageFlowDefinition;
@@ -53,7 +55,7 @@ public class DefaultPageStateMachineTest {
     public void setUp() throws Exception {
         pageFlowDefinitionRegistry = new MapPageFlowDefinitionRegistry();
 
-        DefaultPageFlowDefinition flowDef = new DefaultPageFlowDefinition("flow1");
+        DefaultPageFlowDefinition flowDef = new DefaultPageFlowDefinition("flow1", UUID.randomUUID().toString());
 
         DefaultPageStateDefinition pageDef1 = new DefaultPageStateDefinition("P1", "/page1");
         DefaultPageStateDefinition pageDef2 = new DefaultPageStateDefinition("P2", "/page2");
@@ -69,7 +71,7 @@ public class DefaultPageStateMachineTest {
         flowDef.addPageStateDefinition(pageDef2);
         flowDef.addPageStateDefinition(pageDef3);
 
-        pageFlowDefinitionRegistry.addPageFlowDefinition(flowDef.getId(), flowDef);
+        pageFlowDefinitionRegistry.addPageFlowDefinition(flowDef);
 
         session = new MockHttpSession();
         request = new MockHttpServletRequest();

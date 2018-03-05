@@ -31,15 +31,23 @@ public class DefaultPageFlowDefinition implements PageFlowDefinition {
 
     private final String id;
 
+    private final String uuid;
+
     private List<PageStateDefinition> pageStateDefs;
 
-    public DefaultPageFlowDefinition(final String id) {
+    public DefaultPageFlowDefinition(final String id, final String uuid) {
         this.id = id;
+        this.uuid = uuid;
     }
 
     @Override
     public String getId() {
         return id;
+    }
+
+    @Override
+    public String getUuid() {
+        return uuid;
     }
 
     @Override
