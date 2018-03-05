@@ -15,26 +15,57 @@
  */
 package org.onehippo.forge.pageflow.hst.sitemapitemhandler;
 
+import java.io.IOException;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 import org.hippoecm.hst.configuration.channel.ChannelInfo;
 import org.hippoecm.hst.configuration.hosting.Mount;
 import org.hippoecm.hst.container.RequestContextProvider;
+import org.hippoecm.hst.core.linking.HstLink;
+import org.hippoecm.hst.core.linking.HstLinkCreator;
 import org.hippoecm.hst.core.request.HstRequestContext;
 import org.hippoecm.hst.core.request.ResolvedSiteMapItem;
 import org.hippoecm.hst.site.HstServices;
+import org.onehippo.forge.pageflow.core.PageFlowException;
 import org.onehippo.forge.pageflow.core.def.PageFlowDefinitionRegistry;
 import org.onehippo.forge.pageflow.core.rt.DefaultPageFlowControl;
 import org.onehippo.forge.pageflow.core.rt.PageFlowFactory;
 import org.onehippo.forge.pageflow.core.rt.PageFlowStore;
+import org.onehippo.forge.pageflow.core.rt.PageState;
 import org.onehippo.forge.pageflow.hst.channel.PageFlowSiteInfo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class DefaultHstPageFlowControl extends DefaultPageFlowControl {
 
+    private static Logger log = LoggerFactory.getLogger(DefaultHstPageFlowControl.class);
+
     private static final String MODULE_NAME = "org.onehippo.forge.pageflow";
+
+    @Override
+    public void sendRedirect(HttpServletRequest request, HttpServletResponse response, PageState pageState)
+            throws PageFlowException, IOException, IllegalStateException {
+        final String path = StringUtils.defaultIfEmpty(StringUtils.trim(pageState.getPath()), "/");
+
+        final HstRequestContext requestContext = RequestContextProvider.get();
+        final HstLinkCreator linkCreator = requestContext.getHstLinkCreator();
+
+        final HstLink curHstLink = linkCreator.create(request.getPathInfo(),
+                requestContext.getResolvedMount().getMount());
+        final HstLink newHstLink = linkCreator.create(path, requestContext.getResolvedMount().getMount());
+
+        if (!StringUtils.equals(curHstLink.getPath(), newHstLink.getPath())) {
+            final String location = newHstLink.toUrlForm(requestContext, false);
+            response.sendRedirect(location);
+        } else {
+            log.warn("The link to redirect, '{}', is the same as the current page, '{}'.", newHstLink.getPath(),
+                    curHstLink.getPath());
+        }
+    }
 
     @Override
     protected String findPageFlowId(HttpServletRequest request) {
