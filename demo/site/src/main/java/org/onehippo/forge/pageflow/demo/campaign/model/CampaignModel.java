@@ -19,6 +19,8 @@ import java.io.Serializable;
 
 public class CampaignModel implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     private String planName;
     private String email;
     private String firstName;

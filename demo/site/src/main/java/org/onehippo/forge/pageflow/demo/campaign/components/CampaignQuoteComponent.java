@@ -15,15 +15,47 @@
  */
 package org.onehippo.forge.pageflow.demo.campaign.components;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.apache.commons.lang3.StringUtils;
 import org.hippoecm.hst.core.component.HstComponentException;
 import org.hippoecm.hst.core.component.HstRequest;
 import org.hippoecm.hst.core.component.HstResponse;
 import org.onehippo.forge.pageflow.core.rt.PageFlow;
+import org.onehippo.forge.pageflow.demo.campaign.CampaignConstants;
+import org.onehippo.forge.pageflow.demo.campaign.model.CampaignModel;
 
 public class CampaignQuoteComponent extends AbstractCampaignComponent {
 
-    public void doAction(HstRequest request, HstResponse response) throws HstComponentException {
+    private static final Pattern US_ZIP_PATTERN = Pattern.compile("^\\d{5}$");
+
+    @Override
+    public void doBeforeRender(HstRequest request, HstResponse response) throws HstComponentException {
         final PageFlow pageFlow = getPageFlow();
+        final CampaignModel campaignModel = (CampaignModel) pageFlow.getAttribute(CampaignConstants.DEFAULT_MODEL_NAME);
+
+        if (campaignModel != null) {
+            request.setAttribute("campaignModel", campaignModel);
+        }
+    }
+
+    @Override
+    public void doAction(HstRequest request, HstResponse response) throws HstComponentException {
+        final String zip = StringUtils.trim(request.getParameter("zip"));
+
+        final PageFlow pageFlow = getPageFlow();
+        final CampaignModel campaignModel = new CampaignModel();
+        campaignModel.setZip(zip);
+        pageFlow.setAttribute(CampaignConstants.DEFAULT_MODEL_NAME, campaignModel);
+
+        if (StringUtils.isNotEmpty(zip)) {
+            final Matcher m = US_ZIP_PATTERN.matcher(zip);
+
+            if (m.matches()) {
+                pageFlow.sendEvent(CampaignConstants.EVENT_START_QUOTE);
+            }
+        }
     }
 
 }
