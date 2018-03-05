@@ -39,6 +39,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 public class DefaultPageStateMachineTest {
 
@@ -102,28 +103,43 @@ public class DefaultPageStateMachineTest {
 
         log.debug("PageStateMachine instance: {}", pageFlow);
         assertSame(pageFlow, pageFlowStore.getPageFlow(request, "flow1"));
-
-        pageFlow.start();
         assertFalse(pageFlow.isComplete());
 
         PageState pageState = pageFlow.getPageState();
         log.debug("currentPageState: {}", pageState);
         assertEquals("P1", pageState.getId());
+        pageFlow.setAttribute("name", "John");
+        pageFlow.setAttribute("age", 33);
         assertFalse(pageFlow.isComplete());
 
         pageFlow.sendEvent("P1-to-P2");
         pageState = pageFlow.getPageState();
         log.debug("currentPageState: {}", pageState);
         assertEquals("P2", pageState.getId());
+        assertEquals("John", pageFlow.getAttribute("name"));
+        assertEquals(33, pageFlow.getAttribute("age"));
+        pageFlow.setAttribute("name", "Jane");
+        pageFlow.setAttribute("age", 34);
         assertFalse(pageFlow.isComplete());
 
         pageFlow.sendEvent("P2-to-P3");
         pageState = pageFlow.getPageState();
         log.debug("currentPageState: {}", pageState);
         assertEquals("P3", pageState.getId());
+        assertEquals("Jane", pageFlow.getAttribute("name"));
+        assertEquals(34, pageFlow.getAttribute("age"));
         assertFalse(pageFlow.isComplete());
 
         pageFlow.stop();
+
+        try {
+            pageFlow.setAttribute("name", "Paul");
+            fail("Shouldn't be able to set attribute after page flow stopped.");
+        } catch (IllegalStateException expected) {
+        }
+
+        assertEquals("P3", pageState.getId());
+        assertEquals("Jane", pageFlow.getAttribute("name"));
         assertTrue(pageFlow.isComplete());
     }
 }

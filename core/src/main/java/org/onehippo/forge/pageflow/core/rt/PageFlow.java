@@ -39,11 +39,11 @@ public interface PageFlow extends Serializable {
 
     public List<PageState> getPageStates() throws PageFlowException;
 
-    public Object getModel(String name) throws PageFlowException;
+    public Object getAttribute(String name) throws PageFlowException;
 
-    public void setModel(String name, Object model) throws PageFlowException;
+    public void setAttribute(String name, Object model) throws PageFlowException;
 
-    public Map<String, Object> getModelMap() throws PageFlowException;
+    public Map<String, Object> getAttributeMap() throws PageFlowException;
 
     boolean equals(Object o);
 

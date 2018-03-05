@@ -35,7 +35,7 @@ public class DefaultPageFlow implements PageFlow {
 
     private static final long serialVersionUID = 1L;
 
-    private static final String MODEL_MAP_VAR_NAME = DefaultPageFlow.class.getName() + ".modelMap";
+    private static final String ATTRIBUTE_MAP_VAR_NAME = DefaultPageFlow.class.getName() + ".attributeMap";
 
     private final StateMachine<PageState, String> stateMachine;
 
@@ -54,6 +54,10 @@ public class DefaultPageFlow implements PageFlow {
 
     @Override
     public void start() throws PageFlowException {
+        if (started) {
+            throw new IllegalStateException("Page flow already started.");
+        }
+
         stateMachine.start();
         started = true;
     }
@@ -65,6 +69,10 @@ public class DefaultPageFlow implements PageFlow {
 
     @Override
     public void stop() throws PageFlowException {
+        if (stopped) {
+            throw new IllegalStateException("Page flow already stopped.");
+        }
+
         stateMachine.stop();
         stopped = true;
     }
@@ -87,6 +95,10 @@ public class DefaultPageFlow implements PageFlow {
 
     @Override
     public void sendEvent(String event) throws PageFlowException {
+        if (isStopped()) {
+            throw new IllegalStateException("Page flow is already stopped.");
+        }
+
         stateMachine.sendEvent(event);
     }
 
@@ -100,12 +112,12 @@ public class DefaultPageFlow implements PageFlow {
 
     @SuppressWarnings("unchecked")
     @Override
-    public Object getModel(String name) throws PageFlowException {
-        Map<String, Object> modelMap = (Map<String, Object>) stateMachine.getExtendedState().getVariables()
-                .get(MODEL_MAP_VAR_NAME);
+    public Object getAttribute(String name) throws PageFlowException {
+        Map<String, Object> attributeMap = (Map<String, Object>) stateMachine.getExtendedState().getVariables()
+                .get(ATTRIBUTE_MAP_VAR_NAME);
 
-        if (modelMap != null) {
-            return modelMap.get(name);
+        if (attributeMap != null) {
+            return attributeMap.get(name);
         }
 
         return null;
@@ -113,29 +125,33 @@ public class DefaultPageFlow implements PageFlow {
 
     @SuppressWarnings("unchecked")
     @Override
-    public void setModel(String name, Object model) throws PageFlowException {
-        Map<String, Object> modelMap = (Map<String, Object>) stateMachine.getExtendedState().getVariables()
-                .get(MODEL_MAP_VAR_NAME);
-
-        if (modelMap == null) {
-            modelMap = new LinkedHashMap<>();
-            stateMachine.getExtendedState().getVariables().put(MODEL_MAP_VAR_NAME, modelMap);
+    public void setAttribute(String name, Object model) throws PageFlowException {
+        if (isStopped()) {
+            throw new IllegalStateException("Page flow is already stopped.");
         }
 
-        modelMap.put(name, model);
+        Map<String, Object> attributeMap = (Map<String, Object>) stateMachine.getExtendedState().getVariables()
+                .get(ATTRIBUTE_MAP_VAR_NAME);
+
+        if (attributeMap == null) {
+            attributeMap = new LinkedHashMap<>();
+            stateMachine.getExtendedState().getVariables().put(ATTRIBUTE_MAP_VAR_NAME, attributeMap);
+        }
+
+        attributeMap.put(name, model);
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    public Map<String, Object> getModelMap() throws PageFlowException {
-        Map<String, Object> modelMap = (Map<String, Object>) stateMachine.getExtendedState().getVariables()
-                .get(MODEL_MAP_VAR_NAME);
+    public Map<String, Object> getAttributeMap() throws PageFlowException {
+        Map<String, Object> attributeMap = (Map<String, Object>) stateMachine.getExtendedState().getVariables()
+                .get(ATTRIBUTE_MAP_VAR_NAME);
 
-        if (modelMap == null) {
+        if (attributeMap == null) {
             return Collections.emptyMap();
         }
 
-        return Collections.unmodifiableMap(modelMap);
+        return Collections.unmodifiableMap(attributeMap);
     }
 
     @Override
@@ -145,8 +161,7 @@ public class DefaultPageFlow implements PageFlow {
         }
 
         DefaultPageFlow that = (DefaultPageFlow) o;
-
-        return (Objects.equals(stateMachine, that.stateMachine));
+        return Objects.equals(stateMachine, that.stateMachine);
     }
 
     @Override
