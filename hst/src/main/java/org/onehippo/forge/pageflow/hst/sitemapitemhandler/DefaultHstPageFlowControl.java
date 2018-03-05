@@ -54,17 +54,10 @@ public class DefaultHstPageFlowControl extends DefaultPageFlowControl {
         final HstRequestContext requestContext = RequestContextProvider.get();
         final HstLinkCreator linkCreator = requestContext.getHstLinkCreator();
 
-        final HstLink curHstLink = linkCreator.create(request.getPathInfo(),
-                requestContext.getResolvedMount().getMount());
         final HstLink newHstLink = linkCreator.create(path, requestContext.getResolvedMount().getMount());
 
-        if (!StringUtils.equals(curHstLink.getPath(), newHstLink.getPath())) {
-            final String location = newHstLink.toUrlForm(requestContext, false);
-            response.sendRedirect(location);
-        } else {
-            log.warn("The link to redirect, '{}', is the same as the current page, '{}'.", newHstLink.getPath(),
-                    curHstLink.getPath());
-        }
+        final String location = newHstLink.toUrlForm(requestContext, false);
+        response.sendRedirect(location);
     }
 
     @Override
