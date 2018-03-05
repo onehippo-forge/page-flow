@@ -13,8 +13,17 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package org.onehippo.forge.pageflow.demo.components.campaign;
+package org.onehippo.forge.pageflow.demo.campaign.components;
 
-public class CampaignFlowStatusComponent extends AbstractCampaignComponent {
+import org.hippoecm.hst.core.component.HstComponentException;
+import org.hippoecm.hst.core.component.HstRequest;
+import org.hippoecm.hst.core.component.HstResponse;
+import org.onehippo.forge.pageflow.core.rt.PageFlow;
+
+public class CampaignQuoteComponent extends AbstractCampaignComponent {
+
+    public void doAction(HstRequest request, HstResponse response) throws HstComponentException {
+        final PageFlow pageFlow = getPageFlow();
+    }
 
 }

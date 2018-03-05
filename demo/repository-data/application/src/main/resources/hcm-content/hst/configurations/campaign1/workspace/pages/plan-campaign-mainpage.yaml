@@ -11,7 +11,7 @@
       hst:xtype: hst.vbox
       /campaign-plan:
         jcr:primaryType: hst:containeritemcomponent
-        hst:componentclassname: org.onehippo.forge.pageflow.demo.components.campaign.CampaignPlanComponent
+        hst:componentclassname: org.onehippo.forge.pageflow.demo.campaign.components.CampaignPlanComponent
         hst:iconpath: images/campaignbase/catalog-component-icons/campaign-default.png
         hst:label: Campaign Plan
         hst:template: campaign-plan

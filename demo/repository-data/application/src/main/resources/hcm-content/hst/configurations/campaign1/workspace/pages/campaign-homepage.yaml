@@ -19,7 +19,7 @@
         hst:xtype: hst.item
       /campaign-quote:
         jcr:primaryType: hst:containeritemcomponent
-        hst:componentclassname: org.onehippo.forge.pageflow.demo.components.campaign.CampaignQuoteComponent
+        hst:componentclassname: org.onehippo.forge.pageflow.demo.campaign.components.CampaignQuoteComponent
         hst:iconpath: images/campaignbase/catalog-component-icons/campaign-default.png
         hst:label: Campaign Quote
         hst:template: campaign-quote
