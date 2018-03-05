@@ -17,15 +17,30 @@ package org.onehippo.forge.pageflow.demo.campaign.components;
 
 import org.hippoecm.hst.component.support.bean.BaseHstComponent;
 import org.hippoecm.hst.container.RequestContextProvider;
+import org.hippoecm.hst.core.component.HstComponentException;
+import org.hippoecm.hst.core.component.HstRequest;
+import org.hippoecm.hst.core.component.HstResponse;
 import org.hippoecm.hst.core.request.HstRequestContext;
 import org.onehippo.forge.pageflow.core.rt.PageFlow;
 import org.onehippo.forge.pageflow.core.rt.PageFlowControl;
+import org.onehippo.forge.pageflow.demo.campaign.CampaignConstants;
+import org.onehippo.forge.pageflow.demo.campaign.model.CampaignModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public abstract class AbstractCampaignComponent extends BaseHstComponent {
 
     private static Logger log = LoggerFactory.getLogger(AbstractCampaignComponent.class);
+
+    @Override
+    public void doBeforeRender(HstRequest request, HstResponse response) throws HstComponentException {
+        final PageFlow pageFlow = getPageFlow();
+        final CampaignModel campaignModel = (CampaignModel) pageFlow.getAttribute(CampaignConstants.DEFAULT_MODEL_NAME);
+
+        if (campaignModel != null) {
+            request.setAttribute("campaignModel", campaignModel);
+        }
+    }
 
     protected PageFlow getPageFlow() {
         final HstRequestContext requestContext = RequestContextProvider.get();

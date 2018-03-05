@@ -31,16 +31,6 @@ public class CampaignQuoteComponent extends AbstractCampaignComponent {
     private static final Pattern US_ZIP_PATTERN = Pattern.compile("^\\d{5}$");
 
     @Override
-    public void doBeforeRender(HstRequest request, HstResponse response) throws HstComponentException {
-        final PageFlow pageFlow = getPageFlow();
-        final CampaignModel campaignModel = (CampaignModel) pageFlow.getAttribute(CampaignConstants.DEFAULT_MODEL_NAME);
-
-        if (campaignModel != null) {
-            request.setAttribute("campaignModel", campaignModel);
-        }
-    }
-
-    @Override
     public void doAction(HstRequest request, HstResponse response) throws HstComponentException {
         final String zip = StringUtils.trim(request.getParameter("zip"));
 
