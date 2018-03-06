@@ -23,6 +23,7 @@
 </#if>
 
 <div class="text-center">
+  <form method="post" action="<@hst.actionURL/>">
     <table>
       <tr>
         <th colspan="2">
@@ -104,9 +105,8 @@
       </tr>
       <tr>
         <th colspan="2">
-          <h4>
-            Back to <a href="<@hst.link path='/'/>">home!</a>.
-          </h4>
+          <br/>
+          <input type="submit" value="Back to Home!" />
         </th>
       </tr>
     </table>

@@ -20,20 +20,12 @@ import org.hippoecm.hst.core.component.HstRequest;
 import org.hippoecm.hst.core.component.HstResponse;
 import org.onehippo.forge.pageflow.core.rt.PageFlow;
 import org.onehippo.forge.pageflow.core.rt.PageFlowControl;
-import org.onehippo.forge.pageflow.demo.campaign.CampaignConstants;
-import org.onehippo.forge.pageflow.demo.campaign.model.CampaignModel;
 
 public class CampaignConfirmationComponent extends AbstractCampaignComponent {
 
     @Override
-    public void doBeforeRender(HstRequest request, HstResponse response) throws HstComponentException {
+    public void doAction(HstRequest request, HstResponse response) throws HstComponentException {
         final PageFlow pageFlow = getPageFlow();
-        final CampaignModel campaignModel = (CampaignModel) pageFlow.getAttribute(CampaignConstants.DEFAULT_MODEL_NAME);
-
-        if (campaignModel != null) {
-            request.setAttribute("campaignModel", campaignModel);
-        }
-
         PageFlowControl.getDefault(request).completePageFlow(request, pageFlow);
     }
 
