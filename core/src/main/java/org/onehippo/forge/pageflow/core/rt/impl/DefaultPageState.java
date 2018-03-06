@@ -27,12 +27,15 @@ public class DefaultPageState implements PageState {
 
     private final String id;
 
+    private final String name;
+
     private final String path;
 
     private final int index;
 
-    public DefaultPageState(final String id, final String path, final int index) {
+    public DefaultPageState(final String id, final String name, final String path, final int index) {
         this.id = id;
+        this.name = name;
         this.path = path;
         this.index = index;
     }
@@ -40,6 +43,11 @@ public class DefaultPageState implements PageState {
     @Override
     public String getId() {
         return id;
+    }
+
+    @Override
+    public String getName() {
+        return name;
     }
 
     @Override
@@ -60,16 +68,18 @@ public class DefaultPageState implements PageState {
 
         DefaultPageState that = (DefaultPageState) o;
 
-        return (Objects.equals(id, that.id) && Objects.equals(path, that.path));
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(path, that.path)
+                && (index == that.index);
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(id).append(path).toHashCode();
+        return new HashCodeBuilder().append(id).append(name).append(path).append(index).toHashCode();
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("id", id).append("path", path).toString();
+        return new ToStringBuilder(this).append("id", id).append("name", name).append("path", path)
+                .append("index", index).toString();
     }
 }

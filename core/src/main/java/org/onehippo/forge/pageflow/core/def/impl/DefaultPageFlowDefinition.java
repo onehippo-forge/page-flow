@@ -31,18 +31,26 @@ public class DefaultPageFlowDefinition implements PageFlowDefinition {
 
     private final String id;
 
+    private final String name;
+
     private final String uuid;
 
     private List<PageStateDefinition> pageStateDefs;
 
-    public DefaultPageFlowDefinition(final String id, final String uuid) {
+    public DefaultPageFlowDefinition(final String id, final String name, final String uuid) {
         this.id = id;
+        this.name = name;
         this.uuid = uuid;
     }
 
     @Override
     public String getId() {
         return id;
+    }
+
+    @Override
+    public String getName() {
+        return name;
     }
 
     @Override
@@ -89,16 +97,18 @@ public class DefaultPageFlowDefinition implements PageFlowDefinition {
 
         DefaultPageFlowDefinition that = (DefaultPageFlowDefinition) o;
 
-        return (Objects.equals(id, that.id) && Objects.equals(pageStateDefs, that.pageStateDefs));
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(uuid, that.uuid)
+                && Objects.equals(pageStateDefs, that.pageStateDefs);
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(id).append(pageStateDefs).toHashCode();
+        return new HashCodeBuilder().append(id).append(name).append(uuid).append(pageStateDefs).toHashCode();
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("id", id).append("pageStateDefs", pageStateDefs).toString();
+        return new ToStringBuilder(this).append("id", id).append("name", name).append("uuid", uuid)
+                .append("pageStateDefs", pageStateDefs).toString();
     }
 }

@@ -56,11 +56,12 @@ public class DefaultPageStateMachineTest {
     public void setUp() throws Exception {
         pageFlowDefinitionRegistry = new MapPageFlowDefinitionRegistry();
 
-        DefaultPageFlowDefinition flowDef = new DefaultPageFlowDefinition("flow1", UUID.randomUUID().toString());
+        DefaultPageFlowDefinition flowDef = new DefaultPageFlowDefinition("flow1", "Page Flow 1",
+                UUID.randomUUID().toString());
 
-        DefaultPageStateDefinition pageDef1 = new DefaultPageStateDefinition("P1", "/page1");
-        DefaultPageStateDefinition pageDef2 = new DefaultPageStateDefinition("P2", "/page2");
-        DefaultPageStateDefinition pageDef3 = new DefaultPageStateDefinition("P3", "/page3");
+        DefaultPageStateDefinition pageDef1 = new DefaultPageStateDefinition("P1", "Page 1", "/page1");
+        DefaultPageStateDefinition pageDef2 = new DefaultPageStateDefinition("P2", "Page 2", "/page2");
+        DefaultPageStateDefinition pageDef3 = new DefaultPageStateDefinition("P3", "Page 3", "/page3");
 
         DefaultPageTransitionDefinition transDef1 = new DefaultPageTransitionDefinition("P1-to-P2", "P2");
         pageDef1.addPageTransitionDefinition(transDef1);

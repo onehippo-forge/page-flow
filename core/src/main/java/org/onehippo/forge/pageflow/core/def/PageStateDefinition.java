@@ -22,6 +22,8 @@ public interface PageStateDefinition extends Serializable {
 
     public String getId();
 
+    public String getName();
+
     public String getPath();
 
     public List<PageTransitionDefinition> getPageTransitionDefinitions();

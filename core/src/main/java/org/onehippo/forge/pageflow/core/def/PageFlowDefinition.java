@@ -22,6 +22,8 @@ public interface PageFlowDefinition extends Serializable {
 
     public String getId();
 
+    public String getName();
+
     public String getUuid();
 
     public List<PageStateDefinition> getPageStateDefinitions();

@@ -59,13 +59,14 @@ public class DefaultPageFlowFactory implements PageFlowFactory {
 
             for (PageStateDefinition pageStateDef : pageStateDefinitions) {
                 final String pageStateDefId = pageStateDef.getId();
+                final String pageStateName = pageStateDef.getName();
 
                 if (pageStateMap.containsKey(pageStateDefId)) {
                     throw new PageFlowException(
                             "Duplicate page state id, '" + pageStateDefId + "' in page flow: " + pageFlowDef);
                 }
 
-                final PageState pageState = new DefaultPageState(pageStateDefId, pageStateDef.getPath(),
+                final PageState pageState = new DefaultPageState(pageStateDefId, pageStateName, pageStateDef.getPath(),
                         pageStateIndex++);
                 pageStateMap.put(pageState.getId(), pageState);
 

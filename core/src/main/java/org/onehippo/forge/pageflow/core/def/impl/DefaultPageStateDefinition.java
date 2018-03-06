@@ -31,18 +31,26 @@ public class DefaultPageStateDefinition implements PageStateDefinition {
 
     private final String id;
 
+    private final String name;
+
     private final String path;
 
     private List<PageTransitionDefinition> pageTransitionDefs;
 
-    public DefaultPageStateDefinition(final String id, final String path) {
+    public DefaultPageStateDefinition(final String id, final String name, final String path) {
         this.id = id;
+        this.name = name;
         this.path = path;
     }
 
     @Override
     public String getId() {
         return id;
+    }
+
+    @Override
+    public String getName() {
+        return name;
     }
 
     @Override
@@ -89,18 +97,18 @@ public class DefaultPageStateDefinition implements PageStateDefinition {
 
         DefaultPageStateDefinition that = (DefaultPageStateDefinition) o;
 
-        return (Objects.equals(id, that.id) && Objects.equals(path, that.path)
+        return (Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(path, that.path)
                 && Objects.equals(pageTransitionDefs, that.pageTransitionDefs));
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(id).append(path).append(pageTransitionDefs).toHashCode();
+        return new HashCodeBuilder().append(id).append(name).append(path).append(pageTransitionDefs).toHashCode();
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("id", id).append("path", path)
+        return new ToStringBuilder(this).append("id", id).append("name", name).append("path", path)
                 .append("pageTransitionDefs", pageTransitionDefs).toString();
     }
 }

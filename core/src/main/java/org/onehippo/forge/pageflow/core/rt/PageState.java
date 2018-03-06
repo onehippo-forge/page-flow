@@ -21,6 +21,8 @@ public interface PageState extends Serializable {
 
     public String getId();
 
+    public String getName();
+
     public String getPath();
 
     public int getIndex();

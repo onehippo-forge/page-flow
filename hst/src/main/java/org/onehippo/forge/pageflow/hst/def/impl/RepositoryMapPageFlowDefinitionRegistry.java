@@ -54,6 +54,11 @@ public class RepositoryMapPageFlowDefinitionRegistry extends MapPageFlowDefiniti
         }
 
         @Override
+        public String getName() {
+            return null;
+        }
+
+        @Override
         public String getUuid() {
             return null;
         }
@@ -117,13 +122,14 @@ public class RepositoryMapPageFlowDefinitionRegistry extends MapPageFlowDefiniti
 
     private PageFlowDefinition nodeToPageFlowDefinition(final Node flowNode) throws RepositoryException {
         final String flowId = JcrUtils.getStringProperty(flowNode, "pageflow:flowid", null);
+        final String flowName = JcrUtils.getStringProperty(flowNode, "pageflow:name", null);
 
         if (StringUtils.isBlank(flowId)) {
             log.error("Blank page flow ID at '{}'.", flowNode.getPath());
             return null;
         }
 
-        DefaultPageFlowDefinition flowDef = new DefaultPageFlowDefinition(flowId, flowNode.getIdentifier());
+        DefaultPageFlowDefinition flowDef = new DefaultPageFlowDefinition(flowId, flowName, flowNode.getIdentifier());
 
         for (NodeIterator stateNodeIt = flowNode.getNodes("pageflow:pagestate"); stateNodeIt.hasNext();) {
             final Node stateNode = stateNodeIt.nextNode();
@@ -133,6 +139,7 @@ public class RepositoryMapPageFlowDefinitionRegistry extends MapPageFlowDefiniti
             }
 
             final String stateId = JcrUtils.getStringProperty(stateNode, "pageflow:stateid", null);
+            final String stateName = JcrUtils.getStringProperty(stateNode, "pageflow:name", null);
 
             if (StringUtils.isBlank(stateId)) {
                 log.error("Blank page state ID at '{}'.", stateNode.getPath());
@@ -141,7 +148,7 @@ public class RepositoryMapPageFlowDefinitionRegistry extends MapPageFlowDefiniti
 
             final String statePath = JcrUtils.getStringProperty(stateNode, "pageflow:path", null);
 
-            final DefaultPageStateDefinition stateDef = new DefaultPageStateDefinition(stateId, statePath);
+            final DefaultPageStateDefinition stateDef = new DefaultPageStateDefinition(stateId, stateName, statePath);
 
             for (NodeIterator transNodeIt = stateNode.getNodes("pageflow:pagetransition"); transNodeIt.hasNext();) {
                 final Node transNode = transNodeIt.nextNode();
