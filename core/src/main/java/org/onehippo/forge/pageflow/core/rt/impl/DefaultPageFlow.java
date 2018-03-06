@@ -37,14 +37,22 @@ public class DefaultPageFlow implements PageFlow {
 
     private static final String ATTRIBUTE_MAP_VAR_NAME = DefaultPageFlow.class.getName() + ".attributeMap";
 
+    private final String id;
+
     private final StateMachine<PageState, String> stateMachine;
 
     private boolean started;
 
     private boolean stopped;
 
-    public DefaultPageFlow(final StateMachine<PageState, String> stateMachine) {
+    public DefaultPageFlow(final String id, final StateMachine<PageState, String> stateMachine) {
+        this.id = id;
         this.stateMachine = stateMachine;
+    }
+
+    @Override
+    public String getId() {
+        return id;
     }
 
     @Override

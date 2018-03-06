@@ -52,4 +52,6 @@ public interface PageFlowControl {
     public void sendRedirect(HttpServletRequest request, HttpServletResponse response, PageState pageState)
             throws PageFlowException, IOException, IllegalStateException;
 
+    public void completePageFlow(HttpServletRequest request, PageFlow pageFlow) throws PageFlowException;
+
 }

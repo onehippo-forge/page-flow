@@ -30,6 +30,9 @@ public class CampaignModel implements Serializable {
     private String city;
     private String state;
     private String zip;
+    private String cardNumber;
+    private String cardType;
+    private boolean acknowledged;
 
     public String getPlanName() {
         return planName;
@@ -101,6 +104,30 @@ public class CampaignModel implements Serializable {
 
     public void setZip(String zip) {
         this.zip = zip;
+    }
+
+    public String getCardNumber() {
+        return cardNumber;
+    }
+
+    public void setCardNumber(String cardNumber) {
+        this.cardNumber = cardNumber;
+    }
+
+    public String getCardType() {
+        return cardType;
+    }
+
+    public void setCardType(String cardType) {
+        this.cardType = cardType;
+    }
+
+    public boolean isAcknowledged() {
+        return acknowledged;
+    }
+
+    public void setAcknowledged(boolean acknowledged) {
+        this.acknowledged = acknowledged;
     }
 
 }

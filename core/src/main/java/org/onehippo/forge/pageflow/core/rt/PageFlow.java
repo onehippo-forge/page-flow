@@ -23,6 +23,8 @@ import org.onehippo.forge.pageflow.core.PageFlowException;
 
 public interface PageFlow extends Serializable {
 
+    public String getId();
+
     public boolean isStarted();
 
     public void start() throws PageFlowException;

@@ -132,7 +132,7 @@ public class DefaultPageFlowFactory implements PageFlowFactory {
             }
 
             final StateMachine<PageState, String> stateMachine = builder.build();
-            return new DefaultPageFlow(stateMachine);
+            return new DefaultPageFlow(pageFlowDef.getId(), stateMachine);
         } catch (Exception e) {
             throw new PageFlowException("Failed to create page flow.", e);
         }

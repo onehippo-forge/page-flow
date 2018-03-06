@@ -73,6 +73,17 @@ public class DefaultPageFlowControl implements PageFlowControl {
         }
     }
 
+    @Override
+    public void completePageFlow(HttpServletRequest request, PageFlow pageFlow) throws PageFlowException {
+        pageFlow.stop();
+
+        PageFlowStore store = getPageFlowStore();
+
+        if (store != null) {
+            store.removePageFlow(request, pageFlow.getId());
+        }
+    }
+
     protected String findPageFlowId(HttpServletRequest request) {
         String flowId = StringUtils.trim((String) request.getAttribute(PAGE_FLOW_ID_ATTR_NAME));
 
