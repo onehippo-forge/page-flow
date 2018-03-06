@@ -23,6 +23,8 @@ public interface PageState extends Serializable {
 
     public String getPath();
 
+    public int getIndex();
+
     boolean equals(Object o);
 
     int hashCode();

@@ -16,6 +16,7 @@ definitions:
             jcr:primaryType: hst:containercomponent
             hst:label: Footer
             hst:xtype: hst.vbox
+            hst:lastmodified: 2018-03-06T14:03:06.086-05:00
         /pagenotfound:
           jcr:primaryType: hst:containercomponentfolder
           /main:

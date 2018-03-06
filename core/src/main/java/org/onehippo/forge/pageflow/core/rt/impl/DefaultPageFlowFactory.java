@@ -43,7 +43,8 @@ public class DefaultPageFlowFactory implements PageFlowFactory {
     private static Logger log = LoggerFactory.getLogger(DefaultPageFlowFactory.class);
 
     @Override
-    public PageFlow createPageFlow(HttpServletRequest request, PageFlowDefinition pageFlowDef) throws PageFlowException {
+    public PageFlow createPageFlow(HttpServletRequest request, PageFlowDefinition pageFlowDef)
+            throws PageFlowException {
         try {
             final List<PageStateDefinition> pageStateDefinitions = pageFlowDef.getPageStateDefinitions();
 
@@ -54,6 +55,8 @@ public class DefaultPageFlowFactory implements PageFlowFactory {
             final Map<String, PageState> pageStateMap = new LinkedHashMap<>();
             final Map<String, List<PageTransitionDefinition>> pageTransitionsMap = new LinkedHashMap<>();
 
+            int pageStateIndex = 0;
+
             for (PageStateDefinition pageStateDef : pageStateDefinitions) {
                 final String pageStateDefId = pageStateDef.getId();
 
@@ -62,7 +65,8 @@ public class DefaultPageFlowFactory implements PageFlowFactory {
                             "Duplicate page state id, '" + pageStateDefId + "' in page flow: " + pageFlowDef);
                 }
 
-                final PageState pageState = new DefaultPageState(pageStateDefId, pageStateDef.getPath());
+                final PageState pageState = new DefaultPageState(pageStateDefId, pageStateDef.getPath(),
+                        pageStateIndex++);
                 pageStateMap.put(pageState.getId(), pageState);
 
                 final List<PageTransitionDefinition> pageTransList = new ArrayList<>();

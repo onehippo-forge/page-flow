@@ -17,7 +17,7 @@
       hippostd:state: draft
       hippostdpubwf:createdBy: admin
       hippostdpubwf:creationDate: 2018-03-02T12:35:00.844-05:00
-      hippostdpubwf:lastModificationDate: 2018-03-02T12:42:46.317-05:00
+      hippostdpubwf:lastModificationDate: 2018-03-06T14:33:15.677-05:00
       hippostdpubwf:lastModifiedBy: admin
       hippotranslation:id: 786972dc-93c3-4119-a56f-97873ddd2096
       hippotranslation:locale: document-type-locale
@@ -90,12 +90,6 @@
         pageflow:name: Confirmation
         pageflow:path: /confirm
         pageflow:stateid: confirm
-      /pageflow:pagestate[6]:
-        jcr:primaryType: pageflow:pagestate
-        pageflow:description: Cancellation
-        pageflow:name: Cancellation
-        pageflow:path: /cancel
-        pageflow:stateid: cancel
       /pageflow:eventdef[2]:
         jcr:primaryType: selection:listitem
         selection:key: plan.selected
@@ -124,7 +118,7 @@
       hippostd:state: unpublished
       hippostdpubwf:createdBy: admin
       hippostdpubwf:creationDate: 2018-03-02T12:35:00.844-05:00
-      hippostdpubwf:lastModificationDate: 2018-03-02T12:46:56.456-05:00
+      hippostdpubwf:lastModificationDate: 2018-03-06T14:33:25.699-05:00
       hippostdpubwf:lastModifiedBy: admin
       hippotranslation:id: 786972dc-93c3-4119-a56f-97873ddd2096
       hippotranslation:locale: document-type-locale
@@ -197,12 +191,6 @@
         pageflow:name: Confirmation
         pageflow:path: /confirm
         pageflow:stateid: confirm
-      /pageflow:pagestate[6]:
-        jcr:primaryType: pageflow:pagestate
-        pageflow:description: Cancellation
-        pageflow:name: Cancellation
-        pageflow:path: /cancel
-        pageflow:stateid: cancel
       /pageflow:eventdef[2]:
         jcr:primaryType: selection:listitem
         selection:key: plan.selected
@@ -231,9 +219,9 @@
       hippostd:state: published
       hippostdpubwf:createdBy: admin
       hippostdpubwf:creationDate: 2018-03-02T12:35:00.844-05:00
-      hippostdpubwf:lastModificationDate: 2018-03-02T12:46:56.456-05:00
+      hippostdpubwf:lastModificationDate: 2018-03-06T14:33:25.699-05:00
       hippostdpubwf:lastModifiedBy: admin
-      hippostdpubwf:publicationDate: 2018-03-02T12:47:18.487-05:00
+      hippostdpubwf:publicationDate: 2018-03-06T14:33:28.815-05:00
       hippotranslation:id: 786972dc-93c3-4119-a56f-97873ddd2096
       hippotranslation:locale: document-type-locale
       pageflow:description: Campaign 1 Page Flow
@@ -305,12 +293,6 @@
         pageflow:name: Confirmation
         pageflow:path: /confirm
         pageflow:stateid: confirm
-      /pageflow:pagestate[6]:
-        jcr:primaryType: pageflow:pagestate
-        pageflow:description: Cancellation
-        pageflow:name: Cancellation
-        pageflow:path: /cancel
-        pageflow:stateid: cancel
       /pageflow:eventdef[2]:
         jcr:primaryType: selection:listitem
         selection:key: plan.selected

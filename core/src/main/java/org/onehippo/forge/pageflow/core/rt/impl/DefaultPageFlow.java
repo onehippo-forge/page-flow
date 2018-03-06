@@ -17,6 +17,7 @@ package org.onehippo.forge.pageflow.core.rt.impl;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -115,6 +116,23 @@ public class DefaultPageFlow implements PageFlow {
         Collection<State<PageState, String>> states = stateMachine.getStates();
         List<PageState> pageStates = new LinkedList<>();
         states.forEach(s -> pageStates.add(s.getId()));
+
+        Collections.sort(pageStates, new Comparator<PageState>() {
+            @Override
+            public int compare(PageState state1, PageState state2) {
+                final int index1 = state1.getIndex();
+                final int index2 = state2.getIndex();
+
+                if (index1 < index2) {
+                    return -1;
+                } else if (index1 > index2) {
+                    return 1;
+                }
+
+                return 0;
+            }
+        });
+
         return pageStates;
     }
 

@@ -29,9 +29,12 @@ public class DefaultPageState implements PageState {
 
     private final String path;
 
-    public DefaultPageState(final String id, final String path) {
+    private final int index;
+
+    public DefaultPageState(final String id, final String path, final int index) {
         this.id = id;
         this.path = path;
+        this.index = index;
     }
 
     @Override
@@ -42,6 +45,11 @@ public class DefaultPageState implements PageState {
     @Override
     public String getPath() {
         return path;
+    }
+
+    @Override
+    public int getIndex() {
+        return index;
     }
 
     @Override

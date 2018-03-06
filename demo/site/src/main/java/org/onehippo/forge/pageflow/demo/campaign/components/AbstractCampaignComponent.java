@@ -35,6 +35,8 @@ public abstract class AbstractCampaignComponent extends BaseHstComponent {
     @Override
     public void doBeforeRender(HstRequest request, HstResponse response) throws HstComponentException {
         final PageFlow pageFlow = getPageFlow();
+        request.setAttribute("pageFlow", pageFlow);
+
         final CampaignModel campaignModel = (CampaignModel) pageFlow.getAttribute(CampaignConstants.DEFAULT_MODEL_NAME);
 
         if (campaignModel != null) {
