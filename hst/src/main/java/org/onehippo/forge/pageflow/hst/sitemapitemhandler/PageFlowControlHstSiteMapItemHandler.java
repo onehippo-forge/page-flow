@@ -20,6 +20,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
+import org.hippoecm.hst.container.RequestContextProvider;
+import org.hippoecm.hst.core.request.HstRequestContext;
 import org.hippoecm.hst.core.request.ResolvedSiteMapItem;
 import org.hippoecm.hst.core.sitemapitemhandler.AbstractFilterChainAwareHstSiteMapItemHandler;
 import org.hippoecm.hst.core.sitemapitemhandler.HstSiteMapItemHandlerException;
@@ -41,6 +43,8 @@ public class PageFlowControlHstSiteMapItemHandler extends AbstractFilterChainAwa
     @Override
     public ResolvedSiteMapItem process(ResolvedSiteMapItem resolvedSiteMapItem, HttpServletRequest request,
             HttpServletResponse response, FilterChain filterChain) throws HstSiteMapItemHandlerException {
+        final HstRequestContext requestContext = RequestContextProvider.get();
+
         final PageFlowControl flowControl = getPageFlowControl(request);
 
         if (!pageFlowControlSetInServletContext) {
@@ -61,18 +65,22 @@ public class PageFlowControlHstSiteMapItemHandler extends AbstractFilterChainAwa
                 }
             }
 
-            final PageState pageState = pageFlow.getPageState();
+            if (!requestContext.isPreview()) {
+                final PageState pageState = pageFlow.getPageState();
 
-            if (pageState != null) {
-                final String normalizedPagePath = PathUtils.normalizePath(StringUtils.defaultString(pageState.getPath()));
-                final String normalizedPathInfo = PathUtils.normalizePath(StringUtils.defaultString(request.getPathInfo()));
+                if (pageState != null) {
+                    final String normalizedPagePath = PathUtils
+                            .normalizePath(StringUtils.defaultString(pageState.getPath()));
+                    final String normalizedPathInfo = PathUtils
+                            .normalizePath(StringUtils.defaultString(request.getPathInfo()));
 
-                if (!StringUtils.equals(normalizedPagePath, normalizedPathInfo)) {
-                    try {
-                        flowControl.sendRedirect(request, response, pageState);
-                        return null;
-                    } catch (Exception e) {
-                        log.warn("Failed to redirect to the pageState: {}", pageState, e);
+                    if (!StringUtils.equals(normalizedPagePath, normalizedPathInfo)) {
+                        try {
+                            flowControl.sendRedirect(request, response, pageState);
+                            return null;
+                        } catch (Exception e) {
+                            log.warn("Failed to redirect to the pageState: {}", pageState, e);
+                        }
                     }
                 }
             }

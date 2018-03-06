@@ -15,8 +15,10 @@
       </tr>
       <tr>
         <th>
-          <input type="radio" name="plan" value="single" <#if planName=='single'>checked="true"</#if> />
-          Single
+          <label>
+            <input type="radio" name="plan" value="single" <#if planName=='single'>checked="true"</#if> />
+            Single
+          </label>
         </th>
         <td>
           &nbsp;&nbsp;
@@ -25,8 +27,10 @@
       </tr>
       <tr>
         <th>
-          <input type="radio" name="plan" value="family" <#if planName=='family'>checked="true"</#if> />
-          Family
+          <label>
+            <input type="radio" name="plan" value="family" <#if planName=='family'>checked="true"</#if> />
+            Family
+          </label>
         </th>
         <td>
           &nbsp;&nbsp;
