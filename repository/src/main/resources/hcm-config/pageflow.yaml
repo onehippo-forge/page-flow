@@ -16,7 +16,7 @@ definitions:
             jcr:primaryType: hipposysedit:nodetype
             jcr:mixinTypes: ['hipposysedit:remodel']
             hipposysedit:supertype: ['hippo:document', 'hippostdpubwf:document', 'hippostd:publishableSummary']
-            hipposysedit:uri: http://www.onehippo.org/pageflow/nt/1.0
+            hipposysedit:uri: http://www.onehippo.com/jcr/pageflow/nt/1.0
       /pagetransition:
         jcr:primaryType: hipposysedit:templatetype
         jcr:mixinTypes: ['editor:editable', 'mix:referenceable']

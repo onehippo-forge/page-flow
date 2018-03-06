@@ -17,7 +17,7 @@
       hippostd:state: draft
       hippostdpubwf:createdBy: admin
       hippostdpubwf:creationDate: 2018-03-02T12:35:00.844-05:00
-      hippostdpubwf:lastModificationDate: 2018-03-06T14:33:15.677-05:00
+      hippostdpubwf:lastModificationDate: 2018-03-06T16:42:22.582-05:00
       hippostdpubwf:lastModifiedBy: admin
       hippotranslation:id: 786972dc-93c3-4119-a56f-97873ddd2096
       hippotranslation:locale: document-type-locale
@@ -44,28 +44,20 @@
         pageflow:name: Select a Plan
         pageflow:path: /plan
         pageflow:stateid: plan
-        /pageflow:pagetransition[1]:
+        /pageflow:pagetransition:
           jcr:primaryType: pageflow:pagetransition
           pageflow:event: plan.selected
           pageflow:target: application
-        /pageflow:pagetransition[2]:
-          jcr:primaryType: pageflow:pagetransition
-          pageflow:event: cancel.requested
-          pageflow:target: cancel
       /pageflow:pagestate[3]:
         jcr:primaryType: pageflow:pagestate
         pageflow:description: Application Form
         pageflow:name: Application Form
         pageflow:path: /application
         pageflow:stateid: application
-        /pageflow:pagetransition[1]:
+        /pageflow:pagetransition:
           jcr:primaryType: pageflow:pagetransition
           pageflow:event: application.submitted
           pageflow:target: payment
-        /pageflow:pagetransition[2]:
-          jcr:primaryType: pageflow:pagetransition
-          pageflow:event: cancel.requested
-          pageflow:target: cancel
       /pageflow:pagestate[4]:
         jcr:primaryType: pageflow:pagestate
         pageflow:description: Payment Form
@@ -80,10 +72,6 @@
           jcr:primaryType: pageflow:pagetransition
           pageflow:event: payment.rejected
           pageflow:target: payment
-        /pageflow:pagetransition[3]:
-          jcr:primaryType: pageflow:pagetransition
-          pageflow:event: cancel.requested
-          pageflow:target: cancel
       /pageflow:pagestate[5]:
         jcr:primaryType: pageflow:pagestate
         pageflow:description: Confirmation
@@ -106,10 +94,6 @@
         jcr:primaryType: selection:listitem
         selection:key: payment.rejected
         selection:label: Payment Rejected
-      /pageflow:eventdef[6]:
-        jcr:primaryType: selection:listitem
-        selection:key: cancel.requested
-        selection:label: Cancel Requested
     /campaign-1-flow[2]:
       jcr:primaryType: pageflow:pageflow
       jcr:mixinTypes: ['mix:referenceable', 'mix:versionable']
@@ -118,7 +102,7 @@
       hippostd:state: unpublished
       hippostdpubwf:createdBy: admin
       hippostdpubwf:creationDate: 2018-03-02T12:35:00.844-05:00
-      hippostdpubwf:lastModificationDate: 2018-03-06T14:33:25.699-05:00
+      hippostdpubwf:lastModificationDate: 2018-03-06T16:42:26.849-05:00
       hippostdpubwf:lastModifiedBy: admin
       hippotranslation:id: 786972dc-93c3-4119-a56f-97873ddd2096
       hippotranslation:locale: document-type-locale
@@ -145,28 +129,20 @@
         pageflow:name: Select a Plan
         pageflow:path: /plan
         pageflow:stateid: plan
-        /pageflow:pagetransition[1]:
+        /pageflow:pagetransition:
           jcr:primaryType: pageflow:pagetransition
           pageflow:event: plan.selected
           pageflow:target: application
-        /pageflow:pagetransition[2]:
-          jcr:primaryType: pageflow:pagetransition
-          pageflow:event: cancel.requested
-          pageflow:target: cancel
       /pageflow:pagestate[3]:
         jcr:primaryType: pageflow:pagestate
         pageflow:description: Application Form
         pageflow:name: Application Form
         pageflow:path: /application
         pageflow:stateid: application
-        /pageflow:pagetransition[1]:
+        /pageflow:pagetransition:
           jcr:primaryType: pageflow:pagetransition
           pageflow:event: application.submitted
           pageflow:target: payment
-        /pageflow:pagetransition[2]:
-          jcr:primaryType: pageflow:pagetransition
-          pageflow:event: cancel.requested
-          pageflow:target: cancel
       /pageflow:pagestate[4]:
         jcr:primaryType: pageflow:pagestate
         pageflow:description: Payment Form
@@ -181,10 +157,6 @@
           jcr:primaryType: pageflow:pagetransition
           pageflow:event: payment.rejected
           pageflow:target: payment
-        /pageflow:pagetransition[3]:
-          jcr:primaryType: pageflow:pagetransition
-          pageflow:event: cancel.requested
-          pageflow:target: cancel
       /pageflow:pagestate[5]:
         jcr:primaryType: pageflow:pagestate
         pageflow:description: Confirmation
@@ -207,10 +179,6 @@
         jcr:primaryType: selection:listitem
         selection:key: payment.rejected
         selection:label: Payment Rejected
-      /pageflow:eventdef[6]:
-        jcr:primaryType: selection:listitem
-        selection:key: cancel.requested
-        selection:label: Cancel Requested
     /campaign-1-flow[3]:
       jcr:primaryType: pageflow:pageflow
       jcr:mixinTypes: ['mix:referenceable']
@@ -219,9 +187,9 @@
       hippostd:state: published
       hippostdpubwf:createdBy: admin
       hippostdpubwf:creationDate: 2018-03-02T12:35:00.844-05:00
-      hippostdpubwf:lastModificationDate: 2018-03-06T14:33:25.699-05:00
+      hippostdpubwf:lastModificationDate: 2018-03-06T16:42:26.849-05:00
       hippostdpubwf:lastModifiedBy: admin
-      hippostdpubwf:publicationDate: 2018-03-06T14:33:28.815-05:00
+      hippostdpubwf:publicationDate: 2018-03-06T16:42:34.235-05:00
       hippotranslation:id: 786972dc-93c3-4119-a56f-97873ddd2096
       hippotranslation:locale: document-type-locale
       pageflow:description: Campaign 1 Page Flow
@@ -247,28 +215,20 @@
         pageflow:name: Select a Plan
         pageflow:path: /plan
         pageflow:stateid: plan
-        /pageflow:pagetransition[1]:
+        /pageflow:pagetransition:
           jcr:primaryType: pageflow:pagetransition
           pageflow:event: plan.selected
           pageflow:target: application
-        /pageflow:pagetransition[2]:
-          jcr:primaryType: pageflow:pagetransition
-          pageflow:event: cancel.requested
-          pageflow:target: cancel
       /pageflow:pagestate[3]:
         jcr:primaryType: pageflow:pagestate
         pageflow:description: Application Form
         pageflow:name: Application Form
         pageflow:path: /application
         pageflow:stateid: application
-        /pageflow:pagetransition[1]:
+        /pageflow:pagetransition:
           jcr:primaryType: pageflow:pagetransition
           pageflow:event: application.submitted
           pageflow:target: payment
-        /pageflow:pagetransition[2]:
-          jcr:primaryType: pageflow:pagetransition
-          pageflow:event: cancel.requested
-          pageflow:target: cancel
       /pageflow:pagestate[4]:
         jcr:primaryType: pageflow:pagestate
         pageflow:description: Payment Form
@@ -283,10 +243,6 @@
           jcr:primaryType: pageflow:pagetransition
           pageflow:event: payment.rejected
           pageflow:target: payment
-        /pageflow:pagetransition[3]:
-          jcr:primaryType: pageflow:pagetransition
-          pageflow:event: cancel.requested
-          pageflow:target: cancel
       /pageflow:pagestate[5]:
         jcr:primaryType: pageflow:pagestate
         pageflow:description: Confirmation
@@ -309,7 +265,3 @@
         jcr:primaryType: selection:listitem
         selection:key: payment.rejected
         selection:label: Payment Rejected
-      /pageflow:eventdef[6]:
-        jcr:primaryType: selection:listitem
-        selection:key: cancel.requested
-        selection:label: Cancel Requested
