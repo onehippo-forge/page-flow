@@ -3,12 +3,15 @@ definitions:
     /hippo:namespaces/pageflow:
       jcr:primaryType: hipposysedit:namespace
       jcr:mixinTypes: ['mix:referenceable']
+      jcr:uuid: c8aff907-9370-454c-b5fc-41f8c8ba2f6a
       /basedocument:
         jcr:primaryType: hipposysedit:templatetype
         jcr:mixinTypes: ['mix:referenceable']
+        jcr:uuid: c58b82c4-6d56-44bc-be8c-b2530602168e
         /hipposysedit:nodetype:
           jcr:primaryType: hippo:handle
           jcr:mixinTypes: ['mix:referenceable']
+          jcr:uuid: bcd7e260-79bf-4d04-affd-46ee812d8d0b
           /hipposysedit:nodetype:
             jcr:primaryType: hipposysedit:nodetype
             jcr:mixinTypes: ['hipposysedit:remodel']
@@ -17,12 +20,15 @@ definitions:
       /pagetransition:
         jcr:primaryType: hipposysedit:templatetype
         jcr:mixinTypes: ['editor:editable', 'mix:referenceable']
+        jcr:uuid: ff4a214b-92b4-420f-9da3-aaab726666bc
         /hipposysedit:nodetype:
           jcr:primaryType: hippo:handle
           jcr:mixinTypes: ['mix:referenceable']
+          jcr:uuid: 74688fea-70cd-46d7-b1dd-c4249731a86b
           /hipposysedit:nodetype:
             jcr:primaryType: hipposysedit:nodetype
             jcr:mixinTypes: ['hipposysedit:remodel', 'mix:referenceable']
+            jcr:uuid: 4a2c0b3d-c277-4d35-864f-88c90713dcbf
             hipposysedit:node: true
             hipposysedit:supertype: ['hippo:compound', 'hippostd:relaxed']
             hipposysedit:uri: http://www.onehippo.org/pageflow/nt/1.0
@@ -64,38 +70,41 @@ definitions:
             /event:
               jcr:primaryType: frontend:plugin
               caption: Event
+              external.document.service.facade: org.onehippo.forge.pageflow.cms.editor.field.TransitionSourceEventDefServiceFacade
               field: event
               hint: Page Transition Event
-              plugin.class: org.onehippo.forge.exdocpicker.impl.field.ExternalDocumentFieldSelectorPlugin
-              external.document.service.facade: org.onehippo.forge.pageflow.cms.editor.field.TransitionSourceEventDefServiceFacade
-              selection.mode: single
-              page.size: 20
               initial.search.enabled: true
+              page.size: 20
+              plugin.class: org.onehippo.forge.exdocpicker.impl.field.ExternalDocumentFieldSelectorPlugin
+              selection.mode: single
               wicket.id: ${cluster.id}.field
               /cluster.options:
                 jcr:primaryType: frontend:pluginconfig
             /target:
               jcr:primaryType: frontend:plugin
               caption: Target
+              external.document.service.facade: org.onehippo.forge.pageflow.cms.editor.field.TransitionTargetPageStateServiceFacade
               field: target
               hint: Page Transition Target
-              plugin.class: org.onehippo.forge.exdocpicker.impl.field.ExternalDocumentFieldSelectorPlugin
-              external.document.service.facade: org.onehippo.forge.pageflow.cms.editor.field.TransitionTargetPageStateServiceFacade
-              selection.mode: single
-              page.size: 20
               initial.search.enabled: true
+              page.size: 20
+              plugin.class: org.onehippo.forge.exdocpicker.impl.field.ExternalDocumentFieldSelectorPlugin
+              selection.mode: single
               wicket.id: ${cluster.id}.field
               /cluster.options:
                 jcr:primaryType: frontend:pluginconfig
       /pagestate:
         jcr:primaryType: hipposysedit:templatetype
         jcr:mixinTypes: ['editor:editable', 'mix:referenceable']
+        jcr:uuid: fb0df89b-49fc-4065-8b8b-601a643a3476
         /hipposysedit:nodetype:
           jcr:primaryType: hippo:handle
           jcr:mixinTypes: ['mix:referenceable']
+          jcr:uuid: 0ea851d3-10a8-4af2-8621-b6bcc379cf2b
           /hipposysedit:nodetype:
             jcr:primaryType: hipposysedit:nodetype
             jcr:mixinTypes: ['hipposysedit:remodel', 'mix:referenceable']
+            jcr:uuid: fea9fdf1-6b1b-4c43-a223-c37d1d31aa1e
             hipposysedit:node: true
             hipposysedit:supertype: ['hippo:compound', 'hippostd:relaxed']
             hipposysedit:uri: http://www.onehippo.org/pageflow/nt/1.0
@@ -145,10 +154,10 @@ definitions:
           jcr:primaryType: hipposysedit:prototypeset
           /hipposysedit:prototype:
             jcr:primaryType: pageflow:pagestate
-            pageflow:stateid: ''
-            pageflow:name: ''
             pageflow:description: ''
+            pageflow:name: ''
             pageflow:path: ''
+            pageflow:stateid: ''
         /editor:templates:
           jcr:primaryType: editor:templateset
           /_default_:
@@ -220,15 +229,17 @@ definitions:
       /pageflow:
         jcr:primaryType: hipposysedit:templatetype
         jcr:mixinTypes: ['editor:editable', 'mix:referenceable']
+        jcr:uuid: d2c01f9d-3696-42fc-a059-923b3e13bb08
         /hipposysedit:nodetype:
           jcr:primaryType: hippo:handle
           jcr:mixinTypes: ['mix:referenceable']
+          jcr:uuid: e32d8cd9-b85d-4178-bdc7-1fe3f7c08602
           /hipposysedit:nodetype:
             jcr:primaryType: hipposysedit:nodetype
             jcr:mixinTypes: ['hipposysedit:remodel', 'mix:referenceable']
+            jcr:uuid: a997b659-5e46-4594-8653-26e2fd3fc7f3
             hipposysedit:node: true
-            hipposysedit:supertype: ['pageflow:basedocument', 'hippostd:relaxed',
-              'hippotranslation:translated']
+            hipposysedit:supertype: ['pageflow:basedocument', 'hippostd:relaxed', 'hippotranslation:translated']
             hipposysedit:uri: http://www.onehippo.org/pageflow/nt/1.0
             /flowid:
               jcr:primaryType: hipposysedit:field
@@ -277,6 +288,7 @@ definitions:
           /hipposysedit:prototype:
             jcr:primaryType: pageflow:pageflow
             jcr:mixinTypes: ['mix:referenceable']
+            jcr:uuid: ab33b757-5adb-4214-9a53-90e7453f738a
             hippostd:holder: holder
             hippostd:state: draft
             hippostdpubwf:createdBy: ''
@@ -285,19 +297,19 @@ definitions:
             hippostdpubwf:lastModifiedBy: ''
             hippotranslation:id: document-type-locale-id
             hippotranslation:locale: document-type-locale
+            pageflow:description: ''
             pageflow:flowid: ''
             pageflow:name: ''
-            pageflow:description: ''
             /pageflow:eventdef:
               jcr:primaryType: selection:listitem
               selection:key: ''
               selection:label: ''
             /pageflow:pagestate:
               jcr:primaryType: pageflow:pagestate
-              pageflow:stateid: ''
+              pageflow:description: ''
               pageflow:name: ''
               pageflow:path: ''
-              pageflow:description: ''
+              pageflow:stateid: ''
               /pageflow:pagetransition:
                 jcr:primaryType: pageflow:pagetransition
                 pageflow:event: ''
