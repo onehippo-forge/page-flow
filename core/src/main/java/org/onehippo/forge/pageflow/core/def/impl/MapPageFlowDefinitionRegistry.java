@@ -67,7 +67,13 @@ public class MapPageFlowDefinitionRegistry implements PageFlowDefinitionRegistry
 
     @Override
     public void removePageFlowDefinitionByUuid(String uuid) throws PageFlowException {
-        
+        if (StringUtils.isNotBlank(uuid)) {
+            final String flowId = uuidToFlowIdMap.get(uuid);
+
+            if (flowId != null) {
+                removePageFlowDefinition(flowId);
+            }
+        }
     }
 
     @Override
