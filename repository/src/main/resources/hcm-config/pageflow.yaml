@@ -28,10 +28,10 @@ definitions:
           /hipposysedit:nodetype:
             jcr:primaryType: hipposysedit:nodetype
             jcr:mixinTypes: ['hipposysedit:remodel', 'mix:referenceable']
-            jcr:uuid: 4a2c0b3d-c277-4d35-864f-88c90713dcbf
+            jcr:uuid: f3816275-ba33-4ea4-8aab-2d16d92d55c3
             hipposysedit:node: true
             hipposysedit:supertype: ['hippo:compound', 'hippostd:relaxed']
-            hipposysedit:uri: http://www.onehippo.org/pageflow/nt/1.0
+            hipposysedit:uri: http://www.onehippo.com/jcr/pageflow/nt/1.0
             /event:
               jcr:primaryType: hipposysedit:field
               hipposysedit:mandatory: false
@@ -104,10 +104,10 @@ definitions:
           /hipposysedit:nodetype:
             jcr:primaryType: hipposysedit:nodetype
             jcr:mixinTypes: ['hipposysedit:remodel', 'mix:referenceable']
-            jcr:uuid: fea9fdf1-6b1b-4c43-a223-c37d1d31aa1e
+            jcr:uuid: 2ad524b6-5aa0-4446-aab3-8f4a8a3d7c71
             hipposysedit:node: true
             hipposysedit:supertype: ['hippo:compound', 'hippostd:relaxed']
-            hipposysedit:uri: http://www.onehippo.org/pageflow/nt/1.0
+            hipposysedit:uri: http://www.onehippo.com/jcr/pageflow/nt/1.0
             /stateid:
               jcr:primaryType: hipposysedit:field
               hipposysedit:mandatory: false
@@ -237,10 +237,10 @@ definitions:
           /hipposysedit:nodetype:
             jcr:primaryType: hipposysedit:nodetype
             jcr:mixinTypes: ['hipposysedit:remodel', 'mix:referenceable']
-            jcr:uuid: a997b659-5e46-4594-8653-26e2fd3fc7f3
+            jcr:uuid: efae0d88-1d85-4e8b-9384-c68623ab7617
             hipposysedit:node: true
             hipposysedit:supertype: ['pageflow:basedocument', 'hippostd:relaxed', 'hippotranslation:translated']
-            hipposysedit:uri: http://www.onehippo.org/pageflow/nt/1.0
+            hipposysedit:uri: http://www.onehippo.com/jcr/pageflow/nt/1.0
             /flowid:
               jcr:primaryType: hipposysedit:field
               hipposysedit:mandatory: false
@@ -288,7 +288,7 @@ definitions:
           /hipposysedit:prototype:
             jcr:primaryType: pageflow:pageflow
             jcr:mixinTypes: ['mix:referenceable']
-            jcr:uuid: ab33b757-5adb-4214-9a53-90e7453f738a
+            jcr:uuid: 1c44d258-5610-4920-b818-d44c0143c9c5
             hippostd:holder: holder
             hippostd:state: draft
             hippostdpubwf:createdBy: ''
