@@ -15,6 +15,8 @@
  */
 package org.onehippo.forge.pageflow.core.rt.impl;
 
+import java.util.Collections;
+import java.util.Map;
 import java.util.Objects;
 
 import org.apache.commons.lang.builder.HashCodeBuilder;
@@ -33,11 +35,15 @@ public class DefaultPageState implements PageState {
 
     private final int index;
 
-    public DefaultPageState(final String id, final String name, final String path, final int index) {
+    private final Map<String, String> metadata;
+
+    public DefaultPageState(final String id, final String name, final String path, final int index,
+            final Map<String, String> metadata) {
         this.id = id;
         this.name = name;
         this.path = path;
         this.index = index;
+        this.metadata = metadata;
     }
 
     @Override
@@ -61,6 +67,15 @@ public class DefaultPageState implements PageState {
     }
 
     @Override
+    public Map<String, String> getMetadata() {
+        if (metadata == null) {
+            return Collections.emptyMap();
+        }
+
+        return Collections.unmodifiableMap(metadata);
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (!(o instanceof DefaultPageState)) {
             return false;
@@ -69,17 +84,17 @@ public class DefaultPageState implements PageState {
         DefaultPageState that = (DefaultPageState) o;
 
         return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(path, that.path)
-                && (index == that.index);
+                && (index == that.index) && Objects.equals(metadata, that.metadata);
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(id).append(name).append(path).append(index).toHashCode();
+        return new HashCodeBuilder().append(id).append(name).append(path).append(index).append(metadata).toHashCode();
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this).append("id", id).append("name", name).append("path", path)
-                .append("index", index).toString();
+                .append("index", index).append("metadata", metadata).toString();
     }
 }

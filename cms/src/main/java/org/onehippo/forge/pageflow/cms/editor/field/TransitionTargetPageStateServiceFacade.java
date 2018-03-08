@@ -55,12 +55,11 @@ public class TransitionTargetPageStateServiceFacade implements ExternalDocumentS
                     if (pageStateNode != null) {
                         final String stateId = JcrUtils.getStringProperty(pageStateNode, "pageflow:stateid", null);
                         final String name = JcrUtils.getStringProperty(pageStateNode, "pageflow:name", null);
-                        final String description = JcrUtils.getStringProperty(pageStateNode, "pageflow:description", null);
 
                         if (StringUtils.isNotBlank(stateId)) {
                             if (!queryStringSet || StringUtils.containsIgnoreCase(stateId, queryString)
                                     || StringUtils.containsIgnoreCase(name, queryString)) {
-                                collection.add(new PageStateInfo(stateId, name, description));
+                                collection.add(new PageStateInfo(stateId, name));
                             }
                         }
                     }
@@ -115,7 +114,7 @@ public class TransitionTargetPageStateServiceFacade implements ExternalDocumentS
 
     @Override
     public String getDocumentDescription(ExternalDocumentServiceContext context, PageStateInfo pageState, Locale locale) {
-        return pageState.getDescription();
+        return pageState.getName();
     }
 
     @Override

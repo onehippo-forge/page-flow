@@ -29,15 +29,12 @@ public class PageStateInfo implements Serializable {
 
     private String name;
 
-    private String description;
-
     public PageStateInfo() {
     }
 
-    public PageStateInfo(String stateId, String name, String description) {
+    public PageStateInfo(String stateId, String name) {
         this.stateId = stateId;
         this.name = name;
-        this.description = description;
     }
 
     public String getStateId() {
@@ -56,14 +53,6 @@ public class PageStateInfo implements Serializable {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof PageStateInfo)) {
@@ -71,18 +60,17 @@ public class PageStateInfo implements Serializable {
         }
 
         PageStateInfo that = (PageStateInfo) o;
-        return Objects.equals(stateId, that.stateId) && Objects.equals(name, that.name)
-                && Objects.equals(description, that.description);
+        return Objects.equals(stateId, that.stateId) && Objects.equals(name, that.name);
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(stateId).append(name).append(description).toHashCode();
+        return new HashCodeBuilder().append(stateId).append(name).toHashCode();
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this).append("stateId", stateId).append("name", name)
-                .append("description", description).toString();
+                .toString();
     }
 }

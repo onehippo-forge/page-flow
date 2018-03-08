@@ -16,6 +16,7 @@
 package org.onehippo.forge.pageflow.core.rt.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,6 +38,7 @@ import org.springframework.statemachine.StateMachine;
 import org.springframework.statemachine.config.StateMachineBuilder;
 import org.springframework.statemachine.config.StateMachineBuilder.Builder;
 import org.springframework.statemachine.config.configurers.StateConfigurer;
+import org.springframework.util.CollectionUtils;
 
 public class DefaultPageFlowFactory implements PageFlowFactory {
 
@@ -66,8 +68,12 @@ public class DefaultPageFlowFactory implements PageFlowFactory {
                             "Duplicate page state id, '" + pageStateDefId + "' in page flow: " + pageFlowDef);
                 }
 
+                final Map<String, String> defMetadata = pageStateDef.getMetadata();
+                final Map<String, String> metadata = (CollectionUtils.isEmpty(defMetadata) ? null
+                        : new HashMap<>(defMetadata));
+
                 final PageState pageState = new DefaultPageState(pageStateDefId, pageStateName, pageStateDef.getPath(),
-                        pageStateIndex++);
+                        pageStateIndex++, metadata);
                 pageStateMap.put(pageState.getId(), pageState);
 
                 final List<PageTransitionDefinition> pageTransList = new ArrayList<>();

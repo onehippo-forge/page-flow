@@ -17,6 +17,7 @@ package org.onehippo.forge.pageflow.core.def;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 public interface PageStateDefinition extends Serializable {
 
@@ -25,6 +26,8 @@ public interface PageStateDefinition extends Serializable {
     public String getName();
 
     public String getPath();
+
+    public Map<String, String> getMetadata();
 
     public List<PageTransitionDefinition> getPageTransitionDefinitions();
 

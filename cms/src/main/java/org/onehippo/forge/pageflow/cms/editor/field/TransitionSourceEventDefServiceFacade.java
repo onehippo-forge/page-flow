@@ -53,8 +53,8 @@ public class TransitionSourceEventDefServiceFacade implements ExternalDocumentSe
                     Node eventDefNode = nodeIt.nextNode();
 
                     if (eventDefNode != null) {
-                        final String eventName = JcrUtils.getStringProperty(eventDefNode, "selection:key", null);
-                        final String eventLabel = JcrUtils.getStringProperty(eventDefNode, "selection:label", null);
+                        final String eventName = JcrUtils.getStringProperty(eventDefNode, "pageflow:name", null);
+                        final String eventLabel = JcrUtils.getStringProperty(eventDefNode, "pageflow:value", null);
 
                         if (StringUtils.isNotBlank(eventName)) {
                             if (!queryStringSet || StringUtils.containsIgnoreCase(eventName, queryString)

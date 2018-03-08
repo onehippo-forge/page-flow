@@ -15,7 +15,9 @@
  */
 package org.onehippo.forge.pageflow.hst.def.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
@@ -148,7 +150,35 @@ public class RepositoryMapPageFlowDefinitionRegistry extends MapPageFlowDefiniti
 
             final String statePath = JcrUtils.getStringProperty(stateNode, "pageflow:path", null);
 
-            final DefaultPageStateDefinition stateDef = new DefaultPageStateDefinition(stateId, stateName, statePath);
+            Map<String, String> metadata = null;
+
+            if (stateNode.hasNode("pageflow:metadata")) {
+                for (NodeIterator metaNodeIt = stateNode.getNodes("pageflow:metadata"); metaNodeIt.hasNext(); ) {
+                    final Node metaNode = metaNodeIt.nextNode();
+
+                    if (metaNode == null) {
+                        continue;
+                    }
+
+                    final String name = JcrUtils.getStringProperty(metaNode, "pageflow:name", null);
+
+                    if (StringUtils.isBlank(name)) {
+                        log.warn("Blank metadata name at '{}'.", metaNode.getPath());
+                        continue;
+                    }
+
+                    final String value = JcrUtils.getStringProperty(metaNode, "pageflow:value", "");
+
+                    if (metadata == null) {
+                        metadata = new HashMap<>();
+                    }
+
+                    metadata.put(name, value);
+                }
+            }
+
+            final DefaultPageStateDefinition stateDef = new DefaultPageStateDefinition(stateId, stateName, statePath,
+                    metadata);
 
             for (NodeIterator transNodeIt = stateNode.getNodes("pageflow:pagetransition"); transNodeIt.hasNext();) {
                 final Node transNode = transNodeIt.nextNode();

@@ -18,6 +18,7 @@ package org.onehippo.forge.pageflow.core.def.impl;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import org.apache.commons.lang.builder.HashCodeBuilder;
@@ -35,12 +36,16 @@ public class DefaultPageStateDefinition implements PageStateDefinition {
 
     private final String path;
 
+    private final Map<String, String> metadata;
+
     private List<PageTransitionDefinition> pageTransitionDefs;
 
-    public DefaultPageStateDefinition(final String id, final String name, final String path) {
+    public DefaultPageStateDefinition(final String id, final String name, final String path,
+            final Map<String, String> metadata) {
         this.id = id;
         this.name = name;
         this.path = path;
+        this.metadata = metadata;
     }
 
     @Override
@@ -56,6 +61,15 @@ public class DefaultPageStateDefinition implements PageStateDefinition {
     @Override
     public String getPath() {
         return path;
+    }
+
+    @Override
+    public Map<String, String> getMetadata() {
+        if (metadata == null) {
+            return Collections.emptyMap();
+        }
+
+        return Collections.unmodifiableMap(metadata);
     }
 
     @Override
@@ -98,17 +112,19 @@ public class DefaultPageStateDefinition implements PageStateDefinition {
         DefaultPageStateDefinition that = (DefaultPageStateDefinition) o;
 
         return (Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(path, that.path)
+                && Objects.equals(metadata, that.metadata)
                 && Objects.equals(pageTransitionDefs, that.pageTransitionDefs));
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(id).append(name).append(path).append(pageTransitionDefs).toHashCode();
+        return new HashCodeBuilder().append(id).append(name).append(path).append(metadata).append(pageTransitionDefs)
+                .toHashCode();
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this).append("id", id).append("name", name).append("path", path)
-                .append("pageTransitionDefs", pageTransitionDefs).toString();
+                .append("metadata", metadata).append("pageTransitionDefs", pageTransitionDefs).toString();
     }
 }

@@ -16,6 +16,7 @@
 package org.onehippo.forge.pageflow.core.rt;
 
 import java.io.Serializable;
+import java.util.Map;
 
 public interface PageState extends Serializable {
 
@@ -26,6 +27,8 @@ public interface PageState extends Serializable {
     public String getPath();
 
     public int getIndex();
+
+    public Map<String, String> getMetadata();
 
     boolean equals(Object o);
 
