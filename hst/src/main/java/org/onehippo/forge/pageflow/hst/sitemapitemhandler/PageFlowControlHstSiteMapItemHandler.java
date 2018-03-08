@@ -16,13 +16,15 @@
 package org.onehippo.forge.pageflow.hst.sitemapitemhandler;
 
 import javax.servlet.FilterChain;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.BooleanUtils;
 import org.apache.commons.lang.StringUtils;
 import org.hippoecm.hst.container.RequestContextProvider;
-import org.hippoecm.hst.core.request.HstRequestContext;
 import org.hippoecm.hst.core.request.ResolvedSiteMapItem;
+import org.hippoecm.hst.core.request.SiteMapItemHandlerConfiguration;
 import org.hippoecm.hst.core.sitemapitemhandler.AbstractFilterChainAwareHstSiteMapItemHandler;
 import org.hippoecm.hst.core.sitemapitemhandler.HstSiteMapItemHandlerException;
 import org.hippoecm.hst.util.PathUtils;
@@ -36,16 +38,38 @@ public class PageFlowControlHstSiteMapItemHandler extends AbstractFilterChainAwa
 
     private static Logger log = LoggerFactory.getLogger(PageFlowControlHstSiteMapItemHandler.class);
 
+    public static final String PARAM_ENABLED = "enabled";
+    public static final String PARAM_AUTO_REDIRECTION_ENABLED = "auto.redirection.enabled";
+
     private boolean pageFlowControlSetInServletContext;
 
     private volatile PageFlowControl pageFlowControl;
 
+    private SiteMapItemHandlerConfiguration siteMapItemHandlerConfiguration;
+
+    @Override
+    public void init(ServletContext servletContext, SiteMapItemHandlerConfiguration siteMapItemHandlerConfiguration)
+            throws HstSiteMapItemHandlerException {
+        super.init(servletContext, siteMapItemHandlerConfiguration);
+        this.siteMapItemHandlerConfiguration = siteMapItemHandlerConfiguration;
+    }
+
     @Override
     public ResolvedSiteMapItem process(ResolvedSiteMapItem resolvedSiteMapItem, HttpServletRequest request,
             HttpServletResponse response, FilterChain filterChain) throws HstSiteMapItemHandlerException {
-        final HstRequestContext requestContext = RequestContextProvider.get();
+
+        final Boolean enabled = getConfigurationProperty(PARAM_ENABLED, resolvedSiteMapItem, Boolean.class,
+                Boolean.TRUE);
+
+        if (BooleanUtils.isFalse(enabled)) {
+            return processDefaultResolvedSiteMapItem(request, response, filterChain, resolvedSiteMapItem);
+        }
 
         final PageFlowControl flowControl = getPageFlowControl(request);
+
+        if (flowControl == null) {
+            return processDefaultResolvedSiteMapItem(request, response, filterChain, resolvedSiteMapItem);
+        }
 
         if (!pageFlowControlSetInServletContext) {
             request.getServletContext().setAttribute(PageFlowControl.PAGE_FLOW_CONTROL_ATTR_NAME, flowControl);
@@ -54,47 +78,39 @@ public class PageFlowControlHstSiteMapItemHandler extends AbstractFilterChainAwa
 
         request.setAttribute(PageFlowControl.PAGE_FLOW_CONTROL_ATTR_NAME, flowControl);
 
-        PageFlow pageFlow = flowControl.getPageFlow(request);
-
-        if (pageFlow != null) {
-            if (!pageFlow.isStarted()) {
-                pageFlow.start();
-            } else {
-                if (pageFlow.isComplete()) {
-                    // TODO: go to completed page??
-                }
-            }
-
-            if (!requestContext.isPreview()) {
-                final PageState pageState = pageFlow.getPageState();
-
-                if (pageState != null) {
-                    final String normalizedPagePath = PathUtils
-                            .normalizePath(StringUtils.defaultString(pageState.getPath()));
-                    final String normalizedPathInfo = PathUtils
-                            .normalizePath(StringUtils.defaultString(request.getPathInfo()));
-
-                    if (!StringUtils.equals(normalizedPagePath, normalizedPathInfo)) {
-                        try {
-                            flowControl.sendRedirect(request, response, pageState);
-                            return null;
-                        } catch (Exception e) {
-                            log.warn("Failed to redirect to the pageState: {}", pageState, e);
-                        }
-                    }
-                }
-            }
+        if (RequestContextProvider.get().isPreview()) {
+            return processDefaultResolvedSiteMapItem(request, response, filterChain, resolvedSiteMapItem);
         }
 
-        if (resolvedSiteMapItem == null) {
+        final Boolean autoRedirectionEnabled = getConfigurationProperty(PARAM_AUTO_REDIRECTION_ENABLED,
+                resolvedSiteMapItem, Boolean.class, Boolean.TRUE);
+
+        if (BooleanUtils.isFalse(autoRedirectionEnabled)) {
+            return processDefaultResolvedSiteMapItem(request, response, filterChain, resolvedSiteMapItem);
+        }
+
+        PageFlow pageFlow = getActivePageFlow(request, flowControl);
+
+        if (pageFlow == null) {
+            return processDefaultResolvedSiteMapItem(request, response, filterChain, resolvedSiteMapItem);
+        }
+
+        final PageState pageState = pageFlow.getPageState();
+
+        if (pageState != null && !isRequestForPageState(request, pageState)) {
             try {
-                filterChain.doFilter(request, response);
+                flowControl.sendRedirect(request, response, pageState);
+                return null;
             } catch (Exception e) {
-                log.warn("Failed to filterChain.doFilter(...).", e);
+                log.warn("Failed to redirect to the pageState: {}", pageState, e);
             }
         }
 
-        return resolvedSiteMapItem;
+        return processDefaultResolvedSiteMapItem(request, response, filterChain, resolvedSiteMapItem);
+    }
+
+    protected SiteMapItemHandlerConfiguration getSiteMapItemHandlerConfiguration() {
+        return siteMapItemHandlerConfiguration;
     }
 
     protected PageFlowControl getPageFlowControl(HttpServletRequest request) {
@@ -116,5 +132,60 @@ public class PageFlowControlHstSiteMapItemHandler extends AbstractFilterChainAwa
 
     protected PageFlowControl createPageFlowControl(HttpServletRequest request) {
         return new DefaultHstPageFlowControl();
+    }
+
+    protected PageFlow getActivePageFlow(HttpServletRequest request, PageFlowControl flowControl) {
+        PageFlow pageFlow = flowControl.getPageFlow(request);
+
+        if (pageFlow != null) {
+            if (pageFlow.isComplete()) {
+                flowControl.completePageFlow(request, pageFlow);
+                pageFlow = flowControl.getPageFlow(request);
+            }
+
+            if (!pageFlow.isStarted()) {
+                pageFlow.start();
+            }
+        }
+
+        return pageFlow;
+    }
+
+    protected ResolvedSiteMapItem processDefaultResolvedSiteMapItem(HttpServletRequest request,
+            HttpServletResponse response, FilterChain filterChain, ResolvedSiteMapItem resolvedSiteMapItem) {
+        if (resolvedSiteMapItem == null) {
+            try {
+                filterChain.doFilter(request, response);
+            } catch (Exception e) {
+                log.warn("Failed to filterChain.doFilter(...).", e);
+            }
+        }
+
+        return resolvedSiteMapItem;
+    }
+
+    protected <T> T getConfigurationProperty(String name, ResolvedSiteMapItem resolvedSiteMapItem, Class<T> type,
+            T defaultValue) {
+        T value = null;
+
+        try {
+            if (siteMapItemHandlerConfiguration != null) {
+                if (resolvedSiteMapItem != null) {
+                    value = siteMapItemHandlerConfiguration.getProperty(name, resolvedSiteMapItem, type);
+                } else {
+                    value = siteMapItemHandlerConfiguration.getRawProperty(name, type);
+                }
+            }
+        } catch (Exception e) {
+            log.warn("Exception occurred while getting configuration property: '" + name + "'.", e);
+        }
+
+        return (value != null) ? value : defaultValue;
+    }
+
+    protected boolean isRequestForPageState(final HttpServletRequest request, final PageState pageState) {
+        final String normalizedPagePath = PathUtils.normalizePath(StringUtils.defaultString(pageState.getPath()));
+        final String normalizedPathInfo = PathUtils.normalizePath(StringUtils.defaultString(request.getPathInfo()));
+        return StringUtils.equals(normalizedPagePath, normalizedPathInfo);
     }
 }

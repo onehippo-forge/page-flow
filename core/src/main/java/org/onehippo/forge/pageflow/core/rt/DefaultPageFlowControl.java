@@ -75,7 +75,11 @@ public class DefaultPageFlowControl implements PageFlowControl {
 
     @Override
     public void completePageFlow(HttpServletRequest request, PageFlow pageFlow) throws PageFlowException {
-        pageFlow.stop();
+        try {
+            pageFlow.stop();
+        } catch (Exception e) {
+            log.warn("Page flow was probably stopped.", e);
+        }
 
         PageFlowStore store = getPageFlowStore();
 
