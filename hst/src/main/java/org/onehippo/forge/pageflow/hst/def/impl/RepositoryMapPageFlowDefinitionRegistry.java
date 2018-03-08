@@ -17,8 +17,10 @@ package org.onehippo.forge.pageflow.hst.def.impl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
@@ -161,7 +163,7 @@ public class RepositoryMapPageFlowDefinitionRegistry extends MapPageFlowDefiniti
             Map<String, String> metadata = null;
 
             if (stateNode.hasNode("pageflow:metadata")) {
-                for (NodeIterator metaNodeIt = stateNode.getNodes("pageflow:metadata"); metaNodeIt.hasNext(); ) {
+                for (NodeIterator metaNodeIt = stateNode.getNodes("pageflow:metadata"); metaNodeIt.hasNext();) {
                     final Node metaNode = metaNodeIt.nextNode();
 
                     if (metaNode == null) {
@@ -187,6 +189,7 @@ public class RepositoryMapPageFlowDefinitionRegistry extends MapPageFlowDefiniti
 
             final DefaultPageStateDefinition stateDef = new DefaultPageStateDefinition(stateId, stateName, statePath,
                     metadata);
+            final Set<String> stateLevelTransEventNames = new HashSet<>();
 
             for (NodeIterator transNodeIt = stateNode.getNodes("pageflow:pagetransition"); transNodeIt.hasNext();) {
                 final Node transNode = transNodeIt.nextNode();
@@ -208,15 +211,30 @@ public class RepositoryMapPageFlowDefinitionRegistry extends MapPageFlowDefiniti
                     continue;
                 }
 
+                if (stateLevelTransEventNames.contains(transEvent)) {
+                    log.warn(
+                            "Skipping page state level transition, '{}', for the state, '{}', as another state level transition was already registered for the event.",
+                            transEvent, stateId);
+                    continue;
+                }
+
                 final DefaultPageTransitionDefinition transDef = new DefaultPageTransitionDefinition(transEvent,
                         transTarget);
                 stateDef.addPageTransitionDefinition(transDef);
+                stateLevelTransEventNames.add(transEvent);
             }
 
             for (PageTransitionDefinition globalPageTransDef : globalPageTransDefs) {
                 if (StringUtils.equals(stateId, globalPageTransDef.getTargetPageStateDefinitionId())) {
-                    log.debug(
+                    log.info(
                             "Skipping global transition, '{}', for the state, '{}', as the target is the same as the source.",
+                            globalPageTransDef.getEvent(), stateId);
+                    continue;
+                }
+
+                if (stateLevelTransEventNames.contains(globalPageTransDef.getEvent())) {
+                    log.info(
+                            "Skipping global transition, '{}', for the state, '{}', as another state level transition was already registered.",
                             globalPageTransDef.getEvent(), stateId);
                     continue;
                 }
@@ -230,7 +248,8 @@ public class RepositoryMapPageFlowDefinitionRegistry extends MapPageFlowDefiniti
         return flowDef;
     }
 
-    private List<PageTransitionDefinition> getGlobalPageTransitionDefinitions(final Node flowNode) throws RepositoryException {
+    private List<PageTransitionDefinition> getGlobalPageTransitionDefinitions(final Node flowNode)
+            throws RepositoryException {
         final List<PageTransitionDefinition> globalTransDefs = new ArrayList<>();
 
         for (NodeIterator transNodeIt = flowNode.getNodes("pageflow:pagetransition"); transNodeIt.hasNext();) {

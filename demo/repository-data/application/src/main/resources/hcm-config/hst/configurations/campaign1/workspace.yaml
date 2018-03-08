@@ -26,3 +26,6 @@ definitions:
             hst:xtype: hst.vbox
       /hst:sitemenus:
         jcr:primaryType: hst:sitemenus
+        /main:
+          .meta:residual-child-node-category: content
+          jcr:primaryType: hst:sitemenu
