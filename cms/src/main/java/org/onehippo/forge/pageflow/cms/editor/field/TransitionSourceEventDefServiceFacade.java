@@ -44,9 +44,8 @@ public class TransitionSourceEventDefServiceFacade implements ExternalDocumentSe
         final boolean queryStringSet = StringUtils.isNotBlank(queryString);
 
         try {
-            final Node pageTransNode = context.getContextModel().getNode();
-            final Node pageStateNode = pageTransNode.getParent();
-            final Node variant = pageStateNode.getParent();
+            final Node transNode = context.getContextModel().getNode();
+            final Node variant = findPageFlowDocumentVariantNode(transNode);
 
             if (variant.hasNode("pageflow:eventdef")) {
                 for (NodeIterator nodeIt = variant.getNodes("pageflow:eventdef"); nodeIt.hasNext();) {
@@ -125,5 +124,19 @@ public class TransitionSourceEventDefServiceFacade implements ExternalDocumentSe
     @Override
     public String getDocumentTitle(ExternalDocumentServiceContext context, EventDefInfo eventDef, Locale locale) {
         return StringUtils.defaultString(eventDef.getLabel(), eventDef.getName());
+    }
+
+    private Node findPageFlowDocumentVariantNode(final Node baseNode) throws RepositoryException {
+        Node curNode = baseNode;
+
+        while (curNode != null) {
+            if (curNode.isNodeType("pageflow:pageflow")) {
+                return curNode;
+            }
+
+            curNode = curNode.getParent();
+        }
+
+        throw new IllegalStateException("Cannot find pageflow:pageflow variant node from " + baseNode.getPath());
     }
 }

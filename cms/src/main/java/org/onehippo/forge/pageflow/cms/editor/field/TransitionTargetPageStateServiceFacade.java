@@ -44,23 +44,27 @@ public class TransitionTargetPageStateServiceFacade implements ExternalDocumentS
         final boolean queryStringSet = StringUtils.isNotBlank(queryString);
 
         try {
-            final Node pageTransNode = context.getContextModel().getNode();
-            Node pageStateNode = pageTransNode.getParent();
-            final Node variant = pageStateNode.getParent();
+            final Node transNode = context.getContextModel().getNode();
+            final Node variant = findPageFlowDocumentVariantNode(transNode);
+            final Node curPageStateNode = (transNode.getParent().isNodeType("pageflow:pagestate")
+                    ? transNode.getParent()
+                    : null);
 
             if (variant.hasNode("pageflow:pagestate")) {
                 for (NodeIterator nodeIt = variant.getNodes("pageflow:pagestate"); nodeIt.hasNext();) {
-                    pageStateNode = nodeIt.nextNode();
+                    Node pageStateNode = nodeIt.nextNode();
 
-                    if (pageStateNode != null) {
-                        final String stateId = JcrUtils.getStringProperty(pageStateNode, "pageflow:stateid", null);
-                        final String name = JcrUtils.getStringProperty(pageStateNode, "pageflow:name", null);
+                    if (pageStateNode == null || pageStateNode.isSame(curPageStateNode)) {
+                        continue;
+                    }
 
-                        if (StringUtils.isNotBlank(stateId)) {
-                            if (!queryStringSet || StringUtils.containsIgnoreCase(stateId, queryString)
-                                    || StringUtils.containsIgnoreCase(name, queryString)) {
-                                collection.add(new PageStateInfo(stateId, name));
-                            }
+                    final String stateId = JcrUtils.getStringProperty(pageStateNode, "pageflow:stateid", null);
+                    final String name = JcrUtils.getStringProperty(pageStateNode, "pageflow:name", null);
+
+                    if (StringUtils.isNotBlank(stateId)) {
+                        if (!queryStringSet || StringUtils.containsIgnoreCase(stateId, queryString)
+                                || StringUtils.containsIgnoreCase(name, queryString)) {
+                            collection.add(new PageStateInfo(stateId, name));
                         }
                     }
                 }
@@ -125,5 +129,19 @@ public class TransitionTargetPageStateServiceFacade implements ExternalDocumentS
     @Override
     public String getDocumentTitle(ExternalDocumentServiceContext context, PageStateInfo pageState, Locale locale) {
         return StringUtils.defaultString(pageState.getName(), pageState.getStateId());
+    }
+
+    private Node findPageFlowDocumentVariantNode(final Node baseNode) throws RepositoryException {
+        Node curNode = baseNode;
+
+        while (curNode != null) {
+            if (curNode.isNodeType("pageflow:pageflow")) {
+                return curNode;
+            }
+
+            curNode = curNode.getParent();
+        }
+
+        throw new IllegalStateException("Cannot find pageflow:pageflow variant node from " + baseNode.getPath());
     }
 }

@@ -11,13 +11,6 @@ definitions:
           hst:label: Campaign Application Form
           hst:template: campaign-application-form
           hst:xtype: hst.item
-        /campaign-cancellation:
-          jcr:primaryType: hst:containeritemcomponent
-          hst:componentclassname: org.onehippo.forge.pageflow.demo.campaign.components.CampaignCancellationComponent
-          hst:iconpath: images/campaignbase/catalog-component-icons/campaign-default.png
-          hst:label: Campaign Cancellation
-          hst:template: campaign-cancellation
-          hst:xtype: hst.item
         /campaign-confirmation:
           jcr:primaryType: hst:containeritemcomponent
           hst:componentclassname: org.onehippo.forge.pageflow.demo.campaign.components.CampaignConfirmationComponent

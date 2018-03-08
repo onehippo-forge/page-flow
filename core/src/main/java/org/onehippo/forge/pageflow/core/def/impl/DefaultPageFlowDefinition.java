@@ -24,6 +24,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.onehippo.forge.pageflow.core.def.PageFlowDefinition;
 import org.onehippo.forge.pageflow.core.def.PageStateDefinition;
+import org.onehippo.forge.pageflow.core.def.PageTransitionDefinition;
 
 public class DefaultPageFlowDefinition implements PageFlowDefinition {
 
@@ -36,6 +37,8 @@ public class DefaultPageFlowDefinition implements PageFlowDefinition {
     private final String uuid;
 
     private List<PageStateDefinition> pageStateDefs;
+
+    private List<PageTransitionDefinition> pageTransitionDefs;
 
     public DefaultPageFlowDefinition(final String id, final String name, final String uuid) {
         this.id = id;
@@ -86,6 +89,37 @@ public class DefaultPageFlowDefinition implements PageFlowDefinition {
     public void removeAllPageStateDefinitions() {
         if (pageStateDefs != null) {
             pageStateDefs.clear();
+        }
+    }
+
+    @Override
+    public List<PageTransitionDefinition> getPageTransitionDefinitions() {
+        if (pageTransitionDefs == null) {
+            return Collections.emptyList();
+        }
+
+        return Collections.unmodifiableList(pageTransitionDefs);
+    }
+
+    public void addPageTransitionDefinition(PageTransitionDefinition pageTransitionDef) {
+        if (pageTransitionDefs == null) {
+            pageTransitionDefs = new LinkedList<>();
+        }
+
+        pageTransitionDefs.add(pageTransitionDef);
+    }
+
+    public boolean removePageTransitionDefinition(PageTransitionDefinition pageTransitionDef) {
+        if (pageTransitionDefs == null) {
+            return false;
+        }
+
+        return pageTransitionDefs.remove(pageTransitionDef);
+    }
+
+    public void clearPageTransitionDefinitions() {
+        if (pageTransitionDefs != null) {
+            pageTransitionDefs.clear();
         }
     }
 

@@ -105,7 +105,8 @@
       <tr>
         <th colspan="2">
           <br/>
-          <input type="submit" value="Next" />
+          <input type="submit" name="action" value="Cancel" />
+          <input type="submit" name="action" value="Next" />
         </th>
       </tr>
     </table>

@@ -15,6 +15,7 @@
  */
 package org.onehippo.forge.pageflow.hst.def.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,6 +33,7 @@ import org.hippoecm.repository.util.JcrUtils;
 import org.onehippo.forge.pageflow.core.PageFlowException;
 import org.onehippo.forge.pageflow.core.def.PageFlowDefinition;
 import org.onehippo.forge.pageflow.core.def.PageStateDefinition;
+import org.onehippo.forge.pageflow.core.def.PageTransitionDefinition;
 import org.onehippo.forge.pageflow.core.def.impl.DefaultPageFlowDefinition;
 import org.onehippo.forge.pageflow.core.def.impl.DefaultPageStateDefinition;
 import org.onehippo.forge.pageflow.core.def.impl.DefaultPageTransitionDefinition;
@@ -67,6 +69,11 @@ public class RepositoryMapPageFlowDefinitionRegistry extends MapPageFlowDefiniti
 
         @Override
         public List<PageStateDefinition> getPageStateDefinitions() {
+            return null;
+        }
+
+        @Override
+        public List<PageTransitionDefinition> getPageTransitionDefinitions() {
             return null;
         }
     };
@@ -132,6 +139,7 @@ public class RepositoryMapPageFlowDefinitionRegistry extends MapPageFlowDefiniti
         }
 
         DefaultPageFlowDefinition flowDef = new DefaultPageFlowDefinition(flowId, flowName, flowNode.getIdentifier());
+        final List<PageTransitionDefinition> globalPageTransDefs = getGlobalPageTransitionDefinitions(flowNode);
 
         for (NodeIterator stateNodeIt = flowNode.getNodes("pageflow:pagestate"); stateNodeIt.hasNext();) {
             final Node stateNode = stateNodeIt.nextNode();
@@ -205,9 +213,51 @@ public class RepositoryMapPageFlowDefinitionRegistry extends MapPageFlowDefiniti
                 stateDef.addPageTransitionDefinition(transDef);
             }
 
+            for (PageTransitionDefinition globalPageTransDef : globalPageTransDefs) {
+                if (StringUtils.equals(stateId, globalPageTransDef.getTargetPageStateDefinitionId())) {
+                    log.debug(
+                            "Skipping global transition, '{}', for the state, '{}', as the target is the same as the source.",
+                            globalPageTransDef.getEvent(), stateId);
+                    continue;
+                }
+
+                stateDef.addPageTransitionDefinition(globalPageTransDef);
+            }
+
             flowDef.addPageStateDefinition(stateDef);
         }
 
         return flowDef;
+    }
+
+    private List<PageTransitionDefinition> getGlobalPageTransitionDefinitions(final Node flowNode) throws RepositoryException {
+        final List<PageTransitionDefinition> globalTransDefs = new ArrayList<>();
+
+        for (NodeIterator transNodeIt = flowNode.getNodes("pageflow:pagetransition"); transNodeIt.hasNext();) {
+            final Node transNode = transNodeIt.nextNode();
+
+            if (transNode == null) {
+                continue;
+            }
+
+            final String transEvent = JcrUtils.getStringProperty(transNode, "pageflow:event", null);
+            final String transTarget = JcrUtils.getStringProperty(transNode, "pageflow:target", null);
+
+            if (StringUtils.isBlank(transEvent)) {
+                log.warn("Blank page transition event at '{}'.", transNode.getPath());
+                continue;
+            }
+
+            if (StringUtils.isBlank(transTarget)) {
+                log.warn("Blank page transition target at '{}'.", transNode.getPath());
+                continue;
+            }
+
+            final DefaultPageTransitionDefinition transDef = new DefaultPageTransitionDefinition(transEvent,
+                    transTarget);
+            globalTransDefs.add(transDef);
+        }
+
+        return globalTransDefs;
     }
 }

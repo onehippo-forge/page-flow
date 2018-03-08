@@ -106,7 +106,7 @@
       <tr>
         <th colspan="2">
           <br/>
-          <input type="submit" value="Back to Home!" />
+          <input type="submit" name="action" value="Back to Home!" />
         </th>
       </tr>
     </table>

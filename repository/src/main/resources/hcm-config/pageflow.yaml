@@ -235,7 +235,7 @@ definitions:
           /hipposysedit:nodetype:
             jcr:primaryType: hipposysedit:nodetype
             jcr:mixinTypes: ['hipposysedit:remodel', 'mix:referenceable']
-            jcr:uuid: b96d08ff-9a56-42db-afc8-18bfb1653580
+            jcr:uuid: 11f3fe8f-be27-42e3-aa77-a2adb4477dd9
             hipposysedit:node: true
             hipposysedit:supertype: ['pageflow:basedocument', 'hippostd:relaxed', 'hippotranslation:translated']
             hipposysedit:uri: http://www.onehippo.com/jcr/pageflow/nt/1.0
@@ -281,12 +281,20 @@ definitions:
               hipposysedit:path: pageflow:eventdef
               hipposysedit:primary: false
               hipposysedit:type: pageflow:metadata
+            /pagetransition:
+              jcr:primaryType: hipposysedit:field
+              hipposysedit:mandatory: false
+              hipposysedit:multiple: true
+              hipposysedit:ordered: true
+              hipposysedit:path: pageflow:pagetransition
+              hipposysedit:primary: false
+              hipposysedit:type: pageflow:pagetransition
         /hipposysedit:prototypes:
           jcr:primaryType: hipposysedit:prototypeset
           /hipposysedit:prototype:
             jcr:primaryType: pageflow:pageflow
             jcr:mixinTypes: ['mix:referenceable']
-            jcr:uuid: af014818-00ac-40be-a7ba-bb13ee9fa2c2
+            jcr:uuid: 6af3b077-2883-48e4-b376-ef53ebeb0282
             hippostd:holder: holder
             hippostd:state: draft
             hippostdpubwf:createdBy: ''
@@ -363,6 +371,16 @@ definitions:
               caption: Event Definitions
               field: eventdef
               hint: Enter event key in Name field and event label in Value field.
+              plugin.class: org.hippoecm.frontend.editor.plugins.field.NodeFieldPlugin
+              wicket.id: ${cluster.id}.right.item
+              /cluster.options:
+                jcr:primaryType: frontend:pluginconfig
+            /pagetransition:
+              jcr:primaryType: frontend:plugin
+              caption: Global Page Transitions
+              field: pagetransition
+              hint: Configure Global Transitions which are can be triggered from any page
+                states.
               plugin.class: org.hippoecm.frontend.editor.plugins.field.NodeFieldPlugin
               wicket.id: ${cluster.id}.right.item
               /cluster.options:

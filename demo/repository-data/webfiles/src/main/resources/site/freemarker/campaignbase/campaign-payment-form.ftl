@@ -40,7 +40,8 @@
             I acknowledge the Privacy Policy and have read and accepted the Terms and Conditions.
           </p>
           <br/>
-          <input type="submit" value="Pay Now!" />
+          <input type="submit" name="action" value="Cancel" />
+          <input type="submit" name="action" value="Pay Now!" />
         </th>
       </tr>
     </table>

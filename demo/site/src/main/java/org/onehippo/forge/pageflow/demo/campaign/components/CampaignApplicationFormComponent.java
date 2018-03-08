@@ -27,9 +27,16 @@ public class CampaignApplicationFormComponent extends AbstractCampaignComponent 
 
     @Override
     public void doAction(HstRequest request, HstResponse response) throws HstComponentException {
-        final PageFlow pageFlow = getPageFlow();
+        final String action = request.getParameter("action");
 
+        final PageFlow pageFlow = getPageFlow();
         final CampaignModel campaignModel = (CampaignModel) pageFlow.getAttribute(CampaignConstants.DEFAULT_MODEL_NAME);
+
+        if (StringUtils.equalsIgnoreCase("cancel", action)) {
+            pageFlow.sendEvent(CampaignConstants.EVENT_CANCEL_REQUESTED);
+            return;
+        }
+
         final boolean validated = validateInputs(request, campaignModel);
 
         if (validated) {
