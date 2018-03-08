@@ -5,11 +5,15 @@
 <'hippostd'='http://www.onehippo.org/jcr/hippostd/nt/2.0'>
 <'hippostdpubwf'='http://www.onehippo.org/jcr/hippostdpubwf/nt/1.0'>
 <'hippotranslation'='http://www.onehippo.org/jcr/hippotranslation/nt/1.0'>
-<'selection'='http://forge.onehippo.org/selection/nt/1.0'>
 <'pageflow'='http://www.onehippo.com/jcr/pageflow/nt/1.0'> 
 
 [pageflow:basedocument] > hippo:document, hippostd:publishableSummary, hippostdpubwf:document
   orderable
+
+[pageflow:metadata] > hippo:compound, hippostd:relaxed
+  orderable
+  - pageflow:name (string) mandatory
+  - pageflow:value (string)
 
 [pageflow:pagetransition] > hippo:compound, hippostd:relaxed
   orderable
@@ -22,6 +26,7 @@
   - pageflow:name (string) mandatory
   - pageflow:path (string)
   - pageflow:description (string)
+  + pageflow:metadata (pageflow:metadata) multiple
   + pageflow:pagetransition (pageflow:pagetransition) multiple
 
 [pageflow:pageflow] > pageflow:basedocument, hippostd:relaxed, hippotranslation:translated
@@ -29,5 +34,5 @@
   - pageflow:flowid (string) mandatory
   - pageflow:name (string)
   - pageflow:description (string)
-  + pageflow:eventdef (selection:listitem) multiple
+  + pageflow:eventdef (pageflow:metadata) multiple
   + pageflow:pagestate (pageflow:pagestate) multiple

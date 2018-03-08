@@ -11,91 +11,6 @@
     hippo:name: Campaign 1 Flow
     /campaign-1-flow[1]:
       jcr:primaryType: pageflow:pageflow
-      jcr:mixinTypes: ['mix:referenceable']
-      jcr:uuid: 1a2d8dfd-fee4-44bb-955a-a13475617905
-      hippo:availability: []
-      hippostd:state: draft
-      hippostdpubwf:createdBy: admin
-      hippostdpubwf:creationDate: 2018-03-02T12:35:00.844-05:00
-      hippostdpubwf:lastModificationDate: 2018-03-06T16:42:22.582-05:00
-      hippostdpubwf:lastModifiedBy: admin
-      hippotranslation:id: 786972dc-93c3-4119-a56f-97873ddd2096
-      hippotranslation:locale: document-type-locale
-      pageflow:description: Campaign 1 Page Flow
-      pageflow:flowid: pageflow.campaign1
-      pageflow:name: Campaign 1 Page Flow
-      /pageflow:eventdef[1]:
-        jcr:primaryType: selection:listitem
-        selection:key: start.quote
-        selection:label: Start Quote
-      /pageflow:pagestate[1]:
-        jcr:primaryType: pageflow:pagestate
-        pageflow:description: Landing Page
-        pageflow:name: Landing Page
-        pageflow:path: /
-        pageflow:stateid: landing
-        /pageflow:pagetransition:
-          jcr:primaryType: pageflow:pagetransition
-          pageflow:event: start.quote
-          pageflow:target: plan
-      /pageflow:pagestate[2]:
-        jcr:primaryType: pageflow:pagestate
-        pageflow:description: Select a Plan
-        pageflow:name: Select a Plan
-        pageflow:path: /plan
-        pageflow:stateid: plan
-        /pageflow:pagetransition:
-          jcr:primaryType: pageflow:pagetransition
-          pageflow:event: plan.selected
-          pageflow:target: application
-      /pageflow:pagestate[3]:
-        jcr:primaryType: pageflow:pagestate
-        pageflow:description: Application Form
-        pageflow:name: Application Form
-        pageflow:path: /application
-        pageflow:stateid: application
-        /pageflow:pagetransition:
-          jcr:primaryType: pageflow:pagetransition
-          pageflow:event: application.submitted
-          pageflow:target: payment
-      /pageflow:pagestate[4]:
-        jcr:primaryType: pageflow:pagestate
-        pageflow:description: Payment Form
-        pageflow:name: Payment Form
-        pageflow:path: /payment
-        pageflow:stateid: payment
-        /pageflow:pagetransition[1]:
-          jcr:primaryType: pageflow:pagetransition
-          pageflow:event: payment.accepted
-          pageflow:target: confirm
-        /pageflow:pagetransition[2]:
-          jcr:primaryType: pageflow:pagetransition
-          pageflow:event: payment.rejected
-          pageflow:target: payment
-      /pageflow:pagestate[5]:
-        jcr:primaryType: pageflow:pagestate
-        pageflow:description: Confirmation
-        pageflow:name: Confirmation
-        pageflow:path: /confirm
-        pageflow:stateid: confirm
-      /pageflow:eventdef[2]:
-        jcr:primaryType: selection:listitem
-        selection:key: plan.selected
-        selection:label: Plan Selected
-      /pageflow:eventdef[3]:
-        jcr:primaryType: selection:listitem
-        selection:key: application.submitted
-        selection:label: Application Submitted
-      /pageflow:eventdef[4]:
-        jcr:primaryType: selection:listitem
-        selection:key: payment.accepted
-        selection:label: Payment Accepted
-      /pageflow:eventdef[5]:
-        jcr:primaryType: selection:listitem
-        selection:key: payment.rejected
-        selection:label: Payment Rejected
-    /campaign-1-flow[2]:
-      jcr:primaryType: pageflow:pageflow
       jcr:mixinTypes: ['mix:referenceable', 'mix:versionable']
       jcr:uuid: fca1ae1b-689f-4789-8578-39104ca4c9b6
       hippo:availability: [preview]
@@ -110,12 +25,11 @@
       pageflow:flowid: pageflow.campaign1
       pageflow:name: Campaign 1 Page Flow
       /pageflow:eventdef[1]:
-        jcr:primaryType: selection:listitem
-        selection:key: start.quote
-        selection:label: Start Quote
+        jcr:primaryType: pageflow:metadata
+        pageflow:name: start.quote
+        pageflow:value: Start Quote
       /pageflow:pagestate[1]:
         jcr:primaryType: pageflow:pagestate
-        pageflow:description: Landing Page
         pageflow:name: Landing Page
         pageflow:path: /
         pageflow:stateid: landing
@@ -125,7 +39,6 @@
           pageflow:target: plan
       /pageflow:pagestate[2]:
         jcr:primaryType: pageflow:pagestate
-        pageflow:description: Select a Plan
         pageflow:name: Select a Plan
         pageflow:path: /plan
         pageflow:stateid: plan
@@ -135,7 +48,6 @@
           pageflow:target: application
       /pageflow:pagestate[3]:
         jcr:primaryType: pageflow:pagestate
-        pageflow:description: Application Form
         pageflow:name: Application Form
         pageflow:path: /application
         pageflow:stateid: application
@@ -145,7 +57,6 @@
           pageflow:target: payment
       /pageflow:pagestate[4]:
         jcr:primaryType: pageflow:pagestate
-        pageflow:description: Payment Form
         pageflow:name: Payment Form
         pageflow:path: /payment
         pageflow:stateid: payment
@@ -159,49 +70,47 @@
           pageflow:target: payment
       /pageflow:pagestate[5]:
         jcr:primaryType: pageflow:pagestate
-        pageflow:description: Confirmation
         pageflow:name: Confirmation
         pageflow:path: /confirm
         pageflow:stateid: confirm
       /pageflow:eventdef[2]:
-        jcr:primaryType: selection:listitem
-        selection:key: plan.selected
-        selection:label: Plan Selected
+        jcr:primaryType: pageflow:metadata
+        pageflow:name: plan.selected
+        pageflow:value: Plan Selected
       /pageflow:eventdef[3]:
-        jcr:primaryType: selection:listitem
-        selection:key: application.submitted
-        selection:label: Application Submitted
+        jcr:primaryType: pageflow:metadata
+        pageflow:name: application.submitted
+        pageflow:value: Application Submitted
       /pageflow:eventdef[4]:
-        jcr:primaryType: selection:listitem
-        selection:key: payment.accepted
-        selection:label: Payment Accepted
+        jcr:primaryType: pageflow:metadata
+        pageflow:name: payment.accepted
+        pageflow:value: Payment Accepted
       /pageflow:eventdef[5]:
-        jcr:primaryType: selection:listitem
-        selection:key: payment.rejected
-        selection:label: Payment Rejected
-    /campaign-1-flow[3]:
+        jcr:primaryType: pageflow:metadata
+        pageflow:name: payment.rejected
+        pageflow:value: Payment Rejected
+    /campaign-1-flow[2]:
       jcr:primaryType: pageflow:pageflow
       jcr:mixinTypes: ['mix:referenceable']
-      jcr:uuid: e5e354e0-6e78-4db4-8598-c906d40531e2
+      jcr:uuid: fb1209d1-a922-449f-94a3-5f3e742eb75f
       hippo:availability: [live]
       hippostd:state: published
       hippostdpubwf:createdBy: admin
       hippostdpubwf:creationDate: 2018-03-02T12:35:00.844-05:00
       hippostdpubwf:lastModificationDate: 2018-03-06T16:42:26.849-05:00
       hippostdpubwf:lastModifiedBy: admin
-      hippostdpubwf:publicationDate: 2018-03-06T16:42:34.235-05:00
+      hippostdpubwf:publicationDate: 2018-03-08T11:48:33.160-05:00
       hippotranslation:id: 786972dc-93c3-4119-a56f-97873ddd2096
       hippotranslation:locale: document-type-locale
       pageflow:description: Campaign 1 Page Flow
       pageflow:flowid: pageflow.campaign1
       pageflow:name: Campaign 1 Page Flow
       /pageflow:eventdef[1]:
-        jcr:primaryType: selection:listitem
-        selection:key: start.quote
-        selection:label: Start Quote
+        jcr:primaryType: pageflow:metadata
+        pageflow:name: start.quote
+        pageflow:value: Start Quote
       /pageflow:pagestate[1]:
         jcr:primaryType: pageflow:pagestate
-        pageflow:description: Landing Page
         pageflow:name: Landing Page
         pageflow:path: /
         pageflow:stateid: landing
@@ -211,7 +120,6 @@
           pageflow:target: plan
       /pageflow:pagestate[2]:
         jcr:primaryType: pageflow:pagestate
-        pageflow:description: Select a Plan
         pageflow:name: Select a Plan
         pageflow:path: /plan
         pageflow:stateid: plan
@@ -221,7 +129,6 @@
           pageflow:target: application
       /pageflow:pagestate[3]:
         jcr:primaryType: pageflow:pagestate
-        pageflow:description: Application Form
         pageflow:name: Application Form
         pageflow:path: /application
         pageflow:stateid: application
@@ -231,7 +138,6 @@
           pageflow:target: payment
       /pageflow:pagestate[4]:
         jcr:primaryType: pageflow:pagestate
-        pageflow:description: Payment Form
         pageflow:name: Payment Form
         pageflow:path: /payment
         pageflow:stateid: payment
@@ -245,23 +151,22 @@
           pageflow:target: payment
       /pageflow:pagestate[5]:
         jcr:primaryType: pageflow:pagestate
-        pageflow:description: Confirmation
         pageflow:name: Confirmation
         pageflow:path: /confirm
         pageflow:stateid: confirm
       /pageflow:eventdef[2]:
-        jcr:primaryType: selection:listitem
-        selection:key: plan.selected
-        selection:label: Plan Selected
+        jcr:primaryType: pageflow:metadata
+        pageflow:name: plan.selected
+        pageflow:value: Plan Selected
       /pageflow:eventdef[3]:
-        jcr:primaryType: selection:listitem
-        selection:key: application.submitted
-        selection:label: Application Submitted
+        jcr:primaryType: pageflow:metadata
+        pageflow:name: application.submitted
+        pageflow:value: Application Submitted
       /pageflow:eventdef[4]:
-        jcr:primaryType: selection:listitem
-        selection:key: payment.accepted
-        selection:label: Payment Accepted
+        jcr:primaryType: pageflow:metadata
+        pageflow:name: payment.accepted
+        pageflow:value: Payment Accepted
       /pageflow:eventdef[5]:
-        jcr:primaryType: selection:listitem
-        selection:key: payment.rejected
-        selection:label: Payment Rejected
+        jcr:primaryType: pageflow:metadata
+        pageflow:name: payment.rejected
+        pageflow:value: Payment Rejected

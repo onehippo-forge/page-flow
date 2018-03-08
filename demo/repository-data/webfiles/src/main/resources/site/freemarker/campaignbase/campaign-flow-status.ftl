@@ -17,9 +17,9 @@ Note: You can use resource bundle by a key which combines a prefix and the ID
     <#list pageFlow.pageStates as pageState>
       <#if pageState.path?has_content>
         <#if pageState.index < curPageStateIndex>
-          <span class="label label-primary">${pageState.name}</span>
-        <#elseif pageState.index == curPageStateIndex>
           <span class="label label-success">${pageState.name}</span>
+        <#elseif pageState.index == curPageStateIndex>
+          <span class="label label-primary">${pageState.name}</span>
         <#else>
           <span class="label label-default">${pageState.name}</span>
         </#if>
