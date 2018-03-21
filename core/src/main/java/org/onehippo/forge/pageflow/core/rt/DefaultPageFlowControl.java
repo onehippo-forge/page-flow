@@ -16,6 +16,7 @@
 package org.onehippo.forge.pageflow.core.rt;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -68,7 +69,7 @@ public class DefaultPageFlowControl implements PageFlowControl {
 
         final String location = locBuilder.toString();
 
-        if (!StringUtils.equals(location, request.getRequestURI())) {
+        if (!Objects.equals(location, request.getRequestURI())) {
             response.sendRedirect(location);
         }
     }

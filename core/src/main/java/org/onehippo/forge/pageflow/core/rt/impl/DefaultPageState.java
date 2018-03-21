@@ -16,11 +16,13 @@
 package org.onehippo.forge.pageflow.core.rt.impl;
 
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
 
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.onehippo.forge.pageflow.core.rt.Errors;
 import org.onehippo.forge.pageflow.core.rt.PageState;
 
 public class DefaultPageState implements PageState {
@@ -36,6 +38,8 @@ public class DefaultPageState implements PageState {
     private final int index;
 
     private final Map<String, String> metadata;
+
+    private Map<String, Errors> errorsMap;
 
     public DefaultPageState(final String id, final String name, final String path, final int index,
             final Map<String, String> metadata) {
@@ -75,8 +79,42 @@ public class DefaultPageState implements PageState {
         return Collections.unmodifiableMap(metadata);
     }
 
+    public Errors putErrors(String name, Errors errors) {
+        if (errorsMap == null) {
+            errorsMap = new LinkedHashMap<>();
+        }
+
+        return errorsMap.put(name, errors);
+    }
+
+    public Errors removeErrors(String name) {
+        if (errorsMap != null) {
+            return errorsMap.remove(name);
+        }
+
+        return null;
+    }
+
+    public Map<String, Errors> getErrorsMap() {
+        if (errorsMap == null) {
+            return Collections.emptyMap();
+        }
+
+        return Collections.unmodifiableMap(errorsMap);
+    }
+
+    public void clearAllErrors() {
+        if (errorsMap != null) {
+            errorsMap.clear();
+        }
+    }
+
     @Override
     public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
         if (!(o instanceof DefaultPageState)) {
             return false;
         }
@@ -84,17 +122,19 @@ public class DefaultPageState implements PageState {
         DefaultPageState that = (DefaultPageState) o;
 
         return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(path, that.path)
-                && (index == that.index) && Objects.equals(metadata, that.metadata);
+                && (index == that.index) && Objects.equals(metadata, that.metadata)
+                && Objects.equals(errorsMap, that.errorsMap);
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(id).append(name).append(path).append(index).append(metadata).toHashCode();
+        return new HashCodeBuilder().append(id).append(name).append(path).append(index).append(metadata)
+                .append(errorsMap).toHashCode();
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this).append("id", id).append("name", name).append("path", path)
-                .append("index", index).append("metadata", metadata).toString();
+                .append("index", index).append("metadata", metadata).append("errorsMap", errorsMap).toString();
     }
 }

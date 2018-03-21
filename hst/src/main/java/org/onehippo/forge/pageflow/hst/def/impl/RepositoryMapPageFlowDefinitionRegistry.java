@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.jcr.Node;
@@ -225,7 +226,7 @@ public class RepositoryMapPageFlowDefinitionRegistry extends MapPageFlowDefiniti
             }
 
             for (PageTransitionDefinition globalPageTransDef : globalPageTransDefs) {
-                if (StringUtils.equals(stateId, globalPageTransDef.getTargetPageStateDefinitionId())) {
+                if (Objects.equals(stateId, globalPageTransDef.getTargetPageStateDefinitionId())) {
                     log.info(
                             "Skipping global transition, '{}', for the state, '{}', as the target is the same as the source.",
                             globalPageTransDef.getEvent(), stateId);

@@ -105,6 +105,10 @@ public class DefaultPageStateDefinition implements PageStateDefinition {
 
     @Override
     public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
         if (!(o instanceof DefaultPageStateDefinition)) {
             return false;
         }

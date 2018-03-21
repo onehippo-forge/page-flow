@@ -15,6 +15,8 @@
  */
 package org.onehippo.forge.pageflow.hst.sitemapitemhandler;
 
+import java.util.Objects;
+
 import javax.servlet.FilterChain;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -186,6 +188,6 @@ public class PageFlowControlHstSiteMapItemHandler extends AbstractFilterChainAwa
     protected boolean isRequestForPageState(final HttpServletRequest request, final PageState pageState) {
         final String normalizedPagePath = PathUtils.normalizePath(StringUtils.defaultString(pageState.getPath()));
         final String normalizedPathInfo = PathUtils.normalizePath(StringUtils.defaultString(request.getPathInfo()));
-        return StringUtils.equals(normalizedPagePath, normalizedPathInfo);
+        return Objects.equals(normalizedPagePath, normalizedPathInfo);
     }
 }

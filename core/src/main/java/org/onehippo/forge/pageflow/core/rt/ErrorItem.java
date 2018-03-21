@@ -16,27 +16,12 @@
 package org.onehippo.forge.pageflow.core.rt;
 
 import java.io.Serializable;
-import java.util.Map;
 
-public interface PageState extends Serializable {
+public interface ErrorItem extends Serializable {
 
-    public String getId();
+    public String getCode();
 
-    public String getName();
-
-    public String getPath();
-
-    public int getIndex();
-
-    public Map<String, String> getMetadata();
-
-    public Errors putErrors(String name, Errors errors);
-
-    public Errors removeErrors(String name);
-
-    public Map<String, Errors> getErrorsMap();
-
-    public void clearAllErrors();
+    public String getMessage();
 
     boolean equals(Object o);
 
