@@ -15,11 +15,16 @@
  */
 package org.onehippo.forge.pageflow.demo.campaign.components;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.commons.lang3.StringUtils;
 import org.hippoecm.hst.core.component.HstComponentException;
 import org.hippoecm.hst.core.component.HstRequest;
 import org.hippoecm.hst.core.component.HstResponse;
+import org.onehippo.forge.pageflow.core.rt.Errors;
 import org.onehippo.forge.pageflow.core.rt.PageFlow;
+import org.onehippo.forge.pageflow.core.rt.impl.DefaultErrors;
 import org.onehippo.forge.pageflow.demo.campaign.CampaignConstants;
 import org.onehippo.forge.pageflow.demo.campaign.model.CampaignModel;
 
@@ -30,6 +35,8 @@ public class CampaignApplicationFormComponent extends AbstractCampaignComponent 
         final String action = request.getParameter("action");
 
         final PageFlow pageFlow = getPageFlow();
+        pageFlow.getPageState().clearAllErrors();
+
         final CampaignModel campaignModel = (CampaignModel) pageFlow.getAttribute(CampaignConstants.DEFAULT_MODEL_NAME);
 
         if (StringUtils.equalsIgnoreCase("cancel", action)) {
@@ -37,61 +44,80 @@ public class CampaignApplicationFormComponent extends AbstractCampaignComponent 
             return;
         }
 
-        final boolean validated = validateInputs(request, campaignModel);
+        final Map<String, Errors> errorsMap = readForm(request, campaignModel);
 
-        if (validated) {
-            final boolean submitted = submitApplication(campaignModel);
+        if (!errorsMap.isEmpty()) {
+            pageFlow.getPageState().addAllErrors(errorsMap);
+            return;
+        }
 
-            if (submitted) {
-                pageFlow.sendEvent(CampaignConstants.EVENT_APPLICATION_SUBMITTED);
-            }
+        final boolean submitted = submitApplication(campaignModel);
+
+        if (submitted) {
+            pageFlow.sendEvent(CampaignConstants.EVENT_APPLICATION_SUBMITTED);
         }
     }
 
-    private boolean validateInputs(HstRequest request, CampaignModel campaignModel) {
+    private Map<String, Errors> readForm(HstRequest request, CampaignModel campaignModel) {
+        Map<String, Errors> errorsMap = new HashMap<>();
+
         final String email = StringUtils.trim(request.getParameter("email"));
+
         if (StringUtils.isEmpty(email) || !StringUtils.contains(email, "@")) {
-            return false;
+            errorsMap.put("email", new DefaultErrors("email", createErrorItem("email.invalid")));
+        } else {
+            campaignModel.setEmail(email);
         }
-        campaignModel.setEmail(email);
 
         final String firstName = StringUtils.trim(request.getParameter("firstName"));
+
         if (StringUtils.isEmpty(firstName)) {
-            return false;
+            errorsMap.put("firstName", new DefaultErrors("firstName", createErrorItem("firstName.invalid")));
+        } else {
+            campaignModel.setFirstName(firstName);
         }
-        campaignModel.setFirstName(firstName);
 
         final String lastName = StringUtils.trim(request.getParameter("lastName"));
+
         if (StringUtils.isEmpty(lastName)) {
-            return false;
+            errorsMap.put("lastName", new DefaultErrors("lastName", createErrorItem("lastName.invalid")));
+        } else {
+            campaignModel.setLastName(lastName);
         }
-        campaignModel.setLastName(lastName);
 
         final String phone = StringUtils.trim(request.getParameter("phone"));
+
         if (StringUtils.isEmpty(phone)) {
-            return false;
+            errorsMap.put("phone", new DefaultErrors("phone", createErrorItem("phone.invalid")));
+        } else {
+            campaignModel.setPhone(phone);
         }
-        campaignModel.setPhone(phone);
 
         final String address = StringUtils.trim(request.getParameter("address"));
+
         if (StringUtils.isEmpty(address)) {
-            return false;
+            errorsMap.put("address", new DefaultErrors("address", createErrorItem("address.invalid")));
+        } else {
+            campaignModel.setAddress(address);
         }
-        campaignModel.setAddress(address);
 
         final String city = StringUtils.trim(request.getParameter("city"));
+
         if (StringUtils.isEmpty(city)) {
-            return false;
+            errorsMap.put("city", new DefaultErrors("city", createErrorItem("city.invalid")));
+        } else {
+            campaignModel.setCity(city);
         }
-        campaignModel.setCity(city);
 
         final String state = StringUtils.trim(request.getParameter("state"));
-        if (StringUtils.isEmpty(state)) {
-            return false;
-        }
-        campaignModel.setState(state);
 
-        return true;
+        if (StringUtils.isEmpty(state)) {
+            errorsMap.put("state", new DefaultErrors("state", createErrorItem("state.invalid")));
+        } else {
+            campaignModel.setState(state);
+        }
+
+        return errorsMap;
     }
 
     private boolean submitApplication(CampaignModel campaignModel) {

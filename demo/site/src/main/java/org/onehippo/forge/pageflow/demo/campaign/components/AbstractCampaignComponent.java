@@ -15,14 +15,22 @@
  */
 package org.onehippo.forge.pageflow.demo.campaign.components;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
+
+import javax.servlet.jsp.jstl.core.Config;
+import javax.servlet.jsp.jstl.fmt.LocalizationContext;
+
 import org.hippoecm.hst.component.support.bean.BaseHstComponent;
 import org.hippoecm.hst.container.RequestContextProvider;
 import org.hippoecm.hst.core.component.HstComponentException;
 import org.hippoecm.hst.core.component.HstRequest;
 import org.hippoecm.hst.core.component.HstResponse;
 import org.hippoecm.hst.core.request.HstRequestContext;
+import org.onehippo.forge.pageflow.core.rt.ErrorItem;
 import org.onehippo.forge.pageflow.core.rt.PageFlow;
 import org.onehippo.forge.pageflow.core.rt.PageFlowControl;
+import org.onehippo.forge.pageflow.core.rt.impl.DefaultErrorItem;
 import org.onehippo.forge.pageflow.demo.campaign.CampaignConstants;
 import org.onehippo.forge.pageflow.demo.campaign.model.CampaignModel;
 import org.slf4j.Logger;
@@ -48,5 +56,28 @@ public abstract class AbstractCampaignComponent extends BaseHstComponent {
         final HstRequestContext requestContext = RequestContextProvider.get();
         final PageFlowControl flowControl = PageFlowControl.getDefault(requestContext.getServletRequest());
         return flowControl.getPageFlow(requestContext.getServletRequest());
+    }
+
+    protected ErrorItem createErrorItem(String code) {
+        return createErrorItem(code, null);
+    }
+
+    protected ErrorItem createErrorItem(String code, Object[] arguments) {
+        return createErrorItem(code, arguments, null);
+    }
+
+    protected ErrorItem createErrorItem(String code, Object[] arguments, String defaultMessage) {
+        final HstRequestContext requestContext = RequestContextProvider.get();
+        ResourceBundle resourceBundle = null;
+
+        final LocalizationContext localizationContext = (LocalizationContext) Config
+                .get(requestContext.getServletRequest(), Config.FMT_LOCALIZATION_CONTEXT);
+        if (localizationContext != null) {
+            resourceBundle = localizationContext.getResourceBundle();
+        }
+
+        final Locale locale = requestContext.getPreferredLocale();
+
+        return new DefaultErrorItem(resourceBundle, locale, code, arguments, defaultMessage);
     }
 }

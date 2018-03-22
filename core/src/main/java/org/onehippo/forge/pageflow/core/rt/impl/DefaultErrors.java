@@ -36,6 +36,18 @@ public class DefaultErrors implements Errors {
         this.name = name;
     }
 
+    public DefaultErrors(final String name, ErrorItem...errorItemArray) {
+        this.name = name;
+
+        if (errorItemArray != null && errorItemArray.length > 0) {
+            errorItems = new LinkedList<>();
+
+            for (ErrorItem errorItem : errorItemArray) {
+                errorItems.add(errorItem);
+            }
+        }
+    }
+
     @Override
     public String getName() {
         return name;

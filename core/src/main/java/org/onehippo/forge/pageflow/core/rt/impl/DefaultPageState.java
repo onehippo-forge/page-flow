@@ -79,7 +79,8 @@ public class DefaultPageState implements PageState {
         return Collections.unmodifiableMap(metadata);
     }
 
-    public Errors putErrors(String name, Errors errors) {
+    @Override
+    public Errors addErrors(String name, Errors errors) {
         if (errorsMap == null) {
             errorsMap = new LinkedHashMap<>();
         }
@@ -87,6 +88,16 @@ public class DefaultPageState implements PageState {
         return errorsMap.put(name, errors);
     }
 
+    @Override
+    public void addAllErrors(Map<String, Errors> errorsMap) {
+        if (errorsMap == null) {
+            errorsMap = new LinkedHashMap<>();
+        }
+
+        errorsMap.putAll(errorsMap);
+    }
+
+    @Override
     public Errors removeErrors(String name) {
         if (errorsMap != null) {
             return errorsMap.remove(name);
@@ -95,6 +106,7 @@ public class DefaultPageState implements PageState {
         return null;
     }
 
+    @Override
     public Map<String, Errors> getErrorsMap() {
         if (errorsMap == null) {
             return Collections.emptyMap();
@@ -103,6 +115,7 @@ public class DefaultPageState implements PageState {
         return Collections.unmodifiableMap(errorsMap);
     }
 
+    @Override
     public void clearAllErrors() {
         if (errorsMap != null) {
             errorsMap.clear();
