@@ -47,5 +47,5 @@ $ cd demo
 $ mvn clean verify && mvn -Pcargo.run
 ```
 
-Visit http://localhost:8080/site/.
+Visit http://localhost:8080/site/campaign1.
 
