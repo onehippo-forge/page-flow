@@ -13,31 +13,8 @@
 [//]: # (  See the License for the specific language governing permissions and  )
 [//]: # (  limitations under the License.  )
 
-# Page Flow Control Module for Hippo CMS Delivery tier
+# Configuration
+
+## Configuring Page Flow Definition
 
 TODO
-
-## Module Overview
-
-This project consists of the following submodules:
-
-- TODO
-
-
-# Demo Application
-
-You can build the module locally (as it's not released yet) first in the project root folder.
-
-```bash
-$ mvn clean install
-```
-
-And you can build and run the [demo](demo) project:
-
-```bash
-$ cd demo
-$ mvn clean verify && mvn -Pcargo.run
-```
-
-Visit http://localhost:8080/site/campaign1.
-
