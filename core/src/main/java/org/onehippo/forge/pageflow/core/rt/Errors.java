@@ -20,15 +20,13 @@ import java.util.List;
 
 public interface Errors extends Serializable {
 
-    public String getName();
-
     public boolean isEmpty();
 
-    public boolean addErrorItem(ErrorItem errorItem);
+    public boolean addItem(ErrorItem item);
 
-    public boolean removeErrorItem(ErrorItem errorItem);
+    public boolean removeItem(ErrorItem item);
 
-    public List<ErrorItem> getErrorItems();
+    public List<ErrorItem> getItems();
 
     public void clear();
 

@@ -64,7 +64,7 @@ public class CampaignApplicationFormComponent extends AbstractCampaignComponent 
         final String email = StringUtils.trim(request.getParameter("email"));
 
         if (StringUtils.isEmpty(email) || !StringUtils.contains(email, "@")) {
-            errorsMap.put("email", new DefaultErrors("email", createErrorItem("email.invalid")));
+            errorsMap.put("email", new DefaultErrors(createErrorItem("email.invalid")));
         } else {
             campaignModel.setEmail(email);
         }
@@ -72,7 +72,7 @@ public class CampaignApplicationFormComponent extends AbstractCampaignComponent 
         final String firstName = StringUtils.trim(request.getParameter("firstName"));
 
         if (StringUtils.isEmpty(firstName)) {
-            errorsMap.put("firstName", new DefaultErrors("firstName", createErrorItem("firstName.invalid")));
+            errorsMap.put("firstName", new DefaultErrors(createErrorItem("firstName.invalid")));
         } else {
             campaignModel.setFirstName(firstName);
         }
@@ -80,7 +80,7 @@ public class CampaignApplicationFormComponent extends AbstractCampaignComponent 
         final String lastName = StringUtils.trim(request.getParameter("lastName"));
 
         if (StringUtils.isEmpty(lastName)) {
-            errorsMap.put("lastName", new DefaultErrors("lastName", createErrorItem("lastName.invalid")));
+            errorsMap.put("lastName", new DefaultErrors(createErrorItem("lastName.invalid")));
         } else {
             campaignModel.setLastName(lastName);
         }
@@ -88,7 +88,7 @@ public class CampaignApplicationFormComponent extends AbstractCampaignComponent 
         final String phone = StringUtils.trim(request.getParameter("phone"));
 
         if (StringUtils.isEmpty(phone)) {
-            errorsMap.put("phone", new DefaultErrors("phone", createErrorItem("phone.invalid")));
+            errorsMap.put("phone", new DefaultErrors(createErrorItem("phone.invalid")));
         } else {
             campaignModel.setPhone(phone);
         }
@@ -96,7 +96,7 @@ public class CampaignApplicationFormComponent extends AbstractCampaignComponent 
         final String address = StringUtils.trim(request.getParameter("address"));
 
         if (StringUtils.isEmpty(address)) {
-            errorsMap.put("address", new DefaultErrors("address", createErrorItem("address.invalid")));
+            errorsMap.put("address", new DefaultErrors(createErrorItem("address.invalid")));
         } else {
             campaignModel.setAddress(address);
         }
@@ -104,7 +104,7 @@ public class CampaignApplicationFormComponent extends AbstractCampaignComponent 
         final String city = StringUtils.trim(request.getParameter("city"));
 
         if (StringUtils.isEmpty(city)) {
-            errorsMap.put("city", new DefaultErrors("city", createErrorItem("city.invalid")));
+            errorsMap.put("city", new DefaultErrors(createErrorItem("city.invalid")));
         } else {
             campaignModel.setCity(city);
         }
@@ -112,7 +112,7 @@ public class CampaignApplicationFormComponent extends AbstractCampaignComponent 
         final String state = StringUtils.trim(request.getParameter("state"));
 
         if (StringUtils.isEmpty(state)) {
-            errorsMap.put("state", new DefaultErrors("state", createErrorItem("state.invalid")));
+            errorsMap.put("state", new DefaultErrors(createErrorItem("state.invalid")));
         } else {
             campaignModel.setState(state);
         }

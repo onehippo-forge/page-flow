@@ -29,66 +29,57 @@ public class DefaultErrors implements Errors {
 
     private static final long serialVersionUID = 1L;
 
-    private final String name;
-    private List<ErrorItem> errorItems;
+    private List<ErrorItem> items;
 
-    public DefaultErrors(final String name) {
-        this.name = name;
+    public DefaultErrors() {
     }
 
-    public DefaultErrors(final String name, ErrorItem...errorItemArray) {
-        this.name = name;
+    public DefaultErrors(ErrorItem...itemArray) {
+        if (itemArray != null && itemArray.length > 0) {
+            items = new LinkedList<>();
 
-        if (errorItemArray != null && errorItemArray.length > 0) {
-            errorItems = new LinkedList<>();
-
-            for (ErrorItem errorItem : errorItemArray) {
-                errorItems.add(errorItem);
+            for (ErrorItem errorItem : itemArray) {
+                items.add(errorItem);
             }
         }
     }
 
     @Override
-    public String getName() {
-        return name;
-    }
-
-    @Override
     public boolean isEmpty() {
-        return (errorItems == null || errorItems.isEmpty());
+        return (items == null || items.isEmpty());
     }
 
     @Override
-    public boolean addErrorItem(ErrorItem errorItem) {
-        if (errorItems == null) {
-            errorItems = new LinkedList<>();
+    public boolean addItem(ErrorItem item) {
+        if (items == null) {
+            items = new LinkedList<>();
         }
 
-        return errorItems.add(errorItem);
+        return items.add(item);
     }
 
     @Override
-    public boolean removeErrorItem(ErrorItem errorItem) {
-        if (errorItems == null) {
-            return errorItems.remove(errorItem);
+    public boolean removeItem(ErrorItem item) {
+        if (items == null) {
+            return items.remove(item);
         }
 
         return false;
     }
 
     @Override
-    public List<ErrorItem> getErrorItems() {
-        if (errorItems == null) {
+    public List<ErrorItem> getItems() {
+        if (items == null) {
             return Collections.emptyList();
         }
 
-        return Collections.unmodifiableList(errorItems);
+        return Collections.unmodifiableList(items);
     }
 
     @Override
     public void clear() {
-        if (errorItems != null) {
-            errorItems.clear();
+        if (items != null) {
+            items.clear();
         }
     }
 
@@ -104,11 +95,7 @@ public class DefaultErrors implements Errors {
 
         DefaultErrors that = (DefaultErrors) o;
 
-        if (!Objects.equals(name, that.name)) {
-            return false;
-        }
-
-        if (!Objects.equals(errorItems, that.errorItems)) {
+        if (!Objects.equals(items, that.items)) {
             return false;
         }
 
@@ -117,11 +104,11 @@ public class DefaultErrors implements Errors {
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(name).append(errorItems).toHashCode();
+        return new HashCodeBuilder().append(items).toHashCode();
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("name", name).append("errorItems", errorItems).toString();
+        return new ToStringBuilder(this).append("items", items).toString();
     }
 }

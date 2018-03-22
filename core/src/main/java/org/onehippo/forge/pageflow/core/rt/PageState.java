@@ -30,6 +30,8 @@ public interface PageState extends Serializable {
 
     public Map<String, String> getMetadata();
 
+    public boolean isErrorsEmpty();
+
     public Errors addErrors(String name, Errors errors);
 
     public void addAllErrors(Map<String, Errors> errorsMap);

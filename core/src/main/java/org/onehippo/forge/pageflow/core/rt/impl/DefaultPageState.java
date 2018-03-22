@@ -80,6 +80,11 @@ public class DefaultPageState implements PageState {
     }
 
     @Override
+    public boolean isErrorsEmpty() {
+        return (errorsMap == null || errorsMap.isEmpty());
+    }
+
+    @Override
     public Errors addErrors(String name, Errors errors) {
         if (errorsMap == null) {
             errorsMap = new LinkedHashMap<>();
@@ -90,11 +95,11 @@ public class DefaultPageState implements PageState {
 
     @Override
     public void addAllErrors(Map<String, Errors> errorsMap) {
-        if (errorsMap == null) {
-            errorsMap = new LinkedHashMap<>();
+        if (this.errorsMap == null) {
+            this.errorsMap = new LinkedHashMap<>();
         }
 
-        errorsMap.putAll(errorsMap);
+        this.errorsMap.putAll(errorsMap);
     }
 
     @Override

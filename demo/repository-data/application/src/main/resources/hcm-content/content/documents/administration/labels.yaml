@@ -105,15 +105,19 @@
       hippostd:state: published
       hippostdpubwf:createdBy: admin
       hippostdpubwf:creationDate: 2014-08-21T17:08:08.703+02:00
-      hippostdpubwf:lastModificationDate: 2018-03-02T19:39:47.839-05:00
+      hippostdpubwf:lastModificationDate: 2018-03-21T21:26:19.476-04:00
       hippostdpubwf:lastModifiedBy: admin
-      hippostdpubwf:publicationDate: 2018-03-02T19:39:49.651-05:00
-      resourcebundle:descriptions: ['', '', '']
+      hippostdpubwf:publicationDate: 2018-03-21T21:26:21.860-04:00
+      resourcebundle:descriptions: ['', '', '', '', '', '', '', '', '', '']
       resourcebundle:id: campaign.general
-      resourcebundle:keys: [campaign.text, campaign.title, footer.text]
+      resourcebundle:keys: [campaign.text, campaign.title, footer.text, email.invalid,
+        firstName.invalid, lastName.invalid, phone.invalid, address.invalid, city.invalid,
+        state.invalid]
       resourcebundle:messages: [Identity theft can cost you huge to fix. Never become
           a victim of identity theft. Protect yourself with Identity Protection Plan.,
-        Protect your identity and credit., ©2018]
+        Protect your identity and credit., ©2018, Invalid E-Mail., Invalid first name.,
+        Invalid last name., Invalid phone number., Invalid address, Invalid city.,
+        Invalid state.]
     /campaign-general[2]:
       jcr:primaryType: resourcebundle:resourcebundle
       jcr:mixinTypes: ['mix:referenceable', 'mix:versionable']
@@ -122,14 +126,18 @@
       hippostd:state: unpublished
       hippostdpubwf:createdBy: admin
       hippostdpubwf:creationDate: 2014-08-21T17:08:08.703+02:00
-      hippostdpubwf:lastModificationDate: 2018-03-02T19:39:47.839-05:00
+      hippostdpubwf:lastModificationDate: 2018-03-21T21:26:19.476-04:00
       hippostdpubwf:lastModifiedBy: admin
-      resourcebundle:descriptions: ['', '', '']
+      resourcebundle:descriptions: ['', '', '', '', '', '', '', '', '', '']
       resourcebundle:id: campaign.general
-      resourcebundle:keys: [campaign.text, campaign.title, footer.text]
+      resourcebundle:keys: [campaign.text, campaign.title, footer.text, email.invalid,
+        firstName.invalid, lastName.invalid, phone.invalid, address.invalid, city.invalid,
+        state.invalid]
       resourcebundle:messages: [Identity theft can cost you huge to fix. Never become
           a victim of identity theft. Protect yourself with Identity Protection Plan.,
-        Protect your identity and credit., ©2018]
+        Protect your identity and credit., ©2018, Invalid E-Mail., Invalid first name.,
+        Invalid last name., Invalid phone number., Invalid address, Invalid city.,
+        Invalid state.]
     /campaign-general[3]:
       jcr:primaryType: resourcebundle:resourcebundle
       jcr:mixinTypes: ['mix:referenceable']
@@ -138,11 +146,15 @@
       hippostd:state: draft
       hippostdpubwf:createdBy: admin
       hippostdpubwf:creationDate: 2014-08-21T17:08:08.703+02:00
-      hippostdpubwf:lastModificationDate: 2018-03-02T19:39:23.812-05:00
+      hippostdpubwf:lastModificationDate: 2018-03-21T21:21:55.596-04:00
       hippostdpubwf:lastModifiedBy: admin
-      resourcebundle:descriptions: ['', '', '']
+      resourcebundle:descriptions: ['', '', '', '', '', '', '', '', '', '']
       resourcebundle:id: campaign.general
-      resourcebundle:keys: [campaign.text, campaign.title, footer.text]
+      resourcebundle:keys: [campaign.text, campaign.title, footer.text, email.invalid,
+        firstName.invalid, lastName.invalid, phone.invalid, address.invalid, city.invalid,
+        state.invalid]
       resourcebundle:messages: [Identity theft can cost you huge to fix. Never become
           a victim of identity theft. Protect yourself with Identity Protection Plan.,
-        Protect your identity and credit., ©2018]
+        Protect your identity and credit., ©2018, Invalid E-Mail., Invalid first name.,
+        Invalid last name., Invalid phone number., Invalid address, Invalid city.,
+        Invalid state.]

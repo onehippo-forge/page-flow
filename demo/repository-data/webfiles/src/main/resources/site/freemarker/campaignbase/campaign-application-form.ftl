@@ -24,6 +24,19 @@
 
 <div class="text-center">
   <form method="post" action="<@hst.actionURL/>">
+    <#if !pageFlow.pageState.errorsEmpty>
+      <div class="text-left alert alert-warning">
+        <ul>
+          <#assign errorsMap=pageFlow.pageState.errorsMap>
+          <#list errorsMap?keys as field>
+            <#assign fieldErrors=errorsMap[field]>
+            <#list fieldErrors.items as item>
+              <li>${item.message}</li>
+            </#list>
+          </#list>
+        </ul>
+      </div>
+    </#if>
     <table>
       <tr>
         <th colspan="2">
