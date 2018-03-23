@@ -18,20 +18,53 @@ package org.onehippo.forge.pageflow.core.rt;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * Errors abstraction for an application subject (e.g, a field in a form of an application).
+ */
 public interface Errors extends Serializable {
 
+    /**
+     * Return true if there's no errors.
+     * @return true if there's no errors
+     */
     public boolean isEmpty();
 
+    /**
+     * Add an {@link ErrorItem} to this <code>Errors</code>.
+     * @param item an {@link ErrorItem}
+     * @return true if added
+     */
     public boolean addItem(ErrorItem item);
 
+    /**
+     * Remove the given {@link ErrorItem} ({@code item}) from this <code>Errors</code>.
+     * @param item an {@link ErrorItem}
+     * @return true if removed
+     */
     public boolean removeItem(ErrorItem item);
 
+    /**
+     * Return an unmodifiable list of {@link ErrorItem}s in this <code>Errors</code>.
+     * @return an unmodifiable list of {@link ErrorItem}s in this <code>Errors</code>
+     */
     public List<ErrorItem> getItems();
 
+    /**
+     * Clear out all the {@link ErrorItem}s in this <code>Errors</code>.
+     */
     public void clear();
 
+    /**
+     * Compares the specified object with this <code>Errors</code> for equality.
+     * @param o the object to be compared for equality with this <code>Errors</code>
+     * @return <tt>true</tt> if the specified object is equal to this <code>Errors</code>
+     */
     boolean equals(Object o);
 
+    /**
+     * Returns the hash code value for this <code>Errors</code>.
+     * @return the hash code value for this <code>Errors</code>
+     */
     int hashCode();
 
 }

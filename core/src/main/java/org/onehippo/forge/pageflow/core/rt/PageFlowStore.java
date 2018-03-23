@@ -19,12 +19,43 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.onehippo.forge.pageflow.core.PageFlowException;
 
+/**
+ * Backend Page Flow Store abstraction.
+ * <p>
+ * The backend could be anything that can store {@link PageFlow} instances and read {@link PageFlow} instances
+ * back. For example, in web application environment, one of the simplest implementation could use <code>javax.servlet.http.HttpSession</code>
+ * for a visitor.
+ */
 public interface PageFlowStore {
 
+    /**
+     * Find and retrieve the {@link PageFlow} instance by the identifier of the {@link PageFlow} ({@code flowId})
+     * from the backend storage. Return null if not found.
+     * @param request <code>HttpServletRequest</code> object
+     * @param flowId the identifier of the {@link PageFlow}
+     * @return the {@link PageFlow} instance by the identifier of the {@link PageFlow} ({@code flowId}) from the
+     * backend storage, or null if not found
+     * @throws PageFlowException if any exception occurs
+     */
     public PageFlow getPageFlow(HttpServletRequest request, String flowId) throws PageFlowException;
 
-    public PageFlow savePageFlow(HttpServletRequest request, String flowId, PageFlow pageFlow) throws PageFlowException;
+    /**
+     * Store the {@code pageFlow} into the backend storage by the {@code flowId}.
+     * @param request <code>HttpServletRequest</code> object
+     * @param flowId the identifier of the {@link PageFlow}
+     * @param pageFlow {@link PageFlow} instance
+     * @return true if stored
+     * @throws PageFlowException if any exception occurs
+     */
+    public boolean storePageFlow(HttpServletRequest request, String flowId, PageFlow pageFlow) throws PageFlowException;
 
-    public PageFlow removePageFlow(HttpServletRequest request, String flowId) throws PageFlowException;
+    /**
+     * Remove the associated {@code pageFlow} from the backend storage by the {@code flowId}.
+     * @param request <code>HttpServletRequest</code> object
+     * @param flowId the identifier of the {@link PageFlow}
+     * @return true if removed
+     * @throws PageFlowException if any exception occurs
+     */
+    public boolean removePageFlow(HttpServletRequest request, String flowId) throws PageFlowException;
 
 }

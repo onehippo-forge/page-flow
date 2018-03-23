@@ -31,6 +31,9 @@ import org.onehippo.forge.exdocpicker.impl.SimpleExternalDocumentCollection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * {@link ExternalDocumentServiceFacade} implementation to retrieve/select Page Flow Transition Source Event.
+ */
 public class TransitionSourceEventDefServiceFacade implements ExternalDocumentServiceFacade<EventDefInfo> {
 
     private static final long serialVersionUID = 1L;

@@ -17,14 +17,39 @@ package org.onehippo.forge.pageflow.core.def;
 
 import org.onehippo.forge.pageflow.core.PageFlowException;
 
+/**
+ * Page Flow Definition Registry abstraction which is responsible for retrieval, removing or clearing <code>PageFlowDefinition</code>
+ * instances.
+ */
 public interface PageFlowDefinitionRegistry {
 
+    /**
+     * Retrieve the <code>PageFlowDefinition</code> by the identifier ({@code flowId}).
+     * Return null if there's no <code>PageFlowDefinition</code> found by the identifier.
+     * @param flowId the identifier of the <code>PageFlowDefinition</code>
+     * @return the <code>PageFlowDefinition</code> identified by {@code flowId}, or null if not found.
+     * @throws PageFlowException if any exception occurs
+     */
     public PageFlowDefinition getPageFlowDefinition(String flowId) throws PageFlowException;
 
+    /**
+     * Remove the <code>PageFlowDefinition</code> by the optional {@code uuid} of the <code>PageFlowDefinition</code>.
+     * @param uuid the optional UUID value of the <code>PageFlowDefinition</code>
+     * @throws PageFlowException if any exception occurs
+     */
     public void removePageFlowDefinitionByUuid(String uuid) throws PageFlowException;
 
+    /**
+     * Remove the <code>PageFlowDefinition</code> by the identifier ({@code flowId}) of the <code>PageFlowDefinition</code>.
+     * @param flowId the identifier value of the <code>PageFlowDefinition</code>
+     * @throws PageFlowException if any exception occurs
+     */
     public void removePageFlowDefinition(String flowId) throws PageFlowException;
 
+    /**
+     * Clear all the registered <code>PageFlowDefinition</code>s in the registry.
+     * @throws PageFlowException if any exception occurs
+     */
     public void clearPageFlowDefinitions() throws PageFlowException;
 
 }

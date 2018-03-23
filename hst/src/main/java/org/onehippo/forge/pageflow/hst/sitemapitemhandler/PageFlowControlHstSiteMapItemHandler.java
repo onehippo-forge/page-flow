@@ -36,6 +36,9 @@ import org.onehippo.forge.pageflow.core.rt.PageState;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Default generic <code>HstSiteMapItemHandler</code> implementation to integrate with Page Flow module.
+ */
 public class PageFlowControlHstSiteMapItemHandler extends AbstractFilterChainAwareHstSiteMapItemHandler {
 
     private static Logger log = LoggerFactory.getLogger(PageFlowControlHstSiteMapItemHandler.class);

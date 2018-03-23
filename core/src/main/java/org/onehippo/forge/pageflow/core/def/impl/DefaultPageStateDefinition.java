@@ -26,6 +26,9 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.onehippo.forge.pageflow.core.def.PageStateDefinition;
 import org.onehippo.forge.pageflow.core.def.PageTransitionDefinition;
 
+/**
+ * Default {@link PageStateDefinition} model implementation.
+ */
 public class DefaultPageStateDefinition implements PageStateDefinition {
 
     private static final long serialVersionUID = 1L;

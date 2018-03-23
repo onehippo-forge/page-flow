@@ -29,6 +29,9 @@ import org.onehippo.forge.pageflow.core.def.PageFlowDefinitionRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Default generic {@link PageFlowControl} implementation in a web application.
+ */
 public class DefaultPageFlowControl implements PageFlowControl {
 
     private static Logger log = LoggerFactory.getLogger(DefaultPageFlowControl.class);
@@ -128,7 +131,7 @@ public class DefaultPageFlowControl implements PageFlowControl {
             pageFlow = factory.createPageFlow(request, pageFlowDef);
 
             if (store != null) {
-                store.savePageFlow(request, flowId, pageFlow);
+                store.storePageFlow(request, flowId, pageFlow);
             }
         }
 

@@ -21,6 +21,9 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.onehippo.forge.pageflow.core.def.PageTransitionDefinition;
 
+/**
+ * Default {@link PageTransitionDefinition} model implementation.
+ */
 public class DefaultPageTransitionDefinition implements PageTransitionDefinition {
 
     private static final long serialVersionUID = 1L;

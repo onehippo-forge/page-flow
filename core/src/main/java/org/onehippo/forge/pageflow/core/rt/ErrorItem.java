@@ -17,14 +17,36 @@ package org.onehippo.forge.pageflow.core.rt;
 
 import java.io.Serializable;
 
+/**
+ * Error Item abstraction which is part of {@link Errors}.
+ */
 public interface ErrorItem extends Serializable {
 
+    /**
+     * Return the error code.
+     * <p>
+     * Application may use this error code as same as a resource bundle key for simplicity.
+     * @return the error code
+     */
     public String getCode();
 
+    /**
+     * Return the (human readable) error message.
+     * @return the (human readable) error message
+     */
     public String getMessage();
 
+    /**
+     * Compares the specified object with this <code>ErrorItem</code> for equality.
+     * @param o the object to be compared for equality with this <code>ErrorItem</code>
+     * @return <tt>true</tt> if the specified object is equal to this <code>ErrorItem</code>
+     */
     boolean equals(Object o);
 
+    /**
+     * Returns the hash code value for this <code>ErrorItem</code>.
+     * @return the hash code value for this <code>ErrorItem</code>
+     */
     int hashCode();
 
 }

@@ -21,6 +21,11 @@ import org.hippoecm.hst.core.parameters.FieldGroup;
 import org.hippoecm.hst.core.parameters.FieldGroupList;
 import org.hippoecm.hst.core.parameters.Parameter;
 
+/**
+ * Default Page Flow module based <code>ChannelInfo</code> definition,
+ * allowing to configure the identifier of the default Page Flow of the channel
+ * and the default resource bundle ID(s) (as comma separated string) for the channel.
+ */
 @FieldGroupList({
         @FieldGroup(
                 titleKey = "fields.site",
@@ -30,10 +35,24 @@ import org.hippoecm.hst.core.parameters.Parameter;
 )
 public interface PageFlowSiteInfo extends ChannelInfo {
 
-    @Parameter(name = "defaultPageFlowId", defaultValue = "")
+    /**
+     * Return the identifier of the default Page Flow of this channel.
+     * @return the identifier of the default Page Flow of this channel
+     */
+    @Parameter(
+            name = "defaultPageFlowId",
+            defaultValue = "",
+            description = "Default Page Flow ID")
     String getDefaultPageFlowId();
 
-    @Parameter(name = HstNodeTypes.GENERAL_PROPERTY_DEFAULT_RESOURCE_BUNDLE_ID, defaultValue = "")
+    /**
+     * Return the default (comma-separated) resource bundle ID(s) of this channel.
+     * @return the default (comma-separated) resource bundle ID(s) of this channel
+     */
+    @Parameter(
+            name = HstNodeTypes.GENERAL_PROPERTY_DEFAULT_RESOURCE_BUNDLE_ID,
+            defaultValue = "",
+            description = "Default Resource Bundle ID(s)")
     String getDefaultResourceBundleIds();
 
 }

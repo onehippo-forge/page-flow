@@ -21,6 +21,9 @@ import java.util.Objects;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
+/**
+ * Page State Information model.
+ */
 public class PageStateInfo implements Serializable {
 
     private static final long serialVersionUID = 1L;

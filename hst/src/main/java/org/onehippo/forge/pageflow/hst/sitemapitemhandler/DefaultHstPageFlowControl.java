@@ -33,6 +33,7 @@ import org.hippoecm.hst.site.HstServices;
 import org.onehippo.forge.pageflow.core.PageFlowException;
 import org.onehippo.forge.pageflow.core.def.PageFlowDefinitionRegistry;
 import org.onehippo.forge.pageflow.core.rt.DefaultPageFlowControl;
+import org.onehippo.forge.pageflow.core.rt.PageFlowControl;
 import org.onehippo.forge.pageflow.core.rt.PageFlowFactory;
 import org.onehippo.forge.pageflow.core.rt.PageFlowStore;
 import org.onehippo.forge.pageflow.core.rt.PageState;
@@ -40,6 +41,10 @@ import org.onehippo.forge.pageflow.hst.channel.PageFlowSiteInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Default generic {@link PageFlowControl} implementation for an HST-based site web application
+ * to integrate with Page Flow module.
+ */
 public class DefaultHstPageFlowControl extends DefaultPageFlowControl {
 
     private static Logger log = LoggerFactory.getLogger(DefaultHstPageFlowControl.class);

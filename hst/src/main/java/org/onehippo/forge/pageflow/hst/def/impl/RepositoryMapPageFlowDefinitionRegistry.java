@@ -35,6 +35,7 @@ import org.hippoecm.hst.container.RequestContextProvider;
 import org.hippoecm.repository.util.JcrUtils;
 import org.onehippo.forge.pageflow.core.PageFlowException;
 import org.onehippo.forge.pageflow.core.def.PageFlowDefinition;
+import org.onehippo.forge.pageflow.core.def.PageFlowDefinitionRegistry;
 import org.onehippo.forge.pageflow.core.def.PageStateDefinition;
 import org.onehippo.forge.pageflow.core.def.PageTransitionDefinition;
 import org.onehippo.forge.pageflow.core.def.impl.DefaultPageFlowDefinition;
@@ -44,6 +45,9 @@ import org.onehippo.forge.pageflow.core.def.impl.MapPageFlowDefinitionRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Generic purpose JCR based {@link PageFlowDefinitionRegistry} implementation.
+ */
 public class RepositoryMapPageFlowDefinitionRegistry extends MapPageFlowDefinitionRegistry {
 
     private static Logger log = LoggerFactory.getLogger(RepositoryMapPageFlowDefinitionRegistry.class);

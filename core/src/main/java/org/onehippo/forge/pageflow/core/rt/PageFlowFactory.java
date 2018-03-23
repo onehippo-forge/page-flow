@@ -20,8 +20,18 @@ import javax.servlet.http.HttpServletRequest;
 import org.onehippo.forge.pageflow.core.PageFlowException;
 import org.onehippo.forge.pageflow.core.def.PageFlowDefinition;
 
+/**
+ * Factory abstraction which is responsible for creating a {@link PageFlow} instance from a {@link PageFlowDefinition}.
+ */
 public interface PageFlowFactory {
 
+    /**
+     * Create a {@link PageFlow} instance by {@link PageFlowDefinition}.
+     * @param request <code>HttpServletRequest</code> object
+     * @param pageFlowDef {@link PageFlowDefinition} instance
+     * @return a {@link PageFlow} instance
+     * @throws PageFlowException if any exception occurs
+     */
     public PageFlow createPageFlow(HttpServletRequest request, PageFlowDefinition pageFlowDef) throws PageFlowException;
 
 }

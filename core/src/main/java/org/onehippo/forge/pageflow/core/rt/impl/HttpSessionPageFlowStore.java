@@ -45,21 +45,23 @@ public class HttpSessionPageFlowStore implements PageFlowStore {
     }
 
     @Override
-    public PageFlow savePageFlow(HttpServletRequest request, String flowId, PageFlow pageFlow)
+    public boolean storePageFlow(HttpServletRequest request, String flowId, PageFlow pageFlow)
             throws PageFlowException {
         Map<String, PageFlow> pageFlowMap = getPageFlowMap(request, true);
-        return pageFlowMap.put(flowId, pageFlow);
+        pageFlowMap.put(flowId, pageFlow);
+        return true;
     }
 
     @Override
-    public PageFlow removePageFlow(HttpServletRequest request, String flowId) throws PageFlowException {
+    public boolean removePageFlow(HttpServletRequest request, String flowId) throws PageFlowException {
         Map<String, PageFlow> pageFlowMap = getPageFlowMap(request, false);
 
         if (pageFlowMap == null) {
-            return null;
+            return false;
         }
 
-        return pageFlowMap.remove(flowId);
+        pageFlowMap.remove(flowId);
+        return true;
     }
 
     private Map<String, PageFlow> getPageFlowMap(HttpServletRequest request, boolean create) {

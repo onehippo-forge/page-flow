@@ -23,10 +23,29 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.onehippo.forge.pageflow.core.PageFlowException;
 
+/**
+ * Page Flow Control abstraction, which provides applications with an easier way to retrieve the current {@link PageFlow}
+ * instance from the <code>HttpServletRequest</code>, to send redirection to a specific {@link PageState} and to
+ * complete a {@link PageFlow}.
+ * <p>
+ * For example, an application can use this interface like the following example:
+ * <pre>
+ * final PageFlowControl flowControl = PageFlowControl.getDefault(request);
+ * final PageFlow pageFlow = flowControl.getPageFlow(request);
+ * ...
+ * </pre>
+ */
 public interface PageFlowControl {
 
+    /**
+     * The servlet context or request attribute name by which a {@link PageFlowControl} instance is stored
+     * for an application.
+     */
     public static final String PAGE_FLOW_CONTROL_ATTR_NAME = PageFlowControl.class.getName() + ".pageflowcontrol";
 
+    /**
+     * The request parameter name by which the identifier of a {@link PageFlow} could be inferred if provided.
+     */
     public static final String PAGE_FLOW_ID_PROP_NAME = "pageflowid";
 
     public static final String PAGE_FLOW_ID_ATTR_NAME = PageFlowControl.class.getName() + "." + PAGE_FLOW_ID_PROP_NAME;

@@ -21,6 +21,9 @@ import java.util.Objects;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
+/**
+ * Event Definition Information model.
+ */
 public class EventDefInfo implements Serializable {
 
     private static final long serialVersionUID = 1L;

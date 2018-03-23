@@ -13,28 +13,9 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package org.onehippo.forge.pageflow.core;
 
 /**
- * Generic Page Flow Exception.
+ * The Implementation for core APIs of Page Flow Definitions.
  */
-public class PageFlowException extends RuntimeException {
+package org.onehippo.forge.pageflow.core.def.impl;
 
-    private static final long serialVersionUID = 1L;
-
-    public PageFlowException() {
-        super();
-    }
-
-    public PageFlowException(String message) {
-        super(message);
-    }
-
-    public PageFlowException(Throwable nested) {
-        super(nested);
-    }
-
-    public PageFlowException(String msg, Throwable nested) {
-        super(msg, nested);
-    }
-}

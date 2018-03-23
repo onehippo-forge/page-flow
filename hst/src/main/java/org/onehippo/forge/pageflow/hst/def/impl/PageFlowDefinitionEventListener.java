@@ -12,6 +12,10 @@ import org.onehippo.forge.pageflow.core.def.PageFlowDefinitionRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * JCR Observation Event listener to unregister Page Flow Definitions from the registry on definition content changes
+ * in JCR.
+ */
 public class PageFlowDefinitionEventListener extends GenericEventListener implements EventListenersContainerListener {
 
     private static Logger log = LoggerFactory.getLogger(PageFlowDefinitionEventListener.class);

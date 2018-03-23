@@ -31,6 +31,9 @@ import org.onehippo.forge.exdocpicker.impl.SimpleExternalDocumentCollection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * {@link ExternalDocumentServiceFacade} implementation to retrieve/select Page Flow Transition Target Page State.
+ */
 public class TransitionTargetPageStateServiceFacade implements ExternalDocumentServiceFacade<PageStateInfo> {
 
     private static final long serialVersionUID = 1L;

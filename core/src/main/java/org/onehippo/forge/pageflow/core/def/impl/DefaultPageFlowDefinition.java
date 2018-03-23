@@ -26,6 +26,9 @@ import org.onehippo.forge.pageflow.core.def.PageFlowDefinition;
 import org.onehippo.forge.pageflow.core.def.PageStateDefinition;
 import org.onehippo.forge.pageflow.core.def.PageTransitionDefinition;
 
+/**
+ * Default {@link PageFlowDefinition} model implementation.
+ */
 public class DefaultPageFlowDefinition implements PageFlowDefinition {
 
     private static final long serialVersionUID = 1L;

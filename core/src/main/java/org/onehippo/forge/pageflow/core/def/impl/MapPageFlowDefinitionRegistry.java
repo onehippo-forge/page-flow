@@ -23,6 +23,9 @@ import org.onehippo.forge.pageflow.core.PageFlowException;
 import org.onehippo.forge.pageflow.core.def.PageFlowDefinition;
 import org.onehippo.forge.pageflow.core.def.PageFlowDefinitionRegistry;
 
+/**
+ * Generic purpose <code>Map</code> based {@link PageFlowDefinitionRegistry} implementation.
+ */
 public class MapPageFlowDefinitionRegistry implements PageFlowDefinitionRegistry {
 
     private Map<String, String> uuidToFlowIdMap = new ConcurrentHashMap<>();

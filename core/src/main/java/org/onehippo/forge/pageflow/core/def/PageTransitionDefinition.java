@@ -17,14 +17,34 @@ package org.onehippo.forge.pageflow.core.def;
 
 import java.io.Serializable;
 
+/**
+ * Page Transition Definition abstraction, defining the source event name and target <code>PageStateDefinition</code>'s ID.
+ */
 public interface PageTransitionDefinition extends Serializable {
 
+    /**
+     * Return the source event name causing this page transition.
+     * @return the source event name causing this page transition
+     */
     public String getEvent();
 
+    /**
+     * Return the target <code>PageStateDefinition</code>'s ID.
+     * @return the target <code>PageStateDefinition</code>'s ID
+     */
     public String getTargetPageStateDefinitionId();
 
+    /**
+     * Compares the specified object with this <code>PageTransitionDefinition</code> for equality.
+     * @param o the object to be compared for equality with this <code>PageTransitionDefinition</code>
+     * @return <tt>true</tt> if the specified object is equal to this <code>PageTransitionDefinition</code>
+     */
     boolean equals(Object o);
 
+    /**
+     * Returns the hash code value for this <code>PageTransitionDefinition</code>.
+     * @return the hash code value for this <code>PageTransitionDefinition</code>
+     */
     int hashCode();
 
 }
