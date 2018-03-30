@@ -37,12 +37,12 @@ public class CampaignApplicationFormComponent extends AbstractCampaignComponent 
         final PageFlow pageFlow = getPageFlow();
         pageFlow.getPageState().clearAllErrors();
 
-        final CampaignModel campaignModel = (CampaignModel) pageFlow.getAttribute(CampaignConstants.DEFAULT_MODEL_NAME);
-
         if (StringUtils.equalsIgnoreCase("cancel", action)) {
             pageFlow.sendEvent(CampaignConstants.EVENT_CANCEL_REQUESTED);
             return;
         }
+
+        final CampaignModel campaignModel = (CampaignModel) pageFlow.getAttribute(CampaignConstants.DEFAULT_MODEL_NAME);
 
         final Map<String, Errors> errorsMap = readForm(request, campaignModel);
 

@@ -23,6 +23,7 @@ public class CampaignConstants {
     public static final String EVENT_SINGLE_PLAN_SELECTED = "single.plan.selected";
     public static final String EVENT_FAMILY_PLAN_SELECTED = "family.plan.selected";
     public static final String EVENT_FAMILY_DEPENDENTS_FILLED = "family.dependents.filled";
+    public static final String EVENT_APPLICATION_REVIEWED = "application.reviewed";
     public static final String EVENT_APPLICATION_SUBMITTED = "application.submitted";
     public static final String EVENT_PAYMENT_ACCEPTED = "payment.accepted";
     public static final String EVENT_PAYMENT_REJECTED = "payment.rejected";

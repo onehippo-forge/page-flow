@@ -17,7 +17,7 @@
       hippostd:state: unpublished
       hippostdpubwf:createdBy: admin
       hippostdpubwf:creationDate: 2018-03-02T12:35:00.844-05:00
-      hippostdpubwf:lastModificationDate: 2018-03-30T16:22:31.387-04:00
+      hippostdpubwf:lastModificationDate: 2018-03-30T19:40:30.076-04:00
       hippostdpubwf:lastModifiedBy: admin
       hippotranslation:id: 786972dc-93c3-4119-a56f-97873ddd2096
       hippotranslation:locale: document-type-locale
@@ -67,8 +67,17 @@
         /pageflow:pagetransition:
           jcr:primaryType: pageflow:pagetransition
           pageflow:event: application.submitted
-          pageflow:target: payment
+          pageflow:target: review
       /pageflow:pagestate[5]:
+        jcr:primaryType: pageflow:pagestate
+        pageflow:name: Review
+        pageflow:path: /review
+        pageflow:stateid: review
+        /pageflow:pagetransition:
+          jcr:primaryType: pageflow:pagetransition
+          pageflow:event: application.reviewed
+          pageflow:target: payment
+      /pageflow:pagestate[6]:
         jcr:primaryType: pageflow:pagestate
         pageflow:name: Payment Form
         pageflow:path: /payment
@@ -81,7 +90,7 @@
           jcr:primaryType: pageflow:pagetransition
           pageflow:event: payment.rejected
           pageflow:target: payment
-      /pageflow:pagestate[6]:
+      /pageflow:pagestate[7]:
         jcr:primaryType: pageflow:pagestate
         pageflow:name: Confirmation
         pageflow:path: /confirm
@@ -104,13 +113,17 @@
         pageflow:value: Application Submitted
       /pageflow:eventdef[6]:
         jcr:primaryType: pageflow:metadata
+        pageflow:name: application.reviewed
+        pageflow:value: Application Reviewed
+      /pageflow:eventdef[7]:
+        jcr:primaryType: pageflow:metadata
         pageflow:name: payment.accepted
         pageflow:value: Payment Accepted
-      /pageflow:eventdef[7]:
+      /pageflow:eventdef[8]:
         jcr:primaryType: pageflow:metadata
         pageflow:name: payment.rejected
         pageflow:value: Payment Rejected
-      /pageflow:eventdef[8]:
+      /pageflow:eventdef[9]:
         jcr:primaryType: pageflow:metadata
         pageflow:name: cancel.requested
         pageflow:value: Cancel Requested
@@ -126,9 +139,9 @@
       hippostd:state: published
       hippostdpubwf:createdBy: admin
       hippostdpubwf:creationDate: 2018-03-02T12:35:00.844-05:00
-      hippostdpubwf:lastModificationDate: 2018-03-30T16:22:31.387-04:00
+      hippostdpubwf:lastModificationDate: 2018-03-30T19:40:30.076-04:00
       hippostdpubwf:lastModifiedBy: admin
-      hippostdpubwf:publicationDate: 2018-03-30T16:22:35.258-04:00
+      hippostdpubwf:publicationDate: 2018-03-30T19:40:44.988-04:00
       hippotranslation:id: 786972dc-93c3-4119-a56f-97873ddd2096
       hippotranslation:locale: document-type-locale
       pageflow:description: Campaign 1 Page Flow
@@ -177,8 +190,17 @@
         /pageflow:pagetransition:
           jcr:primaryType: pageflow:pagetransition
           pageflow:event: application.submitted
-          pageflow:target: payment
+          pageflow:target: review
       /pageflow:pagestate[5]:
+        jcr:primaryType: pageflow:pagestate
+        pageflow:name: Review
+        pageflow:path: /review
+        pageflow:stateid: review
+        /pageflow:pagetransition:
+          jcr:primaryType: pageflow:pagetransition
+          pageflow:event: application.reviewed
+          pageflow:target: payment
+      /pageflow:pagestate[6]:
         jcr:primaryType: pageflow:pagestate
         pageflow:name: Payment Form
         pageflow:path: /payment
@@ -191,7 +213,7 @@
           jcr:primaryType: pageflow:pagetransition
           pageflow:event: payment.rejected
           pageflow:target: payment
-      /pageflow:pagestate[6]:
+      /pageflow:pagestate[7]:
         jcr:primaryType: pageflow:pagestate
         pageflow:name: Confirmation
         pageflow:path: /confirm
@@ -214,13 +236,17 @@
         pageflow:value: Application Submitted
       /pageflow:eventdef[6]:
         jcr:primaryType: pageflow:metadata
+        pageflow:name: application.reviewed
+        pageflow:value: Application Reviewed
+      /pageflow:eventdef[7]:
+        jcr:primaryType: pageflow:metadata
         pageflow:name: payment.accepted
         pageflow:value: Payment Accepted
-      /pageflow:eventdef[7]:
+      /pageflow:eventdef[8]:
         jcr:primaryType: pageflow:metadata
         pageflow:name: payment.rejected
         pageflow:value: Payment Rejected
-      /pageflow:eventdef[8]:
+      /pageflow:eventdef[9]:
         jcr:primaryType: pageflow:metadata
         pageflow:name: cancel.requested
         pageflow:value: Cancel Requested
@@ -236,7 +262,7 @@
       hippostd:state: draft
       hippostdpubwf:createdBy: admin
       hippostdpubwf:creationDate: 2018-03-02T12:35:00.844-05:00
-      hippostdpubwf:lastModificationDate: 2018-03-30T16:16:39.843-04:00
+      hippostdpubwf:lastModificationDate: 2018-03-30T19:44:26.056-04:00
       hippostdpubwf:lastModifiedBy: admin
       hippotranslation:id: 786972dc-93c3-4119-a56f-97873ddd2096
       hippotranslation:locale: document-type-locale
@@ -286,8 +312,17 @@
         /pageflow:pagetransition:
           jcr:primaryType: pageflow:pagetransition
           pageflow:event: application.submitted
-          pageflow:target: payment
+          pageflow:target: review
       /pageflow:pagestate[5]:
+        jcr:primaryType: pageflow:pagestate
+        pageflow:name: Review
+        pageflow:path: /review
+        pageflow:stateid: review
+        /pageflow:pagetransition:
+          jcr:primaryType: pageflow:pagetransition
+          pageflow:event: application.reviewed
+          pageflow:target: payment
+      /pageflow:pagestate[6]:
         jcr:primaryType: pageflow:pagestate
         pageflow:name: Payment Form
         pageflow:path: /payment
@@ -300,7 +335,7 @@
           jcr:primaryType: pageflow:pagetransition
           pageflow:event: payment.rejected
           pageflow:target: payment
-      /pageflow:pagestate[6]:
+      /pageflow:pagestate[7]:
         jcr:primaryType: pageflow:pagestate
         pageflow:name: Confirmation
         pageflow:path: /confirm
@@ -323,13 +358,17 @@
         pageflow:value: Application Submitted
       /pageflow:eventdef[6]:
         jcr:primaryType: pageflow:metadata
+        pageflow:name: application.reviewed
+        pageflow:value: Application Reviewed
+      /pageflow:eventdef[7]:
+        jcr:primaryType: pageflow:metadata
         pageflow:name: payment.accepted
         pageflow:value: Payment Accepted
-      /pageflow:eventdef[7]:
+      /pageflow:eventdef[8]:
         jcr:primaryType: pageflow:metadata
         pageflow:name: payment.rejected
         pageflow:value: Payment Rejected
-      /pageflow:eventdef[8]:
+      /pageflow:eventdef[9]:
         jcr:primaryType: pageflow:metadata
         pageflow:name: cancel.requested
         pageflow:value: Cancel Requested
