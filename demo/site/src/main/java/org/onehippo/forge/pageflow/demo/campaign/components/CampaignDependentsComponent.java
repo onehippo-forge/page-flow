@@ -15,6 +15,9 @@
  */
 package org.onehippo.forge.pageflow.demo.campaign.components;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.lang.StringUtils;
 import org.hippoecm.hst.core.component.HstComponentException;
 import org.hippoecm.hst.core.component.HstRequest;
@@ -22,24 +25,38 @@ import org.hippoecm.hst.core.component.HstResponse;
 import org.onehippo.forge.pageflow.core.rt.PageFlow;
 import org.onehippo.forge.pageflow.demo.campaign.CampaignConstants;
 import org.onehippo.forge.pageflow.demo.campaign.model.CampaignModel;
+import org.onehippo.forge.pageflow.demo.campaign.model.Dependent;
 
-public class CampaignPlanComponent extends AbstractCampaignComponent {
+public class CampaignDependentsComponent extends AbstractCampaignComponent {
 
-    private static final String PLAN_SINGLE = "single";
-    private static final String PLAN_FAMILY = "family";
+    private static final int MAX_DEPENDENTS = 7;
+
+    @Override
+    public void doBeforeRender(HstRequest request, HstResponse response) throws HstComponentException {
+        super.doBeforeRender(request, response);
+        request.setAttribute("maxDependents", MAX_DEPENDENTS);
+    }
 
     @Override
     public void doAction(HstRequest request, HstResponse response) throws HstComponentException {
-        final String planName = StringUtils.trim(request.getParameter("plan"));
-
         final PageFlow pageFlow = getPageFlow();
-        final CampaignModel campaignModel = (CampaignModel) pageFlow.getAttribute(CampaignConstants.DEFAULT_MODEL_NAME);
-        campaignModel.setPlanName(planName);
 
-        if (StringUtils.equals(PLAN_SINGLE, planName)) {
-            pageFlow.sendEvent(CampaignConstants.EVENT_SINGLE_PLAN_SELECTED);
-        } else if (StringUtils.equals(PLAN_FAMILY, planName)) {
-            pageFlow.sendEvent(CampaignConstants.EVENT_FAMILY_PLAN_SELECTED);
+        final CampaignModel campaignModel = (CampaignModel) pageFlow.getAttribute(CampaignConstants.DEFAULT_MODEL_NAME);
+        final List<Dependent> dependents = new ArrayList<>();
+
+        for (int i = 1; i <= MAX_DEPENDENTS; i++) {
+            final String firstName = StringUtils.trim(request.getParameter("dependentFirstName" + i));
+            final String lastName = StringUtils.trim(request.getParameter("dependentLastName" + i));
+
+            if (StringUtils.isNotEmpty(firstName) && StringUtils.isNotEmpty(lastName)) {
+                Dependent dependent = new Dependent(firstName, lastName);
+                dependents.add(dependent);
+            }
+        }
+
+        if (!dependents.isEmpty()) {
+            campaignModel.setDependents(dependents);
+            pageFlow.sendEvent(CampaignConstants.EVENT_FAMILY_DEPENDENTS_FILLED);
         }
     }
 

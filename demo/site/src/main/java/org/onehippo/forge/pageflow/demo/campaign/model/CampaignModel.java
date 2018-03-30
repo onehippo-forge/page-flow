@@ -16,6 +16,9 @@
 package org.onehippo.forge.pageflow.demo.campaign.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class CampaignModel implements Serializable {
 
@@ -33,6 +36,7 @@ public class CampaignModel implements Serializable {
     private String cardNumber;
     private String cardType;
     private boolean acknowledged;
+    private List<Dependent> dependents;
 
     public String getPlanName() {
         return planName;
@@ -128,6 +132,22 @@ public class CampaignModel implements Serializable {
 
     public void setAcknowledged(boolean acknowledged) {
         this.acknowledged = acknowledged;
+    }
+
+    public List<Dependent> getDependents() {
+        if (dependents == null) {
+            return Collections.emptyList();
+        }
+
+        return Collections.unmodifiableList(dependents);
+    }
+
+    public void setDependents(List<Dependent> dependents) {
+        this.dependents = new ArrayList<>();
+
+        if (dependents != null) {
+            this.dependents.addAll(dependents);
+        }
     }
 
 }

@@ -41,3 +41,6 @@ definitions:
       /campaign-campaignpage-main:
         jcr:primaryType: hst:template
         hst:renderpath: webfile:/freemarker/campaignbase/campaign-campaignpage-main.ftl
+      /campaign-dependents:
+        jcr:primaryType: hst:template
+        hst:renderpath: webfile:/freemarker/campaignbase/campaign-dependents.ftl

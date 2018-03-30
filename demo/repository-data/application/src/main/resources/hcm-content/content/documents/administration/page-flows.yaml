@@ -17,7 +17,7 @@
       hippostd:state: unpublished
       hippostdpubwf:createdBy: admin
       hippostdpubwf:creationDate: 2018-03-02T12:35:00.844-05:00
-      hippostdpubwf:lastModificationDate: 2018-03-08T12:38:28.950-05:00
+      hippostdpubwf:lastModificationDate: 2018-03-30T16:22:31.387-04:00
       hippostdpubwf:lastModifiedBy: admin
       hippotranslation:id: 786972dc-93c3-4119-a56f-97873ddd2096
       hippotranslation:locale: document-type-locale
@@ -42,11 +42,24 @@
         pageflow:name: Select a Plan
         pageflow:path: /plan
         pageflow:stateid: plan
+        /pageflow:pagetransition[1]:
+          jcr:primaryType: pageflow:pagetransition
+          pageflow:event: single.plan.selected
+          pageflow:target: application
+        /pageflow:pagetransition[2]:
+          jcr:primaryType: pageflow:pagetransition
+          pageflow:event: family.plan.selected
+          pageflow:target: dependents
+      /pageflow:pagestate[3]:
+        jcr:primaryType: pageflow:pagestate
+        pageflow:name: Enter Dependents
+        pageflow:path: /dependents
+        pageflow:stateid: dependents
         /pageflow:pagetransition:
           jcr:primaryType: pageflow:pagetransition
-          pageflow:event: plan.selected
+          pageflow:event: family.dependents.filled
           pageflow:target: application
-      /pageflow:pagestate[3]:
+      /pageflow:pagestate[4]:
         jcr:primaryType: pageflow:pagestate
         pageflow:name: Application Form
         pageflow:path: /application
@@ -55,7 +68,7 @@
           jcr:primaryType: pageflow:pagetransition
           pageflow:event: application.submitted
           pageflow:target: payment
-      /pageflow:pagestate[4]:
+      /pageflow:pagestate[5]:
         jcr:primaryType: pageflow:pagestate
         pageflow:name: Payment Form
         pageflow:path: /payment
@@ -68,28 +81,36 @@
           jcr:primaryType: pageflow:pagetransition
           pageflow:event: payment.rejected
           pageflow:target: payment
-      /pageflow:pagestate[5]:
+      /pageflow:pagestate[6]:
         jcr:primaryType: pageflow:pagestate
         pageflow:name: Confirmation
         pageflow:path: /confirm
         pageflow:stateid: confirm
       /pageflow:eventdef[2]:
         jcr:primaryType: pageflow:metadata
-        pageflow:name: plan.selected
-        pageflow:value: Plan Selected
+        pageflow:name: single.plan.selected
+        pageflow:value: Single Plan Selected
       /pageflow:eventdef[3]:
+        jcr:primaryType: pageflow:metadata
+        pageflow:name: family.plan.selected
+        pageflow:value: Family Plan Selected
+      /pageflow:eventdef[4]:
+        jcr:primaryType: pageflow:metadata
+        pageflow:name: family.dependents.filled
+        pageflow:value: Family Eependents Filled
+      /pageflow:eventdef[5]:
         jcr:primaryType: pageflow:metadata
         pageflow:name: application.submitted
         pageflow:value: Application Submitted
-      /pageflow:eventdef[4]:
+      /pageflow:eventdef[6]:
         jcr:primaryType: pageflow:metadata
         pageflow:name: payment.accepted
         pageflow:value: Payment Accepted
-      /pageflow:eventdef[5]:
+      /pageflow:eventdef[7]:
         jcr:primaryType: pageflow:metadata
         pageflow:name: payment.rejected
         pageflow:value: Payment Rejected
-      /pageflow:eventdef[6]:
+      /pageflow:eventdef[8]:
         jcr:primaryType: pageflow:metadata
         pageflow:name: cancel.requested
         pageflow:value: Cancel Requested
@@ -105,9 +126,9 @@
       hippostd:state: published
       hippostdpubwf:createdBy: admin
       hippostdpubwf:creationDate: 2018-03-02T12:35:00.844-05:00
-      hippostdpubwf:lastModificationDate: 2018-03-08T12:38:28.950-05:00
+      hippostdpubwf:lastModificationDate: 2018-03-30T16:22:31.387-04:00
       hippostdpubwf:lastModifiedBy: admin
-      hippostdpubwf:publicationDate: 2018-03-08T12:39:58.352-05:00
+      hippostdpubwf:publicationDate: 2018-03-30T16:22:35.258-04:00
       hippotranslation:id: 786972dc-93c3-4119-a56f-97873ddd2096
       hippotranslation:locale: document-type-locale
       pageflow:description: Campaign 1 Page Flow
@@ -131,11 +152,24 @@
         pageflow:name: Select a Plan
         pageflow:path: /plan
         pageflow:stateid: plan
+        /pageflow:pagetransition[1]:
+          jcr:primaryType: pageflow:pagetransition
+          pageflow:event: single.plan.selected
+          pageflow:target: application
+        /pageflow:pagetransition[2]:
+          jcr:primaryType: pageflow:pagetransition
+          pageflow:event: family.plan.selected
+          pageflow:target: dependents
+      /pageflow:pagestate[3]:
+        jcr:primaryType: pageflow:pagestate
+        pageflow:name: Enter Dependents
+        pageflow:path: /dependents
+        pageflow:stateid: dependents
         /pageflow:pagetransition:
           jcr:primaryType: pageflow:pagetransition
-          pageflow:event: plan.selected
+          pageflow:event: family.dependents.filled
           pageflow:target: application
-      /pageflow:pagestate[3]:
+      /pageflow:pagestate[4]:
         jcr:primaryType: pageflow:pagestate
         pageflow:name: Application Form
         pageflow:path: /application
@@ -144,7 +178,7 @@
           jcr:primaryType: pageflow:pagetransition
           pageflow:event: application.submitted
           pageflow:target: payment
-      /pageflow:pagestate[4]:
+      /pageflow:pagestate[5]:
         jcr:primaryType: pageflow:pagestate
         pageflow:name: Payment Form
         pageflow:path: /payment
@@ -157,28 +191,36 @@
           jcr:primaryType: pageflow:pagetransition
           pageflow:event: payment.rejected
           pageflow:target: payment
-      /pageflow:pagestate[5]:
+      /pageflow:pagestate[6]:
         jcr:primaryType: pageflow:pagestate
         pageflow:name: Confirmation
         pageflow:path: /confirm
         pageflow:stateid: confirm
       /pageflow:eventdef[2]:
         jcr:primaryType: pageflow:metadata
-        pageflow:name: plan.selected
-        pageflow:value: Plan Selected
+        pageflow:name: single.plan.selected
+        pageflow:value: Single Plan Selected
       /pageflow:eventdef[3]:
+        jcr:primaryType: pageflow:metadata
+        pageflow:name: family.plan.selected
+        pageflow:value: Family Plan Selected
+      /pageflow:eventdef[4]:
+        jcr:primaryType: pageflow:metadata
+        pageflow:name: family.dependents.filled
+        pageflow:value: Family Eependents Filled
+      /pageflow:eventdef[5]:
         jcr:primaryType: pageflow:metadata
         pageflow:name: application.submitted
         pageflow:value: Application Submitted
-      /pageflow:eventdef[4]:
+      /pageflow:eventdef[6]:
         jcr:primaryType: pageflow:metadata
         pageflow:name: payment.accepted
         pageflow:value: Payment Accepted
-      /pageflow:eventdef[5]:
+      /pageflow:eventdef[7]:
         jcr:primaryType: pageflow:metadata
         pageflow:name: payment.rejected
         pageflow:value: Payment Rejected
-      /pageflow:eventdef[6]:
+      /pageflow:eventdef[8]:
         jcr:primaryType: pageflow:metadata
         pageflow:name: cancel.requested
         pageflow:value: Cancel Requested
@@ -194,7 +236,7 @@
       hippostd:state: draft
       hippostdpubwf:createdBy: admin
       hippostdpubwf:creationDate: 2018-03-02T12:35:00.844-05:00
-      hippostdpubwf:lastModificationDate: 2018-03-08T12:39:42.921-05:00
+      hippostdpubwf:lastModificationDate: 2018-03-30T16:16:39.843-04:00
       hippostdpubwf:lastModifiedBy: admin
       hippotranslation:id: 786972dc-93c3-4119-a56f-97873ddd2096
       hippotranslation:locale: document-type-locale
@@ -219,11 +261,24 @@
         pageflow:name: Select a Plan
         pageflow:path: /plan
         pageflow:stateid: plan
+        /pageflow:pagetransition[1]:
+          jcr:primaryType: pageflow:pagetransition
+          pageflow:event: single.plan.selected
+          pageflow:target: application
+        /pageflow:pagetransition[2]:
+          jcr:primaryType: pageflow:pagetransition
+          pageflow:event: family.plan.selected
+          pageflow:target: dependents
+      /pageflow:pagestate[3]:
+        jcr:primaryType: pageflow:pagestate
+        pageflow:name: Enter Dependents
+        pageflow:path: /dependents
+        pageflow:stateid: dependents
         /pageflow:pagetransition:
           jcr:primaryType: pageflow:pagetransition
-          pageflow:event: plan.selected
+          pageflow:event: family.dependents.filled
           pageflow:target: application
-      /pageflow:pagestate[3]:
+      /pageflow:pagestate[4]:
         jcr:primaryType: pageflow:pagestate
         pageflow:name: Application Form
         pageflow:path: /application
@@ -232,7 +287,7 @@
           jcr:primaryType: pageflow:pagetransition
           pageflow:event: application.submitted
           pageflow:target: payment
-      /pageflow:pagestate[4]:
+      /pageflow:pagestate[5]:
         jcr:primaryType: pageflow:pagestate
         pageflow:name: Payment Form
         pageflow:path: /payment
@@ -245,28 +300,36 @@
           jcr:primaryType: pageflow:pagetransition
           pageflow:event: payment.rejected
           pageflow:target: payment
-      /pageflow:pagestate[5]:
+      /pageflow:pagestate[6]:
         jcr:primaryType: pageflow:pagestate
         pageflow:name: Confirmation
         pageflow:path: /confirm
         pageflow:stateid: confirm
       /pageflow:eventdef[2]:
         jcr:primaryType: pageflow:metadata
-        pageflow:name: plan.selected
-        pageflow:value: Plan Selected
+        pageflow:name: single.plan.selected
+        pageflow:value: Single Plan Selected
       /pageflow:eventdef[3]:
+        jcr:primaryType: pageflow:metadata
+        pageflow:name: family.plan.selected
+        pageflow:value: Family Plan Selected
+      /pageflow:eventdef[4]:
+        jcr:primaryType: pageflow:metadata
+        pageflow:name: family.dependents.filled
+        pageflow:value: Family Eependents Filled
+      /pageflow:eventdef[5]:
         jcr:primaryType: pageflow:metadata
         pageflow:name: application.submitted
         pageflow:value: Application Submitted
-      /pageflow:eventdef[4]:
+      /pageflow:eventdef[6]:
         jcr:primaryType: pageflow:metadata
         pageflow:name: payment.accepted
         pageflow:value: Payment Accepted
-      /pageflow:eventdef[5]:
+      /pageflow:eventdef[7]:
         jcr:primaryType: pageflow:metadata
         pageflow:name: payment.rejected
         pageflow:value: Payment Rejected
-      /pageflow:eventdef[6]:
+      /pageflow:eventdef[8]:
         jcr:primaryType: pageflow:metadata
         pageflow:name: cancel.requested
         pageflow:value: Cancel Requested
