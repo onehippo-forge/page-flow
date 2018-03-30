@@ -126,7 +126,7 @@ public class TransitionTargetPageStateServiceFacade implements ExternalDocumentS
 
     @Override
     public String getDocumentIconLink(ExternalDocumentServiceContext context, PageStateInfo pageState, Locale locale) {
-        return "";
+        return "skin/images/icons/domain-48.png";
     }
 
     @Override

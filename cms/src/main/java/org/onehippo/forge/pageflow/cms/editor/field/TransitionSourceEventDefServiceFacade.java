@@ -121,7 +121,7 @@ public class TransitionSourceEventDefServiceFacade implements ExternalDocumentSe
 
     @Override
     public String getDocumentIconLink(ExternalDocumentServiceContext context, EventDefInfo eventDef, Locale locale) {
-        return "";
+        return "skin/images/icons/mail-48.png";
     }
 
     @Override
