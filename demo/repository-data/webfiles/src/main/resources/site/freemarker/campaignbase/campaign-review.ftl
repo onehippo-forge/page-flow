@@ -107,8 +107,38 @@
           <br/>
           <input type="submit" name="action" value="Cancel" />
           <input type="submit" name="action" value="Next" />
+          <a id="nextFromClientSide" href="#">Next from client-side</a>
         </th>
       </tr>
     </table>
   </form>
 </div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+  $("#nextFromClientSide").click(function() {
+    var curPageStateId = null;
+    <#if pageFlow??>
+      curPageStateId = "${pageFlow.pageState.id}";
+    </#if>
+
+    var resourceUri = "<@hst.resourceURL resourceId='sendEvent' escapeXml=false />";
+    var params = { "reviewed": true };
+
+    $.post(resourceUri, params)
+      .done(function(data) {
+        if (data) {
+          var dataObj = $.parseJSON(data);
+          if ((dataObj.pageState) && (dataObj.pageState.id != curPageStateId) && (dataObj.pageState.path)) {
+            location.href = dataObj.pageState.path.substring(1);
+          }
+        }
+      });
+
+    return false;
+  });
+
+});
+</script>
+

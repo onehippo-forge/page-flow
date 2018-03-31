@@ -60,3 +60,4 @@ definitions:
           hst:label: Campaign Review
           hst:template: campaign-review
           hst:xtype: hst.item
+          hst:resourcetemplate: campaign-review-resource

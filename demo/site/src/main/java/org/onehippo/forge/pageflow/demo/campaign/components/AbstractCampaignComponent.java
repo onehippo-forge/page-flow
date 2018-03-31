@@ -42,14 +42,7 @@ public abstract class AbstractCampaignComponent extends BaseHstComponent {
 
     @Override
     public void doBeforeRender(HstRequest request, HstResponse response) throws HstComponentException {
-        final PageFlow pageFlow = getPageFlow();
-        request.setAttribute("pageFlow", pageFlow);
-
-        final CampaignModel campaignModel = (CampaignModel) pageFlow.getAttribute(CampaignConstants.DEFAULT_MODEL_NAME);
-
-        if (campaignModel != null) {
-            request.setAttribute("campaignModel", campaignModel);
-        }
+        setPageFlowRequestAttributes(request, response);
     }
 
     protected PageFlow getPageFlow() {
@@ -79,5 +72,16 @@ public abstract class AbstractCampaignComponent extends BaseHstComponent {
         final Locale locale = requestContext.getPreferredLocale();
 
         return new DefaultErrorItem(resourceBundle, locale, code, arguments, defaultMessage);
+    }
+
+    private void setPageFlowRequestAttributes(HstRequest request, HstResponse response) throws HstComponentException {
+        final PageFlow pageFlow = getPageFlow();
+        request.setAttribute("pageFlow", pageFlow);
+
+        final CampaignModel campaignModel = (CampaignModel) pageFlow.getAttribute(CampaignConstants.DEFAULT_MODEL_NAME);
+
+        if (campaignModel != null) {
+            request.setAttribute("campaignModel", campaignModel);
+        }
     }
 }

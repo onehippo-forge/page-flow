@@ -13,6 +13,7 @@
         jcr:primaryType: hst:containeritemcomponent
         hst:componentclassname: org.onehippo.forge.pageflow.demo.campaign.components.CampaignReviewComponent
         hst:iconpath: images/campaignbase/catalog-component-icons/campaign-default.png
-        hst:label: Campaign Confirmation
+        hst:label: Campaign Review
+        hst:resourcetemplate: campaign-review-resource
         hst:template: campaign-review
         hst:xtype: hst.item

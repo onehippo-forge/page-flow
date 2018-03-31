@@ -47,3 +47,6 @@ definitions:
       /campaign-review:
         jcr:primaryType: hst:template
         hst:renderpath: webfile:/freemarker/campaignbase/campaign-review.ftl
+      /campaign-review-resource:
+        jcr:primaryType: hst:template
+        hst:renderpath: webfile:/freemarker/campaignbase/campaign-review-resource.ftl

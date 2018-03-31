@@ -15,7 +15,8 @@
  */
 package org.onehippo.forge.pageflow.demo.campaign.components;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang.BooleanUtils;
+import org.apache.commons.lang.StringUtils;
 import org.hippoecm.hst.core.component.HstComponentException;
 import org.hippoecm.hst.core.component.HstRequest;
 import org.hippoecm.hst.core.component.HstResponse;
@@ -36,6 +37,19 @@ public class CampaignReviewComponent extends AbstractCampaignComponent {
         }
 
         pageFlow.sendEvent(CampaignConstants.EVENT_APPLICATION_REVIEWED);
+    }
+
+    @Override
+    public void doBeforeServeResource(HstRequest request, HstResponse response) throws HstComponentException {
+        if (StringUtils.equals("sendEvent", request.getResourceID())) {
+            final boolean reviewed = BooleanUtils.toBoolean(request.getParameter("reviewed"));
+
+            if (reviewed) {
+                final PageFlow pageFlow = getPageFlow();
+                request.setAttribute("pageFlow", pageFlow);
+                pageFlow.sendEvent(CampaignConstants.EVENT_APPLICATION_REVIEWED);
+            }
+        }
     }
 
 }
