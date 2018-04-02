@@ -50,6 +50,8 @@ not in multiple, totally-separated HST pages.
 The *multi-step* interaction solution in an <code>HstComponent</code> window level has the following disadvantages:
 
 - It is not possible to use a different HST page layout in a step page because the solution works in an <code>HstComponent</code> window level.
+- It is not so flexible for developers to implement each step page because all the interactions must be configured or implemented
+in the specific *multi-step* interaction framework such as [Enterprise Forms](https://www.onehippo.org/library/enterprise/enterprise-features/enterprise-forms/enterprise-forms.html).
 - Business users cannot configure different
 [Relevance](https://www.onehippo.org/library/enterprise/enterprise-features/targeting/targeting.html)
 personalization on each step HST page separately (e.g, setting a different banner above the form in a step)
@@ -62,13 +64,18 @@ because the solution resides only in single <code>HstComponent</code> window.
 
 ### Features
 
-TODO
+- Generic Page Flow Definitions as documents in Hippo CMS authoring application.
+- Generic Page Flow Handling Runtime, which uses [Spring Statemachine](https://projects.spring.io/spring-statemachine/) library under the hood.
+- Generic HST SiteMap Item Handler for automatic Page Flow resolution and redirection.
+- Generic ChannelInfo interface for easy creation of campaign channel.
+- Generic JCR Observation Event Listener to refresh Page Flow definitions automatically.
 
 ### Module Overview
 
 #### **pageflow-core** JAR module
 
-- Generic APIs for both Page Flow definitions and web application runtime.
+- Generic APIs for both Page Flow definitions and web application runtime,
+  leverating [Spring Statemachine](https://projects.spring.io/spring-statemachine/) library under the hood.
 
 #### **pageflow-hst** JAR module
 
@@ -77,6 +84,7 @@ TODO
 <code>org.onehippo.forge.pageflow.hst.sitemapitemhandler.PageFlowControlHstSiteMapItemHandler</code>,
 handling active <code>PageFlow</code> and automatic redirection based on the states of <code>PageFlow</code>.
 - Default <code>ChannelInfo</code> interface for Channel Manager.
+- Generic JCR Observation Event Listener implementation to invalidate cached Page Flow definitions.
 
 #### **pageflow-repository** JAR module
 
