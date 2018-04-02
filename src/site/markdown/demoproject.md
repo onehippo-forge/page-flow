@@ -45,4 +45,4 @@ Visit http://localhost:8080/site/campaign1.
 
 ![Page Step 7](images/demostep7.png "Page Step 7")
 
-![Demo Page Flow Definition](images/demoflowdef.png "Demo Page Flow Definition")
+![Demo Page Flow Definition 1](images/demoflowdef1.png "Demo Page Flow Definition 1")
