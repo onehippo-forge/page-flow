@@ -13,7 +13,7 @@
 [//]: # (  See the License for the specific language governing permissions and  )
 [//]: # (  limitations under the License.  )
 
-# How to install
+## How to install
 
 Make sure you have the Forge Maven2 repository reference and dependency definition in the root pom.xml of your project.
 

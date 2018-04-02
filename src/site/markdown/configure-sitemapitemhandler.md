@@ -13,8 +13,6 @@
 [//]: # (  See the License for the specific language governing permissions and  )
 [//]: # (  limitations under the License.  )
 
-# Configuring HstSiteMapItemHandler
-
 ## Register PageFlowControlHstSiteMapItemHandler in HST Configuration
 
 **PageFlowControlHstSiteMapItemHandler** is a generic [custom HstSiteMapItemHandler](https://www.onehippo.org/library/concepts/hst-configuration-model/advanced/sitemapitem-handlers.html)

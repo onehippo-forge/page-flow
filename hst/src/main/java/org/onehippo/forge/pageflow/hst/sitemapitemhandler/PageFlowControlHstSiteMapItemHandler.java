@@ -28,6 +28,7 @@ import org.hippoecm.hst.container.RequestContextProvider;
 import org.hippoecm.hst.core.request.ResolvedSiteMapItem;
 import org.hippoecm.hst.core.request.SiteMapItemHandlerConfiguration;
 import org.hippoecm.hst.core.sitemapitemhandler.AbstractFilterChainAwareHstSiteMapItemHandler;
+import org.hippoecm.hst.core.sitemapitemhandler.HstSiteMapItemHandler;
 import org.hippoecm.hst.core.sitemapitemhandler.HstSiteMapItemHandlerException;
 import org.hippoecm.hst.util.PathUtils;
 import org.onehippo.forge.pageflow.core.rt.PageFlow;
@@ -114,10 +115,19 @@ public class PageFlowControlHstSiteMapItemHandler extends AbstractFilterChainAwa
         return processDefaultResolvedSiteMapItem(request, response, filterChain, resolvedSiteMapItem);
     }
 
+    /**
+     * Return SiteMapItemHandlerConfiguration.
+     * @return SiteMapItemHandlerConfiguration
+     */
     protected SiteMapItemHandlerConfiguration getSiteMapItemHandlerConfiguration() {
         return siteMapItemHandlerConfiguration;
     }
 
+    /**
+     * Get a {@link PageFlowControl} instance for this request.
+     * @param request servlet request
+     * @return a {@link PageFlowControl} instance for this request
+     */
     protected PageFlowControl getPageFlowControl(HttpServletRequest request) {
         PageFlowControl flowControl = pageFlowControl;
 
@@ -135,10 +145,21 @@ public class PageFlowControlHstSiteMapItemHandler extends AbstractFilterChainAwa
         return flowControl;
     }
 
+    /**
+     * Create a {@link PageFlowControl} for this request.
+     * @param request servlet request
+     * @return a {@link PageFlowControl} for this request
+     */
     protected PageFlowControl createPageFlowControl(HttpServletRequest request) {
         return new DefaultHstPageFlowControl();
     }
 
+    /**
+     * Return an active {@link PageFlow} instance for this request.
+     * @param request servlet request
+     * @param flowControl {@link PageFlowControl} instance
+     * @return an active {@link PageFlow} instance for this request
+     */
     protected PageFlow getActivePageFlow(HttpServletRequest request, PageFlowControl flowControl) {
         PageFlow pageFlow = flowControl.getPageFlow(request);
 
@@ -156,6 +177,14 @@ public class PageFlowControlHstSiteMapItemHandler extends AbstractFilterChainAwa
         return pageFlow;
     }
 
+    /**
+     * Process the current resolved sitemap item by the default behavior, without any custom behavior from Page Flow Module.
+     * @param request servlet request
+     * @param response servlet response
+     * @param filterChain servlet filter chain
+     * @param resolvedSiteMapItem resolved sitemap item
+     * @return resolved sitemap item, the same meaning as {@link HstSiteMapItemHandler#process(ResolvedSiteMapItem, HttpServletRequest, HttpServletResponse)}.
+     */
     protected ResolvedSiteMapItem processDefaultResolvedSiteMapItem(HttpServletRequest request,
             HttpServletResponse response, FilterChain filterChain, ResolvedSiteMapItem resolvedSiteMapItem) {
         if (resolvedSiteMapItem == null) {
@@ -169,6 +198,14 @@ public class PageFlowControlHstSiteMapItemHandler extends AbstractFilterChainAwa
         return resolvedSiteMapItem;
     }
 
+    /**
+     * Get the configuration property value on the {@code resolvedSiteMapItem}.
+     * @param name configuration property name
+     * @param resolvedSiteMapItem resolved sitemap item
+     * @param type expected configuration value type
+     * @param defaultValue default value
+     * @return the configuration property value on the {@code resolvedSiteMapItem}
+     */
     protected <T> T getConfigurationProperty(String name, ResolvedSiteMapItem resolvedSiteMapItem, Class<T> type,
             T defaultValue) {
         T value = null;
@@ -188,6 +225,14 @@ public class PageFlowControlHstSiteMapItemHandler extends AbstractFilterChainAwa
         return (value != null) ? value : defaultValue;
     }
 
+    /**
+     * Return true if the current {@code request} is for the specific {@code pageState} by comparing the {@code pathInfo}
+     * of the {@code request} with the {@code path} of the {@code pageState}.
+     * @param request servlet request
+     * @param pageState page state
+     * @return true if the current {@code request} is for the specific {@code pageState} by comparing the {@code pathInfo}
+     * of the {@code request} with the {@code path} of the {@code pageState}
+     */
     protected boolean isRequestForPageState(final HttpServletRequest request, final PageState pageState) {
         final String normalizedPagePath = PathUtils.normalizePath(StringUtils.defaultString(pageState.getPath()));
         final String normalizedPathInfo = PathUtils.normalizePath(StringUtils.defaultString(request.getPathInfo()));

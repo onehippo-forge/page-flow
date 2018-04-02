@@ -13,8 +13,20 @@
 [//]: # (  See the License for the specific language governing permissions and  )
 [//]: # (  limitations under the License.  )
 
-# FAQ
+## Demo Application
 
-#### Question 1
+You can build and install the module locally first in the project root folder.
 
-TODO
+```bash
+$ mvn clean install
+```
+
+And you can build and run the [demo](demo) project:
+
+```bash
+$ cd demo
+$ mvn clean verify && mvn -Pcargo.run
+```
+
+Visit http://localhost:8080/site/campaign1.
+

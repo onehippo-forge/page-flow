@@ -13,8 +13,6 @@
 [//]: # (  See the License for the specific language governing permissions and  )
 [//]: # (  limitations under the License.  )
 
-# Developer's How-to
-
-## Introduction
+## Developer's How-to
 
 TODO
