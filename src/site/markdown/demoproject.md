@@ -30,3 +30,17 @@ $ mvn clean verify && mvn -Pcargo.run
 
 Visit http://localhost:8080/site/campaign1.
 
+
+![Page Step 1](images/demostep1.png "Page Step 1")
+
+![Page Step 2](images/demostep2.png "Page Step 2")
+
+![Page Step 3](images/demostep3.png "Page Step 3")
+
+![Page Step 4](images/demostep4.png "Page Step 4")
+
+![Page Step 5](images/demostep5.png "Page Step 5")
+
+![Page Step 6](images/demostep6.png "Page Step 6")
+
+![Page Step 7](images/demostep7.png "Page Step 7")

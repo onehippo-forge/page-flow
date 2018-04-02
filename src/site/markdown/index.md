@@ -60,6 +60,10 @@ because the solution resides only in single <code>HstComponent</code> window.
 
 **Page Flow Module** provides solutions for all those problems listed above.
 
+### Features
+
+TODO
+
 ### Module Overview
 
 #### **pageflow-core** JAR module
