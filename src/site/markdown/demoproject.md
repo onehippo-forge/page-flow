@@ -37,38 +37,51 @@ For testing, visit http://localhost:8080/site/campaign1.
 In the demo project, the Page Flow definition for the channel (http://localhost:8080/site/campaign1) is defined
 in the following document:
 
-![Demo Page Flow Definition 1](images/demoflowdef1.png "Demo Page Flow Definition 1")
+> ![Demo Page Flow Definition 1](images/demoflowdef1.png "Demo Page Flow Definition 1")
 
 The above Page Flow Definition document is equivalent to the following Finite State Machine diagram:
 
-![Demo Finite State Machine 1](images/demoflowfsm1.png "Demo Finite State Machine 1")
+> ![Demo Finite State Machine 1](images/demoflowfsm1.png "Demo Finite State Machine 1")
 
-### Example User Interactions in Demo Project
+- Visitor starts the journey by visiting the **Landing Page** page state.
+- On "start.quote" event (usually an event is triggerd by a user's action in the step page), it would
+be transitioned to **Plan Selection** page state.
+- On "family.plan.selected" event, it would be transitioned to **Dependents Entry** page state, which would be
+  transitioned to **Application Entry** page state afterward.
+  Or on "single.plan.selected" event, it would be transitioned to **Application Entry** page state directly.
+- On "application.submitted" event, it would be transitioned to **Review** page state.
+- On "application.reviewed" event, it would be transitioned to **Payment** page state.
+- On "payment.accepted" event, it would be transitioned to **Confirmation** page state, which leads to **Final End** state.
+  Or on "payment.rejected" event, it would stay in the **Payment** page state.
+- **Application Entry**, **Review** and **Payment** page states could be transitioned back to the **Landing Page** page state
+  on "cancel.requested" event.
 
-#### Page Step #: Landing Page
+### Example Page Flow Implementation in Demo Project
 
-![Page Step 1](images/demostep1.png "Page Step 1")
+#### 1. Page State: Landing Page
 
-#### Page Step #: Plan Selection
+> ![Page Step 1](images/demostep1.png "Page Step 1")
 
-![Page Step 2](images/demostep2.png "Page Step 2")
+#### 2. Page State: Plan Selection
 
-#### Page Step #: Enter Dependents
+> ![Page Step 2](images/demostep2.png "Page Step 2")
 
-![Page Step 3](images/demostep3.png "Page Step 3")
+#### 3. Page State: Enter Dependents
 
-#### Page Step #: Application Form
+> ![Page Step 3](images/demostep3.png "Page Step 3")
 
-![Page Step 4](images/demostep4.png "Page Step 4")
+#### 4. Page State: Application Form
 
-#### Page Step #: Review
+> ![Page Step 4](images/demostep4.png "Page Step 4")
 
-![Page Step 5](images/demostep5.png "Page Step 5")
+#### 5. Page State: Review
 
-#### Page Step #: Payment Form
+> ![Page Step 5](images/demostep5.png "Page Step 5")
 
-![Page Step 6](images/demostep6.png "Page Step 6")
+#### 6. Page State: Payment Form
 
-#### Page Step #: Confirmation
+> ![Page Step 6](images/demostep6.png "Page Step 6")
 
-![Page Step 7](images/demostep7.png "Page Step 7")
+#### 7. Page State: Confirmation
+
+> ![Page Step 7](images/demostep7.png "Page Step 7")
