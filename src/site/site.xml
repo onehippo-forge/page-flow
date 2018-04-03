@@ -38,10 +38,7 @@
       <item name="Home" href="index.html" />
       <item name="Demo Project" href="demoproject.html" />
       <item name="Installation" href="install.html" />
-      <item name="Configuration" href="configure.html">
-        <item name="Configuring HstSiteMapItemHandler" href="configure-sitemapitemhandler.html" />
-        <item name="Configuring Page Flow Definition" href="configure-pageflowdefinition.html" />
-      </item>
+      <item name="Configuration" href="configure.html" />
       <item name="Developer's How-to" href="dev-howto.html" />
       <item name="JavaDocs" href="apidocs/index.html" />
       <item name="Release Notes" href="release-notes.html" />
