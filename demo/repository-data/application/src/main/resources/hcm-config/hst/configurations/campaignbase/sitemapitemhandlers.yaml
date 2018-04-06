@@ -1,9 +1,0 @@
-definitions:
-  config:
-    /hst:hst/hst:configurations/campaignbase/hst:sitemapitemhandlers:
-      jcr:primaryType: hst:sitemapitemhandlers
-      /pageflowcontrolhandler:
-        jcr:primaryType: hst:sitemapitemhandler
-        hst:sitemapitemhandlerclassname: org.onehippo.forge.pageflow.hst.sitemapitemhandler.PageFlowControlHstSiteMapItemHandler
-        auto.redirection.enabled: true
-        enabled: true

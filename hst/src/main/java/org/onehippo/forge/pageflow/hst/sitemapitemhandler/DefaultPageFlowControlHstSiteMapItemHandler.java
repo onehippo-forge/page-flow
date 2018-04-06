@@ -40,9 +40,9 @@ import org.slf4j.LoggerFactory;
 /**
  * Default generic <code>HstSiteMapItemHandler</code> implementation to integrate with Page Flow module.
  */
-public class PageFlowControlHstSiteMapItemHandler extends AbstractFilterChainAwareHstSiteMapItemHandler {
+public class DefaultPageFlowControlHstSiteMapItemHandler extends AbstractFilterChainAwareHstSiteMapItemHandler {
 
-    private static Logger log = LoggerFactory.getLogger(PageFlowControlHstSiteMapItemHandler.class);
+    private static Logger log = LoggerFactory.getLogger(DefaultPageFlowControlHstSiteMapItemHandler.class);
 
     public static final String PARAM_ENABLED = "enabled";
     public static final String PARAM_AUTO_REDIRECTION_ENABLED = "auto.redirection.enabled";
