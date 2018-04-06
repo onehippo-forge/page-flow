@@ -15,7 +15,9 @@
 
 ## Installation
 
-Make sure you have the Forge Maven2 repository reference and dependency definition in the root pom.xml of your project.
+### Hippo Forge Maven Repository Configuration
+
+Make sure you have the Forge Maven2 repository reference in the root ```pom.xml``` of your project.
 
 ```xml
   <repositories>
@@ -31,7 +33,16 @@ Make sure you have the Forge Maven2 repository reference and dependency definiti
     <!-- SNIP -->
 
   </repositories>
+```
 
+### Dependency Management
+
+Add all the dependencies in the root ```pom.xml``` of your project.
+
+You also need to add <code>forge.pageflow.version</code> property in the <code>properties</code> section.
+Find the proper version in the [Release Notes](release-notes.html).
+
+```
   <!-- SNIP -->
 
   <dependencyManagement>
@@ -71,7 +82,9 @@ Make sure you have the Forge Maven2 repository reference and dependency definiti
   </dependencyManagement>
 ```
 
-In site/pom.xml, add the following dependency:
+### Dependencies in Content Delivery Web Application
+
+In ```site/pom.xml```, add the following dependency:
 
 ```xml
     <dependency>
@@ -80,7 +93,9 @@ In site/pom.xml, add the following dependency:
     </dependency>
 ```
 
-In cms/pom.xml, add the following dependency:
+### Dependencies in Content Authoring Web Application
+
+In ```cms/pom.xml```, add the following dependencies:
 
 ```xml
     <dependency>
@@ -93,5 +108,3 @@ In cms/pom.xml, add the following dependency:
       <artifactId>pageflow-cms</artifactId>
     </dependency>
 ```
-
-That's it!
