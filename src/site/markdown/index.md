@@ -44,21 +44,21 @@ If you asked this as well, that's really a good question!
 
 You can use [Enterprise Forms](https://www.onehippo.org/library/enterprise/enterprise-features/enterprise-forms/enterprise-forms.html)
 or something similar for that kind of *multi-step* interactions, but that's not *multi-step-pages* actually
-because that kind of *multi-step* interaction solutions are working in an <code>HstComponent</code> window level,
+because that kind of *multi-step* interaction solutions are working in an ```HstComponent``` window level,
 not in multiple, totally-separated HST pages.
 
-The *multi-step* interaction solution in an <code>HstComponent</code> window level has the following disadvantages:
+The *multi-step* interaction solution in an ```HstComponent``` window level has the following disadvantages:
 
-- It is not possible to use a different HST page layout in a step page because the solution works in an <code>HstComponent</code> window level.
+- It is not possible to use a different HST page layout in a step page because the solution works in an ```HstComponent``` window level.
 - It is not so flexible for developers to implement each step page because all the interactions must be configured or implemented
 in the specific *multi-step* interaction framework such as [Enterprise Forms](https://www.onehippo.org/library/enterprise/enterprise-features/enterprise-forms/enterprise-forms.html).
 - Business users cannot configure different
 [Relevance](https://www.onehippo.org/library/enterprise/enterprise-features/targeting/targeting.html)
 personalization on each step HST page separately (e.g, setting a different banner above the form in a step)
-because the solution resides only in single <code>HstComponent</code> window.
+because the solution resides only in single ```HstComponent``` window.
 - Business users cannot configure a conversion goal in a specific step HST page (e.g, final application form page step)
 for an [Experiment](https://www.onehippo.org/library/end-user-manual/experiments/experiments.html)
-because the solution resides only in single <code>HstComponent</code> window.
+because the solution resides only in single ```HstComponent``` window.
 
 **Page Flow Module** provides solutions for all those problems listed above.
 
@@ -79,11 +79,11 @@ because the solution resides only in single <code>HstComponent</code> window.
 
 #### **pageflow-hst** JAR module
 
-- HST-2 specific <code>PageFlowControl</code> implementation
-- HST-2 specific <code>SiteMapItemHandler</code> implementation,
-<code>org.onehippo.forge.pageflow.hst.sitemapitemhandler.PageFlowControlHstSiteMapItemHandler</code>,
-handling active <code>PageFlow</code> and automatic redirection based on the states of <code>PageFlow</code>.
-- Default <code>ChannelInfo</code> interface for Channel Manager.
+- HST-2 specific ```PageFlowControl``` implementation
+- HST-2 specific ```SiteMapItemHandler``` implementation,
+```org.onehippo.forge.pageflow.hst.sitemapitemhandler.PageFlowControlHstSiteMapItemHandler```,
+handling active ```PageFlow``` and automatic redirection based on the states of ```PageFlow```.
+- Default ```ChannelInfo``` interface for Channel Manager.
 - Generic JCR Observation Event Listener implementation to invalidate cached Page Flow definitions.
 
 #### **pageflow-repository** JAR module

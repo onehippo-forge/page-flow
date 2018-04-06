@@ -17,30 +17,38 @@
 
 ### Introduction
 
-TODO
+Configurations include two parts:
 
-### Register PageFlowControlHstSiteMapItemHandler
+1. Configure **Page Flow HstSiteMapItemHandler ID** (```defaultpageflowcontrolhandler``` by default)
+  for a mount or sitemap item.
+1. Configure **Page Flow Definition ID** for a channel, mount or sitemap item.
+1. (Optional) Configure **Page Flow Channel Info** for a channel.
 
-**PageFlowControlHstSiteMapItemHandler** is a generic [custom HstSiteMapItemHandler](https://www.onehippo.org/library/concepts/hst-configuration-model/advanced/sitemapitem-handlers.html)
-implementation to control the page flow based on the page flow definition document.
+**Page Flow HstSiteMapItemHandler ID** (```defaultpageflowcontrolhandler``` by default) must be configured
+in either mount level or sitemap item level. So, Page Flow Module can handle automatic initiation, redirection, etc.
+for a visitor based on the visitor's Page Flow instance lifecycle.
 
-Register the HstSiteMapItemHandler in an HST Configuration node of your channel
-(e.g, ```/hst:hst/hst:configurations/campaign1/hst:sitemapitemhandlers```)
-or in the base HST Configuration node (e.g, ```/hst:hst/hst:configurations/campaignbase/hst:sitemapitemhandlers```)
-or even higher level of the ancestor HST Configuration node if needed (e.g, ```hst:hst/hst:configurations/hst:default/hst:sitemapitemhandlers```)
-like the following:
+Also, **Page Flow Definition ID** must be configured in a channel, mount or sitemap item level.
+So, Page Flow Module will initialize and manage a Page Flow instance based on the configured Page Flow Definition ID.
 
-```
-/pageflowcontrolhandler:
-  jcr:primaryType: hst:sitemapitemhandler
-  auto.redirection.enabled: true
-  enabled: true
-  hst:sitemapitemhandlerclassname: org.onehippo.forge.pageflow.hst.sitemapitemhandler.PageFlowControlHstSiteMapItemHandler
-```
+### Configure **Page Flow HstSiteMapItemHandler ID** (```defaultpageflowcontrolhandler``` by default) for a mount or sitemap item
 
-### Configure PageFlowControlHstSiteMapItemHandler
+One ore more [HstSiteMapItemHandler](https://www.onehippo.org/library/concepts/hst-configuration-model/advanced/sitemapitem-handlers.html)s
+can be configured in either mount level (```@hst:defaultsitemapitemhandlerids``` property) or sitemap item level (```@hst:sitemapitemhandlerids``` property).
 
-#### Option 1: Configure PageFlowControlHstSiteMapItemHandler at Mount (for a Channel)
+It could be very convenient to configure the ```HstSiteMapItemHandler``` ID value in the mount level
+because the same ```HstSiteMapItemHandler```s will be applied to all the resolved sitemap items under the same resolved mount.
+So, you don't need to configure the ```HstSiteMapItemHandler``` ID for each sitemap item configuration again and again.
+This is extremely useful when you have a channel that serves a Page Flow Module driven request processing.
+e.g, "Identity Protection Product Campaign Microsite Channel".
+
+However, if you want to control it in more granular level by having some sitemap items for other page serving,
+and having some other sitemap items for Page Flow Module driven request processing, then you might want to configure
+the the ```HstSiteMapItemHandler``` ID value in each sitemap item level for some selected sitemap items. e.g, "/campaign1", "/campaign1/_any_", ...
+In this case, make sure that you configured the **Page Flow HstSiteMapItemHandler ID** on all the possible sitemap items
+for Page Flow Module driven requests.
+
+#### Scenario 1: Configure **Page Flow HstSiteMapItemHandler ID** in Mount Level
 
 Suppose you have an HST Mount configuration at ```/hst:hst/hst:hosts/dev-localhost/localhost/hst:root/campaign1```
 which is associated with a channel called "Campaign 1".
@@ -48,24 +56,73 @@ which is associated with a channel called "Campaign 1".
 If you want the channel to be controlled by the Page Flow module, then simply add
 the registered HstSiteMapItemHandler name to the ```@hst:defaultsitemapitemhandlerids``` of the mount configuration like the following:
 
+For example,
+
 ```
 /campaign1:
   jcr:primaryType: hst:mount
-  hst:defaultsitemapitemhandlerids: [pageflowcontrolhandler]
+  hst:defaultsitemapitemhandlerids: [defaultpageflowcontrolhandler]
   ...
 ```
 
-Now, every request coming along to the mount will be controlled by the **PageFlowControlHstSiteMapItemHandler**.
+Now, every request coming along to this mount will be controlled by **Page Flow Module**.
 
-#### Option 2: Configure PageFlowControlHstSiteMapItemHandler at SiteMap Items
+#### Scenario 2: Configure **Page Flow HstSiteMapItemHandler ID** in SiteMap Item Level
 
-In general, it is more convenient to configure the HstSiteMapItemHandler in the mount level
-as you don't need to configure it in each sitemap item level.
+You can configure the ```@hst:sitemapitemhandlerids``` property on each sitemap item separately in this scenario.
+If you set the property on specific sitemap items, any requests onto the sitemap items will be controlled by **Page Flow Module**.
+Otherwise, Page Flow module wouldn't do anything for the other sitemap items.
 
-However, sometimes you might want to have some paths in the same channel controlled by the
-Page Flow module, but some others not controlled by the module, for some reasons.
+For example,
 
-In that case, you can configure the ```@hst:sitemapitemhandlerids``` property on each sitemap item separately. If you set the property on a specific sitemap item, any requests onto the sitemap item will be controlled by the Page Flow module. Otherwise, Page Flow module wouldn't do anything for the others.
+```
+/payment:
+  jcr:primaryType: hst:sitemapitem
+  hst:sitemapitemhandlerids: [defaultpageflowcontrolhandler]
+  ...
+```
 
-This might be helpful if you want to have kind of "hybrid" sitemap items in single channel.
+### Configure **Page Flow Definition ID** for a channel, mount or sitemap item
+
+Once you published a **Page Flow Definition** document like shown in the [Demo Project](demoproject.html),
+you can associate the **Page Flow Definition ID** value (the **Flow ID** field value in the editor) to a channel,
+a mount or a sitemap item.
+
+The default **PageFlowControl** implementation (```org.onehippo.forge.pageflow.hst.sitemapitemhandler.DefaultHstPageFlowControl```) resolves the
+current **Page Flow Definition ID** in the following order:
+
+1. If the current servlet request has a non-blank string attribute by name, ```org.onehippo.forge.pageflow.core.rt.PageFlowControl.PAGE_FLOW_ID_ATTR_NAME```,
+   then it is used.
+1. Else if the current ```HttpSession``` has a non-blank string attribute by name, ```org.onehippo.forge.pageflow.core.rt.PageFlowControl.PAGE_FLOW_ID_ATTR_NAME```,
+   then it is used.
+1. Else If the current resolved sitemap item returns a non-blank value for a parameter named ```pageflowid```, it is used.
+1. Else if the current resolved mount is associated with a channel, and if the ```ChannelInfo``` class of the channel is type of ```org.onehippo.forge.pageflow.hst.channel.PageFlowSiteInfo```,
+   and if the channel info object returns a non-blank value on ```PageFlowSiteInfo#getDefaultPageFlowId()```,
+   then it is used.
+   If the ```ChannelInfo``` is not null but is not type of ```org.onehippo.forge.pageflow.hst.channel.PageFlowSiteInfo```,
+   then the channel property named ```pageflowid``` will be read. If the value is non-blank, it is used.
+1. Else if the resolved mount's mount property or normal property named ```pageflowid``` will be read. If not blank, it is used.
+1. Otherwise, it will fail to resolve the current **Page Flow Definition ID**, and as a result all the Page Flow Module
+driven request processing will fail.
+
+### (Optional) Configure **Page Flow Channel Info** for a channel
+
+When you configure a Page Flow Definition for a dedicated channel, you might also want to configure the Page Flow Definition
+through the Channel Setting window like the following:
+
+> ![Page Flow Channel Info](images/flowchninfo.png "Page Flow Channel Info")
+
+So, you can simply copy **Flow ID** field value in the Page Flow Definition document and paste it into the
+**Default Page Flow ID** input shown above.
+
+**Page Flow Module** provides a default [Channel Info](https://www.onehippo.org/library/concepts/channels/define-channel-configuration-parameters.html): ```org.onehippo.forge.pageflow.hst.channel.PageFlowSiteInfo```
+
+To use this Channel Info, you can configure your channel configuration like the following:
+
+```
+/hst:channel:
+  jcr:primaryType: hst:channel
+  hst:channelinfoclass: org.onehippo.forge.pageflow.hst.channel.PageFlowSiteInfo
+  ...
+```
 

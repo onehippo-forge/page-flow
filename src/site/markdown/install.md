@@ -39,7 +39,7 @@ Make sure you have the Forge Maven2 repository reference in the root ```pom.xml`
 
 Add all the dependencies in the root ```pom.xml``` of your project.
 
-You also need to add <code>forge.pageflow.version</code> property in the <code>properties</code> section.
+You also need to add ```forge.pageflow.version``` property in the ```properties``` section.
 Find the proper version in the [Release Notes](release-notes.html).
 
 ```
