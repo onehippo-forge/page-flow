@@ -1,0 +1,6 @@
+group: 
+    name: hippo-forge
+    after: hippo-cms
+project:
+    name: pageflow
+module: pageflow-repository

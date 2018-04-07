@@ -1,0 +1,31 @@
+definitions:
+  config:
+    /hst:hst/hst:configurations/campaign1/hst:workspace:
+      jcr:primaryType: hst:workspace
+      /hst:containers:
+        jcr:primaryType: hst:containercomponentfolder
+        /base:
+          jcr:primaryType: hst:containercomponentfolder
+          /top:
+            .meta:residual-child-node-category: content
+            jcr:primaryType: hst:containercomponent
+            hst:label: Top
+            hst:xtype: hst.vbox
+          /footer:
+            .meta:residual-child-node-category: content
+            jcr:primaryType: hst:containercomponent
+            hst:label: Footer
+            hst:xtype: hst.vbox
+            hst:lastmodified: 2018-03-06T14:03:06.086-05:00
+        /pagenotfound:
+          jcr:primaryType: hst:containercomponentfolder
+          /main:
+            .meta:residual-child-node-category: content
+            jcr:primaryType: hst:containercomponent
+            hst:label: Page-Not-Found Main
+            hst:xtype: hst.vbox
+      /hst:sitemenus:
+        jcr:primaryType: hst:sitemenus
+        /main:
+          .meta:residual-child-node-category: content
+          jcr:primaryType: hst:sitemenu

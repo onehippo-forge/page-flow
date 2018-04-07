@@ -1,0 +1,160 @@
+/content/documents/administration/labels:
+  jcr:primaryType: hippostd:folder
+  jcr:mixinTypes: ['mix:referenceable']
+  jcr:uuid: 651edd7a-5296-4f73-8785-42c8a6403333
+  hippostd:foldertype: [new-resource-bundle, new-untranslated-folder]
+  /global:
+    jcr:primaryType: hippo:handle
+    jcr:mixinTypes: ['hippo:named', 'mix:referenceable']
+    jcr:uuid: efd252a3-de5b-48e0-ae8a-24c5554e701a
+    hippo:name: Global
+    /global:
+      jcr:primaryType: resourcebundle:resourcebundle
+      jcr:mixinTypes: ['mix:referenceable']
+      jcr:uuid: ee82265d-4465-4c60-8b62-903e06e4757e
+      hippo:availability: [live, preview]
+      hippostd:state: published
+      hippostdpubwf:createdBy: admin
+      hippostdpubwf:creationDate: 2014-08-21T22:10:13.443+02:00
+      hippostdpubwf:lastModificationDate: 2014-08-21T22:10:52.812+02:00
+      hippostdpubwf:lastModifiedBy: admin
+      hippostdpubwf:publicationDate: 2014-08-21T22:10:54.657+02:00
+      resourcebundle:descriptions: [Text shown in the global page footer.]
+      resourcebundle:id: essentials.global
+      resourcebundle:keys: [footer.text]
+      resourcebundle:messages: [©2018]
+  /homepage:
+    jcr:primaryType: hippo:handle
+    jcr:mixinTypes: ['hippo:named', 'mix:referenceable']
+    jcr:uuid: 45f593ae-3d53-4f38-8324-a7643da9a6f3
+    hippo:name: Homepage
+    /homepage:
+      jcr:primaryType: resourcebundle:resourcebundle
+      jcr:mixinTypes: ['mix:referenceable']
+      jcr:uuid: e34c74b5-5601-41a1-abb6-9e88ac174e6b
+      hippo:availability: [live, preview]
+      hippostd:state: published
+      hippostdpubwf:createdBy: admin
+      hippostdpubwf:creationDate: 2014-08-21T17:08:08.703+02:00
+      hippostdpubwf:lastModificationDate: 2014-08-21T17:11:53.242+02:00
+      hippostdpubwf:lastModifiedBy: admin
+      hippostdpubwf:publicationDate: 2014-08-21T17:11:55.239+02:00
+      resourcebundle:descriptions: [Title displayed on homepage., Text displayed on
+          homepage.]
+      resourcebundle:id: essentials.homepage
+      resourcebundle:keys: [homepage.title, homepage.text]
+      resourcebundle:messages: [Home Page, 'Every website comes with its own styling
+          requirements. Hippo''s setup application can therefore not address site
+          styling. Instead, the generated pages use minimal styling to render the
+          content. It is the task of the Hippo developer to adjust the front-end to
+          the site''s needs.']
+  /pagenotfound:
+    jcr:primaryType: hippo:handle
+    jcr:mixinTypes: ['hippo:named', 'mix:referenceable']
+    jcr:uuid: 8c0bd70d-7bc9-4a15-848d-2c33f44220ea
+    hippo:name: Page not found
+    /pagenotfound:
+      jcr:primaryType: resourcebundle:resourcebundle
+      jcr:mixinTypes: ['mix:referenceable']
+      jcr:uuid: 0cf9890d-3518-479b-8503-8527342faf2e
+      hippo:availability: [live, preview]
+      hippostd:state: published
+      hippostdpubwf:createdBy: admin
+      hippostdpubwf:creationDate: 2014-08-21T17:08:08.703+02:00
+      hippostdpubwf:lastModificationDate: 2014-08-21T17:11:53.242+02:00
+      hippostdpubwf:lastModifiedBy: admin
+      hippostdpubwf:publicationDate: 2014-08-21T17:11:55.239+02:00
+      resourcebundle:descriptions: [Title displayed when page is not found., Text
+          displayed when page is not found.]
+      resourcebundle:id: essentials.pagenotfound
+      resourcebundle:keys: [pagenotfound.title, pagenotfound.text]
+      resourcebundle:messages: [Page not found (404), 'The page you requested was
+          not found. - [This text can be edited here: http://localhost:8080/cms/?1&path=/content/documents/administration/labels/pagenotfound]']
+  /pagination:
+    jcr:primaryType: hippo:handle
+    jcr:mixinTypes: ['hippo:named', 'mix:referenceable']
+    jcr:uuid: a7c56148-c087-495a-a155-21f418e30819
+    hippo:name: Pagination
+    /pagination:
+      jcr:primaryType: resourcebundle:resourcebundle
+      jcr:mixinTypes: ['mix:referenceable']
+      jcr:uuid: 4918851e-b268-427a-af8e-2ce12459767a
+      hippo:availability: [live, preview]
+      hippostd:state: published
+      hippostdpubwf:createdBy: admin
+      hippostdpubwf:creationDate: 2014-08-21T14:30:14.382+02:00
+      hippostdpubwf:lastModificationDate: 2014-08-21T17:03:32.811+02:00
+      hippostdpubwf:lastModifiedBy: admin
+      hippostdpubwf:publicationDate: 2014-08-21T17:06:47.420+02:00
+      resourcebundle:descriptions: ['Used in the indication, how many results were
+          found. The label is appended to the number of results.', Label used for
+          the link to the previous page., Label used for the link to the next page.]
+      resourcebundle:id: essentials.pagination
+      resourcebundle:keys: [results.indication, page.previous, page.next]
+      resourcebundle:messages: [document(s), previous, next]
+  /campaign-general:
+    jcr:primaryType: hippo:handle
+    jcr:mixinTypes: ['hippo:named', 'mix:referenceable']
+    jcr:uuid: 6eed4199-803e-4706-895d-f958a9e1f578
+    hippo:name: Campaign General
+    /campaign-general[1]:
+      jcr:primaryType: resourcebundle:resourcebundle
+      jcr:mixinTypes: ['mix:referenceable']
+      jcr:uuid: cfd6fbd4-3879-401d-9d48-3d9fc788baf5
+      hippo:availability: [live]
+      hippostd:state: published
+      hippostdpubwf:createdBy: admin
+      hippostdpubwf:creationDate: 2014-08-21T17:08:08.703+02:00
+      hippostdpubwf:lastModificationDate: 2018-03-21T21:26:19.476-04:00
+      hippostdpubwf:lastModifiedBy: admin
+      hippostdpubwf:publicationDate: 2018-03-21T21:26:21.860-04:00
+      resourcebundle:descriptions: ['', '', '', '', '', '', '', '', '', '']
+      resourcebundle:id: campaign.general
+      resourcebundle:keys: [campaign.text, campaign.title, footer.text, email.invalid,
+        firstName.invalid, lastName.invalid, phone.invalid, address.invalid, city.invalid,
+        state.invalid]
+      resourcebundle:messages: [Identity theft can cost you huge to fix. Never become
+          a victim of identity theft. Protect yourself with Identity Protection Plan.,
+        Protect your identity and credit., ©2018, Invalid E-Mail., Invalid first name.,
+        Invalid last name., Invalid phone number., Invalid address, Invalid city.,
+        Invalid state.]
+    /campaign-general[2]:
+      jcr:primaryType: resourcebundle:resourcebundle
+      jcr:mixinTypes: ['mix:referenceable', 'mix:versionable']
+      jcr:uuid: ba9db7f9-9a99-4a6c-8a65-fa00337eecc0
+      hippo:availability: [preview]
+      hippostd:state: unpublished
+      hippostdpubwf:createdBy: admin
+      hippostdpubwf:creationDate: 2014-08-21T17:08:08.703+02:00
+      hippostdpubwf:lastModificationDate: 2018-03-21T21:26:19.476-04:00
+      hippostdpubwf:lastModifiedBy: admin
+      resourcebundle:descriptions: ['', '', '', '', '', '', '', '', '', '']
+      resourcebundle:id: campaign.general
+      resourcebundle:keys: [campaign.text, campaign.title, footer.text, email.invalid,
+        firstName.invalid, lastName.invalid, phone.invalid, address.invalid, city.invalid,
+        state.invalid]
+      resourcebundle:messages: [Identity theft can cost you huge to fix. Never become
+          a victim of identity theft. Protect yourself with Identity Protection Plan.,
+        Protect your identity and credit., ©2018, Invalid E-Mail., Invalid first name.,
+        Invalid last name., Invalid phone number., Invalid address, Invalid city.,
+        Invalid state.]
+    /campaign-general[3]:
+      jcr:primaryType: resourcebundle:resourcebundle
+      jcr:mixinTypes: ['mix:referenceable']
+      jcr:uuid: 62d93f8f-c039-4004-9411-3c2a7fb8c160
+      hippo:availability: []
+      hippostd:state: draft
+      hippostdpubwf:createdBy: admin
+      hippostdpubwf:creationDate: 2014-08-21T17:08:08.703+02:00
+      hippostdpubwf:lastModificationDate: 2018-03-21T21:21:55.596-04:00
+      hippostdpubwf:lastModifiedBy: admin
+      resourcebundle:descriptions: ['', '', '', '', '', '', '', '', '', '']
+      resourcebundle:id: campaign.general
+      resourcebundle:keys: [campaign.text, campaign.title, footer.text, email.invalid,
+        firstName.invalid, lastName.invalid, phone.invalid, address.invalid, city.invalid,
+        state.invalid]
+      resourcebundle:messages: [Identity theft can cost you huge to fix. Never become
+          a victim of identity theft. Protect yourself with Identity Protection Plan.,
+        Protect your identity and credit., ©2018, Invalid E-Mail., Invalid first name.,
+        Invalid last name., Invalid phone number., Invalid address, Invalid city.,
+        Invalid state.]

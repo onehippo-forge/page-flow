@@ -1,0 +1,455 @@
+definitions:
+  config:
+    /hippo:namespaces/pageflow:
+      jcr:primaryType: hipposysedit:namespace
+      jcr:mixinTypes: ['mix:referenceable']
+      jcr:uuid: c8aff907-9370-454c-b5fc-41f8c8ba2f6a
+      /basedocument:
+        jcr:primaryType: hipposysedit:templatetype
+        jcr:mixinTypes: ['mix:referenceable']
+        jcr:uuid: c58b82c4-6d56-44bc-be8c-b2530602168e
+        /hipposysedit:nodetype:
+          jcr:primaryType: hippo:handle
+          jcr:mixinTypes: ['mix:referenceable']
+          jcr:uuid: bcd7e260-79bf-4d04-affd-46ee812d8d0b
+          /hipposysedit:nodetype:
+            jcr:primaryType: hipposysedit:nodetype
+            jcr:mixinTypes: ['hipposysedit:remodel']
+            hipposysedit:supertype: ['hippo:document', 'hippostdpubwf:document', 'hippostd:publishableSummary']
+            hipposysedit:uri: http://www.onehippo.com/jcr/pageflow/nt/1.0
+      /pagetransition:
+        jcr:primaryType: hipposysedit:templatetype
+        jcr:mixinTypes: ['editor:editable', 'mix:referenceable']
+        jcr:uuid: ff4a214b-92b4-420f-9da3-aaab726666bc
+        /hipposysedit:nodetype:
+          jcr:primaryType: hippo:handle
+          jcr:mixinTypes: ['mix:referenceable']
+          jcr:uuid: 74688fea-70cd-46d7-b1dd-c4249731a86b
+          /hipposysedit:nodetype:
+            jcr:primaryType: hipposysedit:nodetype
+            jcr:mixinTypes: ['hipposysedit:remodel', 'mix:referenceable']
+            jcr:uuid: f3816275-ba33-4ea4-8aab-2d16d92d55c3
+            hipposysedit:node: true
+            hipposysedit:supertype: ['hippo:compound', 'hippostd:relaxed']
+            hipposysedit:uri: http://www.onehippo.com/jcr/pageflow/nt/1.0
+            /event:
+              jcr:primaryType: hipposysedit:field
+              hipposysedit:mandatory: false
+              hipposysedit:multiple: false
+              hipposysedit:ordered: false
+              hipposysedit:path: pageflow:event
+              hipposysedit:primary: false
+              hipposysedit:type: String
+              hipposysedit:validators: [non-empty, required]
+            /target:
+              jcr:primaryType: hipposysedit:field
+              hipposysedit:mandatory: false
+              hipposysedit:multiple: false
+              hipposysedit:ordered: false
+              hipposysedit:path: pageflow:target
+              hipposysedit:primary: false
+              hipposysedit:type: String
+        /hipposysedit:prototypes:
+          jcr:primaryType: hipposysedit:prototypeset
+          /hipposysedit:prototype:
+            jcr:primaryType: pageflow:pagetransition
+            pageflow:event: ''
+            pageflow:target: ''
+        /editor:templates:
+          jcr:primaryType: editor:templateset
+          /_default_:
+            jcr:primaryType: frontend:plugincluster
+            frontend:properties: [mode]
+            frontend:references: [wicket.model, model.compareTo, engine, validator.id]
+            frontend:services: [wicket.id, validator.id]
+            /root:
+              jcr:primaryType: frontend:plugin
+              item: ${cluster.id}.field
+              plugin.class: org.hippoecm.frontend.service.render.ListViewPlugin
+              wicket.variant: row
+            /event:
+              jcr:primaryType: frontend:plugin
+              caption: Event
+              external.document.service.facade: org.onehippo.forge.pageflow.cms.editor.field.TransitionSourceEventDefServiceFacade
+              field: event
+              hint: Page Transition Event
+              initial.search.enabled: true
+              page.size: 20
+              plugin.class: org.onehippo.forge.exdocpicker.impl.field.ExternalDocumentFieldSelectorPlugin
+              selection.mode: single
+              wicket.id: ${cluster.id}.field
+              /cluster.options:
+                jcr:primaryType: frontend:pluginconfig
+            /target:
+              jcr:primaryType: frontend:plugin
+              caption: Target
+              external.document.service.facade: org.onehippo.forge.pageflow.cms.editor.field.TransitionTargetPageStateServiceFacade
+              field: target
+              hint: Page Transition Target
+              initial.search.enabled: true
+              page.size: 20
+              plugin.class: org.onehippo.forge.exdocpicker.impl.field.ExternalDocumentFieldSelectorPlugin
+              selection.mode: single
+              wicket.id: ${cluster.id}.field
+              /cluster.options:
+                jcr:primaryType: frontend:pluginconfig
+      /pagestate:
+        jcr:primaryType: hipposysedit:templatetype
+        jcr:mixinTypes: ['editor:editable', 'mix:referenceable']
+        jcr:uuid: fb0df89b-49fc-4065-8b8b-601a643a3476
+        /hipposysedit:nodetype:
+          jcr:primaryType: hippo:handle
+          jcr:mixinTypes: ['mix:referenceable']
+          jcr:uuid: 0ea851d3-10a8-4af2-8621-b6bcc379cf2b
+          /hipposysedit:nodetype:
+            jcr:primaryType: hipposysedit:nodetype
+            jcr:mixinTypes: ['hipposysedit:remodel', 'mix:referenceable']
+            jcr:uuid: 14db708d-c90c-4ea3-92b7-abb2234188d6
+            hipposysedit:node: true
+            hipposysedit:supertype: ['hippo:compound', 'hippostd:relaxed']
+            hipposysedit:uri: http://www.onehippo.com/jcr/pageflow/nt/1.0
+            /stateid:
+              jcr:primaryType: hipposysedit:field
+              hipposysedit:mandatory: false
+              hipposysedit:multiple: false
+              hipposysedit:ordered: false
+              hipposysedit:path: pageflow:stateid
+              hipposysedit:primary: false
+              hipposysedit:type: String
+              hipposysedit:validators: [non-empty, required]
+            /name:
+              jcr:primaryType: hipposysedit:field
+              hipposysedit:mandatory: false
+              hipposysedit:multiple: false
+              hipposysedit:ordered: false
+              hipposysedit:path: pageflow:name
+              hipposysedit:primary: false
+              hipposysedit:type: String
+              hipposysedit:validators: [non-empty, required]
+            /path:
+              jcr:primaryType: hipposysedit:field
+              hipposysedit:mandatory: false
+              hipposysedit:multiple: false
+              hipposysedit:ordered: false
+              hipposysedit:path: pageflow:path
+              hipposysedit:primary: false
+              hipposysedit:type: String
+            /pagetransition:
+              jcr:primaryType: hipposysedit:field
+              hipposysedit:mandatory: false
+              hipposysedit:multiple: true
+              hipposysedit:ordered: true
+              hipposysedit:path: pageflow:pagetransition
+              hipposysedit:primary: false
+              hipposysedit:type: pageflow:pagetransition
+            /metadata:
+              jcr:primaryType: hipposysedit:field
+              hipposysedit:mandatory: false
+              hipposysedit:multiple: true
+              hipposysedit:ordered: true
+              hipposysedit:path: pageflow:metadata
+              hipposysedit:primary: false
+              hipposysedit:type: pageflow:metadata
+        /hipposysedit:prototypes:
+          jcr:primaryType: hipposysedit:prototypeset
+          /hipposysedit:prototype:
+            jcr:primaryType: pageflow:pagestate
+            pageflow:name: ''
+            pageflow:path: ''
+            pageflow:stateid: ''
+        /editor:templates:
+          jcr:primaryType: editor:templateset
+          /_default_:
+            jcr:primaryType: frontend:plugincluster
+            frontend:properties: [mode]
+            frontend:references: [wicket.model, model.compareTo, engine, validator.id]
+            frontend:services: [wicket.id, validator.id]
+            /root:
+              jcr:primaryType: frontend:plugin
+              extension.left: ${cluster.id}.left
+              extension.right: ${cluster.id}.right
+              plugin.class: org.hippoecm.frontend.editor.layout.TwoColumn
+              wicket.extensions: [extension.left, extension.right]
+            /left:
+              jcr:primaryType: frontend:plugin
+              item: ${cluster.id}.left.item
+              plugin.class: org.hippoecm.frontend.service.render.ListViewPlugin
+              wicket.id: ${cluster.id}.left
+            /right:
+              jcr:primaryType: frontend:plugin
+              item: ${cluster.id}.right.item
+              plugin.class: org.hippoecm.frontend.service.render.ListViewPlugin
+              wicket.id: ${cluster.id}.right
+            /stateid:
+              jcr:primaryType: frontend:plugin
+              caption: Page State ID
+              field: stateid
+              hint: Page State ID
+              plugin.class: org.hippoecm.frontend.editor.plugins.field.PropertyFieldPlugin
+              wicket.id: ${cluster.id}.right.item
+              /cluster.options:
+                jcr:primaryType: frontend:pluginconfig
+            /name:
+              jcr:primaryType: frontend:plugin
+              caption: Name
+              field: name
+              hint: Page State Name
+              plugin.class: org.hippoecm.frontend.editor.plugins.field.PropertyFieldPlugin
+              wicket.id: ${cluster.id}.left.item
+              /cluster.options:
+                jcr:primaryType: frontend:pluginconfig
+            /path:
+              jcr:primaryType: frontend:plugin
+              caption: Path
+              field: path
+              plugin.class: org.hippoecm.frontend.editor.plugins.field.PropertyFieldPlugin
+              wicket.id: ${cluster.id}.right.item
+              /cluster.options:
+                jcr:primaryType: frontend:pluginconfig
+            /pagetransition:
+              jcr:primaryType: frontend:plugin
+              caption: Page Transitions
+              field: pagetransition
+              hint: Page Transitions
+              plugin.class: org.hippoecm.frontend.editor.plugins.field.NodeFieldPlugin
+              wicket.id: ${cluster.id}.left.item
+              /cluster.options:
+                jcr:primaryType: frontend:pluginconfig
+            /metadata:
+              jcr:primaryType: frontend:plugin
+              caption: Metadata
+              field: metadata
+              hint: Enter metadata of Page State.
+              plugin.class: org.hippoecm.frontend.editor.plugins.field.NodeFieldPlugin
+              wicket.id: ${cluster.id}.right.item
+              /cluster.options:
+                jcr:primaryType: frontend:pluginconfig
+      /pageflow:
+        jcr:primaryType: hipposysedit:templatetype
+        jcr:mixinTypes: ['editor:editable', 'mix:referenceable']
+        jcr:uuid: d2c01f9d-3696-42fc-a059-923b3e13bb08
+        /hipposysedit:nodetype:
+          jcr:primaryType: hippo:handle
+          jcr:mixinTypes: ['mix:referenceable']
+          jcr:uuid: e32d8cd9-b85d-4178-bdc7-1fe3f7c08602
+          /hipposysedit:nodetype:
+            jcr:primaryType: hipposysedit:nodetype
+            jcr:mixinTypes: ['hipposysedit:remodel', 'mix:referenceable']
+            jcr:uuid: 11f3fe8f-be27-42e3-aa77-a2adb4477dd9
+            hipposysedit:node: true
+            hipposysedit:supertype: ['pageflow:basedocument', 'hippostd:relaxed', 'hippotranslation:translated']
+            hipposysedit:uri: http://www.onehippo.com/jcr/pageflow/nt/1.0
+            /flowid:
+              jcr:primaryType: hipposysedit:field
+              hipposysedit:mandatory: false
+              hipposysedit:multiple: false
+              hipposysedit:ordered: false
+              hipposysedit:path: pageflow:flowid
+              hipposysedit:primary: false
+              hipposysedit:type: String
+              hipposysedit:validators: [non-empty, required]
+            /name:
+              jcr:primaryType: hipposysedit:field
+              hipposysedit:mandatory: false
+              hipposysedit:multiple: false
+              hipposysedit:ordered: false
+              hipposysedit:path: pageflow:name
+              hipposysedit:primary: false
+              hipposysedit:type: String
+              hipposysedit:validators: [non-empty, required]
+            /description:
+              jcr:primaryType: hipposysedit:field
+              hipposysedit:mandatory: false
+              hipposysedit:multiple: false
+              hipposysedit:ordered: false
+              hipposysedit:path: pageflow:description
+              hipposysedit:primary: false
+              hipposysedit:type: Text
+            /pagestate:
+              jcr:primaryType: hipposysedit:field
+              hipposysedit:mandatory: false
+              hipposysedit:multiple: true
+              hipposysedit:ordered: true
+              hipposysedit:path: pageflow:pagestate
+              hipposysedit:primary: false
+              hipposysedit:type: pageflow:pagestate
+            /eventdef:
+              jcr:primaryType: hipposysedit:field
+              hipposysedit:mandatory: false
+              hipposysedit:multiple: true
+              hipposysedit:ordered: true
+              hipposysedit:path: pageflow:eventdef
+              hipposysedit:primary: false
+              hipposysedit:type: pageflow:metadata
+            /pagetransition:
+              jcr:primaryType: hipposysedit:field
+              hipposysedit:mandatory: false
+              hipposysedit:multiple: true
+              hipposysedit:ordered: true
+              hipposysedit:path: pageflow:pagetransition
+              hipposysedit:primary: false
+              hipposysedit:type: pageflow:pagetransition
+        /hipposysedit:prototypes:
+          jcr:primaryType: hipposysedit:prototypeset
+          /hipposysedit:prototype:
+            jcr:primaryType: pageflow:pageflow
+            jcr:mixinTypes: ['mix:referenceable']
+            jcr:uuid: 6af3b077-2883-48e4-b376-ef53ebeb0282
+            hippostd:holder: holder
+            hippostd:state: draft
+            hippostdpubwf:createdBy: ''
+            hippostdpubwf:creationDate: 2018-03-01T13:03:03.444-05:00
+            hippostdpubwf:lastModificationDate: 2018-03-01T13:03:03.443-05:00
+            hippostdpubwf:lastModifiedBy: ''
+            hippotranslation:id: document-type-locale-id
+            hippotranslation:locale: document-type-locale
+            pageflow:description: ''
+            pageflow:flowid: ''
+            pageflow:name: ''
+        /editor:templates:
+          jcr:primaryType: editor:templateset
+          /_default_:
+            jcr:primaryType: frontend:plugincluster
+            frontend:properties: [mode]
+            frontend:references: [wicket.model, model.compareTo, engine, validator.id]
+            frontend:services: [wicket.id, validator.id]
+            /root:
+              jcr:primaryType: frontend:plugin
+              extension.left: ${cluster.id}.left
+              extension.right: ${cluster.id}.right
+              plugin.class: org.hippoecm.frontend.editor.layout.TwoColumn
+              wicket.extensions: [extension.left, extension.right]
+            /left:
+              jcr:primaryType: frontend:plugin
+              item: ${cluster.id}.left.item
+              plugin.class: org.hippoecm.frontend.service.render.ListViewPlugin
+              wicket.id: ${cluster.id}.left
+            /right:
+              jcr:primaryType: frontend:plugin
+              item: ${cluster.id}.right.item
+              plugin.class: org.hippoecm.frontend.service.render.ListViewPlugin
+              wicket.id: ${cluster.id}.right
+            /flowid:
+              jcr:primaryType: frontend:plugin
+              caption: Flow ID
+              field: flowid
+              hint: Page Flow ID
+              plugin.class: org.hippoecm.frontend.editor.plugins.field.PropertyFieldPlugin
+              wicket.id: ${cluster.id}.right.item
+              /cluster.options:
+                jcr:primaryType: frontend:pluginconfig
+            /name:
+              jcr:primaryType: frontend:plugin
+              caption: Name
+              field: name
+              hint: Page Flow Name
+              plugin.class: org.hippoecm.frontend.editor.plugins.field.PropertyFieldPlugin
+              wicket.id: ${cluster.id}.left.item
+              /cluster.options:
+                jcr:primaryType: frontend:pluginconfig
+            /description:
+              jcr:primaryType: frontend:plugin
+              caption: Description
+              field: description
+              hint: Page Flow Description
+              plugin.class: org.hippoecm.frontend.editor.plugins.field.PropertyFieldPlugin
+              wicket.id: ${cluster.id}.left.item
+              /cluster.options:
+                jcr:primaryType: frontend:pluginconfig
+                rows: '2'
+            /pagestate:
+              jcr:primaryType: frontend:plugin
+              caption: Page States
+              field: pagestate
+              hint: Page States
+              plugin.class: org.hippoecm.frontend.editor.plugins.field.NodeFieldPlugin
+              wicket.id: ${cluster.id}.left.item
+              /cluster.options:
+                jcr:primaryType: frontend:pluginconfig
+            /eventdef:
+              jcr:primaryType: frontend:plugin
+              caption: Event Definitions
+              field: eventdef
+              hint: Enter event key in Name field and event label in Value field.
+              plugin.class: org.hippoecm.frontend.editor.plugins.field.NodeFieldPlugin
+              wicket.id: ${cluster.id}.right.item
+              /cluster.options:
+                jcr:primaryType: frontend:pluginconfig
+            /pagetransition:
+              jcr:primaryType: frontend:plugin
+              caption: Global Page Transitions
+              field: pagetransition
+              hint: Configure Global Transitions which are can be triggered from any page
+                states.
+              plugin.class: org.hippoecm.frontend.editor.plugins.field.NodeFieldPlugin
+              wicket.id: ${cluster.id}.right.item
+              /cluster.options:
+                jcr:primaryType: frontend:pluginconfig
+      /metadata:
+        jcr:primaryType: hipposysedit:templatetype
+        jcr:mixinTypes: ['editor:editable', 'mix:referenceable']
+        jcr:uuid: f8111cab-40b9-4a91-8a67-0711ed910f6f
+        /hipposysedit:nodetype:
+          jcr:primaryType: hippo:handle
+          jcr:mixinTypes: ['mix:referenceable']
+          jcr:uuid: 59e1f1e9-3a6f-4c7d-973a-1bca362f7a7b
+          /hipposysedit:nodetype:
+            jcr:primaryType: hipposysedit:nodetype
+            jcr:mixinTypes: ['hipposysedit:remodel', 'mix:referenceable']
+            jcr:uuid: 2749311a-8cc5-4f9d-827c-7cf8a97f92e6
+            hipposysedit:node: true
+            hipposysedit:supertype: ['hippo:compound', 'hippostd:relaxed']
+            hipposysedit:uri: http://www.onehippo.com/jcr/pageflow/nt/1.0
+            /name:
+              jcr:primaryType: hipposysedit:field
+              hipposysedit:mandatory: false
+              hipposysedit:multiple: false
+              hipposysedit:ordered: false
+              hipposysedit:path: pageflow:name
+              hipposysedit:primary: false
+              hipposysedit:type: String
+              hipposysedit:validators: [non-empty, required]
+            /value:
+              jcr:primaryType: hipposysedit:field
+              hipposysedit:mandatory: false
+              hipposysedit:multiple: false
+              hipposysedit:ordered: false
+              hipposysedit:path: pageflow:value
+              hipposysedit:primary: false
+              hipposysedit:type: String
+        /hipposysedit:prototypes:
+          jcr:primaryType: hipposysedit:prototypeset
+          /hipposysedit:prototype:
+            jcr:primaryType: pageflow:metadata
+            pageflow:name: ''
+            pageflow:value: ''
+        /editor:templates:
+          jcr:primaryType: editor:templateset
+          /_default_:
+            jcr:primaryType: frontend:plugincluster
+            frontend:properties: [mode]
+            frontend:references: [wicket.model, model.compareTo, engine, validator.id]
+            frontend:services: [wicket.id, validator.id]
+            /root:
+              jcr:primaryType: frontend:plugin
+              item: ${cluster.id}.field
+              plugin.class: org.hippoecm.frontend.service.render.ListViewPlugin
+              wicket.variant: row
+            /name:
+              jcr:primaryType: frontend:plugin
+              caption: Name
+              field: name
+              hint: Metadata name
+              plugin.class: org.hippoecm.frontend.editor.plugins.field.PropertyFieldPlugin
+              wicket.id: ${cluster.id}.field
+              /cluster.options:
+                jcr:primaryType: frontend:pluginconfig
+            /value:
+              jcr:primaryType: frontend:plugin
+              caption: Value
+              field: value
+              hint: Metadata value
+              plugin.class: org.hippoecm.frontend.editor.plugins.field.PropertyFieldPlugin
+              wicket.id: ${cluster.id}.field
+              /cluster.options:
+                jcr:primaryType: frontend:pluginconfig

@@ -1,0 +1,5 @@
+definitions:
+  namespace:
+    pageflow:
+      uri: http://www.onehippo.com/jcr/pageflow/nt/1.0
+      cnd: pageflow.cnd

@@ -1,0 +1,5 @@
+/hst:hst/hst:configurations/campaign1/hst:workspace/hst:sitemap/application:
+  jcr:primaryType: hst:sitemapitem
+  hst:componentconfigurationid: hst:pages/application-campaign-mainpage
+  hst:lastmodified: 2018-03-06T12:03:15.541-05:00
+  hst:pagetitle: Application
