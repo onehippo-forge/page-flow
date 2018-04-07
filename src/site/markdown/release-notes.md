@@ -19,11 +19,11 @@
 
 | Plugin Version        | Hippo CMS Release Version |
 |: --------------------:|:-------------------------:|
-| 0.3.x                 | 12.x                      |
+| 1.x                   | 12.x                      |
 
-### Release Notes of 0.3.x
+### Release Notes of 1.x
 
-#### 0.3.0
+#### 1.0.0
 
-- In development.
+- Initial release.
 
