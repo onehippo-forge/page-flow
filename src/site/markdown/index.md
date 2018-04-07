@@ -34,7 +34,7 @@ visitor's information, and so on.
 **Page Flow Module** provides a *solution* to manage and implement this kind of *multi-step-pages* user interactions
 very easily in Hipppo CMS.
 
-### Wait... Why Page Flow Module?
+### Why Page Flow Module?
 
 Why should Page Flow Module be introduced then? Can developers not use
 [Enterprise Forms](https://www.onehippo.org/library/enterprise/enterprise-features/enterprise-forms/enterprise-forms.html)
