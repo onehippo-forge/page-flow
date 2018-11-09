@@ -60,7 +60,7 @@ be transitioned to **Plan Selection** page state.
 
 ### Example Page Flow Implementation in Demo Project
 
-The demo project includes multiple pages and [HST Components](https://github.com/onehippo-forge/page-flow/tree/master/demo/site/src/main/java/org/onehippo/forge/pageflow/demo/campaign/components)
+The demo project includes multiple pages and [HST Components](https://github.com/bloomreach-forge/page-flow/tree/master/demo/site/src/main/java/org/onehippo/forge/pageflow/demo/campaign/components)
 depending on the Page Flow Definition shown above.
 When you visit http://localhost:8080/site/campaign1, you may start a Page Flow instance with the following first step:
 
