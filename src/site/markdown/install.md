@@ -15,7 +15,7 @@
 
 ## Installation
 
-### Hippo Forge Maven Repository Configuration
+### Bloomreach Forge Maven Repository Configuration
 
 Make sure you have the Forge Maven2 repository reference in the root ```pom.xml``` of your project.
 

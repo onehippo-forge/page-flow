@@ -223,6 +223,6 @@ For more details, see [JavaDocs](apidocs/index.html).
 
 A good example for error handling ```HstComponent``` and FreeMarker template can be found in the following sources in the demo project:
 
-- [CampaignApplicationFormComponent.java](https://github.com/onehippo-forge/page-flow/blob/master/demo/site/src/main/java/org/onehippo/forge/pageflow/demo/campaign/components/CampaignApplicationFormComponent.java)
-- [campaign-application-form.ftl](https://github.com/onehippo-forge/page-flow/blob/master/demo/repository-data/webfiles/src/main/resources/site/freemarker/campaignbase/campaign-application-form.ftl)
+- [CampaignApplicationFormComponent.java](https://github.com/bloomreach-forge/page-flow/blob/master/demo/site/src/main/java/org/onehippo/forge/pageflow/demo/campaign/components/CampaignApplicationFormComponent.java)
+- [campaign-application-form.ftl](https://github.com/bloomreach-forge/page-flow/blob/master/demo/repository-data/webfiles/src/main/resources/site/freemarker/campaignbase/campaign-application-form.ftl)
 
