@@ -1,0 +1,4 @@
+definitions:
+  config:
+    /hst:hst/hst:configurations/campaignbase/hst:abstractpages:
+      jcr:primaryType: hst:pages

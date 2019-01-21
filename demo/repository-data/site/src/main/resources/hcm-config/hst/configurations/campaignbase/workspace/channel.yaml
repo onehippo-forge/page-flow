@@ -1,0 +1,8 @@
+definitions:
+  config:
+    /hst:hst/hst:configurations/campaignbase/hst:workspace/hst:channel:
+      .meta:residual-child-node-category: content
+      jcr:primaryType: hst:channel
+      hst:name: Campaign Base
+      hst:type: website
+      hst:channelinfoclass: org.onehippo.forge.pageflow.hst.channel.PageFlowSiteInfo

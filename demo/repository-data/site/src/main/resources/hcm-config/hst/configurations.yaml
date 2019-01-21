@@ -22,3 +22,9 @@ definitions:
       /pageflowdemo:
         jcr:primaryType: hst:configuration
         hst:inheritsfrom: [../common]
+      /campaignbase:
+        jcr:primaryType: hst:configuration
+        hst:inheritsfrom: [../common]
+      /campaign1:
+        jcr:primaryType: hst:configuration
+        hst:inheritsfrom: [../campaignbase]
