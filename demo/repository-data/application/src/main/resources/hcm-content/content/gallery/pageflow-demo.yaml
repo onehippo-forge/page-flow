@@ -1,0 +1,7 @@
+/content/gallery/pageflowdemo:
+  jcr:primaryType: hippogallery:stdImageGallery
+  jcr:mixinTypes: ['hippo:named', 'mix:referenceable']
+  jcr:uuid: 5d493271-2e9d-410d-8e2e-e65ad77587a2
+  hippo:name: Page Flow Demo
+  hippostd:foldertype: [new-image-folder]
+  hippostd:gallerytype: ['hippogallery:imageset']

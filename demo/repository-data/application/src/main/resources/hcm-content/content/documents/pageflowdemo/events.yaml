@@ -1,0 +1,145 @@
+/content/documents/pageflowdemo/events:
+  jcr:primaryType: hippostd:folder
+  jcr:mixinTypes: ['hippotranslation:translated', 'mix:referenceable']
+  jcr:uuid: e3a88554-763a-4c5d-b461-d6ee05d07e04
+  hippostd:foldertype: [new-events-document, new-events-folder]
+  hippotranslation:id: bfaaab6c-91ef-4839-bb30-6c32e6abfb44
+  hippotranslation:locale: en
+  /2019:
+    jcr:primaryType: hippostd:folder
+    jcr:mixinTypes: ['hippotranslation:translated', 'mix:referenceable']
+    jcr:uuid: 52103e64-ac87-4857-b0ca-beac2273204e
+    hippostd:foldertype: [new-events-document, new-events-folder]
+    hippotranslation:id: 4521c466-4e0a-4fd1-9707-e504cdad7eb3
+    hippotranslation:locale: en
+    /01:
+      jcr:primaryType: hippostd:folder
+      jcr:mixinTypes: ['hippotranslation:translated', 'mix:referenceable']
+      jcr:uuid: 46d8e2ee-5aba-4463-90b8-64470cbd4d06
+      hippostd:foldertype: [new-events-document, new-events-folder]
+      hippotranslation:id: 7956fe56-ce9d-419c-a9c4-0062fe3e7ff4
+      hippotranslation:locale: en
+      /breakfast:
+        jcr:primaryType: hippo:handle
+        jcr:mixinTypes: ['hippo:named', 'mix:referenceable']
+        jcr:uuid: b8f5eb45-7200-452a-b26e-3118a0dc60b8
+        hippo:name: Breakfast
+        /breakfast:
+          jcr:primaryType: pageflowdemo:eventsdocument
+          jcr:mixinTypes: ['mix:referenceable']
+          jcr:uuid: 92291cd9-47d9-4b9e-8849-112e20213109
+          hippo:availability: [live, preview]
+          hippostd:holder: admin
+          hippostd:state: published
+          hippostdpubwf:createdBy: admin
+          hippostdpubwf:creationDate: 2013-11-12T11:00:00+01:00
+          hippostdpubwf:lastModificationDate: 2013-11-12T11:11:00+01:00
+          hippostdpubwf:lastModifiedBy: admin
+          hippostdpubwf:publicationDate: 2013-11-12T12:16:00+01:00
+          hippotranslation:id: 5f1d4d36-814a-4722-b9bb-b95b98361205
+          hippotranslation:locale: en
+          pageflowdemo:date: 2013-11-12T08:00:00+01:00
+          pageflowdemo:documenttype: event
+          pageflowdemo:enddate: 2020-01-21T19:10:00+09:00
+          pageflowdemo:introduction: Start the day with a nice breakfast.
+          pageflowdemo:location: Room 101
+          pageflowdemo:title: Breakfast
+          /pageflowdemo:content:
+            jcr:primaryType: hippostd:html
+            hippostd:content: |-
+              <html>
+                        <body>
+
+                        <p>Breakfast is served starting from 8:00 until 9:30.</p>
+
+                        </body>
+                        </html>
+          /pageflowdemo:image:
+            jcr:primaryType: hippogallerypicker:imagelink
+            hippo:docbase: c8f03498-56eb-46c9-83b2-cf014f2e03d7
+            hippo:facets: []
+            hippo:modes: []
+            hippo:values: []
+      /introduction-speech:
+        jcr:primaryType: hippo:handle
+        jcr:mixinTypes: ['hippo:named', 'mix:referenceable']
+        jcr:uuid: 18e36c35-429d-4fee-b76e-eeabcbfc08bb
+        hippo:name: Introduction speech
+        /introduction-speech:
+          jcr:primaryType: pageflowdemo:eventsdocument
+          jcr:mixinTypes: ['mix:referenceable']
+          jcr:uuid: 26fc37c5-d5ac-400b-a297-0d7f31cbf723
+          hippo:availability: [live, preview]
+          hippostd:holder: admin
+          hippostd:state: published
+          hippostdpubwf:createdBy: admin
+          hippostdpubwf:creationDate: 2013-11-12T11:02:00+01:00
+          hippostdpubwf:lastModificationDate: 2013-11-12T11:16:00+01:00
+          hippostdpubwf:lastModifiedBy: admin
+          hippostdpubwf:publicationDate: 2013-11-12T12:16:00+01:00
+          hippotranslation:id: 38fb54a4-c098-4705-ae17-456ddf1925f7
+          hippotranslation:locale: en
+          pageflowdemo:date: 2013-11-12T10:00:00+01:00
+          pageflowdemo:documenttype: event
+          pageflowdemo:enddate: 2020-01-21T19:10:00+09:00
+          pageflowdemo:introduction: After breakfast there will be an introductory
+            speech.
+          pageflowdemo:location: Room 400
+          pageflowdemo:title: Introduction speech
+          /pageflowdemo:content:
+            jcr:primaryType: hippostd:html
+            hippostd:content: |-
+              <html>
+                        <body>
+
+                        <p>Speech will be about the workshop.</p>
+
+                        </body>
+                        </html>
+          /pageflowdemo:image:
+            jcr:primaryType: hippogallerypicker:imagelink
+            hippo:docbase: 9f32434e-84e3-4150-a6f2-d89a67be2fb1
+            hippo:facets: []
+            hippo:modes: []
+            hippo:values: []
+      /workshop:
+        jcr:primaryType: hippo:handle
+        jcr:mixinTypes: ['mix:referenceable']
+        jcr:uuid: 7a29ec60-2689-48b2-aca2-49696c5c23eb
+        /workshop:
+          jcr:primaryType: pageflowdemo:eventsdocument
+          jcr:mixinTypes: ['mix:referenceable']
+          jcr:uuid: 62a9715f-f5ae-4405-a5d5-7202652866c7
+          hippo:availability: [live, preview]
+          hippostd:holder: admin
+          hippostd:state: published
+          hippostdpubwf:createdBy: admin
+          hippostdpubwf:creationDate: 2013-11-12T11:16:00+01:00
+          hippostdpubwf:lastModificationDate: 2013-11-12T11:18:00+01:00
+          hippostdpubwf:lastModifiedBy: admin
+          hippostdpubwf:publicationDate: 2013-11-12T12:16:00+01:00
+          hippotranslation:id: f9b03c37-77c4-4211-8d68-1ae645c69639
+          hippotranslation:locale: en
+          pageflowdemo:date: 2013-11-12T13:00:00+01:00
+          pageflowdemo:documenttype: event
+          pageflowdemo:enddate: 2020-01-21T19:10:00+09:00
+          pageflowdemo:introduction: Workshop starts at 1:00
+          pageflowdemo:location: Room 600
+          pageflowdemo:title: Workshop
+          /pageflowdemo:content:
+            jcr:primaryType: hippostd:html
+            hippostd:content: |-
+              <html>
+                        <body>
+                        <strong>Everybody </strong>
+                        <p>can join the workshop and start practicing what they learned during the last
+                        week.</p>
+
+                        </body>
+                        </html>
+          /pageflowdemo:image:
+            jcr:primaryType: hippogallerypicker:imagelink
+            hippo:docbase: d035387b-f9ce-49f6-bcb0-9ab6915a2d5f
+            hippo:facets: []
+            hippo:modes: []
+            hippo:values: []

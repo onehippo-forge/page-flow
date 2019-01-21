@@ -1,0 +1,6 @@
+definitions:
+  config:
+    /hst:hst/hst:configurations/pageflowdemo/hst:catalog:
+      jcr:primaryType: hst:catalog
+      /pageflowdemo-catalog:
+        jcr:primaryType: hst:containeritempackage

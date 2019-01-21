@@ -1,0 +1,6 @@
+definitions:
+  config:
+    /hippo:namespaces/pageflowdemo:
+      jcr:primaryType: hipposysedit:namespace
+      jcr:mixinTypes: ['mix:referenceable']
+      jcr:uuid: 470ffc7d-45f0-497c-9bf6-21ee67581556

@@ -1,0 +1,7 @@
+group: 
+  name: pageflow-demo
+  after: hippo-cms
+project: pageflow-demo
+module: 
+  name: pageflow-demo-repository-data-development
+  after: pageflow-demo-repository-data-application

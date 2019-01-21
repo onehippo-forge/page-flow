@@ -1,0 +1,5 @@
+definitions:
+  namespace:
+    pageflowdemo:
+      uri: http://www.pageflowdemo.com/pageflowdemo/nt/1.0
+      cnd: namespaces/pageflow-demo.cnd

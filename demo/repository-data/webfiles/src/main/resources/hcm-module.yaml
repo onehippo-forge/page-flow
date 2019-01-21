@@ -1,0 +1,5 @@
+group: 
+  name: pageflow-demo
+project: pageflow-demo
+module:
+  name: pageflow-demo-repository-data-webfiles
