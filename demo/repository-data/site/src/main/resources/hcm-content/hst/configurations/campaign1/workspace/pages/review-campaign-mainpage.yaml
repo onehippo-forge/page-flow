@@ -1,0 +1,19 @@
+/hst:hst/hst:configurations/campaign1/hst:workspace/hst:pages/review-campaign-mainpage:
+  jcr:primaryType: hst:component
+  hst:lastmodified: 2018-03-06T12:04:29.892-05:00
+  hst:referencecomponent: hst:abstractpages/base
+  /main:
+    jcr:primaryType: hst:component
+    hst:template: campaign-campaignpage-main
+    /main-container:
+      jcr:primaryType: hst:containercomponent
+      hst:lastmodified: 2018-03-06T12:14:34.434-05:00
+      hst:xtype: hst.vbox
+      /campaign-review:
+        jcr:primaryType: hst:containeritemcomponent
+        hst:componentclassname: org.onehippo.forge.pageflow.demo.campaign.components.CampaignReviewComponent
+        hst:iconpath: images/campaignbase/catalog-component-icons/campaign-default.png
+        hst:label: Campaign Review
+        hst:resourcetemplate: campaign-review-resource
+        hst:template: campaign-review
+        hst:xtype: hst.item

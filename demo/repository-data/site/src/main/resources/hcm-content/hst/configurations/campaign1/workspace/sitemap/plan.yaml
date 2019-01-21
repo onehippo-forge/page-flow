@@ -1,0 +1,5 @@
+/hst:hst/hst:configurations/campaign1/hst:workspace/hst:sitemap/plan:
+  jcr:primaryType: hst:sitemapitem
+  hst:componentconfigurationid: hst:pages/plan-campaign-mainpage
+  hst:lastmodified: 2018-03-02T19:25:07.136-05:00
+  hst:pagetitle: Campaign 1 Plan
