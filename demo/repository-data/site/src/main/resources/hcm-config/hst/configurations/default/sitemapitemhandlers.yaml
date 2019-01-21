@@ -1,0 +1,7 @@
+definitions:
+  config:
+    /hst:hst/hst:configurations/hst:default/hst:sitemapitemhandlers/defaultpageflowcontrolhandler:
+      jcr:primaryType: hst:sitemapitemhandler
+      auto.redirection.enabled: true
+      enabled: true
+      hst:sitemapitemhandlerclassname: org.onehippo.forge.pageflow.hst.sitemapitemhandler.DefaultPageFlowControlHstSiteMapItemHandler

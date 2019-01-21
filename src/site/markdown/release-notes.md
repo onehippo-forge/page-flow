@@ -19,7 +19,14 @@
 
 | Plugin Version        | Hippo CMS Release Version |
 |: --------------------:|:-------------------------:|
+| 2.x                   | 13.x                      |
 | 1.x                   | 12.x                      |
+
+### Release Notes of 2.x
+
+#### 2.0.0
+
+- [HIPFORGE-256](https://issues.onehippo.com/browse/HIPFORGE-256) [Page Flow] Upgrade for v13 compatibility
 
 ### Release Notes of 1.x
 
