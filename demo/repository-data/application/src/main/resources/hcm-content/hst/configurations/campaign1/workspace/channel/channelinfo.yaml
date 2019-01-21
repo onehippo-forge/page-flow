@@ -1,4 +1,0 @@
-/hst:hst/hst:configurations/campaign1/hst:workspace/hst:channel/hst:channelinfo:
-  jcr:primaryType: hst:channelinfo
-  defaultPageFlowId: pageflow.campaign1
-  hst:defaultresourcebundleid: campaign.general, essentials.pagenotfound

@@ -1,7 +1,0 @@
-definitions:
-  config:
-    /hst:hst/hst:configurations/pageflowdemo/hst:workspace/hst:channel:
-      .meta:residual-child-node-category: content
-      jcr:primaryType: hst:channel
-      hst:name: Page Flow Demo
-      hst:type: website

@@ -1,5 +1,0 @@
-/hst:hst/hst:configurations/campaign1/hst:workspace/hst:sitemap/confirm:
-  jcr:primaryType: hst:sitemapitem
-  hst:componentconfigurationid: hst:pages/confirm-campaign-mainpage
-  hst:lastmodified: 2018-03-06T12:04:29.892-05:00
-  hst:pagetitle: Confirm

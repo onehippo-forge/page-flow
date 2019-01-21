@@ -1,4 +1,0 @@
-definitions:
-  config:
-    /hst:hst/hst:configurations/campaign1/hst:sitemap:
-      jcr:primaryType: hst:sitemap

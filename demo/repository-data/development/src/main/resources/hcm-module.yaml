@@ -1,7 +1,0 @@
-group: 
-  name: pageflow-demo
-  after: [hippo-cms, hippo-forge]
-project: pageflow-demo
-module: 
-  name: pageflow-demo-repository-data-development
-  after: pageflow-demo-repository-data-application

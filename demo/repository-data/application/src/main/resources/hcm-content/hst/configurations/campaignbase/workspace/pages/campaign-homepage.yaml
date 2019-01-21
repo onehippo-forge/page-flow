@@ -1,9 +1,0 @@
-/hst:hst/hst:configurations/campaignbase/hst:workspace/hst:pages/campaign-homepage:
-  jcr:primaryType: hst:component
-  hst:referencecomponent: hst:abstractpages/base
-  /main:
-    jcr:primaryType: hst:component
-    hst:template: campaign-campaignpage-main
-    /main-container:
-      jcr:primaryType: hst:containercomponent
-      hst:xtype: hst.vbox

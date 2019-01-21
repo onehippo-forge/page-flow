@@ -1,7 +1,0 @@
-/hst:hst/hst:configurations/campaign1/hst:workspace/hst:containers/base/footer/campaign-flow-status:
-  jcr:primaryType: hst:containeritemcomponent
-  hst:componentclassname: org.onehippo.forge.pageflow.demo.campaign.components.CampaignFlowStatusComponent
-  hst:iconpath: images/campaignbase/catalog-component-icons/campaign-default.png
-  hst:label: Campaign Flow Status
-  hst:template: campaign-flow-status
-  hst:xtype: hst.item

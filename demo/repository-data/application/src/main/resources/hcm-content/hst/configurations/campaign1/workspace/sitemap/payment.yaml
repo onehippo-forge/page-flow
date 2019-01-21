@@ -1,5 +1,0 @@
-/hst:hst/hst:configurations/campaign1/hst:workspace/hst:sitemap/payment:
-  jcr:primaryType: hst:sitemapitem
-  hst:componentconfigurationid: hst:pages/payment-campaign-mainpage
-  hst:lastmodified: 2018-03-06T12:03:50.877-05:00
-  hst:pagetitle: Payment
