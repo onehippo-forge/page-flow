@@ -16,3 +16,17 @@ definitions:
         hst:label: News List
         hst:template: newslist-main-newslist
         hst:xtype: hst.item
+      /banner:
+        jcr:primaryType: hst:containeritemcomponent
+        hst:componentclassname: org.onehippo.cms7.essentials.components.EssentialsBannerComponent
+        hst:iconpath: images/essentials/catalog-component-icons/banner.png
+        hst:label: Banner
+        hst:template: essentials-banner
+        hst:xtype: hst.item
+      /carousel:
+        jcr:primaryType: hst:containeritemcomponent
+        hst:componentclassname: org.onehippo.cms7.essentials.components.EssentialsCarouselComponent
+        hst:iconpath: images/essentials/catalog-component-icons/carousel.png
+        hst:label: Carousel
+        hst:template: essentials-carousel
+        hst:xtype: hst.item

@@ -1,4 +1,5 @@
 /content/documents/pageflowdemo/events:
+  .meta:order-before: banners
   jcr:primaryType: hippostd:folder
   jcr:mixinTypes: ['hippotranslation:translated', 'mix:referenceable']
   jcr:uuid: e3a88554-763a-4c5d-b461-d6ee05d07e04

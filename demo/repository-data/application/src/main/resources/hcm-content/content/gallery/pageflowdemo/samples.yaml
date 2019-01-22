@@ -1,4 +1,5 @@
 /content/gallery/pageflowdemo/samples:
+  .meta:order-before: banners
   jcr:primaryType: hippogallery:stdImageGallery
   jcr:mixinTypes: ['mix:referenceable']
   jcr:uuid: 79fe4bd3-3863-4d5d-ba1d-5dce02ebc44b

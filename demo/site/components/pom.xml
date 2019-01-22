@@ -13,6 +13,12 @@
   <description>Page Flow Demo Site Components</description>
 
   <dependencies>
+
+    <dependency>
+      <groupId>org.onehippo.forge.pageflow</groupId>
+      <artifactId>pageflow-hst</artifactId>
+    </dependency>
+
     <dependency>
       <groupId>javax.servlet.jsp</groupId>
       <artifactId>jsp-api</artifactId>
@@ -21,6 +27,7 @@
     <dependency>
       <groupId>org.apache.taglibs</groupId>
       <artifactId>taglibs-standard-spec</artifactId>
+      <scope>compile</scope>
     </dependency>
 
     <dependency>
