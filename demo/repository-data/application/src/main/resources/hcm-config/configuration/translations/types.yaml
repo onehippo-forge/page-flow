@@ -1,35 +1,5 @@
 definitions:
   config:
-    /hippo:configuration/hippo:translations/hippo:types/pageflowdemo:bannerdocument:
-      jcr:primaryType: hipposys:resourcebundles
-      /en:
-        jcr:primaryType: hipposys:resourcebundle
-        jcr:name: Banner
-        pageflowdemo:content: Content
-        pageflowdemo:image: Image
-        pageflowdemo:link: Link
-        pageflowdemo:title: Title
-      /nl:
-        jcr:primaryType: hipposys:resourcebundle
-        jcr:name: Banner
-        pageflowdemo:content: Inhoud
-        pageflowdemo:image: Afbeelding
-        pageflowdemo:link: Link
-        pageflowdemo:title: Titel
-      /fr:
-        jcr:primaryType: hipposys:resourcebundle
-        jcr:name: Bannière
-        pageflowdemo:content: Contenu
-        pageflowdemo:image: Image
-        pageflowdemo:link: Lien
-        pageflowdemo:title: Titre
-      /de:
-        jcr:primaryType: hipposys:resourcebundle
-        jcr:name: Banner
-        pageflowdemo:content: Inhalt
-        pageflowdemo:image: Abbildung
-        pageflowdemo:link: Link
-        pageflowdemo:title: Titel
     /hippo:configuration/hippo:translations/hippo:types/pageflowdemo:eventsdocument:
       jcr:primaryType: hipposys:resourcebundles
       /en:
@@ -118,3 +88,33 @@ definitions:
         pageflowdemo:location: Lieu
         pageflowdemo:source: Source
         pageflowdemo:title: Titre
+    /hippo:configuration/hippo:translations/hippo:types/pageflowdemo:bannerdocument:
+      jcr:primaryType: hipposys:resourcebundles
+      /en:
+        jcr:primaryType: hipposys:resourcebundle
+        jcr:name: Banner
+        pageflowdemo:content: Content
+        pageflowdemo:image: Image
+        pageflowdemo:link: Link
+        pageflowdemo:title: Title
+      /nl:
+        jcr:primaryType: hipposys:resourcebundle
+        jcr:name: Banner
+        pageflowdemo:content: Inhoud
+        pageflowdemo:image: Afbeelding
+        pageflowdemo:link: Link
+        pageflowdemo:title: Titel
+      /fr:
+        jcr:primaryType: hipposys:resourcebundle
+        jcr:name: Bannière
+        pageflowdemo:content: Contenu
+        pageflowdemo:image: Image
+        pageflowdemo:link: Lien
+        pageflowdemo:title: Titre
+      /de:
+        jcr:primaryType: hipposys:resourcebundle
+        jcr:name: Banner
+        pageflowdemo:content: Inhalt
+        pageflowdemo:image: Abbildung
+        pageflowdemo:link: Link
+        pageflowdemo:title: Titel

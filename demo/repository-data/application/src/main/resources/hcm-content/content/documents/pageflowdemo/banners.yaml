@@ -1,9 +1,9 @@
 /content/documents/pageflowdemo/banners:
   jcr:primaryType: hippostd:folder
   jcr:mixinTypes: ['hippotranslation:translated', 'mix:referenceable']
-  jcr:uuid: df2cea0b-057a-448d-a288-4e5ded768b52
+  jcr:uuid: abfaf74b-9ffe-4cef-bba1-ba5ec279190e
   hippostd:foldertype: [new-banner-document, new-banner-folder]
-  hippotranslation:id: d795caa2-d629-4071-bbec-9ec8af19e630
+  hippotranslation:id: f3bdd891-9267-4ae3-8aae-44bd9750c672
   hippotranslation:locale: en
   /banner1:
     jcr:primaryType: hippo:handle
@@ -12,7 +12,7 @@
     /banner1:
       jcr:primaryType: pageflowdemo:bannerdocument
       jcr:mixinTypes: ['mix:referenceable']
-      jcr:uuid: f163853e-2b35-4ba9-8b79-9698de9a5069
+      jcr:uuid: 65c0b92e-0831-4dfb-bb79-4227b46dd5c3
       hippo:availability: [live, preview]
       hippostd:holder: admin
       hippostd:state: published
@@ -21,7 +21,7 @@
       hippostdpubwf:lastModificationDate: 2014-03-20T17:04:00+01:00
       hippostdpubwf:lastModifiedBy: admin
       hippostdpubwf:publicationDate: 2014-03-20T17:04:00+01:00
-      hippotranslation:id: d0b70403-9706-4156-8bbf-a2fef5be1c11
+      hippotranslation:id: 5cef492a-2f8b-4a6e-bfef-3c48edceff3e
       hippotranslation:locale: en
       pageflowdemo:title: Sample banner
       /pageflowdemo:content:
@@ -47,7 +47,7 @@
     /banner2:
       jcr:primaryType: pageflowdemo:bannerdocument
       jcr:mixinTypes: ['mix:referenceable']
-      jcr:uuid: 95e54cde-79c4-41bd-8e23-61b82c413aa2
+      jcr:uuid: 9cd7b8dd-9502-4117-bb13-1ec37edc4a3e
       hippo:availability: [live, preview]
       hippostd:holder: admin
       hippostd:state: published
@@ -56,7 +56,7 @@
       hippostdpubwf:lastModificationDate: 2014-03-20T17:04:00+01:00
       hippostdpubwf:lastModifiedBy: admin
       hippostdpubwf:publicationDate: 2014-03-20T17:04:00+01:00
-      hippotranslation:id: 914d8af9-db0d-46aa-acbf-8f04b40b4a64
+      hippotranslation:id: 01053377-dad2-4182-9ae5-36844f39124d
       hippotranslation:locale: en
       pageflowdemo:title: Sample banner 2
       /pageflowdemo:content:

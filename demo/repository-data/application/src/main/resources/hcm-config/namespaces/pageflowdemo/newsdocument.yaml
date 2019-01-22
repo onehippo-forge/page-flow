@@ -3,19 +3,19 @@ definitions:
     /hippo:namespaces/pageflowdemo/newsdocument:
       jcr:primaryType: hipposysedit:templatetype
       jcr:mixinTypes: ['editor:editable', 'mix:referenceable']
-      jcr:uuid: 86d74fc6-4413-46a3-84fc-6c0eca36d20d
+      jcr:uuid: 5caf24ee-ec27-498c-a548-9aa54a7beb31
       /hipposysedit:nodetype:
         jcr:primaryType: hippo:handle
         jcr:mixinTypes: ['mix:referenceable']
-        jcr:uuid: a874112b-db14-4f0c-b16b-23a99f7e6504
+        jcr:uuid: 77794d28-cfcc-439f-b09e-4dcae4b14e5a
         /hipposysedit:nodetype:
           jcr:primaryType: hipposysedit:nodetype
           jcr:mixinTypes: ['hipposysedit:remodel', 'mix:referenceable']
-          jcr:uuid: edebadfb-698a-4510-b38e-17b29a75e92f
+          jcr:uuid: 7de934f9-efac-4314-a821-f4b098578146
           hipposysedit:node: true
           hipposysedit:supertype: ['pageflowdemo:basedocument', 'hippostd:relaxed',
             'hippotranslation:translated']
-          hipposysedit:uri: http://www.onehippo.org/pageflowdemo/nt/1.0
+          hipposysedit:uri: http://www.pageflowdemo.com/pageflowdemo/nt/1.0
           /title:
             jcr:primaryType: hipposysedit:field
             hipposysedit:mandatory: false
@@ -86,7 +86,7 @@ definitions:
         /hipposysedit:prototype:
           jcr:primaryType: pageflowdemo:newsdocument
           jcr:mixinTypes: ['mix:referenceable']
-          jcr:uuid: cabf6458-ba9d-43a6-888c-89ae95e91f3c
+          jcr:uuid: 5ff0e362-2040-4e1e-bca8-de753fbe7b65
           hippo:related___pathreference: []
           hippostd:holder: holder
           hippostd:state: draft

@@ -1,23 +1,24 @@
 /content/documents/pageflowdemo/news:
+  .meta:order-before: banners
   jcr:primaryType: hippostd:folder
   jcr:mixinTypes: ['hippotranslation:translated', 'mix:referenceable']
-  jcr:uuid: ddeac990-352e-438c-b5ad-3ba2b1c775a5
+  jcr:uuid: 99fb5adb-e611-4ede-934a-710135495212
   hippostd:foldertype: [new-news-document, new-news-folder]
-  hippotranslation:id: 0efd47e3-efdc-451f-9857-d8eea8ea9c59
+  hippotranslation:id: 8ab6e757-c147-4dae-bd70-29f0ae28f0a9
   hippotranslation:locale: en
-  /2018:
+  /2019:
     jcr:primaryType: hippostd:folder
     jcr:mixinTypes: ['hippotranslation:translated', 'mix:referenceable']
-    jcr:uuid: 74502244-49f3-43ff-8757-0440a3ee1032
+    jcr:uuid: 9d83e532-9aaa-4b16-91bf-3fe3aecafc70
     hippostd:foldertype: [new-news-document, new-news-folder]
-    hippotranslation:id: f4b37087-f324-48c0-87d2-4efe6fcc4327
+    hippotranslation:id: 97c23c28-4288-4679-ab79-fe4db0e12234
     hippotranslation:locale: en
-    /03:
+    /01:
       jcr:primaryType: hippostd:folder
       jcr:mixinTypes: ['hippotranslation:translated', 'mix:referenceable']
-      jcr:uuid: 83c90685-fe39-4a89-aa6f-c4ef8c98b66b
+      jcr:uuid: 07ce2cce-81f8-4aa2-a3f9-a5d02eec6707
       hippostd:foldertype: [new-news-document, new-news-folder]
-      hippotranslation:id: a8f9df25-1c12-42b4-af6a-3409f6e4110c
+      hippotranslation:id: 5f0c85d3-f2d7-4e60-9834-9c05d432eadf
       hippotranslation:locale: en
       /the-medusa-news:
         jcr:primaryType: hippo:handle
@@ -27,7 +28,7 @@
         /the-medusa-news:
           jcr:primaryType: pageflowdemo:newsdocument
           jcr:mixinTypes: ['mix:referenceable']
-          jcr:uuid: 0e7a4f55-d8e1-4c27-ad7e-94cbd98e1845
+          jcr:uuid: fae22c83-ad44-4339-b972-5bda17b01ec4
           hippo:availability: [live, preview]
           hippostd:holder: admin
           hippostd:state: published
@@ -36,10 +37,10 @@
           hippostdpubwf:lastModificationDate: 2013-11-12T13:04:00+01:00
           hippostdpubwf:lastModifiedBy: admin
           hippostdpubwf:publicationDate: 2013-11-12T13:04:00+01:00
-          hippotranslation:id: 574185b1-0fa3-4536-be0d-b72e88be62d7
+          hippotranslation:id: 94840a66-0335-43e1-83d4-e1f779fa398f
           hippotranslation:locale: en
           pageflowdemo:author: Alfred Anonymous
-          pageflowdemo:date: 2018-03-01T10:37:00-05:00
+          pageflowdemo:date: 2019-01-21T19:10:00+09:00
           pageflowdemo:documenttype: news
           pageflowdemo:introduction: Lorem ipsum dolor sit amet, consectetur adipisicing
             elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -94,7 +95,7 @@
         /2013-harvest:
           jcr:primaryType: pageflowdemo:newsdocument
           jcr:mixinTypes: ['mix:referenceable']
-          jcr:uuid: a36ccc9c-a26e-4d84-87ee-e85d2068255e
+          jcr:uuid: 578fe479-4169-49c2-9dbb-ac34737a7479
           hippo:availability: [live, preview]
           hippostd:holder: admin
           hippostd:state: published
@@ -103,10 +104,10 @@
           hippostdpubwf:lastModificationDate: 2013-11-12T14:31:00+01:00
           hippostdpubwf:lastModifiedBy: admin
           hippostdpubwf:publicationDate: 2013-11-12T14:31:00+01:00
-          hippotranslation:id: 23e4544b-11df-4f2a-b30d-b771077e880e
+          hippotranslation:id: 215fefbe-3fc0-4d06-9c29-7fa509ee75d3
           hippotranslation:locale: en
           pageflowdemo:author: Alfred Anonymous
-          pageflowdemo:date: 2018-03-01T10:37:00-05:00
+          pageflowdemo:date: 2019-01-21T19:10:00+09:00
           pageflowdemo:documenttype: news
           pageflowdemo:introduction: Lorem ipsum dolor sit amet, consectetur adipisicing
             elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -161,7 +162,7 @@
         /the-gastropoda-news:
           jcr:primaryType: pageflowdemo:newsdocument
           jcr:mixinTypes: ['mix:referenceable']
-          jcr:uuid: 17cd09a4-83ff-4ddf-a66a-d6a8ff931b95
+          jcr:uuid: f334c9b7-eb6d-49c4-b705-c3e3eb096f43
           hippo:availability: [live, preview]
           hippostd:holder: admin
           hippostd:state: published
@@ -170,10 +171,10 @@
           hippostdpubwf:lastModificationDate: 2013-11-12T12:52:00+01:00
           hippostdpubwf:lastModifiedBy: admin
           hippostdpubwf:publicationDate: 2013-11-12T12:52:00+01:00
-          hippotranslation:id: 3d14d443-57b5-4692-86c4-c12158a2c12e
+          hippotranslation:id: bb851d9c-21b3-4748-881d-5a323d32c8b1
           hippotranslation:locale: en
           pageflowdemo:author: Alfred Anonymous
-          pageflowdemo:date: 2018-03-01T10:37:00-05:00
+          pageflowdemo:date: 2019-01-21T19:10:00+09:00
           pageflowdemo:documenttype: news
           pageflowdemo:introduction: Lorem ipsum dolor sit amet, consectetur adipisicing
             elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.

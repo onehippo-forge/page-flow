@@ -3,19 +3,19 @@ definitions:
     /hippo:namespaces/pageflowdemo/eventsdocument:
       jcr:primaryType: hipposysedit:templatetype
       jcr:mixinTypes: ['editor:editable', 'mix:referenceable']
-      jcr:uuid: 8cd812ce-d724-4386-90a3-93658c3fa705
+      jcr:uuid: 6cdb0c14-3fe1-43b8-9af2-6c5fc0235cc6
       /hipposysedit:nodetype:
         jcr:primaryType: hippo:handle
         jcr:mixinTypes: ['mix:referenceable']
-        jcr:uuid: 71626e24-dbb1-493d-90da-d70ca5572a7d
+        jcr:uuid: d34ef4e1-49dc-4369-918f-5938eb812f41
         /hipposysedit:nodetype:
           jcr:primaryType: hipposysedit:nodetype
           jcr:mixinTypes: ['hipposysedit:remodel', 'mix:referenceable']
-          jcr:uuid: 85c6963d-e1a2-4380-b0c4-2487cfe19035
+          jcr:uuid: 68f2808c-044d-4d3a-a4c3-287da6475cc9
           hipposysedit:node: true
           hipposysedit:supertype: ['pageflowdemo:basedocument', 'hippostd:relaxed',
             'hippotranslation:translated']
-          hipposysedit:uri: http://www.onehippo.org/pageflowdemo/nt/1.0
+          hipposysedit:uri: http://www.pageflowdemo.com/pageflowdemo/nt/1.0
           /title:
             jcr:primaryType: hipposysedit:field
             hipposysedit:mandatory: false
@@ -77,7 +77,7 @@ definitions:
         /hipposysedit:prototype:
           jcr:primaryType: pageflowdemo:eventsdocument
           jcr:mixinTypes: ['mix:referenceable']
-          jcr:uuid: 1d33fc97-94e3-4f15-b1bc-28fce0cf0263
+          jcr:uuid: 93095939-be66-4edc-8ebf-1200131d6bbb
           hippo:related___pathreference: []
           hippostd:holder: holder
           hippostd:state: draft
